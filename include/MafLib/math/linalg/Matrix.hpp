@@ -269,7 +269,7 @@ public:
     /**
      * @brief Element-wise matrix addition assignment.
      * @tparam U Numeric type of the other matrix.
-     * @attention This method doesn't cast the matrix if U is broader type
+     * @attention This method doesn't cast the matrix if U is a broader type.
      * @throws std::invalid_argument if dimensions do not match.
      */
     template <Numeric U>
@@ -278,7 +278,7 @@ public:
     /**
      * @brief Element-wise scalar addition assignment (Matrix + scalar).
      * @tparam U An arithmetic scalar type.
-     * @attention This method doesn't cast the matrix if U is broader type
+     * @attention This method doesn't cast the matrix if U is a broader type.
      * @return Matrix of the original matrix type.
      */
     template <Numeric U>
@@ -304,7 +304,7 @@ public:
     /**
      * @brief Element-wise matrix subtraction assignment.
      * @tparam U Numeric type of the other matrix.
-     * @attention This method doesn't cast the matrix if U is broader type
+     * @attention This method doesn't cast the matrix if U is a broader type.
      * @throws std::invalid_argument if dimensions do not match.
      */
     template <Numeric U>
@@ -313,7 +313,7 @@ public:
     /**
      * @brief Element-wise scalar subtraction assignment (Matrix - scalar).
      * @tparam U An arithmetic scalar type.
-     * @attention This method doesn't cast the matrix if U is broader type
+     * @attention This method doesn't cast the matrix if U is a broader type.
      * @return Matrix of the original matrix type.
      */
     template <Numeric U>
@@ -461,7 +461,7 @@ public:
     /**
      * @brief Element-wise scalar multiplication assignment (Matrix * scalar).
      * @tparam U An arithmetic scalar type.
-     * @attention This method doesn't cast the matrix if U is broader type
+     * @attention This method doesn't cast the matrix if U is a broader type.
      * @return Matrix of the original matrix type.
      */
     template <Numeric U>
@@ -518,7 +518,7 @@ public:
     /**
      * @brief Element-wise scalar division assignment (Matrix / scalar).
      * @tparam U An arithmetic scalar type.
-     * @attention This method doesn't cast the matrix if U is broader type
+     * @attention This method doesn't cast the matrix if U is a broader type.
      * @return Matrix of the original matrix type.
      */
     template <Numeric U>
