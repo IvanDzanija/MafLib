@@ -248,7 +248,6 @@ Matrix<T>& Matrix<T>::operator-=(const U& scalar) noexcept {
     return *this;
 }
 
-// TODO: ROUTINES BELOW NEED TESTS
 // Multiply each element of matrix by a scalar
 template <Numeric T>
 template <Numeric U>
@@ -301,6 +300,8 @@ Matrix<T>& Matrix<T>::operator*=(const U& scalar) noexcept {
     }
     return *this;
 }
+
+// TODO: ROUTINES BELOW NEED TESTS
 
 // Divide each element of matrix by a scalar
 template <Numeric T>

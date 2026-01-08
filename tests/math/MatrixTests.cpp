@@ -362,12 +362,6 @@ private:
     //=============================================================================
     // MATRIX OPERATORS TESTS
     //=============================================================================
-    void should_correctly_perform_unary_minus() {
-        math::Matrix<int> m1(2, 3, {1, 2, 3, 4, 5, 6});
-        math::Matrix<int> m2(2, 3, {-1, -2, -3, -4, -5, -6});
-        ASSERT_TRUE(-m1 == m2);
-    }
-
     void should_check_equality_between_identical_matrices() {
         math::Matrix<int> a(2, 2, {1, 2, 3, 4});
         math::Matrix<int> b(2, 2, {1, 2, 3, 4});
@@ -378,6 +372,12 @@ private:
         math::Matrix<int> a(2, 2, {1, 2, 3, 4});
         math::Matrix<int> b(2, 2, {1, 9, 3, 4});
         ASSERT_TRUE(!(a == b));
+    }
+
+    void should_correctly_perform_unary_minus() {
+        math::Matrix<int> m1(2, 3, {1, 2, 3, 4, 5, 6});
+        math::Matrix<int> m2(2, 3, {-1, -2, -3, -4, -5, -6});
+        ASSERT_TRUE(-m1 == m2);
     }
 
     void should_add_two_matrices_of_same_size() {
@@ -408,6 +408,40 @@ private:
         ASSERT_TRUE(d.at(1, 0) == 7.5);
         ASSERT_TRUE(d.at(1, 1) == 8.5);
         ASSERT_TRUE(e == d);
+    }
+
+    void should_add_assign_matrix() {
+        math::Matrix<float> a(2, 2, {1.5f, 2.5f, 3.5f, 4.5f});
+        math::Matrix<int> b(2, 2, {10, 20, 30, 40});
+
+        a += b;
+
+        ASSERT_TRUE(is_close(a.at(0, 0), 11.5f));
+        ASSERT_TRUE(is_close(a.at(0, 1), 22.5f));
+        ASSERT_TRUE(is_close(a.at(1, 0), 33.5f));
+        ASSERT_TRUE(is_close(a.at(1, 1), 44.5f));
+    }
+
+    void should_add_assign_scalar() {
+        math::Matrix<int> a(2, 2, {1, 2, 3, 4});
+
+        a += 10;
+
+        ASSERT_TRUE(a.at(0, 0) == 11);
+        ASSERT_TRUE(a.at(0, 1) == 12);
+        ASSERT_TRUE(a.at(1, 0) == 13);
+        ASSERT_TRUE(a.at(1, 1) == 14);
+
+        math::Matrix<double> b(2, 2, {1.5, 2.5, 3.5, 4.5});
+        b += 0.5;
+        ASSERT_TRUE(is_close(b.at(0, 0), 2.0));
+        ASSERT_TRUE(is_close(b.at(0, 1), 3.0));
+        ASSERT_TRUE(is_close(b.at(1, 0), 4.0));
+        ASSERT_TRUE(is_close(b.at(1, 1), 5.0));
+
+        b += 10;
+        ASSERT_TRUE(is_close(b.at(0, 0), 12.0));
+        ASSERT_TRUE(is_close(b.at(1, 1), 15.0));
     }
 
     void should_subtract_two_matrices_of_same_size() {
@@ -441,50 +475,16 @@ private:
         ASSERT_TRUE(e.at(1, 1) == 0.5);
     }
 
-    void should_add_assign_matrix() {
-        math::Matrix<float> a(2, 2, {1.5f, 2.5f, 3.5f, 4.5f});
-        math::Matrix<int> b(2, 2, {10, 20, 30, 40});
-
-        a += b;  // a is modified
-
-        ASSERT_TRUE(is_close(a.at(0, 0), 11.5f));
-        ASSERT_TRUE(is_close(a.at(0, 1), 22.5f));
-        ASSERT_TRUE(is_close(a.at(1, 0), 33.5f));
-        ASSERT_TRUE(is_close(a.at(1, 1), 44.5f));
-    }
-
     void should_subtract_assign_matrix() {
         math::Matrix<float> a(2, 2, {11.5f, 22.5f, 33.5f, 44.5f});
         math::Matrix<int> b(2, 2, {10, 20, 30, 40});
 
-        a -= b;  // a is modified
+        a -= b;
 
         ASSERT_TRUE(is_close(a.at(0, 0), 1.5f));
         ASSERT_TRUE(is_close(a.at(0, 1), 2.5f));
         ASSERT_TRUE(is_close(a.at(1, 0), 3.5f));
         ASSERT_TRUE(is_close(a.at(1, 1), 4.5f));
-    }
-
-    void should_add_assign_scalar() {
-        math::Matrix<int> a(2, 2, {1, 2, 3, 4});
-
-        a += 10;
-
-        ASSERT_TRUE(a.at(0, 0) == 11);
-        ASSERT_TRUE(a.at(0, 1) == 12);
-        ASSERT_TRUE(a.at(1, 0) == 13);
-        ASSERT_TRUE(a.at(1, 1) == 14);
-
-        math::Matrix<double> b(2, 2, {1.5, 2.5, 3.5, 4.5});
-        b += 0.5;
-        ASSERT_TRUE(is_close(b.at(0, 0), 2.0));
-        ASSERT_TRUE(is_close(b.at(0, 1), 3.0));
-        ASSERT_TRUE(is_close(b.at(1, 0), 4.0));
-        ASSERT_TRUE(is_close(b.at(1, 1), 5.0));
-
-        b += 10;
-        ASSERT_TRUE(is_close(b.at(0, 0), 12.0));
-        ASSERT_TRUE(is_close(b.at(1, 1), 15.0));
     }
 
     void should_subtract_assign_scalar() {
@@ -509,37 +509,76 @@ private:
         ASSERT_TRUE(is_close(b.at(1, 1), 4.5));
     }
 
-    void should_multiply_assign_scalar() {
-        math::Matrix<int> a(2, 2, {11, 12, 13, 14});
+    void should_multiply_matrix_and_scalar() {
+        math::Matrix<int> a(2, 2, {1, 2, -3, 4});
+        auto b = a * 2.0;
+        ASSERT_TRUE(is_close(b.at(0, 0), 2.0));
+        ASSERT_TRUE(is_close(b.at(0, 1), 4.0));
+        ASSERT_TRUE(is_close(b.at(1, 0), -6.0));
+        ASSERT_TRUE(is_close(b.at(1, 1), 8.0));
 
-        a *= 10.F;
+        auto c = 2 * a;
+        ASSERT_TRUE(is_close(c.at(0, 0), 2.0));
+        ASSERT_TRUE(is_close(c.at(0, 1), 4.0));
+        ASSERT_TRUE(is_close(c.at(1, 0), -6.0));
+        ASSERT_TRUE(is_close(c.at(1, 1), 8.0));
 
-        ASSERT_TRUE(a.at(0, 0) + 0.5 == 110);
-        ASSERT_TRUE(a.at(0, 1) == 120);
-        ASSERT_TRUE(a.at(1, 0) == 130);
-        ASSERT_TRUE(a.at(1, 1) == 140);
-
-        math::Matrix<double> b(2, 2, {12.0, 13.0, 14.0, 15.0});
-        b -= 0.5;
-        ASSERT_TRUE(is_close(b.at(0, 0), 11.5));
-        ASSERT_TRUE(is_close(b.at(0, 1), 12.5));
-        ASSERT_TRUE(is_close(b.at(1, 0), 13.5));
-        ASSERT_TRUE(is_close(b.at(1, 1), 14.5));
-
-        b -= 10;
-        ASSERT_TRUE(is_close(b.at(0, 0), 1.5));
-        ASSERT_TRUE(is_close(b.at(1, 1), 4.5));
+        auto d = a * 2.5f;
+        ASSERT_TRUE(is_close(d.at(0, 0), 2.5f));
+        ASSERT_TRUE(is_close(d.at(1, 1), 10.0f));
     }
 
-    void should_multiply_matrix_and_scalar() {
-        math::Matrix<double> a(2, 2, {1.5, 2.0, -3.0, 4.0});
-        auto b = a * 2.0;
-        auto c = 2 * a;
-        ASSERT_TRUE(fabs(b.at(0, 0) - 3.0) < 1e-6);
-        ASSERT_TRUE(fabs(b.at(0, 1) - 4.0) < 1e-6);
-        ASSERT_TRUE(fabs(b.at(1, 0) + 6.0) < 1e-6);
-        ASSERT_TRUE(fabs(b.at(1, 1) - 8.0) < 1e-6);
-        ASSERT_TRUE(b == c);
+    void should_multiply_assign_scalar() {
+        math::Matrix<int> a(2, 2, {1, 2, 3, 4});
+        a *= 2.5f;
+
+        ASSERT_TRUE(a.at(0, 0) == 2);
+        ASSERT_TRUE(a.at(1, 1) == 10);
+
+        math::Matrix<double> b(2, 2, {1.0, 2.0, 3.0, 4.0});
+        b *= 0.5;
+        ASSERT_TRUE(is_close(b.at(0, 0), 0.5));
+        ASSERT_TRUE(is_close(b.at(1, 1), 2.0));
+    }
+
+    void should_divide_matrix_and_scalar() {
+        math::Matrix<int> a(2, 2, {1, 2, 3, 4});
+        auto b = a / 2;
+
+        ASSERT_TRUE(is_close(b.at(0, 0), 0.5));
+        ASSERT_TRUE(is_close(b.at(1, 1), 2.0));
+
+        math::Matrix<float> c(2, 2, {1.0f, 2.0f, 3.0f, 4.0f});
+        auto d = c / 0.5;
+
+        ASSERT_TRUE(is_close(d.at(0, 0), 2.0));
+        ASSERT_TRUE(is_close(d.at(1, 1), 8.0));
+
+        math::Matrix<int> e(2, 2, {1, 2, 4, 8});
+        auto f = 10.0 / e;
+
+        ASSERT_TRUE(is_close(f.at(0, 0), 10.0));
+        ASSERT_TRUE(is_close(f.at(0, 1), 5.0));
+        ASSERT_TRUE(is_close(f.at(1, 0), 2.5));
+        ASSERT_TRUE(is_close(f.at(1, 1), 1.25));
+    }
+
+    void should_divide_assign_scalar() {
+        math::Matrix<int> a(2, 2, {10, 20, 30, 40});
+        a /= 3;
+        a.print();
+        ASSERT_TRUE(a.at(0, 0) == 3);
+        ASSERT_TRUE(a.at(1, 1) == 13);
+
+        math::Matrix<float> b(2, 2, {1.0f, 2.0f, 3.0f, 4.0f});
+        b /= 2.0f;
+        ASSERT_TRUE(is_close(b.at(0, 0), 0.5f));
+        ASSERT_TRUE(is_close(b.at(1, 1), 2.0f));
+
+        math::Matrix<float> c(2, 2, {5.0f, 10.0f, 15.0f, 20.0f});
+        c /= 2.0;
+        ASSERT_TRUE(is_close(c.at(0, 0), 2.5f));
+        static_assert(std::is_same_v<typename decltype(c)::value_type, float>);
     }
 
     void should_multiply_matrices() {
@@ -950,14 +989,22 @@ public:
         should_make_identity_matrix();
         should_transpose_square_matrix_in_place();
         should_return_transposed_copy_for_non_square_matrix();
-        should_correctly_perform_unary_minus();
         should_check_equality_between_identical_matrices();
         should_not_be_equal_if_any_element_differs();
+        should_correctly_perform_unary_minus();
         should_add_two_matrices_of_same_size();
         should_add_scalar_and_matrix();
+        should_add_assign_matrix();
+        should_add_assign_scalar();
         should_subtract_two_matrices_of_same_size();
         should_subtract_scalar_and_matrix();
+        should_subtract_assign_matrix();
+        should_subtract_assign_scalar();
         should_multiply_matrix_and_scalar();
+        should_multiply_assign_scalar();
+        should_divide_matrix_and_scalar();
+        should_divide_assign_scalar();
+
         should_multiply_matrices();
         should_multiply_matrix_and_vector();
         matmul_time_test();
