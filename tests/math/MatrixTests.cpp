@@ -509,6 +509,28 @@ private:
         ASSERT_TRUE(is_close(b.at(1, 1), 4.5));
     }
 
+    void should_multiply_assign_scalar() {
+        math::Matrix<int> a(2, 2, {11, 12, 13, 14});
+
+        a *= 10.F;
+
+        ASSERT_TRUE(a.at(0, 0) + 0.5 == 110);
+        ASSERT_TRUE(a.at(0, 1) == 120);
+        ASSERT_TRUE(a.at(1, 0) == 130);
+        ASSERT_TRUE(a.at(1, 1) == 140);
+
+        math::Matrix<double> b(2, 2, {12.0, 13.0, 14.0, 15.0});
+        b -= 0.5;
+        ASSERT_TRUE(is_close(b.at(0, 0), 11.5));
+        ASSERT_TRUE(is_close(b.at(0, 1), 12.5));
+        ASSERT_TRUE(is_close(b.at(1, 0), 13.5));
+        ASSERT_TRUE(is_close(b.at(1, 1), 14.5));
+
+        b -= 10;
+        ASSERT_TRUE(is_close(b.at(0, 0), 1.5));
+        ASSERT_TRUE(is_close(b.at(1, 1), 4.5));
+    }
+
     void should_multiply_matrix_and_scalar() {
         math::Matrix<double> a(2, 2, {1.5, 2.0, -3.0, 4.0});
         auto b = a * 2.0;

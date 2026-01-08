@@ -267,7 +267,7 @@ public:
     [[nodiscard]] auto operator+(const U& scalar) const noexcept;
 
     /**
-     * @brief Element-wise matrix addition.
+     * @brief Element-wise matrix addition assignment.
      * @tparam U Numeric type of the other matrix.
      * @attention This method doesn't cast the matrix if U is broader type
      * @throws std::invalid_argument if dimensions do not match.
@@ -276,7 +276,7 @@ public:
     Matrix<T>& operator+=(const Matrix<U>& other);
 
     /**
-     * @brief Element-wise scalar addition (Matrix + scalar).
+     * @brief Element-wise scalar addition assignment (Matrix + scalar).
      * @tparam U An arithmetic scalar type.
      * @attention This method doesn't cast the matrix if U is broader type
      * @return Matrix of the original matrix type.
@@ -302,7 +302,7 @@ public:
     [[nodiscard]] auto operator-(const U& scalar) const noexcept;
 
     /**
-     * @brief Element-wise matrix subtraction.
+     * @brief Element-wise matrix subtraction assignment.
      * @tparam U Numeric type of the other matrix.
      * @attention This method doesn't cast the matrix if U is broader type
      * @throws std::invalid_argument if dimensions do not match.
@@ -311,7 +311,7 @@ public:
     Matrix<T>& operator-=(const Matrix<U>& other);
 
     /**
-     * @brief Element-wise scalar subtraction (Matrix - scalar).
+     * @brief Element-wise scalar subtraction assignment (Matrix - scalar).
      * @tparam U An arithmetic scalar type.
      * @attention This method doesn't cast the matrix if U is broader type
      * @return Matrix of the original matrix type.
@@ -459,7 +459,7 @@ public:
     [[nodiscard]] auto operator*(const U& scalar) const noexcept;
 
     /**
-     * @brief Element-wise scalar multiplication (Matrix * scalar).
+     * @brief Element-wise scalar multiplication assignment (Matrix * scalar).
      * @tparam U An arithmetic scalar type.
      * @attention This method doesn't cast the matrix if U is broader type
      * @return Matrix of the original matrix type.
@@ -497,10 +497,10 @@ public:
         #pragma omp parallel for
         for (size_t i = 0; i < n; ++i) {
             R sum = R(0);
-            auto L_row_i = this->row_span(i);
+            auto L_row_i = row_span(i);
             #pragma omp simd reduction(+ : sum)
             for (size_t j = 0; j < m; ++j) {
-                sum += static_cast<R>(L_row_i[j]) * static_cast<R>(other.at(j));
+                sum += static_cast<R>(L_row_i[j]) * static_cast<R>(other[j]);
             }
             result.at(i) = sum;
         }
@@ -516,7 +516,7 @@ public:
     [[nodiscard]] auto operator/(const U& scalar) const noexcept;
 
     /**
-     * @brief Element-wise scalar multiplication (Matrix / scalar).
+     * @brief Element-wise scalar division assignment (Matrix / scalar).
      * @tparam U An arithmetic scalar type.
      * @attention This method doesn't cast the matrix if U is broader type
      * @return Matrix of the original matrix type.

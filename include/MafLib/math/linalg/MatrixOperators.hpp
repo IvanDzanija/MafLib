@@ -331,7 +331,7 @@ template <Numeric U>
  * @return Matrix of the common, promoted type.
  */
 template <Numeric T, Numeric U>
-[[nodiscard]] auto operator/(const U& scalar, const Matrix<T>& matrix) {
+[[nodiscard]] auto operator/(const U& scalar, const Matrix<T>& matrix) noexcept {
     using R = std::common_type_t<T, U, double>;  // Forces double if both are ints
 
     Matrix<R> result(matrix.row_count(), matrix.column_count());
