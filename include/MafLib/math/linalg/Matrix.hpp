@@ -267,18 +267,18 @@ public:
     [[nodiscard]] auto operator+(const U& scalar) const noexcept;
 
     /**
-     * @brief Element-wise matrix addition.
+     * @brief Element-wise matrix addition assignment.
      * @tparam U Numeric type of the other matrix.
-     * @attention This method doesn't cast the matrix is U is broader type
+     * @attention This method doesn't cast the matrix if U is a broader type.
      * @throws std::invalid_argument if dimensions do not match.
      */
     template <Numeric U>
     Matrix<T>& operator+=(const Matrix<U>& other);
 
     /**
-     * @brief Element-wise scalar addition (Matrix + scalar).
+     * @brief Element-wise scalar addition assignment (Matrix + scalar).
      * @tparam U An arithmetic scalar type.
-     * @attention This method doesn't cast the matrix is U is broader type
+     * @attention This method doesn't cast the matrix if U is a broader type.
      * @return Matrix of the original matrix type.
      */
     template <Numeric U>
@@ -302,18 +302,18 @@ public:
     [[nodiscard]] auto operator-(const U& scalar) const noexcept;
 
     /**
-     * @brief Element-wise matrix subtraction.
+     * @brief Element-wise matrix subtraction assignment.
      * @tparam U Numeric type of the other matrix.
-     * @attention This method doesn't cast the matrix is U is broader type
+     * @attention This method doesn't cast the matrix if U is a broader type.
      * @throws std::invalid_argument if dimensions do not match.
      */
     template <Numeric U>
     Matrix<T>& operator-=(const Matrix<U>& other);
 
     /**
-     * @brief Element-wise scalar subtraction (Matrix - scalar).
+     * @brief Element-wise scalar subtraction assignment (Matrix - scalar).
      * @tparam U An arithmetic scalar type.
-     * @attention This method doesn't cast the matrix is U is broader type
+     * @attention This method doesn't cast the matrix if U is a broader type.
      * @return Matrix of the original matrix type.
      */
     template <Numeric U>
@@ -322,6 +322,7 @@ public:
     /**
      * @brief Standard algebraic matrix multiplication (A * B).
      * @details Implemented with a parallelized, cache-blocked algorithm.
+     * @details Uses BLAS gemm where available.
      * @tparam U Numeric type of the other matrix.
      * @return Matrix of the common, promoted type.
      * @throws std::invalid_argument if inner dimensions do not match
@@ -455,27 +456,16 @@ public:
      * @return Matrix of the common, promoted type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator*(const U& scalar) const {
-        using R = std::common_type_t<T, U>;
-
-        Matrix<R> result(_rows, _cols);
-
-        std::transform(_data.begin(),
-                       _data.end(),
-                       result.data().begin(),
-                       [scalar](const T& value) {
-                           return static_cast<R>(value) * static_cast<R>(scalar);
-                       });
-        return result;
-    }
+    [[nodiscard]] auto operator*(const U& scalar) const noexcept;
 
     /**
-     * @brief Element-wise scalar multiplication (scalar * Matrix).
+     * @brief Element-wise scalar multiplication assignment (Matrix * scalar).
+     * @tparam U An arithmetic scalar type.
+     * @attention This method doesn't cast the matrix if U is a broader type.
+     * @return Matrix of the original matrix type.
      */
     template <Numeric U>
-    [[nodiscard]] friend auto operator*(const U& scalar, const Matrix<T>& matrix) {
-        return matrix * scalar;
-    }
+    Matrix<T>& operator*=(const U& scalar) noexcept;
 
     /**
      * @brief Matrix-Vector multiplication (Matrix * column_vector).
@@ -507,10 +497,10 @@ public:
         #pragma omp parallel for
         for (size_t i = 0; i < n; ++i) {
             R sum = R(0);
-            auto L_row_i = this->row_span(i);
+            auto L_row_i = row_span(i);
             #pragma omp simd reduction(+ : sum)
             for (size_t j = 0; j < m; ++j) {
-                sum += static_cast<R>(L_row_i[j]) * static_cast<R>(other.at(j));
+                sum += static_cast<R>(L_row_i[j]) * static_cast<R>(other[j]);
             }
             result.at(i) = sum;
         }
@@ -523,31 +513,16 @@ public:
      * @return Matrix of the common, promoted type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator/(const U& scalar) const {
-        // Note: This promotes T to double if T is int, which is
-        // usually desired for division.
-        using R = std::common_type_t<T, U, double>;
-        return *this * (R(1) / static_cast<R>(scalar));
-    }
+    [[nodiscard]] auto operator/(const U& scalar) const noexcept;
 
     /**
-     * @brief Element-wise scalar division (scalar / Matrix).
+     * @brief Element-wise scalar division assignment (Matrix / scalar).
      * @tparam U An arithmetic scalar type.
-     * @return Matrix of the common, promoted type.
+     * @attention This method doesn't cast the matrix if U is a broader type.
+     * @return Matrix of the original matrix type.
      */
     template <Numeric U>
-    [[nodiscard]] friend auto operator/(const U& scalar, const Matrix<T>& matrix) {
-        using R = std::common_type_t<T, U, double>;
-
-        Matrix<R> result(matrix._rows, matrix._cols);
-        std::transform(matrix._data.begin(),
-                       matrix._data.end(),
-                       result.data().begin(),
-                       [scalar](const T& value) {
-                           return static_cast<R>(scalar) / static_cast<R>(value);
-                       });
-        return result;
-    }
+    Matrix<T>& operator/=(const U& scalar) noexcept;
 
     // --- Debugging and printing ---
 
