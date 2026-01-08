@@ -566,7 +566,6 @@ private:
     void should_divide_assign_scalar() {
         math::Matrix<int> a(2, 2, {10, 20, 30, 40});
         a /= 3;
-        a.print();
         ASSERT_TRUE(a.at(0, 0) == 3);
         ASSERT_TRUE(a.at(1, 1) == 13);
 
