@@ -1,0 +1,20 @@
+<map id="maf::math::Matrix::is_positive_definite" name="maf::math::Matrix::is_positive_definite">
+<area shape="rect" id="Node000001" title="Checks if the matrix is positive definite." alt="" coords="5,86,138,126"/>
+<area shape="rect" id="Node000002" href="$d4/d02/namespacemaf_1_1math.html#adacdd5d260e55a04182d86ed82d0e0b2" title="Computes the Cholesky decomposition of a symmetric positive definite matrix." alt="" coords="186,93,326,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,104,170,104,170,109,138,109"/>
+<area shape="rect" id="Node000003" href="$d6/de6/namespacemaf_1_1math_1_1detail.html#a9823af698a94cb131e27fbd62f84a83e" title="Internal implementation of Cholesky decomposition." alt="" coords="374,86,501,126"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="326,104,358,104,358,109,326,109"/>
+<area shape="rect" id="Node000004" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a3506acc05e298718fb6d5587d6594055" title="Gets a mutable reference to the element at (row, col)." alt="" coords="730,5,873,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="465,83,503,59,548,38,590,27,633,20,714,14,715,19,634,25,591,33,550,43,506,63,468,88"/>
+<area shape="rect" id="Node000005" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a0f6daf36ebb2efd5970384565469323c" title="Checks if the matrix is symmetric (A == A^T)." alt="" coords="549,52,682,93"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="501,92,533,85,534,91,502,97"/>
+<area shape="rect" id="Node000008" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aa1fa0768048faff36f5dfc56911a8ce4" title="Gets the number of rows." alt="" coords="549,118,682,158"/>
+<area shape="poly" id="edge8_Node000003_Node000008" title=" " alt="" coords="502,115,534,121,533,126,501,120"/>
+<area shape="rect" id="Node000009" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#afb33cbf4574399aa71beba18c85a2663" title="Gets a mutable std::span of a single row." alt="" coords="549,183,682,224"/>
+<area shape="poly" id="edge9_Node000003_Node000009" title=" " alt="" coords="475,125,551,168,561,173,558,178,548,172,473,129"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="681,51,740,33,741,38,683,56"/>
+<area shape="rect" id="Node000006" href="$d0/d8d/namespacemaf_1_1util.html#a4c6d8c5ac3d702b62706ed826dd22c77" title=" " alt="" coords="739,59,864,84"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="682,70,723,69,723,75,682,75"/>
+<area shape="rect" id="Node000007" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a774d7c4510a8977e5b19f5f332d5789c" title="Checks if the matrix is square (rows == cols)." alt="" coords="735,108,868,149"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="683,90,721,102,720,107,681,95"/>
+</map>

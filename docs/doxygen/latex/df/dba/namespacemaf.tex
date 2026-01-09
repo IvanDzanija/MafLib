@@ -13,69 +13,78 @@ namespace \mbox{\hyperlink{namespacemaf_1_1util}{util}}
 class \mbox{\hyperlink{classmaf_1_1_disjoint_set}{Disjoint\+Set}}
 \begin{DoxyCompactList}\small\item\em Implements a Disjoint Set Union (DSU) data structure. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmaf_1_1_trie}{Trie}}
+\item 
+class \mbox{\hyperlink{classmaf_1_1_binary_tree}{Binary\+Tree}}
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Functions}
+\doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename T$>$ }\\bool \mbox{\hyperlink{namespacemaf_a11dab27cc975212d0cfebee780289026}{is\+\_\+close}} (T v1, T v2, double epsilon=\mbox{\hyperlink{namespacemaf_ab1ccbacf86d0e3b14fc056bfd7b25e83}{EPSILON}})
+using \mbox{\hyperlink{namespacemaf_a4ec9e90b2247dd4ef8023b6d07f46bce}{int8}} = int8\+\_\+t
 \item 
-{\footnotesize template$<$typename T, typename U$>$ }\\bool \mbox{\hyperlink{namespacemaf_ab9cb49dc65e09b7c9a78dd81a34e10c3}{is\+\_\+close}} (T v1, U v2, double epsilon=\mbox{\hyperlink{namespacemaf_ab1ccbacf86d0e3b14fc056bfd7b25e83}{EPSILON}})
+using \mbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{uint8}} = uint8\+\_\+t
+\item 
+using \mbox{\hyperlink{namespacemaf_ad8fdcc870f0454cfeda3a0d38839d961}{int16}} = int16\+\_\+t
+\item 
+using \mbox{\hyperlink{namespacemaf_a4654f88dcb4e10ac77438dd02e7a4907}{uint16}} = uint16\+\_\+t
+\item 
+using \mbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}} = int32\+\_\+t
+\item 
+using \mbox{\hyperlink{namespacemaf_a9c6f11cfee0c09e2f40fbb271b5a1b04}{uint32}} = uint32\+\_\+t
+\item 
+using \mbox{\hyperlink{namespacemaf_aaa8f9513b19617e672f757b67f764f0e}{int64}} = int64\+\_\+t
+\item 
+using \mbox{\hyperlink{namespacemaf_a5963b7c995788e68c583df33b93cfefb}{uint64}} = uint64\+\_\+t
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-constexpr int8\+\_\+t \mbox{\hyperlink{namespacemaf_aa44d65eb8db5d918996e66005cb5d573}{OUT\+\_\+\+OF\+\_\+\+BOUNDS}} = -\/1
-\item 
-constexpr int8\+\_\+t \mbox{\hyperlink{namespacemaf_a9889e36aacfbf9282d0dfa3851622673}{NOT\+\_\+\+SQUARE}} = -\/2
-\item 
-constexpr double \mbox{\hyperlink{namespacemaf_ab1ccbacf86d0e3b14fc056bfd7b25e83}{EPSILON}} = 1e-\/6
-\end{DoxyCompactItemize}
 
 
-\label{doc-func-members}
-\Hypertarget{namespacemaf_doc-func-members}
-\doxysubsection{Function Documentation}
-\Hypertarget{namespacemaf_a11dab27cc975212d0cfebee780289026}\index{maf@{maf}!is\_close@{is\_close}}
-\index{is\_close@{is\_close}!maf@{maf}}
-\doxysubsubsection{\texorpdfstring{is\_close()}{is\_close()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \label{namespacemaf_a11dab27cc975212d0cfebee780289026} 
-template$<$typename T$>$ \\
-bool maf\+::is\+\_\+close (\begin{DoxyParamCaption}\item[{T}]{v1}{, }\item[{T}]{v2}{, }\item[{double}]{epsilon}{ = {\ttfamily \mbox{\hyperlink{namespacemaf_ab1ccbacf86d0e3b14fc056bfd7b25e83}{EPSILON}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
+\label{doc-typedef-members}
+\Hypertarget{namespacemaf_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespacemaf_ad8fdcc870f0454cfeda3a0d38839d961}\index{maf@{maf}!int16@{int16}}
+\index{int16@{int16}!maf@{maf}}
+\doxysubsubsection{\texorpdfstring{int16}{int16}}
+{\footnotesize\ttfamily \label{namespacemaf_ad8fdcc870f0454cfeda3a0d38839d961} 
+using \mbox{\hyperlink{namespacemaf_ad8fdcc870f0454cfeda3a0d38839d961}{maf\+::int16}} = int16\+\_\+t}
 
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{df/dba/namespacemaf_a11dab27cc975212d0cfebee780289026_icgraph}
-\end{center}
-\end{figure}
-\Hypertarget{namespacemaf_ab9cb49dc65e09b7c9a78dd81a34e10c3}\index{maf@{maf}!is\_close@{is\_close}}
-\index{is\_close@{is\_close}!maf@{maf}}
-\doxysubsubsection{\texorpdfstring{is\_close()}{is\_close()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \label{namespacemaf_ab9cb49dc65e09b7c9a78dd81a34e10c3} 
-template$<$typename T, typename U$>$ \\
-bool maf\+::is\+\_\+close (\begin{DoxyParamCaption}\item[{T}]{v1}{, }\item[{U}]{v2}{, }\item[{double}]{epsilon}{ = {\ttfamily \mbox{\hyperlink{namespacemaf_ab1ccbacf86d0e3b14fc056bfd7b25e83}{EPSILON}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
+\Hypertarget{namespacemaf_af052326c13f45efe97d686b69973eb15}\index{maf@{maf}!int32@{int32}}
+\index{int32@{int32}!maf@{maf}}
+\doxysubsubsection{\texorpdfstring{int32}{int32}}
+{\footnotesize\ttfamily \label{namespacemaf_af052326c13f45efe97d686b69973eb15} 
+using \mbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{maf\+::int32}} = int32\+\_\+t}
 
+\Hypertarget{namespacemaf_aaa8f9513b19617e672f757b67f764f0e}\index{maf@{maf}!int64@{int64}}
+\index{int64@{int64}!maf@{maf}}
+\doxysubsubsection{\texorpdfstring{int64}{int64}}
+{\footnotesize\ttfamily \label{namespacemaf_aaa8f9513b19617e672f757b67f764f0e} 
+using \mbox{\hyperlink{namespacemaf_aaa8f9513b19617e672f757b67f764f0e}{maf\+::int64}} = int64\+\_\+t}
 
+\Hypertarget{namespacemaf_a4ec9e90b2247dd4ef8023b6d07f46bce}\index{maf@{maf}!int8@{int8}}
+\index{int8@{int8}!maf@{maf}}
+\doxysubsubsection{\texorpdfstring{int8}{int8}}
+{\footnotesize\ttfamily \label{namespacemaf_a4ec9e90b2247dd4ef8023b6d07f46bce} 
+using \mbox{\hyperlink{namespacemaf_a4ec9e90b2247dd4ef8023b6d07f46bce}{maf\+::int8}} = int8\+\_\+t}
 
-\label{doc-var-members}
-\Hypertarget{namespacemaf_doc-var-members}
-\doxysubsection{Variable Documentation}
-\Hypertarget{namespacemaf_ab1ccbacf86d0e3b14fc056bfd7b25e83}\index{maf@{maf}!EPSILON@{EPSILON}}
-\index{EPSILON@{EPSILON}!maf@{maf}}
-\doxysubsubsection{\texorpdfstring{EPSILON}{EPSILON}}
-{\footnotesize\ttfamily \label{namespacemaf_ab1ccbacf86d0e3b14fc056bfd7b25e83} 
-double maf\+::\+EPSILON = 1e-\/6\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+\Hypertarget{namespacemaf_a4654f88dcb4e10ac77438dd02e7a4907}\index{maf@{maf}!uint16@{uint16}}
+\index{uint16@{uint16}!maf@{maf}}
+\doxysubsubsection{\texorpdfstring{uint16}{uint16}}
+{\footnotesize\ttfamily \label{namespacemaf_a4654f88dcb4e10ac77438dd02e7a4907} 
+using \mbox{\hyperlink{namespacemaf_a4654f88dcb4e10ac77438dd02e7a4907}{maf\+::uint16}} = uint16\+\_\+t}
 
-\Hypertarget{namespacemaf_a9889e36aacfbf9282d0dfa3851622673}\index{maf@{maf}!NOT\_SQUARE@{NOT\_SQUARE}}
-\index{NOT\_SQUARE@{NOT\_SQUARE}!maf@{maf}}
-\doxysubsubsection{\texorpdfstring{NOT\_SQUARE}{NOT\_SQUARE}}
-{\footnotesize\ttfamily \label{namespacemaf_a9889e36aacfbf9282d0dfa3851622673} 
-int8\+\_\+t maf\+::\+NOT\+\_\+\+SQUARE = -\/2\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+\Hypertarget{namespacemaf_a9c6f11cfee0c09e2f40fbb271b5a1b04}\index{maf@{maf}!uint32@{uint32}}
+\index{uint32@{uint32}!maf@{maf}}
+\doxysubsubsection{\texorpdfstring{uint32}{uint32}}
+{\footnotesize\ttfamily \label{namespacemaf_a9c6f11cfee0c09e2f40fbb271b5a1b04} 
+using \mbox{\hyperlink{namespacemaf_a9c6f11cfee0c09e2f40fbb271b5a1b04}{maf\+::uint32}} = uint32\+\_\+t}
 
-\Hypertarget{namespacemaf_aa44d65eb8db5d918996e66005cb5d573}\index{maf@{maf}!OUT\_OF\_BOUNDS@{OUT\_OF\_BOUNDS}}
-\index{OUT\_OF\_BOUNDS@{OUT\_OF\_BOUNDS}!maf@{maf}}
-\doxysubsubsection{\texorpdfstring{OUT\_OF\_BOUNDS}{OUT\_OF\_BOUNDS}}
-{\footnotesize\ttfamily \label{namespacemaf_aa44d65eb8db5d918996e66005cb5d573} 
-int8\+\_\+t maf\+::\+OUT\+\_\+\+OF\+\_\+\+BOUNDS = -\/1\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+\Hypertarget{namespacemaf_a5963b7c995788e68c583df33b93cfefb}\index{maf@{maf}!uint64@{uint64}}
+\index{uint64@{uint64}!maf@{maf}}
+\doxysubsubsection{\texorpdfstring{uint64}{uint64}}
+{\footnotesize\ttfamily \label{namespacemaf_a5963b7c995788e68c583df33b93cfefb} 
+using \mbox{\hyperlink{namespacemaf_a5963b7c995788e68c583df33b93cfefb}{maf\+::uint64}} = uint64\+\_\+t}
+
+\Hypertarget{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}\index{maf@{maf}!uint8@{uint8}}
+\index{uint8@{uint8}!maf@{maf}}
+\doxysubsubsection{\texorpdfstring{uint8}{uint8}}
+{\footnotesize\ttfamily \label{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f} 
+using \mbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{maf\+::uint8}} = uint8\+\_\+t}
 

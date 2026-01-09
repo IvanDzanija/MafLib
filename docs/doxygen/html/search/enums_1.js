@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['orientation_0',['Orientation',['../de/d35/classmaf_1_1math_1_1_vector.html#afa8632efb0c07233f2d1eea1015c30fb',1,'maf::math::Vector']]]
+  ['orientation_0',['Orientation',['../d4/d02/namespacemaf_1_1math.html#afe4f407d72235467d014872419cfaa29',1,'maf::math']]]
 ];

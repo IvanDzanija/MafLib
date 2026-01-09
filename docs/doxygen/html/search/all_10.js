@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['uint16_0',['uint16',['../d1/df7/_global_header_8hpp.html#aa720ba8c0d1dcc513c82c51d3f6e9995',1,'GlobalHeader.hpp']]],
-  ['uint32_1',['uint32',['../d1/df7/_global_header_8hpp.html#a5522c54735d837fae7d6ba026b858441',1,'GlobalHeader.hpp']]],
-  ['uint64_2',['uint64',['../d1/df7/_global_header_8hpp.html#aca0ba831b19773ec091e57f5cf76a1fb',1,'GlobalHeader.hpp']]],
-  ['uint8_3',['uint8',['../d1/df7/_global_header_8hpp.html#aa17fc6cc2c9a4ad80e9fcdd3f64320e1',1,'GlobalHeader.hpp']]],
-  ['unite_4',['unite',['../db/da1/classmaf_1_1_disjoint_set.html#ae8731c4fd9d0b6f8bed4f0b035306b9f',1,'maf::DisjointSet']]],
-  ['united_5',['united',['../db/da1/classmaf_1_1_disjoint_set.html#acb80ae42f825cae6c0f7e9f71eedf689',1,'maf::DisjointSet']]]
+  ['same_5fsign_0',['same_sign',['../d0/d8d/namespacemaf_1_1util.html#ab331fd08e50c92e3c379958f73f8ff21',1,'maf::util']]],
+  ['saxpy_1',['saxpy',['../d0/d9a/namespacemaf_1_1math_1_1acc.html#ac4678109fd13b01a586a13cb95f8184b',1,'maf::math::acc']]],
+  ['search_2',['search',['../d8/d20/classmaf_1_1_trie.html#a0f0d0ec6fe702684ef8d46a8f309d3a9',1,'maf::Trie::search()'],['../d7/d79/class_b_tree.html#ab1e8142f057d557be5d5d425b49f8a0c',1,'BTree::search()']]],
+  ['set_5fsize_3',['set_size',['../db/da1/classmaf_1_1_disjoint_set.html#a91da1bee9be42396620df397876b0354',1,'maf::DisjointSet']]],
+  ['size_4',['size',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#a45aa75653ab2200d6de78ec7accbda5b',1,'maf::math::Matrix::size()'],['../de/d35/classmaf_1_1math_1_1_vector.html#a486da0689bba119f338f50eb5e334a1a',1,'maf::math::Vector::size()']]],
+  ['sscal_5',['sscal',['../d0/d9a/namespacemaf_1_1math_1_1acc.html#a9b8154ee8b5fb351500bf61c7d6433db',1,'maf::math::acc']]],
+  ['statistics_2eh_6',['Statistics.h',['../da/df2/_statistics_8h.html',1,'']]]
 ];

@@ -1,0 +1,91 @@
+\doxysection{Vector\+Constructors.\+hpp}
+\hypertarget{_vector_constructors_8hpp_source}{}\label{_vector_constructors_8hpp_source}\index{include/MafLib/math/linalg/VectorConstructors.hpp@{include/MafLib/math/linalg/VectorConstructors.hpp}}
+\mbox{\hyperlink{_vector_constructors_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VECTOR\_CONSTRUCTORS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VECTOR\_CONSTRUCTORS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector_8hpp}{Vector.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ Constructs\ an\ uninitialized\ vector\ of\ size\ size.}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00016\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<T>::Vector}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}},\ \mbox{\hyperlink{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29}{Orientation}}\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}})\ :\ \_orientation(\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}})\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}\ ==\ 0)\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vector\ size\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00019\ \ \ \ \ \}}
+\DoxyCodeLine{00020\ \ \ \ \ \_data.resize(\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}});}
+\DoxyCodeLine{00021\ \}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ Constructs\ a\ vector\ from\ a\ raw\ data\ pointer.}}
+\DoxyCodeLine{00024\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00025\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00026\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<T>::Vector}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}},\ \textcolor{keyword}{const}\ U*\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}},\ \mbox{\hyperlink{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29}{Orientation}}\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}})}
+\DoxyCodeLine{00027\ \ \ \ \ :\ \_orientation(\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}})\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}\ ==\ 0)\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vector\ size\ must\ be\ greater\ than\ zero!"{}});}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}}\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Data\ pointer\ cannot\ be\ null!"{}});}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \_data.assign(\mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}},\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}}\ +\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}});}
+\DoxyCodeLine{00036\ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ Constructs\ from\ a\ std::vector,\ copy\ constructor}}
+\DoxyCodeLine{00039\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00040\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00041\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<T>::Vector}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}},\ \textcolor{keyword}{const}\ std::vector<U>\&\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}},\ \mbox{\hyperlink{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29}{Orientation}}\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}})}
+\DoxyCodeLine{00042\ \ \ \ \ :\ \_orientation(\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}})\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}\ ==\ 0)\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vector\ size\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}}.size()\ !=\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}})\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ throw\ std::invalid\_argument(\textcolor{stringliteral}{"{}Data\ size\ does\ not\ match\ vector\ size."{}});}
+\DoxyCodeLine{00049\ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \_data\ =\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}};}
+\DoxyCodeLine{00051\ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ Constructs\ from\ a\ std::vector,\ move\ constructor}}
+\DoxyCodeLine{00054\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00055\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<T>::Vector}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}},\ std::vector<T>\&\&\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}},\ \mbox{\hyperlink{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29}{Orientation}}\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}})}
+\DoxyCodeLine{00056\ \ \ \ \ :\ \_orientation(\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}})\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}\ ==\ 0)\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vector\ size\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}}.size()\ !=\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}})\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ throw\ std::invalid\_argument(\textcolor{stringliteral}{"{}Data\ size\ does\ not\ match\ vector\ size."{}});}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \_data\ =\ std::move(\mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}});}
+\DoxyCodeLine{00066\ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{comment}{//\ Constructs\ from\ a\ std::array,\ copy\ constructor}}
+\DoxyCodeLine{00069\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00070\ \textcolor{keyword}{template}\ <Numeric\ U,\ \textcolor{keywordtype}{size\_t}\ N>}
+\DoxyCodeLine{00071\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<T>::Vector}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}},\ \textcolor{keyword}{const}\ std::array<U,\ N>\&\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}},\ \mbox{\hyperlink{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29}{Orientation}}\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}})}
+\DoxyCodeLine{00072\ \ \ \ \ :\ \_orientation(\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}})\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}\ ==\ 0)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vector\ size\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{if}\ (N\ !=\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}})\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Data\ size\ does\ not\ match\ vector\ size."{}});}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \_data.assign(\mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}}.begin(),\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}}.end());}
+\DoxyCodeLine{00081\ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{comment}{//\ Converting\ constructor}}
+\DoxyCodeLine{00084\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00085\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00086\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<T>::Vector}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<U>}}\&\ other)}
+\DoxyCodeLine{00087\ \ \ \ \ :\ \_orientation(other.\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}()),}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \_data(other.\mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}}().\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a36d6a5a5315a1c2ae9bad35ca5aa448a}{begin}}(),\ other.\mbox{\hyperlink{classmaf_1_1math_1_1_vector_ae7f1be4d6d85f1ce33fcd5cdea8f1def}{data}}().\mbox{\hyperlink{classmaf_1_1math_1_1_vector_a4b7d99320a69fd965ce3210267d64c0e}{end}}())\ \{\}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

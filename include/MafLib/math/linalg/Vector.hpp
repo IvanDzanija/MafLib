@@ -268,6 +268,26 @@ public:
     [[nodiscard]] auto operator+(const U& scalar) const noexcept;
 
     /**
+     * @brief Element-wise vector addition assignment (Vector + Vector).
+     * @tparam U Numeric type of the other vector.
+     * @param other The vector to add.
+     * @attention This method doesn't cast the vector if U is a broader type.
+     * @throws std::invalid_argument if dimensions or orientations do not
+     * match.
+     */
+    template <Numeric U>
+    [[nodiscard]] auto operator+=(const Vector<U>& other) const;
+
+    /**
+     * @brief Element-wise scalar addition assignment (Vector + scalar).
+     * @tparam U An arithmetic scalar type.
+     * @param scalar The scalar value to add to each element.
+     * @attention This method doesn't cast the vector if U is a broader type.
+     */
+    template <Numeric U>
+    [[nodiscard]] auto operator+=(const U& scalar) const noexcept;
+
+    /**
      * @brief Element-wise vector subtraction (Vector - Vector).
      * @tparam U Numeric type of the other vector.
      * @param other The vector to subtract.
@@ -288,6 +308,26 @@ public:
     [[nodiscard]] auto operator-(const U& scalar) const noexcept;
 
     /**
+     * @brief Element-wise vector subtraction assignment (Vector - Vector).
+     * @tparam U Numeric type of the other vector.
+     * @param other The vector to subtract.
+     * @attention This method doesn't cast the vector if U is a broader type.
+     * @throws std::invalid_argument if dimensions or orientations do not
+     * match.
+     */
+    template <Numeric U>
+    [[nodiscard]] auto operator-=(const Vector<U>& other) const;
+
+    /**
+     * @brief Element-wise scalar subtraction (Vector - scalar).
+     * @tparam U An arithmetic scalar type.
+     * @param scalar The scalar value to subtract from each element.
+     * @attention This method doesn't cast the Vector if U is a broader type.
+     */
+    template <Numeric U>
+    [[nodiscard]] auto operator-=(const U& scalar) const noexcept;
+
+    /**
      * @brief Element-wise scalar multiplication (Vector * scalar).
      * @tparam U An arithmetic scalar type.
      * @param scalar The scalar value to multiply by.
@@ -296,18 +336,53 @@ public:
     template <Numeric U>
     [[nodiscard]] auto operator*(const U& scalar) const noexcept;
 
-    // TODO: Refactoring and stopped here. Continue from here
-    // COMPARE BLAS ROUTINES TO OMP ONES
+    // TODO: add tests from here
+    /**
+     * @brief Element-wise scalar multiplication assignment (Vector * scalar).
+     * @tparam U An arithmetic scalar type.
+     * @param scalar The scalar value to multiply by.
+     * @attention This method doesn't cast the Vector if U is a broader type.
+     */
+    template <Numeric U>
+    [[nodiscard]] auto operator*=(const U& scalar) const noexcept;
+
+    /**
+     * @brief Calculates the dot product (inner product) of two Vectors.
+     * @attention This method doesn't check for correct Vector orientations.
+     * @tparam U Numeric type of the other Vector.
+     * @param other The other Vector.
+     * @return A scalar value of the common, promoted type.
+     * @throws std::invalid_argument if Vector sizes do not match.
+     */
+    template <Numeric U>
+    [[nodiscard]] auto dot_product(const Vector<U>& other) const;
+
     /**
      * @brief Outer product (Column Vector * Row Vector).
      * @details This must be a (N x 1) * (1 x M) multiplication.
      * @tparam U Numeric type of the other vector.
-     * @param other The row vector (this vector must be a column).
+     * @param other The row Vector (this Vector must be a column).
      * @return A new Matrix of size (this.size x other.size).
      * @throws std::invalid_argument if orientations are not COLUMN * ROW.
      */
     template <Numeric U>
+    [[nodiscard]] auto outer_product(const Vector<U>& other) const;
+
+    /**
+     * @brief Dot product (Row Vector * Column Vector).
+     * @attention This must be a (1 x N) * (N x 1) multiplication.
+     * @details Checks for correct orientations then calls \ref dot_product().
+     * @tparam U Numeric type of the other vector.
+     * @param other The row Vector (this Vector must be a column).
+     * @return A new Matrix of size (this.size x other.size).
+     * @throws std::invalid_argument if orientations are not ROW * COLUMN.
+     * @throws std::invalid_argument if Vector sizes do not match.
+     */
+    template <Numeric U>
     [[nodiscard]] auto operator*(const Vector<U>& other) const;
+
+    // TODO: Refactoring and stopped here. Continue from here
+    // COMPARE BLAS ROUTINES TO OMP ONES
 
     /**
      * @brief Matrix-Vector multiplication (Row Vector * Matrix).
@@ -320,16 +395,6 @@ public:
      */
     template <Numeric U>
     [[nodiscard]] auto operator*(const Matrix<U>& other) const;
-
-    /**
-     * @brief Calculates the dot product (inner product) of two vectors.
-     * @tparam U Numeric type of the other vector.
-     * @param other The other vector.
-     * @return A scalar value of the common, promoted type.
-     * @throws std::invalid_argument if vector sizes do not match.
-     */
-    template <Numeric U>
-    [[nodiscard]] auto dot_product(const Vector<U>& other) const;
 
     // --- Printing and debugging ---
 
@@ -366,12 +431,12 @@ private:
      */
     void _invert_sign() {
         if (_data.size() > OMP_LINEAR_LIMIT) {
-            #pragma omp parallel for
+#pragma omp parallel for
             for (size_t i = 0; i < _data.size(); ++i) {
                 _data[i] = -_data[i];
             }
         } else {
-            #pragma omp simd
+#pragma omp simd
             for (size_t i = 0; i < _data.size(); ++i) {
                 _data[i] = -_data[i];
             }

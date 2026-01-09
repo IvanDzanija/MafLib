@@ -4,21 +4,22 @@
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
 \DoxyCodeLine{00002\ }
-\DoxyCodeLine{00003\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_a_v_l_tree}{AVLTree}}\ \{}
-\DoxyCodeLine{00004\ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00005\ \ \ \ \ \textcolor{keyword}{struct\ }AVLNode\ \{}
-\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ T\ value;}
-\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ AVLNode\ *left,\ right;}
-\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_global_header_8hpp_a3271a6f688eb2ba4047a2982ff49919a}{int32}}\ height;}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_global_header_8hpp_a3271a6f688eb2ba4047a2982ff49919a}{int32}}\ balance\_factor()\ \{}
-\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_global_header_8hpp_a3271a6f688eb2ba4047a2982ff49919a}{int32}}\ lsd\ =\ (this-\/>left\ !=\ \textcolor{keyword}{nullptr})\ ?\ this-\/>left-\/>height\ :\ 0;}
-\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_global_header_8hpp_a3271a6f688eb2ba4047a2982ff49919a}{int32}}\ rsd\ =\ (this-\/>right\ !=\ \textcolor{keyword}{nullptr})\ ?\ this-\/>right.height\ :\ 0;}
-\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ rsd\ -\/\ lsd;}
-\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00015\ \ \ \ \ \};}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \ \ \ \ AVLNode\ *root;}
-\DoxyCodeLine{00018\ \};}
+\DoxyCodeLine{00003\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00004\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_a_v_l_tree}{AVLTree}}\ \{}
+\DoxyCodeLine{00005\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{keyword}{struct\ }AVLNode\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ T\ value;}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ AVLNode\ *left,\ right;}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ int32\ height;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ int32\ balance\_factor()\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ int32\ lsd\ =\ (this-\/>left\ !=\ \textcolor{keyword}{nullptr})\ ?\ this-\/>left-\/>height\ :\ 0;}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ int32\ rsd\ =\ (this-\/>right\ !=\ \textcolor{keyword}{nullptr})\ ?\ this-\/>right.height\ :\ 0;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ rsd\ -\/\ lsd;}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00016\ \ \ \ \ \};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ AVLNode*\ root;}
+\DoxyCodeLine{00019\ \};}
 
 \end{DoxyCode}

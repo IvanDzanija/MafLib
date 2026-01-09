@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['epsilon_0',['EPSILON',['../df/dba/namespacemaf.html#ab1ccbacf86d0e3b14fc056bfd7b25e83',1,'maf']]]
+  ['epsilon_0',['EPSILON',['../d0/d8d/namespacemaf_1_1util.html#a082a0adde8d74d686bde3eec53f323da',1,'maf::util']]]
 ];

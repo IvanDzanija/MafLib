@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['trie_0',['Trie',['../d8/d20/classmaf_1_1_trie.html',1,'maf']]]
+  ['polynomial_0',['Polynomial',['../d2/dbb/classmaf_1_1math_1_1_polynomial.html',1,'maf::math']]]
 ];

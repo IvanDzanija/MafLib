@@ -531,6 +531,7 @@ private:
     void should_multiply_assign_scalar() {
         math::Matrix<int> a(2, 2, {1, 2, 3, 4});
         a *= 2.5f;
+        a.print();
 
         ASSERT_TRUE(a.at(0, 0) == 2);
         ASSERT_TRUE(a.at(1, 1) == 10);
@@ -544,6 +545,7 @@ private:
     void should_divide_matrix_and_scalar() {
         math::Matrix<int> a(2, 2, {1, 2, 3, 4});
         auto b = a / 2;
+        b.print();
 
         ASSERT_TRUE(is_close(b.at(0, 0), 0.5));
         ASSERT_TRUE(is_close(b.at(1, 1), 2.0));

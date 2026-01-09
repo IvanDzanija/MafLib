@@ -1,13 +1,10 @@
 #ifndef VECTOR_OPERATORS_H
 #define VECTOR_OPERATORS_H
+#include "MafLib/math/linalg/AccelerateWrappers/VectorRoutines.hpp"
 #pragma once
 #include "Vector.hpp"
 
 namespace maf::math {
-
-//=============================================================================
-// BLAS LEVEL 1 ROUTINES
-//=============================================================================
 
 // Equality operator
 template <Numeric T>
@@ -39,12 +36,12 @@ template <Numeric U>
     size_t n = _data.size();
     Vector<R> result(n, _orientation);
     if (n > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < n; ++i) {
             result[i] = static_cast<R>(_data[i]) + static_cast<R>(other[i]);
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < n; ++i) {
             result[i] = static_cast<R>(_data[i]) + static_cast<R>(other[i]);
         }
@@ -63,12 +60,12 @@ template <Numeric U>
 
     Vector<R> result(n, _orientation);
     if (n > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < n; ++i) {
             result[i] = static_cast<R>(_data[i]) + r_scalar;
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < n; ++i) {
             result[i] = static_cast<R>(_data[i]) + r_scalar;
         }
@@ -88,6 +85,52 @@ template <Numeric T, Numeric U>
     return vec + scalar;
 }
 
+// Vector + Vector
+template <Numeric T>
+template <Numeric U>
+[[nodiscard]] auto Vector<T>::operator+=(const Vector<U>& other) const {
+    if (_orientation != other.orientation() || _data.size() != other.data().size()) {
+        throw std::invalid_argument("Vectors must be same orientation and size!");
+    }
+
+    size_t n = _data.size();
+    if (n > OMP_LINEAR_LIMIT) {
+#pragma omp parallel for
+        for (size_t i = 0; i < n; ++i) {
+            _data[i] += static_cast<T>(other[i]);
+        }
+    } else {
+#pragma omp simd
+        for (size_t i = 0; i < n; ++i) {
+            _data[i] += static_cast<T>(other[i]);
+        }
+    }
+    return *this;
+}
+
+// Vector + Scalar
+template <Numeric T>
+template <Numeric U>
+[[nodiscard]] auto Vector<T>::operator+=(const U& scalar) const noexcept {
+    using R = std::common_type_t<T, U>;
+
+    R r_scalar = static_cast<R>(scalar);
+    size_t n = _data.size();
+
+    if (n > OMP_LINEAR_LIMIT) {
+#pragma omp parallel for
+        for (size_t i = 0; i < n; ++i) {
+            _data[i] += r_scalar;
+        }
+    } else {
+#pragma omp simd
+        for (size_t i = 0; i < n; ++i) {
+            _data[i] += r_scalar;
+        }
+    }
+    return *this;
+}
+
 // Vector - Vector
 template <Numeric T>
 template <Numeric U>
@@ -101,12 +144,12 @@ template <Numeric U>
     size_t n = _data.size();
     Vector<R> result(n, _orientation);
     if (n > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < n; ++i) {
             result[i] = static_cast<R>(_data[i]) - static_cast<R>(other[i]);
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < n; ++i) {
             result[i] = static_cast<R>(_data[i]) - static_cast<R>(other[i]);
         }
@@ -125,12 +168,12 @@ auto Vector<T>::operator-(const U& scalar) const noexcept {
 
     Vector<R> result(n, _orientation);
     if (n > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < n; ++i) {
             result[i] = static_cast<R>(_data[i]) - r_scalar;
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < n; ++i) {
             result[i] = static_cast<R>(_data[i]) - r_scalar;
         }
@@ -154,17 +197,63 @@ auto operator-(const U& scalar, const Vector<T>& vec) noexcept {
 
     Vector<R> result(n, vec.orientation());
     if (n > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < n; ++i) {
             result[i] = r_scalar - static_cast<R>(vec[i]);
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < n; ++i) {
             result[i] = r_scalar - static_cast<R>(vec[i]);
         }
     }
     return result;
+}
+
+// Vector - Vector
+template <Numeric T>
+template <Numeric U>
+[[nodiscard]] auto Vector<T>::operator-=(const Vector<U>& other) const {
+    if (_orientation != other.orientation() || _data.size() != other.data().size()) {
+        throw std::invalid_argument("Vectors must be same orientation and size!");
+    }
+
+    size_t n = _data.size();
+    if (n > OMP_LINEAR_LIMIT) {
+#pragma omp parallel for
+        for (size_t i = 0; i < n; ++i) {
+            _data[i] -= static_cast<T>(other[i]);
+        }
+    } else {
+#pragma omp simd
+        for (size_t i = 0; i < n; ++i) {
+            _data[i] -= static_cast<T>(other[i]);
+        }
+    }
+    return *this;
+}
+
+// Vector - Scalar
+template <Numeric T>
+template <Numeric U>
+[[nodiscard]] auto Vector<T>::operator-=(const U& scalar) const noexcept {
+    using R = std::common_type_t<T, U>;
+
+    R r_scalar = static_cast<R>(scalar);
+    size_t n = _data.size();
+
+    if (n > OMP_LINEAR_LIMIT) {
+#pragma omp parallel for
+        for (size_t i = 0; i < n; ++i) {
+            _data[i] -= r_scalar;
+        }
+    } else {
+#pragma omp simd
+        for (size_t i = 0; i < n; ++i) {
+            _data[i] -= r_scalar;
+        }
+    }
+    return *this;
 }
 
 // Vector * Scalar
@@ -178,12 +267,12 @@ template <Numeric U>
 
     Vector<R> result(n, _orientation);
     if (n > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < n; ++i) {
             result[i] = static_cast<R>(_data[i]) * r_scalar;
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < n; ++i) {
             result[i] = static_cast<R>(_data[i]) * r_scalar;
         }
@@ -203,9 +292,136 @@ template <Numeric T, Numeric U>
     return vec * scalar;
 }
 
-// TODO: Check if makes sense to use BLAS on routines below
+// TODO: add tests below
 
+// Vector * Scalar
+template <Numeric T>
+template <Numeric U>
+[[nodiscard]] auto Vector<T>::operator*=(const U& scalar) const noexcept {
+    using R = std::common_type_t<T, U>;
+
+    R r_scalar = static_cast<R>(scalar);
+    size_t n = _data.size();
+
+    if (n > OMP_LINEAR_LIMIT) {
+#pragma omp parallel for
+        for (size_t i = 0; i < n; ++i) {
+            _data[i] *= r_scalar;
+        }
+    } else {
+#pragma omp simd
+        for (size_t i = 0; i < n; ++i) {
+            _data[i] *= r_scalar;
+        }
+    }
+    return *this;
+}
+
+// Vector * Vector -> Scalar
+template <Numeric T>
+template <Numeric U>
+auto Vector<T>::dot_product(const Vector<U>& other) const {
+    size_t n = _data.size();
+    if (n != other.size()) {
+        throw std::invalid_argument("Vectors must be of same size!");
+    }
+
+#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
+    if constexpr (std::is_same_v<T, U>) {
+        if constexpr (std::is_same_v<T, double>) {
+            return acc::ddot(_data, other.data());
+        } else if constexpr (std::is_same_v<T, float>) {
+            return acc::sdot(_data, other.data());
+        }
+    }
+#endif
+
+    using R = std::common_type_t<T, U>;
+
+    R result(0);
+    if (n > OMP_LINEAR_LIMIT) {
+#pragma omp parallel for reduction(+ : result)
+        for (size_t i = 0; i < n; ++i) {
+            result += static_cast<R>(_data[i]) * static_cast<R>(other[i]);
+        }
+    } else {
+#pragma omp simd reduction(+ : result)
+        for (size_t i = 0; i < n; ++i) {
+            result += static_cast<R>(_data[i]) * static_cast<R>(other[i]);
+        }
+    }
+    return result;
+}
+
+// Vector * Vector -> Scalar
+template <Numeric T>
+template <Numeric U>
+auto Vector<T>::operator*(const Vector<U>& other) const {
+    if (_orientation == other._orientation || _orientation == COLUMN) {
+        throw std::invalid_argument(
+            "Invalid multiplication: Vectors must be of different orientations (row x "
+            "column) for dot product. If you are certain that you want the dot "
+            "product, use the dot_product() method which does not require specific "
+            "orientations.");
+    }
+    return dot_product(other);
+}
+
+// Vector * Vector -> Matrix
+template <Numeric T>
+template <Numeric U>
+[[nodiscard]] auto Vector<T>::outer_product(const Vector<U>& other) const {
+    using R = std::common_type_t<T, U>;
+
+    size_t n = _data.size();
+    size_t m = other.size();
+
+    if (_orientation == other._orientation) {
+        // 1x1 x 1x1 vector multiplication
+        if (n == 1 && m == 1) {
+            return Matrix(1, 1, {_data[0] * other[0]});
+        }
+        throw std::invalid_argument("Vector dimensions do not match!");
+    }
+    switch (_orientation) {
+        case COLUMN: {
+            Matrix<R> result(n, m);
+            if (n * m > OMP_QUADRATIC_LIMIT) {
+#pragma omp parallel for
+                for (size_t i = 0; i < n; ++i) {
+                    for (size_t j = 0; j < m; ++j) {
+                        result.data()[(i * m) + j] =
+                            static_cast<R>(_data[i]) * static_cast<R>(other[j]);
+                    }
+                }
+            } else {
+                for (size_t i = 0; i < n; ++i) {
+#pragma omp simd
+                    for (size_t j = 0; j < m; ++j) {
+                        result.data()[(i * m) + j] =
+                            static_cast<R>(_data[i]) * static_cast<R>(other[j]);
+                    }
+                }
+            }
+
+            return result;
+        }
+        default:
+            if (n != m) {
+                throw std::invalid_argument("Vector dimensions do not match!");
+            }
+
+            std::cout << "This results in a 1x1 matrix. Consider using vector dot "
+                         "product."
+                      << std::endl;
+
+            return Matrix<R>(1, 1, {dot_product(other)});
+    }
+}
+
+// TODO: Check if makes sense to use BLAS on routines below
 // Vector * Matrix -> Vector
+
 template <Numeric T>
 template <Numeric U>
 auto Vector<T>::operator*(const Matrix<U>& other) const {
@@ -232,63 +448,7 @@ auto Vector<T>::operator*(const Matrix<U>& other) const {
     }
     return result;
 }
-
-// Vector * Vector -> Matrix
-template <Numeric T>
-template <Numeric U>
-auto Vector<T>::operator*(const Vector<U>& other) const {
-    std::cout << "THIS IS AN OUTER PRODUCT OPERATOR!" << std::endl;
-
-    using R = std::common_type_t<T, U>;
-    size_t n = _data.size();
-    size_t m = other.size();
-    if (_orientation == other._orientation) {
-        // 1x1 x 1x1 vector multiplication
-        if (n == 1 && m == 1) {
-            return Matrix(1, 1, {_data.at(0) * other._data.at(0)});
-        }
-        throw std::invalid_argument(
-            "Vector dimensions do not match! Maybe you are looking for "
-            "vector dot product.");
-    }
-    switch (_orientation) {
-        case COLUMN: {
-            Matrix<R> result(n, m);
-            for (size_t i = 0; i < n; ++i) {
-                for (size_t j = 0; j < m; ++j) {
-                    result.at(i, j) = at(i) * other.at(j);
-                }
-            }
-            return result;
-        }
-
-        default:
-            std::cout << "This results in a 1x1 matrix. Consider using vector "
-                         "dot product."
-                      << std::endl;
-
-            R result = 0;
-            for (size_t i = 0; i < n; ++i) {
-                for (size_t j = 0; j < m; ++j) {
-                    result += at(i) * other.at(j);
-                }
-            }
-            return Matrix<R>(1, 1, {result});
-    }
-}
-
-// Vector * Vector -> Scalar
-template <Numeric T>
-template <Numeric U>
-auto Vector<T>::dot_product(const Vector<U>& other) const {
-    std::common_type_t<T, U> result = 0;
-    for (size_t i = 0; i < size(); ++i) {
-        for (size_t j = 0; j < other.size(); ++j) {
-            result += at(i) * other.at(j);
-        }
-    }
-    return result;
-}
+// TODO:  add / operator overloads
 
 }  // namespace maf::math
 

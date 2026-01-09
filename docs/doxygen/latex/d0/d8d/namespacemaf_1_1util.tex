@@ -13,12 +13,42 @@ bool \mbox{\hyperlink{namespacemaf_1_1util_ab331fd08e50c92e3c379958f73f8ff21}{sa
 bool \mbox{\hyperlink{namespacemaf_1_1util_a1fc89e6a016b62d850603a1d9ab579f1}{is\+\_\+power\+\_\+of\+\_\+two}} (int n)
 \item 
 unsigned int \mbox{\hyperlink{namespacemaf_1_1util_ae51d0d5b7dd64a53bd29db8ec4ab9811}{most\+\_\+significant\+\_\+bit}} (int n)
+\item 
+{\footnotesize template$<$typename T$>$ }\\bool \mbox{\hyperlink{namespacemaf_1_1util_a4c6d8c5ac3d702b62706ed826dd22c77}{is\+\_\+close}} (T v1, T v2, double epsilon=\mbox{\hyperlink{namespacemaf_1_1util_a082a0adde8d74d686bde3eec53f323da}{EPSILON}})
+\item 
+{\footnotesize template$<$typename T, typename U$>$ }\\bool \mbox{\hyperlink{namespacemaf_1_1util_ae4cf9e3bb378a55e4cb78fd699dfd4ff}{is\+\_\+close}} (T v1, U v2, double epsilon=\mbox{\hyperlink{namespacemaf_1_1util_a082a0adde8d74d686bde3eec53f323da}{EPSILON}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr double \mbox{\hyperlink{namespacemaf_1_1util_a082a0adde8d74d686bde3eec53f323da}{EPSILON}} = 1e-\/6
 \end{DoxyCompactItemize}
 
 
 \label{doc-func-members}
 \Hypertarget{namespacemaf_1_1util_doc-func-members}
 \doxysubsection{Function Documentation}
+\Hypertarget{namespacemaf_1_1util_a4c6d8c5ac3d702b62706ed826dd22c77}\index{maf::util@{maf::util}!is\_close@{is\_close}}
+\index{is\_close@{is\_close}!maf::util@{maf::util}}
+\doxysubsubsection{\texorpdfstring{is\_close()}{is\_close()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1util_a4c6d8c5ac3d702b62706ed826dd22c77} 
+template$<$typename T$>$ \\
+bool maf\+::util\+::is\+\_\+close (\begin{DoxyParamCaption}\item[{T}]{v1}{, }\item[{T}]{v2}{, }\item[{double}]{epsilon}{ = {\ttfamily \mbox{\hyperlink{namespacemaf_1_1util_a082a0adde8d74d686bde3eec53f323da}{EPSILON}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d8d/namespacemaf_1_1util_a4c6d8c5ac3d702b62706ed826dd22c77_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemaf_1_1util_ae4cf9e3bb378a55e4cb78fd699dfd4ff}\index{maf::util@{maf::util}!is\_close@{is\_close}}
+\index{is\_close@{is\_close}!maf::util@{maf::util}}
+\doxysubsubsection{\texorpdfstring{is\_close()}{is\_close()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1util_ae4cf9e3bb378a55e4cb78fd699dfd4ff} 
+template$<$typename T, typename U$>$ \\
+bool maf\+::util\+::is\+\_\+close (\begin{DoxyParamCaption}\item[{T}]{v1}{, }\item[{U}]{v2}{, }\item[{double}]{epsilon}{ = {\ttfamily \mbox{\hyperlink{namespacemaf_1_1util_a082a0adde8d74d686bde3eec53f323da}{EPSILON}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
 \Hypertarget{namespacemaf_1_1util_a1fc89e6a016b62d850603a1d9ab579f1}\index{maf::util@{maf::util}!is\_power\_of\_two@{is\_power\_of\_two}}
 \index{is\_power\_of\_two@{is\_power\_of\_two}!maf::util@{maf::util}}
 \doxysubsubsection{\texorpdfstring{is\_power\_of\_two()}{is\_power\_of\_two()}}
@@ -36,4 +66,15 @@ unsigned int maf\+::util\+::most\+\_\+significant\+\_\+bit (\begin{DoxyParamCapt
 \doxysubsubsection{\texorpdfstring{same\_sign()}{same\_sign()}}
 {\footnotesize\ttfamily \label{namespacemaf_1_1util_ab331fd08e50c92e3c379958f73f8ff21} 
 bool maf\+::util\+::same\+\_\+sign (\begin{DoxyParamCaption}\item[{int}]{a}{, }\item[{int}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-var-members}
+\Hypertarget{namespacemaf_1_1util_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacemaf_1_1util_a082a0adde8d74d686bde3eec53f323da}\index{maf::util@{maf::util}!EPSILON@{EPSILON}}
+\index{EPSILON@{EPSILON}!maf::util@{maf::util}}
+\doxysubsubsection{\texorpdfstring{EPSILON}{EPSILON}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1util_a082a0adde8d74d686bde3eec53f323da} 
+double maf\+::util\+::\+EPSILON = 1e-\/6\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 

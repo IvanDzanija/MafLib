@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['choleskydecomposition_2ehpp_0',['CholeskyDecomposition.hpp',['../d5/d1f/_cholesky_decomposition_8hpp.html',1,'']]]
+  ['cholesky_2ehpp_0',['Cholesky.hpp',['../db/d3b/_cholesky_8hpp.html',1,'']]]
 ];

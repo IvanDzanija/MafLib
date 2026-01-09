@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['vector_0',['Vector',['../de/d35/classmaf_1_1math_1_1_vector.html',1,'maf::math::Vector&lt; T &gt;'],['../de/d35/classmaf_1_1math_1_1_vector.html#aa96c8ef557852ec4425b3399e4c758c7',1,'maf::math::Vector::Vector()'],['../de/d35/classmaf_1_1math_1_1_vector.html#a5b5f435bdc127f05fdc705c58395b6ed',1,'maf::math::Vector::Vector(size_t size, T *data, Orientation orientation=COLUMN)'],['../de/d35/classmaf_1_1math_1_1_vector.html#adce45df04dad23e8e7fb2aa5dde3b2cf',1,'maf::math::Vector::Vector(size_t size, Orientation orientation=COLUMN)'],['../de/d35/classmaf_1_1math_1_1_vector.html#ab534ebb245d6771fb5977b241be10f91',1,'maf::math::Vector::Vector(size_t size, const std::vector&lt; T &gt; &amp;data, Orientation orientation=COLUMN)'],['../de/d35/classmaf_1_1math_1_1_vector.html#a716800c73059c5fdcfddc4abd057343c',1,'maf::math::Vector::Vector(size_t size, std::vector&lt; T &gt; &amp;&amp;data, Orientation orientation=COLUMN)'],['../de/d35/classmaf_1_1math_1_1_vector.html#a20d90280ea731664d99eed92bfb5741c',1,'maf::math::Vector::Vector(size_t size, const std::array&lt; U, N &gt; &amp;data, Orientation orientation=COLUMN)']]],
-  ['vector_2ehpp_1',['Vector.hpp',['../db/d20/_vector_8hpp.html',1,'']]],
-  ['vectormethods_2ehpp_2',['VectorMethods.hpp',['../d3/d50/_vector_methods_8hpp.html',1,'']]],
-  ['vectoroperators_2ehpp_3',['VectorOperators.hpp',['../dd/d8d/_vector_operators_8hpp.html',1,'']]]
+  ['test_2ecpp_0',['test.cpp',['../df/dac/test_8cpp.html',1,'']]],
+  ['transpose_1',['transpose',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#a65c510831554a29db6115f964b3679b0',1,'maf::math::Matrix::transpose()'],['../de/d35/classmaf_1_1math_1_1_vector.html#a6257e58bd19631bdfb91b72c1da6d2c2',1,'maf::math::Vector::transpose()']]],
+  ['transposed_2',['transposed',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#a246ca1334c2afc425a2eafc68b48fa38',1,'maf::math::Matrix::transposed()'],['../de/d35/classmaf_1_1math_1_1_vector.html#a8f1900daefc1a467b50da3c889612c75',1,'maf::math::Vector::transposed()']]],
+  ['trie_3',['Trie',['../d8/d20/classmaf_1_1_trie.html',1,'maf::Trie'],['../d8/d20/classmaf_1_1_trie.html#a67064abce61928893b7338390b084314',1,'maf::Trie::Trie()=default'],['../d8/d20/classmaf_1_1_trie.html#ab3d1329f9de741d1d2d66daf14d2efd1',1,'maf::Trie::Trie(TrieNode *root)']]],
+  ['trie_2ehpp_4',['Trie.hpp',['../df/d83/_trie_8hpp.html',1,'']]]
 ];

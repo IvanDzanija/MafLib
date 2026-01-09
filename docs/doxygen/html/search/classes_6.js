@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vector_0',['Vector',['../de/d35/classmaf_1_1math_1_1_vector.html',1,'maf::math']]]
+  ['trie_0',['Trie',['../d8/d20/classmaf_1_1_trie.html',1,'maf']]]
 ];

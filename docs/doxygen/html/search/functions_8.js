@@ -1,4 +1,26 @@
 var searchData=
 [
-  ['loosely_5fequal_0',['loosely_equal',['../d4/d02/namespacemaf_1_1math.html#a3d4733be1cd68ede07a9c2de6728b2d7',1,'maf::math']]]
+  ['identity_5fmatrix_0',['identity_matrix',['../d4/d02/namespacemaf_1_1math.html#a4d61c9a4c0434a2e01652894564f7ebb',1,'maf::math']]],
+  ['inplace_5fdaxpy_1',['inplace_daxpy',['../d0/d9a/namespacemaf_1_1math_1_1acc.html#aef7de9e7deea56e65c8d6b76156bf12f',1,'maf::math::acc']]],
+  ['inplace_5fsaxpy_2',['inplace_saxpy',['../d0/d9a/namespacemaf_1_1math_1_1acc.html#afb2cad35eb6908493f2658b697f9001c',1,'maf::math::acc']]],
+  ['inplace_5fsscal_3',['inplace_sscal',['../d0/d9a/namespacemaf_1_1math_1_1acc.html#a7df4cadb947f057fafa9d554b74d2844',1,'maf::math::acc']]],
+  ['inplace_5fvaddi_4',['inplace_vaddi',['../d0/d9a/namespacemaf_1_1math_1_1acc.html#abefc966df6ad8b9d2f2f54fccf682a58',1,'maf::math::acc']]],
+  ['inplace_5fvsaddd_5',['inplace_vsaddd',['../d0/d9a/namespacemaf_1_1math_1_1acc.html#a11956a59db4393bf9a53f82b9c307cb3',1,'maf::math::acc']]],
+  ['inplace_5fvsaddi_6',['inplace_vsaddi',['../d0/d9a/namespacemaf_1_1math_1_1acc.html#aea68ededb5a1899d37a78231df668b3b',1,'maf::math::acc']]],
+  ['inplace_5fvsadds_7',['inplace_vsadds',['../d0/d9a/namespacemaf_1_1math_1_1acc.html#ae3f5bfe9d4f7a57d90f644654d41a19b',1,'maf::math::acc']]],
+  ['insert_8',['insert',['../d8/d20/classmaf_1_1_trie.html#ac4cf68fa3c580f117bce94bf916ab028',1,'maf::Trie::insert()'],['../d7/d79/class_b_tree.html#aa93c588afe760be2113669723fc9edb5',1,'BTree::insert()']]],
+  ['is_5fclose_9',['is_close',['../d0/d8d/namespacemaf_1_1util.html#a4c6d8c5ac3d702b62706ed826dd22c77',1,'maf::util::is_close(T v1, T v2, double epsilon=EPSILON)'],['../d0/d8d/namespacemaf_1_1util.html#ae4cf9e3bb378a55e4cb78fd699dfd4ff',1,'maf::util::is_close(T v1, U v2, double epsilon=EPSILON)']]],
+  ['is_5fdiagonal_10',['is_diagonal',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#a90408b80daf821aff91fd2aed917ce8e',1,'maf::math::Matrix']]],
+  ['is_5ffinite_11',['is_finite',['../d2/da4/class_extended_int.html#a0b0b15af5202fd43f29d641f1ab63b23',1,'ExtendedInt']]],
+  ['is_5finf_12',['is_inf',['../d2/da4/class_extended_int.html#ac4674e6d534e9e6e8e9a5f353e14bad3',1,'ExtendedInt']]],
+  ['is_5flower_5ftriangular_13',['is_lower_triangular',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#a48ce2d00357e89ece95524bd003b63c6',1,'maf::math::Matrix']]],
+  ['is_5fneg_5finf_14',['is_neg_inf',['../d2/da4/class_extended_int.html#a7884534d4365c351c7e8f56482d5d58a',1,'ExtendedInt']]],
+  ['is_5fnull_15',['is_null',['../de/d35/classmaf_1_1math_1_1_vector.html#aad485062e875a345db7fd5c81f7390ef',1,'maf::math::Vector']]],
+  ['is_5fpos_5finf_16',['is_pos_inf',['../d2/da4/class_extended_int.html#abb38c9149cbc90c8cb4fbde0fe320065',1,'ExtendedInt']]],
+  ['is_5fpositive_5fdefinite_17',['is_positive_definite',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#a40d503bbba1ec9fcbb50f0a90207bd04',1,'maf::math::Matrix']]],
+  ['is_5fpower_5fof_5ftwo_18',['is_power_of_two',['../d0/d8d/namespacemaf_1_1util.html#a1fc89e6a016b62d850603a1d9ab579f1',1,'maf::util']]],
+  ['is_5fsingular_19',['is_singular',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#ae26826bcc4a303b29538a17c0a39de2b',1,'maf::math::Matrix']]],
+  ['is_5fsquare_20',['is_square',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#a774d7c4510a8977e5b19f5f332d5789c',1,'maf::math::Matrix']]],
+  ['is_5fsymmetric_21',['is_symmetric',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#a0f6daf36ebb2efd5970384565469323c',1,'maf::math::Matrix']]],
+  ['is_5fupper_5ftriangular_22',['is_upper_triangular',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#af79337899f9b0f2613175daf53f18ea9',1,'maf::math::Matrix']]]
 ];

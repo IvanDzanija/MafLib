@@ -5,10 +5,21 @@
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
 \DoxyCodeLine{00002\ }
 \DoxyCodeLine{00003\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemaf_1_1util}{maf::util}}\ \{}
-\DoxyCodeLine{00004\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmaf_1_1util_1_1_mod_int}{ModInt}}\ \{}
-\DoxyCodeLine{00005\ \ \ \ \ T\ \_val;}
-\DoxyCodeLine{00006\ \ \ \ \ T\ \_mod;}
-\DoxyCodeLine{00007\ \};}
-\DoxyCodeLine{00008\ \}\ \textcolor{comment}{//\ namespace\ maf::util}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ TODO:\ Make\ T\ integral\ type\ only}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ T\ Mod>}
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmaf_1_1util_1_1_mod_int}{ModInt}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00008\ \ \ \ \ [[nodiscard]]\ T\ \mbox{\hyperlink{classmaf_1_1util_1_1_mod_int_a9943ad2df7b2fb7bb9b17701c6cf86f5}{get\_value}}()\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_val;}
+\DoxyCodeLine{00010\ \ \ \ \ \}}
+\DoxyCodeLine{00011\ \ \ \ \ [[nodiscard]]\ T\ \mbox{\hyperlink{classmaf_1_1util_1_1_mod_int_a4ef4cdaf163d993243354d7aa20e60d1}{get\_mod}}()\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ MOD;}
+\DoxyCodeLine{00013\ \ \ \ \ \}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00016\ \ \ \ \ T\ \_val;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ T\ MOD\ =\ Mod;}
+\DoxyCodeLine{00018\ \};}
+\DoxyCodeLine{00019\ \}\ \ \textcolor{comment}{//\ namespace\ maf::util}}
 
 \end{DoxyCode}
