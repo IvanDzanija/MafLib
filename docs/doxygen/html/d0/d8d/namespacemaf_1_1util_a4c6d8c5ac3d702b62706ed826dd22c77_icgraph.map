@@ -1,0 +1,32 @@
+<map id="maf::util::is_close" name="maf::util::is_close">
+<area shape="rect" id="Node000001" title=" " alt="" coords="818,201,942,226"/>
+<area shape="rect" id="Node000002" href="$d6/de6/namespacemaf_1_1math_1_1detail.html#a60463d7cb4da4798efddf0b3042c06c2" title="Internal implementation of PLU decomposition." alt="" coords="618,13,770,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="865,188,828,120,801,84,768,53,747,41,750,37,771,49,805,81,832,118,869,185"/>
+<area shape="rect" id="Node000005" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a48ce2d00357e89ece95524bd003b63c6" title="Checks if the matrix is lower triangular." alt="" coords="628,63,760,103"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="854,191,815,155,768,119,746,106,749,102,771,114,819,151,858,188"/>
+<area shape="rect" id="Node000007" href="$de/d35/classmaf_1_1math_1_1_vector.html#aad485062e875a345db7fd5c81f7390ef" title="Checks if the vector is a null vector." alt="" coords="627,128,761,169"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="826,198,753,172,755,167,828,193"/>
+<area shape="rect" id="Node000008" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a0f6daf36ebb2efd5970384565469323c" title="Checks if the matrix is symmetric (A == A^T)." alt="" coords="628,259,760,299"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="828,235,755,261,753,256,826,230"/>
+<area shape="rect" id="Node000013" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#af79337899f9b0f2613175daf53f18ea9" title="Checks if the matrix is upper triangular." alt="" coords="628,193,760,234"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="803,216,760,216,760,211,803,211"/>
+<area shape="rect" id="Node000014" href="$d4/d02/namespacemaf_1_1math.html#a3d4733be1cd68ede07a9c2de6728b2d7" title="Checks if two matrices are element&#45;wise equal within a tolerance." alt="" coords="629,324,759,365"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="858,240,819,276,771,313,749,326,746,321,768,309,815,272,854,236"/>
+<area shape="rect" id="Node000015" href="$de/d35/classmaf_1_1math_1_1_vector.html#a02e4aff220cd36bb92d84d08def1fdb2" title="Normalizes the vector in&#45;place (divides by its L2 norm)." alt="" coords="627,389,761,430"/>
+<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="869,242,831,309,804,346,771,378,753,391,750,387,768,374,800,342,826,306,864,239"/>
+<area shape="rect" id="Node000003" href="$d4/d02/namespacemaf_1_1math.html#a5605a040f9b62ca6a92b7e7f91c6ee0f" title="Performs a blocked PLU decomposition on a square matrix." alt="" coords="420,13,525,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="603,28,525,28,525,23,603,23"/>
+<area shape="rect" id="Node000004" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#ae26826bcc4a303b29538a17c0a39de2b" title="Checks if the matrix is singular (non&#45;invertible)." alt="" coords="190,5,322,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="404,28,323,28,323,23,404,23"/>
+<area shape="rect" id="Node000006" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a90408b80daf821aff91fd2aed917ce8e" title="Checks if the matrix is diagonal." alt="" coords="406,128,538,169"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="614,109,540,131,538,126,612,104"/>
+<area shape="rect" id="Node000009" href="$d6/de6/namespacemaf_1_1math_1_1detail.html#a9823af698a94cb131e27fbd62f84a83e" title="Internal implementation of Cholesky decomposition." alt="" coords="408,231,536,271"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="612,271,536,262,536,256,613,266"/>
+<area shape="rect" id="Node000012" href="$d4/d02/namespacemaf_1_1math.html#a7128b942acd7f39f1716053f0c4650ca" title=" " alt="" coords="374,296,570,321"/>
+<area shape="poly" id="edge11_Node000008_Node000012" title=" " alt="" coords="613,292,571,298,571,293,612,287"/>
+<area shape="rect" id="Node000010" href="$d4/d02/namespacemaf_1_1math.html#adacdd5d260e55a04182d86ed82d0e0b2" title="Computes the Cholesky decomposition of a symmetric positive definite matrix." alt="" coords="186,238,326,264"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="393,254,326,254,326,248,393,248"/>
+<area shape="rect" id="Node000011" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a40d503bbba1ec9fcbb50f0a90207bd04" title="Checks if the matrix is positive definite." alt="" coords="5,231,138,271"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="170,254,138,254,138,248,170,248"/>
+<area shape="poly" id="edge13_Node000013_Node000006" title=" " alt="" coords="612,192,538,170,540,165,614,187"/>
+</map>

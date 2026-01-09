@@ -1,14 +1,9 @@
 var searchData=
 [
-  ['cbegin_0',['cbegin',['../de/d35/classmaf_1_1math_1_1_vector.html#ad86b36b09c3a0b866d8508e013aa09fc',1,'maf::math::Vector']]],
-  ['cend_1',['cend',['../de/d35/classmaf_1_1math_1_1_vector.html#afa7ada2f328c3eff483b60d552bff19e',1,'maf::math::Vector']]],
-  ['cholesky_2',['cholesky',['../d4/d02/namespacemaf_1_1math.html#a45286ae95d74e7a19ecf706538b151e7',1,'maf::math']]],
-  ['choleskydecomposition_2ehpp_3',['CholeskyDecomposition.hpp',['../d5/d1f/_cholesky_decomposition_8hpp.html',1,'']]],
-  ['column_4',['COLUMN',['../de/d35/classmaf_1_1math_1_1_vector.html#afa8632efb0c07233f2d1eea1015c30fba62c892b0dcd60d184c9560b0a752518e',1,'maf::math::Vector']]],
-  ['column_5fcount_5',['column_count',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#a98d6cc10d243169d78f53d07406ace8b',1,'maf::math::Matrix']]],
-  ['correlated_5fshocks_6',['correlated_shocks',['../d4/d02/namespacemaf_1_1math.html#a2eb500c1b4cfbb3169604245422bd93e',1,'maf::math']]],
-  ['count_5fsets_7',['count_sets',['../db/da1/classmaf_1_1_disjoint_set.html#ab00d6b60b33f011bf1097f7dbb5ed27b',1,'maf::DisjointSet']]],
-  ['covariance_8',['covariance',['../d4/d02/namespacemaf_1_1math.html#a66ab6cca490d0bd2354b736a13658711',1,'maf::math::covariance(const Vector&lt; T &gt; &amp;x, const Vector&lt; T &gt; &amp;y)'],['../d4/d02/namespacemaf_1_1math.html#a0bdeb6320da66ec8fa672a071ac38cca',1,'maf::math::covariance(const std::vector&lt; T &gt; &amp;x, T mean_x, const std::vector&lt; T &gt; &amp;y, T mean_y)']]],
-  ['crbegin_9',['crbegin',['../de/d35/classmaf_1_1math_1_1_vector.html#ad8b6a7d8d3c11d9ada93dc01a7a6dead',1,'maf::math::Vector']]],
-  ['crend_10',['crend',['../de/d35/classmaf_1_1math_1_1_vector.html#a363f377d18c73b7b353b6d81fcb48e0c',1,'maf::math::Vector']]]
+  ['begin_0',['begin',['../de/d35/classmaf_1_1math_1_1_vector.html#a36d6a5a5315a1c2ae9bad35ca5aa448a',1,'maf::math::Vector::begin() noexcept'],['../de/d35/classmaf_1_1math_1_1_vector.html#a7b7e8fda09c78bbd67569affd7020d65',1,'maf::math::Vector::begin() const noexcept']]],
+  ['binarytree_1',['BinaryTree',['../d7/df3/classmaf_1_1_binary_tree.html',1,'maf']]],
+  ['binarytree_2ehpp_2',['BinaryTree.hpp',['../dd/dee/_binary_tree_8hpp.html',1,'']]],
+  ['bits_2ehpp_3',['Bits.hpp',['../df/d59/_bits_8hpp.html',1,'']]],
+  ['btree_4',['BTree',['../d7/d79/class_b_tree.html',1,'BTree&lt; T &gt;'],['../d7/d79/class_b_tree.html#a15b88d9ea1f220777b9f3f64993c750a',1,'BTree::BTree()']]],
+  ['btree_2ehpp_5',['BTree.hpp',['../dc/d7b/_b_tree_8hpp.html',1,'']]]
 ];

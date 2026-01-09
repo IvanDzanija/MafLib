@@ -1,0 +1,5 @@
+<map id="maf::math::plu" name="maf::math::plu">
+<area shape="rect" id="Node000001" title="Performs a blocked PLU decomposition on a square matrix." alt="" coords="186,13,291,38"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#ae26826bcc4a303b29538a17c0a39de2b" title="Checks if the matrix is singular (non&#45;invertible)." alt="" coords="5,5,138,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,28,138,28,138,23,170,23"/>
+</map>

@@ -9,20 +9,20 @@
 \DoxyCodeLine{00005\ }
 \DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
 \DoxyCodeLine{00015\ \textcolor{comment}{//\ Checks\ if\ matrix\ is\ square.}}
-\DoxyCodeLine{00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00016\ \textcolor{keyword}{template}\ <Numeric\ T>}
 \DoxyCodeLine{00017\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a774d7c4510a8977e5b19f5f332d5789c}{Matrix<T>::is\_square}}()\textcolor{keyword}{\ const\ }\{}
 \DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{return}\ \_rows\ ==\ \_cols;}
 \DoxyCodeLine{00019\ \}}
 \DoxyCodeLine{00020\ }
 \DoxyCodeLine{00021\ \textcolor{comment}{//\ Checks\ if\ matrix\ is\ symmetric.}}
-\DoxyCodeLine{00022\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00022\ \textcolor{keyword}{template}\ <Numeric\ T>}
 \DoxyCodeLine{00023\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a0f6daf36ebb2efd5970384565469323c}{Matrix<T>::is\_symmetric}}()\textcolor{keyword}{\ const\ }\{}
 \DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a774d7c4510a8977e5b19f5f332d5789c}{is\_square}}())\ \{}
 \DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00026\ \ \ \ \ \}}
 \DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \_rows;\ ++i)\ \{}
 \DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ i\ +\ 1;\ j\ <\ \_cols;\ ++j)\ \{}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespacemaf_a11dab27cc975212d0cfebee780289026}{is\_close}}(this-\/>\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(i,\ j),\ this-\/>\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(j,\ i)))\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespacemaf_1_1util_a4c6d8c5ac3d702b62706ed826dd22c77}{is\_close}}(\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(i,\ j),\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(j,\ i)))\ \{}
 \DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \}}
@@ -31,91 +31,98 @@
 \DoxyCodeLine{00035\ \}}
 \DoxyCodeLine{00036\ }
 \DoxyCodeLine{00037\ \textcolor{comment}{//\ Checks\ if\ matrix\ is\ upper\ triangular.}}
-\DoxyCodeLine{00038\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00038\ \textcolor{keyword}{template}\ <Numeric\ T>}
 \DoxyCodeLine{00039\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_af79337899f9b0f2613175daf53f18ea9}{Matrix<T>::is\_upper\_triangular}}()\textcolor{keyword}{\ const\ }\{}
 \DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a774d7c4510a8977e5b19f5f332d5789c}{is\_square}}())\ \{}
 \DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00042\ \ \ \ \ \}}
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ \_rows;\ ++i)\ \{}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ i;\ ++j)\ \{}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespacemaf_a11dab27cc975212d0cfebee780289026}{is\_close}}(this-\/>\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(i,\ j),\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0)))\ \{}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00049\ \ \ \ \ \}}
-\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00051\ \}}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00053\ \textcolor{comment}{//\ Checks\ if\ matrix\ is\ lower\ triangular.}}
-\DoxyCodeLine{00054\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00055\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a48ce2d00357e89ece95524bd003b63c6}{Matrix<T>::is\_lower\_triangular}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a774d7c4510a8977e5b19f5f332d5789c}{is\_square}}())\ \{}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00058\ \ \ \ \ \}}
-\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \_rows\ -\/\ 1;\ ++i)\ \{}
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ i\ +\ 1;\ j\ <\ \_cols;\ ++j)\ \{}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespacemaf_a11dab27cc975212d0cfebee780289026}{is\_close}}(this-\/>\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(i,\ j),\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0)))\ \{}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00065\ \ \ \ \ \}}
-\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00067\ \}}
-\DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \textcolor{comment}{//\ Checks\ if\ matrix\ is\ diagonal.}}
-\DoxyCodeLine{00070\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00071\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a90408b80daf821aff91fd2aed917ce8e}{Matrix<T>::is\_diagonal}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a774d7c4510a8977e5b19f5f332d5789c}{is\_square}}())\ \{}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00074\ \ \ \ \ \}}
-\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_af79337899f9b0f2613175daf53f18ea9}{is\_upper\_triangular}}()\ \&\&\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a48ce2d00357e89ece95524bd003b63c6}{is\_lower\_triangular}}();}
-\DoxyCodeLine{00076\ \}}
-\DoxyCodeLine{00077\ }
-\DoxyCodeLine{00078\ \textcolor{comment}{//\ Checks\ if\ matrix\ is\ singular.}}
-\DoxyCodeLine{00079\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00080\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_ae26826bcc4a303b29538a17c0a39de2b}{Matrix<T>::is\_singular}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a774d7c4510a8977e5b19f5f332d5789c}{is\_square}}())\ \{}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00083\ \ \ \ \ \}}
-\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemaf_1_1math_ac44a6962e2d09c20d929223448b4421c}{plu}}(*\textcolor{keyword}{this});}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00087\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::runtime\_error\ \&e)\ \{}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00089\ \ \ \ \ \}}
-\DoxyCodeLine{00090\ \}}
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{00093\ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_af716a9fdb890f168430aad15c9207a27}{Matrix<T>::is\_positive\_definite}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemaf_1_1math_a45286ae95d74e7a19ecf706538b151e7}{cholesky}}(*\textcolor{keyword}{this});}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00097\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (std::exception\ e)\ \{}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00099\ \ \ \ \ \}}
-\DoxyCodeLine{00100\ \}}
-\DoxyCodeLine{00101\ }
-\DoxyCodeLine{00109\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ U>}
-\DoxyCodeLine{00110\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacemaf_1_1math_a3d4733be1cd68ede07a9c2de6728b2d7}{loosely\_equal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<T>}}\ \&first,}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<U>}}\ \&second,}
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ eps\ =\ 1e-\/6)\ \{}
-\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ first.\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa1fa0768048faff36f5dfc56911a8ce4}{row\_count}}();}
-\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ m\ =\ first.\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a98d6cc10d243169d78f53d07406ace8b}{column\_count}}();}
-\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ !=\ second.\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa1fa0768048faff36f5dfc56911a8ce4}{row\_count}}()\ ||\ m\ !=\ second.\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a98d6cc10d243169d78f53d07406ace8b}{column\_count}}())\ \{}
-\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00117\ \ \ \ \ \}}
-\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ m;\ ++j)\ \{}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespacemaf_a11dab27cc975212d0cfebee780289026}{is\_close}}(first.\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(i,\ j),\ second.\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(i,\ j),\ eps))\ \{}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ T\ ZERO\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ \_rows;\ ++i)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ i;\ ++j)\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespacemaf_1_1util_a4c6d8c5ac3d702b62706ed826dd22c77}{is\_close}}(\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(i,\ j),\ ZERO))\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \ \ \ \ \}}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00054\ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{comment}{//\ Checks\ if\ matrix\ is\ lower\ triangular.}}
+\DoxyCodeLine{00057\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00058\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a48ce2d00357e89ece95524bd003b63c6}{Matrix<T>::is\_lower\_triangular}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a774d7c4510a8977e5b19f5f332d5789c}{is\_square}}())\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ T\ ZERO\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \_rows\ -\/\ 1;\ ++i)\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ i\ +\ 1;\ j\ <\ \_cols;\ ++j)\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespacemaf_1_1util_a4c6d8c5ac3d702b62706ed826dd22c77}{is\_close}}(\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(i,\ j),\ ZERO))\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00073\ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{comment}{//\ Checks\ if\ matrix\ is\ diagonal.}}
+\DoxyCodeLine{00076\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00077\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a90408b80daf821aff91fd2aed917ce8e}{Matrix<T>::is\_diagonal}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a774d7c4510a8977e5b19f5f332d5789c}{is\_square}}())\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{//\ TODO:\ We\ can\ skip\ the\ checks\ for\ is\ square\ in\ both?}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_af79337899f9b0f2613175daf53f18ea9}{is\_upper\_triangular}}()\ \&\&\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a48ce2d00357e89ece95524bd003b63c6}{is\_lower\_triangular}}();}
+\DoxyCodeLine{00083\ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{comment}{//\ Checks\ if\ matrix\ is\ singular.}}
+\DoxyCodeLine{00086\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00087\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_ae26826bcc4a303b29538a17c0a39de2b}{Matrix<T>::is\_singular}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a774d7c4510a8977e5b19f5f332d5789c}{is\_square}}())\ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00090\ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemaf_1_1math_a5605a040f9b62ca6a92b7e7f91c6ee0f}{plu}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00094\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::runtime\_error\&\ e)\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00096\ \ \ \ \ \}}
+\DoxyCodeLine{00097\ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00100\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a40d503bbba1ec9fcbb50f0a90207bd04}{Matrix<T>::is\_positive\_definite}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemaf_1_1math_adacdd5d260e55a04182d86ed82d0e0b2}{cholesky}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00104\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (std::exception\ e)\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00116\ \textcolor{keyword}{template}\ <Numeric\ T,\ Numeric\ U>}
+\DoxyCodeLine{00117\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacemaf_1_1math_a3d4733be1cd68ede07a9c2de6728b2d7}{loosely\_equal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<T>}}\&\ first,}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<U>}}\&\ second,}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ eps\ =\ 1e-\/6)\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ first.\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa1fa0768048faff36f5dfc56911a8ce4}{row\_count}}();}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ m\ =\ first.\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a98d6cc10d243169d78f53d07406ace8b}{column\_count}}();}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ !=\ second.\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa1fa0768048faff36f5dfc56911a8ce4}{row\_count}}()\ ||\ m\ !=\ second.\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a98d6cc10d243169d78f53d07406ace8b}{column\_count}}())\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00124\ \ \ \ \ \}}
-\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00126\ \}}
-\DoxyCodeLine{00127\ }
-\DoxyCodeLine{00128\ \}\ \textcolor{comment}{//\ namespace\ maf::math}}
-\DoxyCodeLine{00129\ }
-\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ m;\ ++j)\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespacemaf_1_1util_a4c6d8c5ac3d702b62706ed826dd22c77}{is\_close}}(first.\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(i,\ j),\ second.\mbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(i,\ j),\ eps))\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00133\ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

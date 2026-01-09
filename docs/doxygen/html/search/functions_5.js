@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['fill_0',['fill',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#a71134f227c2c22e4ecf24b33ed3c0396',1,'maf::math::Matrix::fill()'],['../de/d35/classmaf_1_1math_1_1_vector.html#a7112b999c9d59b392fba991a752af923',1,'maf::math::Vector::fill()']]],
-  ['find_1',['find',['../db/da1/classmaf_1_1_disjoint_set.html#a8ba4ca7bf154318426dbafbbe294c6ba',1,'maf::DisjointSet']]]
+  ['end_0',['end',['../de/d35/classmaf_1_1math_1_1_vector.html#a4b7d99320a69fd965ce3210267d64c0e',1,'maf::math::Vector::end() noexcept'],['../de/d35/classmaf_1_1math_1_1_vector.html#a67de8a29ae52bbb5c487ad55ec90366f',1,'maf::math::Vector::end() const noexcept']]],
+  ['extendedint_1',['ExtendedInt',['../d2/da4/class_extended_int.html#aa04920c7dfe93b6784a50dd554a66081',1,'ExtendedInt::ExtendedInt()'],['../d2/da4/class_extended_int.html#a7cc4867c85d1fd13e6690bfb718565f0',1,'ExtendedInt::ExtendedInt(int value)'],['../d2/da4/class_extended_int.html#a0a304d7cef43d33967a64f059982ae9e',1,'ExtendedInt::ExtendedInt(InfinityType value)']]]
 ];

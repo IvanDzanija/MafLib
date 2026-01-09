@@ -1,31 +1,64 @@
 \doxysection{maf\+::math Namespace Reference}
 \hypertarget{namespacemaf_1_1math}{}\label{namespacemaf_1_1math}\index{maf::math@{maf::math}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemaf_1_1math_1_1acc}{acc}}
+\item 
+namespace \mbox{\hyperlink{namespacemaf_1_1math_1_1detail}{detail}}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}
-\item 
+\begin{DoxyCompactList}\small\item\em A general-\/purpose mathematical vector class. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}
-\begin{DoxyCompactList}\small\item\em A general-\/purpose, row-\/major, dense matrix class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A general-\/purpose, row-\/major, dense matrix class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmaf_1_1math_1_1_polynomial}{Polynomial}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Concepts}
+\begin{DoxyCompactItemize}
+\item 
+concept \mbox{\hyperlink{conceptmaf_1_1math_1_1_numeric}{Numeric}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29}{Orientation}} \+: uint8 \{ \mbox{\hyperlink{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29a66b1fbb126096e2f3d898499c99fb568}{ROW}}
+, \mbox{\hyperlink{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29abbd4c1ae91eacf0b622ff6b811619e14}{COLUMN}}
+ \}
+\begin{DoxyCompactList}\small\item\em Specifies if the vector behaves as a row or column vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename T$>$ }\\\mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \mbox{\hyperlink{namespacemaf_1_1math_a45286ae95d74e7a19ecf706538b151e7}{cholesky}} (const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix)
+{\footnotesize template$<$typename Result\+Type = void, Numeric T$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_adacdd5d260e55a04182d86ed82d0e0b2}{cholesky}} (const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix)
 \begin{DoxyCompactList}\small\item\em Computes the Cholesky decomposition of a symmetric positive definite matrix. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T, typename U$>$ }\\constexpr bool \mbox{\hyperlink{namespacemaf_1_1math_a3d4733be1cd68ede07a9c2de6728b2d7}{loosely\+\_\+equal}} (const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&first, const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ U $>$ \&second, double eps=1e-\/6)
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\constexpr bool \mbox{\hyperlink{namespacemaf_1_1math_a3d4733be1cd68ede07a9c2de6728b2d7}{loosely\+\_\+equal}} (const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&first, const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ U $>$ \&second, double eps=1e-\/6)
 \begin{DoxyCompactList}\small\item\em Checks if two matrices are element-\/wise equal within a tolerance. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T$>$ }\\\mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \mbox{\hyperlink{namespacemaf_1_1math_a4d61c9a4c0434a2e01652894564f7ebb}{identity\+\_\+matrix}} (size\+\_\+t size)
+{\footnotesize template$<$Numeric T$>$ }\\\mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \mbox{\hyperlink{namespacemaf_1_1math_a4d61c9a4c0434a2e01652894564f7ebb}{identity\+\_\+matrix}} (size\+\_\+t size)
 \begin{DoxyCompactList}\small\item\em Creates a new identity matrix of a given size. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename U$>$ }\\\mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ U $>$ \mbox{\hyperlink{namespacemaf_1_1math_a44a90b54cc59e94a6502aa223b893215}{ones}} (size\+\_\+t rows, size\+\_\+t cols)
+{\footnotesize template$<$Numeric U$>$ }\\\mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ U $>$ \mbox{\hyperlink{namespacemaf_1_1math_a44a90b54cc59e94a6502aa223b893215}{ones}} (size\+\_\+t rows, size\+\_\+t cols)
 \begin{DoxyCompactList}\small\item\em Creates a new matrix filled with ones. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T$>$ }\\\mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \mbox{\hyperlink{namespacemaf_1_1math_a0fe2f174cf146553516e15feb16733c5}{make\+\_\+permutation\+\_\+matrix}} (const std\+::vector$<$ \mbox{\hyperlink{_global_header_8hpp_a5522c54735d837fae7d6ba026b858441}{uint32}} $>$ \&perm)
+{\footnotesize template$<$Numeric T$>$ }\\\mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \mbox{\hyperlink{namespacemaf_1_1math_a78bf8c3c2c4809fee2fbe6eee7a9f9d9}{permutation\+\_\+matrix}} (const std\+::vector$<$ \mbox{\hyperlink{namespacemaf_a9c6f11cfee0c09e2f40fbb271b5a1b04}{uint32}} $>$ \&perm)
 \begin{DoxyCompactList}\small\item\em Creates a new permutation matrix from a permutation vector. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T$>$ }\\std\+::tuple$<$ std\+::vector$<$ \mbox{\hyperlink{_global_header_8hpp_a5522c54735d837fae7d6ba026b858441}{uint32}} $>$, \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$, \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ $>$ \mbox{\hyperlink{namespacemaf_1_1math_ac44a6962e2d09c20d929223448b4421c}{plu}} (const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix)
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_a7589e838f9f43f42cb637c59bd040536}{operator+}} (const U \&scalar, const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix) noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar addition (scalar + \doxylink{classmaf_1_1math_1_1_matrix}{Matrix}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_aa539cd7e636fe2beafd205a3b51b0311}{operator-\/}} (const U \&scalar, const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix)
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar subtraction (scalar -\/ \doxylink{classmaf_1_1math_1_1_matrix}{Matrix}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_aa10366118175f185d9656b48350bbb87}{operator\texorpdfstring{$\ast$}{*}}} (const U \&scalar, const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix) noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar multiplication (scalar \texorpdfstring{$\ast$}{*} \doxylink{classmaf_1_1math_1_1_matrix}{Matrix}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_ac4720649ed3571d96a4dca03d8a998e6}{operator/}} (const U \&scalar, const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix) noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar division (scalar / \doxylink{classmaf_1_1math_1_1_matrix}{Matrix}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Result\+Type = void, Numeric T$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_a5605a040f9b62ca6a92b7e7f91c6ee0f}{plu}} (const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix)
 \begin{DoxyCompactList}\small\item\em Performs a blocked PLU decomposition on a square matrix. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T, typename U$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_a92c661d711efb613ef38ff09aad60a11}{operator+}} (const U \&scalar, const \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ T $>$ \&vec)
+{\footnotesize template$<$typename T$>$ }\\std\+::pair$<$ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$, \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ $>$ \mbox{\hyperlink{namespacemaf_1_1math_a7128b942acd7f39f1716053f0c4650ca}{QR\+\_\+decompostion}} (const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix)
 \item 
-{\footnotesize template$<$typename T, typename U$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_a487f2b044c2c1f92018a75592289c035}{operator-\/}} (const U \&scalar, const \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ T $>$ \&vec)
-\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_a4dd02365af6e0d50a467fb5f127c273d}{operator+}} (const U \&scalar, const \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ T $>$ \&vec) noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar addition (scalar + \doxylink{classmaf_1_1math_1_1_vector}{Vector}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_af1ff156bad4f0d341317e0cc4046084c}{operator-\/}} (const U \&scalar, const \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ T $>$ \&vec) noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar subtraction (scalar -\/ \doxylink{classmaf_1_1math_1_1_vector}{Vector}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_ad27dc696e8f9c2ec8e3cf07778b0a154}{operator\texorpdfstring{$\ast$}{*}}} (const U \&scalar, const \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ T $>$ \&vec) noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar multiplication (scalar \texorpdfstring{$\ast$}{*} \doxylink{classmaf_1_1math_1_1_vector}{Vector}). \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T, typename U$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_a2eb500c1b4cfbb3169604245422bd93e}{correlated\+\_\+shocks}} (const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ U $>$ \&L, const \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ T $>$ \&Z)
 \item 
 {\footnotesize template$<$typename T$>$ }\\double \mbox{\hyperlink{namespacemaf_1_1math_a3ecc6092e067ec17d8e9ed22a66f5deb}{mean}} (const \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ T $>$ \&data)
@@ -36,15 +69,40 @@ class \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}
 \end{DoxyCompactItemize}
 
 
+\label{doc-enum-members}
+\Hypertarget{namespacemaf_1_1math_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29}\index{maf::math@{maf::math}!Orientation@{Orientation}}
+\index{Orientation@{Orientation}!maf::math@{maf::math}}
+\doxysubsubsection{\texorpdfstring{Orientation}{Orientation}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29} 
+enum \mbox{\hyperlink{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29}{maf\+::math\+::\+Orientation}} \+: \mbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{uint8}}}
+
+
+
+Specifies if the vector behaves as a row or column vector. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ROW@{ROW}!maf::math@{maf::math}}\index{maf::math@{maf::math}!ROW@{ROW}}}\Hypertarget{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29a66b1fbb126096e2f3d898499c99fb568}\label{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29a66b1fbb126096e2f3d898499c99fb568} 
+ROW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COLUMN@{COLUMN}!maf::math@{maf::math}}\index{maf::math@{maf::math}!COLUMN@{COLUMN}}}\Hypertarget{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29abbd4c1ae91eacf0b622ff6b811619e14}\label{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29abbd4c1ae91eacf0b622ff6b811619e14} 
+COLUMN&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
 \label{doc-func-members}
 \Hypertarget{namespacemaf_1_1math_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{namespacemaf_1_1math_a45286ae95d74e7a19ecf706538b151e7}\index{maf::math@{maf::math}!cholesky@{cholesky}}
+\Hypertarget{namespacemaf_1_1math_adacdd5d260e55a04182d86ed82d0e0b2}\index{maf::math@{maf::math}!cholesky@{cholesky}}
 \index{cholesky@{cholesky}!maf::math@{maf::math}}
 \doxysubsubsection{\texorpdfstring{cholesky()}{cholesky()}}
-{\footnotesize\ttfamily \label{namespacemaf_1_1math_a45286ae95d74e7a19ecf706538b151e7} 
-template$<$typename T$>$ \\
-\mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ maf\+::math\+::cholesky (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_adacdd5d260e55a04182d86ed82d0e0b2} 
+template$<$typename Result\+Type = void, Numeric T$>$ \\
+auto maf\+::math\+::cholesky (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
 
 
 
@@ -65,7 +123,7 @@ More information\+: \href{https://en.wikipedia.org/wiki/Cholesky_decomposition}{
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em T} & The numeric type of the matrix elements (e.\+g., float, double). \\
+{\em T} & The floating point type of the matrix elements (e.\+g., float, double). \\
 \hline
 \end{DoxyTemplParams}
 
@@ -91,14 +149,14 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{d4/d02/namespacemaf_1_1math_a45286ae95d74e7a19ecf706538b151e7_cgraph}
+\includegraphics[width=350pt]{d4/d02/namespacemaf_1_1math_adacdd5d260e55a04182d86ed82d0e0b2_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=321pt]{d4/d02/namespacemaf_1_1math_a45286ae95d74e7a19ecf706538b151e7_icgraph}
+\includegraphics[width=321pt]{d4/d02/namespacemaf_1_1math_adacdd5d260e55a04182d86ed82d0e0b2_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{namespacemaf_1_1math_a2eb500c1b4cfbb3169604245422bd93e}\index{maf::math@{maf::math}!correlated\_shocks@{correlated\_shocks}}
@@ -147,7 +205,7 @@ Here is the call graph for this function\+:\nopagebreak
 \index{identity\_matrix@{identity\_matrix}!maf::math@{maf::math}}
 \doxysubsubsection{\texorpdfstring{identity\_matrix()}{identity\_matrix()}}
 {\footnotesize\ttfamily \label{namespacemaf_1_1math_a4d61c9a4c0434a2e01652894564f7ebb} 
-template$<$typename T$>$ \\
+template$<$Numeric T$>$ \\
 \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ maf\+::math\+::identity\+\_\+matrix (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
 
 
@@ -167,16 +225,14 @@ Creates a new identity matrix of a given size.
 \begin{DoxyReturn}{Returns}
 An identity \doxylink{classmaf_1_1math_1_1_matrix}{Matrix$<$\+T$>$} of size (size x size). 
 \end{DoxyReturn}
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{d4/d02/namespacemaf_1_1math_a4d61c9a4c0434a2e01652894564f7ebb_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -187,7 +243,7 @@ Here is the caller graph for this function\+:
 \index{loosely\_equal@{loosely\_equal}!maf::math@{maf::math}}
 \doxysubsubsection{\texorpdfstring{loosely\_equal()}{loosely\_equal()}}
 {\footnotesize\ttfamily \label{namespacemaf_1_1math_a3d4733be1cd68ede07a9c2de6728b2d7} 
-template$<$typename T, typename U$>$ \\
+template$<$Numeric T, Numeric U$>$ \\
 bool maf\+::math\+::loosely\+\_\+equal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&}]{first}{, }\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ U $>$ \&}]{second}{, }\item[{double}]{eps}{ = {\ttfamily 1e-\/6}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [constexpr]}}
 
 
@@ -196,9 +252,9 @@ Checks if two matrices are element-\/wise equal within a tolerance.
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em T} & Numeric type of the first matrix. \\
+{\em T} & \doxylink{conceptmaf_1_1math_1_1_numeric}{Numeric} type of the first matrix. \\
 \hline
-{\em U} & Numeric type of the second matrix. \\
+{\em U} & \doxylink{conceptmaf_1_1math_1_1_numeric}{Numeric} type of the second matrix. \\
 \hline
 \end{DoxyTemplParams}
 
@@ -214,37 +270,6 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=321pt]{d4/d02/namespacemaf_1_1math_a3d4733be1cd68ede07a9c2de6728b2d7_cgraph}
-\end{center}
-\end{figure}
-\Hypertarget{namespacemaf_1_1math_a0fe2f174cf146553516e15feb16733c5}\index{maf::math@{maf::math}!make\_permutation\_matrix@{make\_permutation\_matrix}}
-\index{make\_permutation\_matrix@{make\_permutation\_matrix}!maf::math@{maf::math}}
-\doxysubsubsection{\texorpdfstring{make\_permutation\_matrix()}{make\_permutation\_matrix()}}
-{\footnotesize\ttfamily \label{namespacemaf_1_1math_a0fe2f174cf146553516e15feb16733c5} 
-template$<$typename T$>$ \\
-\mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ maf\+::math\+::make\+\_\+permutation\+\_\+matrix (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{_global_header_8hpp_a5522c54735d837fae7d6ba026b858441}{uint32}} $>$ \&}]{perm}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
-
-
-
-Creates a new permutation matrix from a permutation vector. 
-
-
-\begin{DoxyTemplParams}{Template Parameters}
-{\em T} & The numeric type of the matrix. \\
-\hline
-\end{DoxyTemplParams}
-
-\begin{DoxyParams}{Parameters}
-{\em perm} & A vector where {\ttfamily perm\mbox{[}i\mbox{]} = j} means row {\ttfamily i} maps to column {\ttfamily j}. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A sparse permutation \doxylink{classmaf_1_1math_1_1_matrix}{Matrix$<$\+T$>$}. 
-\end{DoxyReturn}
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{d4/d02/namespacemaf_1_1math_a0fe2f174cf146553516e15feb16733c5_cgraph}
 \end{center}
 \end{figure}
 \Hypertarget{namespacemaf_1_1math_a3ecc6092e067ec17d8e9ed22a66f5deb}\index{maf::math@{maf::math}!mean@{mean}}
@@ -276,7 +301,7 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{ones@{ones}!maf::math@{maf::math}}
 \doxysubsubsection{\texorpdfstring{ones()}{ones()}}
 {\footnotesize\ttfamily \label{namespacemaf_1_1math_a44a90b54cc59e94a6502aa223b893215} 
-template$<$typename U$>$ \\
+template$<$Numeric U$>$ \\
 \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ U $>$ maf\+::math\+::ones (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{rows}{, }\item[{size\+\_\+t}]{cols}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
 
 
@@ -305,32 +330,195 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=312pt]{d4/d02/namespacemaf_1_1math_a44a90b54cc59e94a6502aa223b893215_cgraph}
 \end{center}
 \end{figure}
-\Hypertarget{namespacemaf_1_1math_a92c661d711efb613ef38ff09aad60a11}\index{maf::math@{maf::math}!operator+@{operator+}}
+\Hypertarget{namespacemaf_1_1math_aa10366118175f185d9656b48350bbb87}\index{maf::math@{maf::math}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!maf::math@{maf::math}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_aa10366118175f185d9656b48350bbb87} 
+template$<$Numeric T, Numeric U$>$ \\
+auto maf\+::math\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{, }\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar multiplication (scalar \texorpdfstring{$\ast$}{*} \doxylink{classmaf_1_1math_1_1_matrix}{Matrix}). 
+
+\Hypertarget{namespacemaf_1_1math_ad27dc696e8f9c2ec8e3cf07778b0a154}\index{maf::math@{maf::math}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!maf::math@{maf::math}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_ad27dc696e8f9c2ec8e3cf07778b0a154} 
+template$<$Numeric T, Numeric U$>$ \\
+auto maf\+::math\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{, }\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ T $>$ \&}]{vec}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar multiplication (scalar \texorpdfstring{$\ast$}{*} \doxylink{classmaf_1_1math_1_1_vector}{Vector}). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value. \\
+\hline
+{\em vec} & The vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classmaf_1_1math_1_1_vector}{Vector} of the common, promoted type. 
+\end{DoxyReturn}
+\Hypertarget{namespacemaf_1_1math_a7589e838f9f43f42cb637c59bd040536}\index{maf::math@{maf::math}!operator+@{operator+}}
 \index{operator+@{operator+}!maf::math@{maf::math}}
-\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
-{\footnotesize\ttfamily \label{namespacemaf_1_1math_a92c661d711efb613ef38ff09aad60a11} 
-template$<$typename T, typename U$>$ \\
-auto maf\+::math\+::operator+ (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{, }\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ T $>$ \&}]{vec}{}\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_a7589e838f9f43f42cb637c59bd040536} 
+template$<$Numeric T, Numeric U$>$ \\
+auto maf\+::math\+::operator+ (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{, }\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
 
-It\textquotesingle{}s recommended to use \doxylink{classmaf_1_1math_1_1_vector}{Vector} + Scalar instead. \begin{DoxyReturn}{Returns}
-\doxylink{classmaf_1_1math_1_1_vector}{Vector} of common promoted type. 
+
+
+Element-\/wise scalar addition (scalar + \doxylink{classmaf_1_1math_1_1_matrix}{Matrix}). 
+
+\Hypertarget{namespacemaf_1_1math_a4dd02365af6e0d50a467fb5f127c273d}\index{maf::math@{maf::math}!operator+@{operator+}}
+\index{operator+@{operator+}!maf::math@{maf::math}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_a4dd02365af6e0d50a467fb5f127c273d} 
+template$<$Numeric T, Numeric U$>$ \\
+auto maf\+::math\+::operator+ (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{, }\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ T $>$ \&}]{vec}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar addition (scalar + \doxylink{classmaf_1_1math_1_1_vector}{Vector}). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value. \\
+\hline
+{\em vec} & The vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classmaf_1_1math_1_1_vector}{Vector} of the common, promoted type. 
 \end{DoxyReturn}
-\Hypertarget{namespacemaf_1_1math_a487f2b044c2c1f92018a75592289c035}\index{maf::math@{maf::math}!operator-\/@{operator-\/}}
+\Hypertarget{namespacemaf_1_1math_aa539cd7e636fe2beafd205a3b51b0311}\index{maf::math@{maf::math}!operator-\/@{operator-\/}}
 \index{operator-\/@{operator-\/}!maf::math@{maf::math}}
-\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
-{\footnotesize\ttfamily \label{namespacemaf_1_1math_a487f2b044c2c1f92018a75592289c035} 
-template$<$typename T, typename U$>$ \\
-auto maf\+::math\+::operator-\/ (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{, }\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ T $>$ \&}]{vec}{}\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_aa539cd7e636fe2beafd205a3b51b0311} 
+template$<$Numeric T, Numeric U$>$ \\
+auto maf\+::math\+::operator-\/ (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{, }\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
 
-Subtract each element of vector from a scalar. \begin{DoxyReturn}{Returns}
-\doxylink{classmaf_1_1math_1_1_vector}{Vector} of common promoted type. 
+
+
+Element-\/wise scalar subtraction (scalar -\/ \doxylink{classmaf_1_1math_1_1_matrix}{Matrix}). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classmaf_1_1math_1_1_matrix}{Matrix} of the common, promoted type. 
 \end{DoxyReturn}
-\Hypertarget{namespacemaf_1_1math_ac44a6962e2d09c20d929223448b4421c}\index{maf::math@{maf::math}!plu@{plu}}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{d4/d02/namespacemaf_1_1math_aa539cd7e636fe2beafd205a3b51b0311_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemaf_1_1math_af1ff156bad4f0d341317e0cc4046084c}\index{maf::math@{maf::math}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!maf::math@{maf::math}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_af1ff156bad4f0d341317e0cc4046084c} 
+template$<$Numeric T, Numeric U$>$ \\
+auto maf\+::math\+::operator-\/ (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{, }\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ T $>$ \&}]{vec}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar subtraction (scalar -\/ \doxylink{classmaf_1_1math_1_1_vector}{Vector}). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value from which elements are subtracted. \\
+\hline
+{\em vec} & The vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classmaf_1_1math_1_1_vector}{Vector} of the common, promoted type. 
+\end{DoxyReturn}
+\Hypertarget{namespacemaf_1_1math_ac4720649ed3571d96a4dca03d8a998e6}\index{maf::math@{maf::math}!operator/@{operator/}}
+\index{operator/@{operator/}!maf::math@{maf::math}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_ac4720649ed3571d96a4dca03d8a998e6} 
+template$<$Numeric T, Numeric U$>$ \\
+auto maf\+::math\+::operator/ (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{, }\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar division (scalar / \doxylink{classmaf_1_1math_1_1_matrix}{Matrix}). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classmaf_1_1math_1_1_matrix}{Matrix} of the common, promoted type. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{d4/d02/namespacemaf_1_1math_ac4720649ed3571d96a4dca03d8a998e6_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemaf_1_1math_a78bf8c3c2c4809fee2fbe6eee7a9f9d9}\index{maf::math@{maf::math}!permutation\_matrix@{permutation\_matrix}}
+\index{permutation\_matrix@{permutation\_matrix}!maf::math@{maf::math}}
+\doxysubsubsection{\texorpdfstring{permutation\_matrix()}{permutation\_matrix()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_a78bf8c3c2c4809fee2fbe6eee7a9f9d9} 
+template$<$Numeric T$>$ \\
+\mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ maf\+::math\+::permutation\+\_\+matrix (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{namespacemaf_a9c6f11cfee0c09e2f40fbb271b5a1b04}{uint32}} $>$ \&}]{perm}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Creates a new permutation matrix from a permutation vector. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The numeric type of the matrix. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em perm} & A vector where {\ttfamily perm\mbox{[}i\mbox{]} = j} means row {\ttfamily i} maps to column {\ttfamily j}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A sparse permutation \doxylink{classmaf_1_1math_1_1_matrix}{Matrix$<$\+T$>$}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/d02/namespacemaf_1_1math_a78bf8c3c2c4809fee2fbe6eee7a9f9d9_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemaf_1_1math_a5605a040f9b62ca6a92b7e7f91c6ee0f}\index{maf::math@{maf::math}!plu@{plu}}
 \index{plu@{plu}!maf::math@{maf::math}}
 \doxysubsubsection{\texorpdfstring{plu()}{plu()}}
-{\footnotesize\ttfamily \label{namespacemaf_1_1math_ac44a6962e2d09c20d929223448b4421c} 
-template$<$typename T$>$ \\
-std\+::tuple$<$ std\+::vector$<$ \mbox{\hyperlink{_global_header_8hpp_a5522c54735d837fae7d6ba026b858441}{uint32}} $>$, \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$, \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ $>$ maf\+::math\+::plu (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_a5605a040f9b62ca6a92b7e7f91c6ee0f} 
+template$<$typename Result\+Type = void, Numeric T$>$ \\
+auto maf\+::math\+::plu (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
 
 
 
@@ -347,6 +535,11 @@ The decomposition is computed using a right-\/looking blocked algorithm for impr
 
 More information\+: \href{https://en.wikipedia.org/wiki/LU_decomposition\#LU_factorization_with_partial_pivoting}{\texttt{https\+://en.\+wikipedia.\+org/wiki/\+LU\+\_\+decomposition\#\+LU\+\_\+factorization\+\_\+with\+\_\+partial\+\_\+pivoting}}
 
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The floating point type of the matrix elements (e.\+g., float, double). \\
+\hline
+\end{DoxyTemplParams}
 
 \begin{DoxyParams}{Parameters}
 {\em matrix} & The const reference to the square input matrix (A) to decompose. \\
@@ -371,18 +564,31 @@ A std\+::tuple containing\+:
 \begin{DoxySince}{Since}
 2025 
 \end{DoxySince}
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{d4/d02/namespacemaf_1_1math_ac44a6962e2d09c20d929223448b4421c_cgraph}
+\includegraphics[width=350pt]{d4/d02/namespacemaf_1_1math_a5605a040f9b62ca6a92b7e7f91c6ee0f_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=294pt]{d4/d02/namespacemaf_1_1math_ac44a6962e2d09c20d929223448b4421c_icgraph}
+\includegraphics[width=294pt]{d4/d02/namespacemaf_1_1math_a5605a040f9b62ca6a92b7e7f91c6ee0f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemaf_1_1math_a7128b942acd7f39f1716053f0c4650ca}\index{maf::math@{maf::math}!QR\_decompostion@{QR\_decompostion}}
+\index{QR\_decompostion@{QR\_decompostion}!maf::math@{maf::math}}
+\doxysubsubsection{\texorpdfstring{QR\_decompostion()}{QR\_decompostion()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_a7128b942acd7f39f1716053f0c4650ca} 
+template$<$typename T$>$ \\
+std\+::pair$<$ \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$, \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ $>$ maf\+::math\+::\+QR\+\_\+decompostion (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/d02/namespacemaf_1_1math_a7128b942acd7f39f1716053f0c4650ca_cgraph}
 \end{center}
 \end{figure}

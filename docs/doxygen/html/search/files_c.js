@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['test_2ecpp_0',['test.cpp',['../df/dac/test_8cpp.html',1,'']]],
-  ['trie_2ehpp_1',['Trie.hpp',['../df/d83/_trie_8hpp.html',1,'']]]
+  ['randomvars_2eh_0',['RandomVars.h',['../d9/d56/_random_vars_8h.html',1,'']]]
 ];

@@ -6,107 +6,111 @@
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ EXTENDEDINTEGER}}
 \DoxyCodeLine{00003\ }
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <climits>}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <variant>}}
-\DoxyCodeLine{00008\ }
-\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \{}
-\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96}{InfinityType}}\ \{\ \mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96afd2a016b421e0145e7b62af632d0a04d}{PosInf}},\ \mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96a5235470e53e550afd3a6fb293593ab81}{NegInf}}\ \};}
-\DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{comment}{//\ Factory\ methods}}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \mbox{\hyperlink{class_extended_int_a17d38c5c12427866a6e770a6442510a0}{pos\_inf}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(\mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96afd2a016b421e0145e7b62af632d0a04d}{InfinityType::PosInf}});\ \}}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \mbox{\hyperlink{class_extended_int_ac572966b8528e9c7160d19b27b6ecc71}{neg\_inf}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(\mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96a5235470e53e550afd3a6fb293593ab81}{InfinityType::NegInf}});\ \}}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ Constructors}}
-\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}()\ :\ \_value(0)\ \{\}\ \textcolor{comment}{//\ Default\ constructor\ initilizes\ value\ to\ 0}}
-\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_extended_int_a7cc4867c85d1fd13e6690bfb718565f0}{ExtendedInt}}(\textcolor{keywordtype}{int}\ value)\ :\ \_value(value)\ \{\}}
-\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{class_extended_int_a0a304d7cef43d33967a64f059982ae9e}{ExtendedInt}}(\mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96}{InfinityType}}\ value)\ :\ \_value(value)\ \{\}}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{comment}{//\ Type\ checking}}
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ std::holds\_alternative<InfinityType>(\_value);\ \}}
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ std::holds\_alternative<int>(\_value);\ \}}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_extended_int_abb38c9149cbc90c8cb4fbde0fe320065}{is\_pos\_inf}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}()\ \&\&}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::get<InfinityType>(\_value)\ ==\ \mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96afd2a016b421e0145e7b62af632d0a04d}{InfinityType::PosInf}};}
-\DoxyCodeLine{00039\ \ \ \ \ \}}
-\DoxyCodeLine{00040\ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_extended_int_a7884534d4365c351c7e8f56482d5d58a}{is\_neg\_inf}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}()\ \&\&}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::get<InfinityType>(\_value)\ ==\ \mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96a5235470e53e550afd3a6fb293593ab81}{InfinityType::NegInf}};}
-\DoxyCodeLine{00043\ \ \ \ \ \}}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \ \ \ \ \textcolor{comment}{//\ Getters\ and\ setters}}
-\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}())\ \{}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Value\ is\ infinity!"{}});}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::get<int>(\_value);}
-\DoxyCodeLine{00051\ \ \ \ \ \}}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \mbox{\hyperlink{class_extended_int_a5b8ca277a60a0faa23c4198eb90ab736}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \&other)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ finite\ +\ finite}}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}())\ \{}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ a\ =\ \mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}(),\ b\ =\ other.\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}();}
-\DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Overflow\ checking}}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((b\ >\ 0\ \&\&\ a\ >\ INT\_MAX\ -\/\ b)\ ||\ (b\ <\ 0\ \&\&\ a\ <\ INT\_MIN\ -\/\ b))\ \{}
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ b\ >\ 0\ ?\ \mbox{\hyperlink{class_extended_int_a17d38c5c12427866a6e770a6442510a0}{pos\_inf}}()\ :\ \mbox{\hyperlink{class_extended_int_ac572966b8528e9c7160d19b27b6ecc71}{neg\_inf}}();}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(a\ +\ b);}
-\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}())\ \{}
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}());}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}())\ \{}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(other.\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}());}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Mixing\ infinties\ is\ not\ allowed!}}
-\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{class_extended_int_abb38c9149cbc90c8cb4fbde0fe320065}{is\_pos\_inf}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_a7884534d4365c351c7e8f56482d5d58a}{is\_neg\_inf}}())\ ||}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{class_extended_int_a7884534d4365c351c7e8f56482d5d58a}{is\_neg\_inf}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_abb38c9149cbc90c8cb4fbde0fe320065}{is\_pos\_inf}}()))\ \{}
-\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Mixing\ infinities\ is\ not\ allowed!"{}});}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Positive\ infinity\ +\ positive\ infinity}}
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}());}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00079\ \ \ \ \ \}}
-\DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \mbox{\hyperlink{class_extended_int_a7d6f1906c33847a07d8b4dec58c6212d}{operator-\/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \&other)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ finite\ +\ finite}}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}())\ \{}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ a\ =\ \mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}(),\ b\ =\ other.\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}();}
-\DoxyCodeLine{00085\ }
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Overflow\ checking}}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((b\ >\ 0\ \&\&\ a\ <\ INT\_MIN\ +\ b)\ ||\ (b\ <\ 0\ \&\&\ a\ >\ INT\_MAX\ +\ b))\ \{}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ b\ <\ 0\ ?\ \mbox{\hyperlink{class_extended_int_a17d38c5c12427866a6e770a6442510a0}{pos\_inf}}()\ :\ \mbox{\hyperlink{class_extended_int_ac572966b8528e9c7160d19b27b6ecc71}{neg\_inf}}();}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(a\ -\/\ b);}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00092\ }
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}())\ \{}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}());}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}())\ \{}
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(other.\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}());}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00098\ }
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Same\ infinities\ are\ not\ allowed!}}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{class_extended_int_abb38c9149cbc90c8cb4fbde0fe320065}{is\_pos\_inf}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_abb38c9149cbc90c8cb4fbde0fe320065}{is\_pos\_inf}}())\ ||}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{class_extended_int_a7884534d4365c351c7e8f56482d5d58a}{is\_neg\_inf}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_a7884534d4365c351c7e8f56482d5d58a}{is\_neg\_inf}}()))\ \{}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Mixing\ infinities\ is\ not\ allowed!"{}});}
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Positive\ infinity\ -\/\ negative\ infinity}}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}());}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00107\ \ \ \ \ \}}
-\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_extended_int_af494406e7f10e41a8b5f9a581169c540}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \&other)\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_value\ ==\ other.\_value;}
-\DoxyCodeLine{00110\ \ \ \ \ \}}
-\DoxyCodeLine{00111\ }
-\DoxyCodeLine{00112\ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00113\ \ \ \ \ std::variant<int,\ InfinityType>\ \_value;}
-\DoxyCodeLine{00114\ \};}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5}{InfinityType}}\ :\ uint8\ \{\ \mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5afd2a016b421e0145e7b62af632d0a04d}{PosInf}},\ \mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5a5235470e53e550afd3a6fb293593ab81}{NegInf}}\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{//\ Factory\ methods}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \mbox{\hyperlink{class_extended_int_a17d38c5c12427866a6e770a6442510a0}{pos\_inf}}()\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5afd2a016b421e0145e7b62af632d0a04d}{InfinityType::PosInf}}\};}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \mbox{\hyperlink{class_extended_int_ac572966b8528e9c7160d19b27b6ecc71}{neg\_inf}}()\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5a5235470e53e550afd3a6fb293593ab81}{InfinityType::NegInf}}\};}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ Constructors}}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}()\ :\ \_value(0)\ \{\}\ \ \textcolor{comment}{//\ Default\ constructor\ initilizes\ value\ to\ 0}}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_extended_int_a7cc4867c85d1fd13e6690bfb718565f0}{ExtendedInt}}(\textcolor{keywordtype}{int}\ value)\ :\ \_value(value)\ \{\}}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_extended_int_a0a304d7cef43d33967a64f059982ae9e}{ExtendedInt}}(\mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5}{InfinityType}}\ value)\ :\ \_value(value)\ \{\}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ Type\ checking}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::holds\_alternative<InfinityType>(\_value);}
+\DoxyCodeLine{00037\ \ \ \ \ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::holds\_alternative<int>(\_value);}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_extended_int_abb38c9149cbc90c8cb4fbde0fe320065}{is\_pos\_inf}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}()\ \&\&\ std::get<InfinityType>(\_value)\ ==\ \mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5afd2a016b421e0145e7b62af632d0a04d}{InfinityType::PosInf}};}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_extended_int_a7884534d4365c351c7e8f56482d5d58a}{is\_neg\_inf}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}()\ \&\&\ std::get<InfinityType>(\_value)\ ==\ \mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5a5235470e53e550afd3a6fb293593ab81}{InfinityType::NegInf}};}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{comment}{//\ Getters\ and\ setters}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}())\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Value\ is\ infinity!"{}});}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::get<int>(\_value);}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \mbox{\hyperlink{class_extended_int_a5b8ca277a60a0faa23c4198eb90ab736}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\&\ other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ finite\ +\ finite}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}())\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ a\ =\ \mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}(),\ b\ =\ other.\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Overflow\ checking}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((b\ >\ 0\ \&\&\ a\ >\ INT\_MAX\ -\/\ b)\ ||\ (b\ <\ 0\ \&\&\ a\ <\ INT\_MIN\ -\/\ b))\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ b\ >\ 0\ ?\ \mbox{\hyperlink{class_extended_int_a17d38c5c12427866a6e770a6442510a0}{pos\_inf}}()\ :\ \mbox{\hyperlink{class_extended_int_ac572966b8528e9c7160d19b27b6ecc71}{neg\_inf}}();}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(a\ +\ b);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}())\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}());}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}())\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(other.\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}());}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Mixing\ infinties\ is\ not\ allowed!}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{class_extended_int_abb38c9149cbc90c8cb4fbde0fe320065}{is\_pos\_inf}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_a7884534d4365c351c7e8f56482d5d58a}{is\_neg\_inf}}())\ ||}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{class_extended_int_a7884534d4365c351c7e8f56482d5d58a}{is\_neg\_inf}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_abb38c9149cbc90c8cb4fbde0fe320065}{is\_pos\_inf}}()))\ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Mixing\ infinities\ is\ not\ allowed!"{}});}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Positive\ infinity\ +\ positive\ infinity}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}());}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\ \mbox{\hyperlink{class_extended_int_a7d6f1906c33847a07d8b4dec58c6212d}{operator-\/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\&\ other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ finite\ +\ finite}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}())\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ a\ =\ \mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}(),\ b\ =\ other.\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}();}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Overflow\ checking}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((b\ >\ 0\ \&\&\ a\ <\ INT\_MIN\ +\ b)\ ||\ (b\ <\ 0\ \&\&\ a\ >\ INT\_MAX\ +\ b))\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ b\ <\ 0\ ?\ \mbox{\hyperlink{class_extended_int_a17d38c5c12427866a6e770a6442510a0}{pos\_inf}}()\ :\ \mbox{\hyperlink{class_extended_int_ac572966b8528e9c7160d19b27b6ecc71}{neg\_inf}}();}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}(a\ -\/\ b);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}())\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}()\};}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_extended_int_a0b0b15af5202fd43f29d641f1ab63b23}{is\_finite}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\_inf}}())\ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{other.\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}()\};}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Same\ infinities\ are\ not\ allowed!}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{class_extended_int_abb38c9149cbc90c8cb4fbde0fe320065}{is\_pos\_inf}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_abb38c9149cbc90c8cb4fbde0fe320065}{is\_pos\_inf}}())\ ||}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{class_extended_int_a7884534d4365c351c7e8f56482d5d58a}{is\_neg\_inf}}()\ \&\&\ other.\mbox{\hyperlink{class_extended_int_a7884534d4365c351c7e8f56482d5d58a}{is\_neg\_inf}}()))\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Mixing\ infinities\ is\ not\ allowed!"{}});}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Positive\ infinity\ -\/\ negative\ infinity}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{class_extended_int_adfdb75623a492c5116f46e4dc6c24ed3}{get\_value}}()\};}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_extended_int_af494406e7f10e41a8b5f9a581169c540}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_extended_int_aa04920c7dfe93b6784a50dd554a66081}{ExtendedInt}}\&\ other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_value\ ==\ other.\_value;}
+\DoxyCodeLine{00114\ \ \ \ \ \}}
 \DoxyCodeLine{00115\ }
-\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00116\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00117\ \ \ \ \ std::variant<int,\ InfinityType>\ \_value;}
+\DoxyCodeLine{00118\ \};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

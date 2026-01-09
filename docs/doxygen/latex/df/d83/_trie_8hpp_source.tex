@@ -13,7 +13,7 @@
 \DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Definition\ of\ sigma\ -\/>\ 256\ ascii\ chars}}
 \DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ std::array<TrieNode\ *,\ 256>\ children;}
 \DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ TrieNode\ *parent;}
-\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{_global_header_8hpp_aa720ba8c0d1dcc513c82c51d3f6e9995}{uint16}}\ child\_count\ =\ 0;}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemaf_a4654f88dcb4e10ac77438dd02e7a4907}{uint16}}\ child\_count\ =\ 0;}
 \DoxyCodeLine{00013\ }
 \DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ TrieNode(TrieNode\ *parent\ =\ \textcolor{keyword}{nullptr})\ :\ parent(parent)\ \{}
 \DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ children.fill(\textcolor{keyword}{nullptr});}
@@ -28,14 +28,14 @@
 \DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ is\_leaf()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ child\_count\ ==\ 0;\ \}}
 \DoxyCodeLine{00028\ }
 \DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ [[nodiscard]]\ TrieNode\ *transition(\textcolor{keywordtype}{char}\ value)\ \{}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ children.at(\textcolor{keyword}{static\_cast<}\mbox{\hyperlink{_global_header_8hpp_aa17fc6cc2c9a4ad80e9fcdd3f64320e1}{uint8}}\textcolor{keyword}{>}(value));}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ children.at(\textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{uint8}}\textcolor{keyword}{>}(value));}
 \DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00034\ }
 \DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ TrieNode\ *\mbox{\hyperlink{classmaf_1_1_trie_ac4cf68fa3c580f117bce94bf916ab028}{insert}}(\textcolor{keywordtype}{char}\ value)\ \{}
 \DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ TrieNode\ *node\ =\ transition(value);}
 \DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (node\ ==\ \textcolor{keyword}{nullptr})\ \{}
 \DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ *new\_node\ =\ \textcolor{keyword}{new}\ TrieNode(\textcolor{keyword}{this});}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ children.at(\textcolor{keyword}{static\_cast<}\mbox{\hyperlink{_global_header_8hpp_aa17fc6cc2c9a4ad80e9fcdd3f64320e1}{uint8}}\textcolor{keyword}{>}(value))\ =\ new\_node;}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ children.at(\textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{uint8}}\textcolor{keyword}{>}(value))\ =\ new\_node;}
 \DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++child\_count;}
 \DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ new\_node;}
 \DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
@@ -55,7 +55,7 @@
 \DoxyCodeLine{00061\ }
 \DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ [[nodiscard]]\ std::string\ toString()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
 \DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ s\ =\ \textcolor{stringliteral}{"{}Children("{}}\ +\ std::to\_string(child\_count)\ +\ \textcolor{stringliteral}{"{}):\(\backslash\)n"{}};}
-\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{_global_header_8hpp_aa720ba8c0d1dcc513c82c51d3f6e9995}{uint16}}\ i\ =\ 0;\ i\ <\ 256;\ ++i)\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{namespacemaf_a4654f88dcb4e10ac77438dd02e7a4907}{uint16}}\ i\ =\ 0;\ i\ <\ 256;\ ++i)\ \{}
 \DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (children.at(i)\ !=\ \textcolor{keyword}{nullptr})\ \{}
 \DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\ +=\ \textcolor{charliteral}{'\ '};}
 \DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s\ +=\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{char}\textcolor{keyword}{>}(i);}

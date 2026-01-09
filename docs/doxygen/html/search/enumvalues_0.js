@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['column_0',['COLUMN',['../de/d35/classmaf_1_1math_1_1_vector.html#afa8632efb0c07233f2d1eea1015c30fba62c892b0dcd60d184c9560b0a752518e',1,'maf::math::Vector']]]
+  ['column_0',['COLUMN',['../d4/d02/namespacemaf_1_1math.html#afe4f407d72235467d014872419cfaa29abbd4c1ae91eacf0b622ff6b811619e14',1,'maf::math']]]
 ];

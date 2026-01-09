@@ -48,6 +48,7 @@ $(function() { codefold.init(); });
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="../../concepts.html"><span>Concepts</span></a></li>
       <li><a href="../../annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="../../files.html"><span>Files</span></a></li>
       <li>
@@ -107,74 +108,52 @@ $(function() { codefold.init(); });
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define GLOBALHEADER_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;array&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;cassert&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;chrono&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;cstring&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;execution&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;iomanip&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;omp.h&gt;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;optional&gt;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;random&gt;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;ranges&gt;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;span&gt;</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="../../d1/df7/_global_header_8hpp.html#a3626f2f93183532b6e8b19234cc5c4d3">   25</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../d1/df7/_global_header_8hpp.html#a3626f2f93183532b6e8b19234cc5c4d3">int8</a> = int8_t;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="../../d1/df7/_global_header_8hpp.html#aa17fc6cc2c9a4ad80e9fcdd3f64320e1">   26</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../d1/df7/_global_header_8hpp.html#aa17fc6cc2c9a4ad80e9fcdd3f64320e1">uint8</a> = uint8_t;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="../../d1/df7/_global_header_8hpp.html#aa918a75369e273ba410b034cd2ced87b">   27</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../d1/df7/_global_header_8hpp.html#aa918a75369e273ba410b034cd2ced87b">int16</a> = int16_t;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="../../d1/df7/_global_header_8hpp.html#aa720ba8c0d1dcc513c82c51d3f6e9995">   28</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../d1/df7/_global_header_8hpp.html#aa720ba8c0d1dcc513c82c51d3f6e9995">uint16</a> = uint16_t;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="../../d1/df7/_global_header_8hpp.html#a3271a6f688eb2ba4047a2982ff49919a">   29</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../d1/df7/_global_header_8hpp.html#a3271a6f688eb2ba4047a2982ff49919a">int32</a> = int32_t;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="../../d1/df7/_global_header_8hpp.html#a5522c54735d837fae7d6ba026b858441">   30</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../d1/df7/_global_header_8hpp.html#a5522c54735d837fae7d6ba026b858441">uint32</a> = uint32_t;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="../../d1/df7/_global_header_8hpp.html#ad2d958ccdb69773a12a7cb71d87a412e">   31</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../d1/df7/_global_header_8hpp.html#ad2d958ccdb69773a12a7cb71d87a412e">int64</a> = int64_t;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="../../d1/df7/_global_header_8hpp.html#aca0ba831b19773ec091e57f5cf76a1fb">   32</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../d1/df7/_global_header_8hpp.html#aca0ba831b19773ec091e57f5cf76a1fb">uint64</a> = uint64_t;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html">   34</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../df/dba/namespacemaf.html">maf</a> {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="../../d1/df7/_global_header_8hpp.html#ad51ded0bbd705f02f73fc60c0b721ced">   35</a></span><span class="preprocessor">#define BLOCK_SIZE 64</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#aa44d65eb8db5d918996e66005cb5d573">   36</a></span><span class="keyword">inline</span> <span class="keyword">constexpr</span> int8_t <a class="code hl_variable" href="../../df/dba/namespacemaf.html#aa44d65eb8db5d918996e66005cb5d573">OUT_OF_BOUNDS</a> = -1;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#a9889e36aacfbf9282d0dfa3851622673">   37</a></span><span class="keyword">inline</span> <span class="keyword">constexpr</span> int8_t <a class="code hl_variable" href="../../df/dba/namespacemaf.html#a9889e36aacfbf9282d0dfa3851622673">NOT_SQUARE</a> = -2;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#ab1ccbacf86d0e3b14fc056bfd7b25e83">   38</a></span><span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keywordtype">double</span> <a class="code hl_variable" href="../../df/dba/namespacemaf.html#ab1ccbacf86d0e3b14fc056bfd7b25e83">EPSILON</a> = 1e-6;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#a11dab27cc975212d0cfebee780289026">   41</a></span>[[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="../../df/dba/namespacemaf.html#a11dab27cc975212d0cfebee780289026">is_close</a>(T v1, T v2, <span class="keywordtype">double</span> epsilon = <a class="code hl_variable" href="../../df/dba/namespacemaf.html#ab1ccbacf86d0e3b14fc056bfd7b25e83">EPSILON</a>) {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">return</span> std::abs(v1 - v2) &lt; epsilon;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;omp.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;chrono&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;cstring&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;execution&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;iomanip&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;optional&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;random&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;ranges&gt;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;span&gt;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html">   27</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../df/dba/namespacemaf.html">maf</a> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#a4ec9e90b2247dd4ef8023b6d07f46bce">   28</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../df/dba/namespacemaf.html#a4ec9e90b2247dd4ef8023b6d07f46bce">int8</a> = int8_t;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#a369c7c8a42bfa1b66b4aa59815849b1f">   29</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../df/dba/namespacemaf.html#a369c7c8a42bfa1b66b4aa59815849b1f">uint8</a> = uint8_t;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#ad8fdcc870f0454cfeda3a0d38839d961">   30</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../df/dba/namespacemaf.html#ad8fdcc870f0454cfeda3a0d38839d961">int16</a> = int16_t;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#a4654f88dcb4e10ac77438dd02e7a4907">   31</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../df/dba/namespacemaf.html#a4654f88dcb4e10ac77438dd02e7a4907">uint16</a> = uint16_t;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#af052326c13f45efe97d686b69973eb15">   32</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../df/dba/namespacemaf.html#af052326c13f45efe97d686b69973eb15">int32</a> = int32_t;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#a9c6f11cfee0c09e2f40fbb271b5a1b04">   33</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../df/dba/namespacemaf.html#a9c6f11cfee0c09e2f40fbb271b5a1b04">uint32</a> = uint32_t;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#aaa8f9513b19617e672f757b67f764f0e">   34</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../df/dba/namespacemaf.html#aaa8f9513b19617e672f757b67f764f0e">int64</a> = int64_t;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#a5963b7c995788e68c583df33b93cfefb">   35</a></span><span class="keyword">using </span><a class="code hl_typedef" href="../../df/dba/namespacemaf.html#a5963b7c995788e68c583df33b93cfefb">uint64</a> = uint64_t;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}  <span class="comment">// namespace maf</span></div>
 </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
-<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="../../df/dba/namespacemaf.html#ab9cb49dc65e09b7c9a78dd81a34e10c3">   46</a></span>[[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="../../df/dba/namespacemaf.html#a11dab27cc975212d0cfebee780289026">is_close</a>(T v1, U v2, <span class="keywordtype">double</span> epsilon = <a class="code hl_variable" href="../../df/dba/namespacemaf.html#ab1ccbacf86d0e3b14fc056bfd7b25e83">EPSILON</a>) {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">using </span>R = std::common_type_t&lt;T, U&gt;;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">return</span> std::abs(<span class="keyword">static_cast&lt;</span>R<span class="keyword">&gt;</span>(v1) - <span class="keyword">static_cast&lt;</span>R<span class="keyword">&gt;</span>(v2)) &lt; epsilon;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
-</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>} <span class="comment">// namespace maf</span></div>
-</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif </span><span class="comment">// GLOBALHEADER_HPP</span></div>
-<div class="ttc" id="a_global_header_8hpp_html_a3271a6f688eb2ba4047a2982ff49919a"><div class="ttname"><a href="../../d1/df7/_global_header_8hpp.html#a3271a6f688eb2ba4047a2982ff49919a">int32</a></div><div class="ttdeci">int32_t int32</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:29</div></div>
-<div class="ttc" id="a_global_header_8hpp_html_a3626f2f93183532b6e8b19234cc5c4d3"><div class="ttname"><a href="../../d1/df7/_global_header_8hpp.html#a3626f2f93183532b6e8b19234cc5c4d3">int8</a></div><div class="ttdeci">int8_t int8</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:25</div></div>
-<div class="ttc" id="a_global_header_8hpp_html_a5522c54735d837fae7d6ba026b858441"><div class="ttname"><a href="../../d1/df7/_global_header_8hpp.html#a5522c54735d837fae7d6ba026b858441">uint32</a></div><div class="ttdeci">uint32_t uint32</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:30</div></div>
-<div class="ttc" id="a_global_header_8hpp_html_aa17fc6cc2c9a4ad80e9fcdd3f64320e1"><div class="ttname"><a href="../../d1/df7/_global_header_8hpp.html#aa17fc6cc2c9a4ad80e9fcdd3f64320e1">uint8</a></div><div class="ttdeci">uint8_t uint8</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:26</div></div>
-<div class="ttc" id="a_global_header_8hpp_html_aa720ba8c0d1dcc513c82c51d3f6e9995"><div class="ttname"><a href="../../d1/df7/_global_header_8hpp.html#aa720ba8c0d1dcc513c82c51d3f6e9995">uint16</a></div><div class="ttdeci">uint16_t uint16</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:28</div></div>
-<div class="ttc" id="a_global_header_8hpp_html_aa918a75369e273ba410b034cd2ced87b"><div class="ttname"><a href="../../d1/df7/_global_header_8hpp.html#aa918a75369e273ba410b034cd2ced87b">int16</a></div><div class="ttdeci">int16_t int16</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:27</div></div>
-<div class="ttc" id="a_global_header_8hpp_html_aca0ba831b19773ec091e57f5cf76a1fb"><div class="ttname"><a href="../../d1/df7/_global_header_8hpp.html#aca0ba831b19773ec091e57f5cf76a1fb">uint64</a></div><div class="ttdeci">uint64_t uint64</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:32</div></div>
-<div class="ttc" id="a_global_header_8hpp_html_ad2d958ccdb69773a12a7cb71d87a412e"><div class="ttname"><a href="../../d1/df7/_global_header_8hpp.html#ad2d958ccdb69773a12a7cb71d87a412e">int64</a></div><div class="ttdeci">int64_t int64</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:31</div></div>
-<div class="ttc" id="anamespacemaf_html"><div class="ttname"><a href="../../df/dba/namespacemaf.html">maf</a></div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:34</div></div>
-<div class="ttc" id="anamespacemaf_html_a11dab27cc975212d0cfebee780289026"><div class="ttname"><a href="../../df/dba/namespacemaf.html#a11dab27cc975212d0cfebee780289026">maf::is_close</a></div><div class="ttdeci">bool is_close(T v1, T v2, double epsilon=EPSILON)</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:41</div></div>
-<div class="ttc" id="anamespacemaf_html_a9889e36aacfbf9282d0dfa3851622673"><div class="ttname"><a href="../../df/dba/namespacemaf.html#a9889e36aacfbf9282d0dfa3851622673">maf::NOT_SQUARE</a></div><div class="ttdeci">constexpr int8_t NOT_SQUARE</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:37</div></div>
-<div class="ttc" id="anamespacemaf_html_aa44d65eb8db5d918996e66005cb5d573"><div class="ttname"><a href="../../df/dba/namespacemaf.html#aa44d65eb8db5d918996e66005cb5d573">maf::OUT_OF_BOUNDS</a></div><div class="ttdeci">constexpr int8_t OUT_OF_BOUNDS</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:36</div></div>
-<div class="ttc" id="anamespacemaf_html_ab1ccbacf86d0e3b14fc056bfd7b25e83"><div class="ttname"><a href="../../df/dba/namespacemaf.html#ab1ccbacf86d0e3b14fc056bfd7b25e83">maf::EPSILON</a></div><div class="ttdeci">constexpr double EPSILON</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:38</div></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#endif  </span><span class="comment">// GLOBALHEADER_HPP</span></div>
+<div class="ttc" id="anamespacemaf_html"><div class="ttname"><a href="../../df/dba/namespacemaf.html">maf</a></div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:27</div></div>
+<div class="ttc" id="anamespacemaf_html_a369c7c8a42bfa1b66b4aa59815849b1f"><div class="ttname"><a href="../../df/dba/namespacemaf.html#a369c7c8a42bfa1b66b4aa59815849b1f">maf::uint8</a></div><div class="ttdeci">uint8_t uint8</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:29</div></div>
+<div class="ttc" id="anamespacemaf_html_a4654f88dcb4e10ac77438dd02e7a4907"><div class="ttname"><a href="../../df/dba/namespacemaf.html#a4654f88dcb4e10ac77438dd02e7a4907">maf::uint16</a></div><div class="ttdeci">uint16_t uint16</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:31</div></div>
+<div class="ttc" id="anamespacemaf_html_a4ec9e90b2247dd4ef8023b6d07f46bce"><div class="ttname"><a href="../../df/dba/namespacemaf.html#a4ec9e90b2247dd4ef8023b6d07f46bce">maf::int8</a></div><div class="ttdeci">int8_t int8</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:28</div></div>
+<div class="ttc" id="anamespacemaf_html_a5963b7c995788e68c583df33b93cfefb"><div class="ttname"><a href="../../df/dba/namespacemaf.html#a5963b7c995788e68c583df33b93cfefb">maf::uint64</a></div><div class="ttdeci">uint64_t uint64</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:35</div></div>
+<div class="ttc" id="anamespacemaf_html_a9c6f11cfee0c09e2f40fbb271b5a1b04"><div class="ttname"><a href="../../df/dba/namespacemaf.html#a9c6f11cfee0c09e2f40fbb271b5a1b04">maf::uint32</a></div><div class="ttdeci">uint32_t uint32</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:33</div></div>
+<div class="ttc" id="anamespacemaf_html_aaa8f9513b19617e672f757b67f764f0e"><div class="ttname"><a href="../../df/dba/namespacemaf.html#aaa8f9513b19617e672f757b67f764f0e">maf::int64</a></div><div class="ttdeci">int64_t int64</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:34</div></div>
+<div class="ttc" id="anamespacemaf_html_ad8fdcc870f0454cfeda3a0d38839d961"><div class="ttname"><a href="../../df/dba/namespacemaf.html#ad8fdcc870f0454cfeda3a0d38839d961">maf::int16</a></div><div class="ttdeci">int16_t int16</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:30</div></div>
+<div class="ttc" id="anamespacemaf_html_af052326c13f45efe97d686b69973eb15"><div class="ttname"><a href="../../df/dba/namespacemaf.html#af052326c13f45efe97d686b69973eb15">maf::int32</a></div><div class="ttdeci">int32_t int32</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:32</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

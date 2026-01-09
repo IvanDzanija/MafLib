@@ -1,13 +1,7 @@
 <map id="maf::math::Matrix::operator*" name="maf::math::Matrix::operator*">
-<area shape="rect" id="Node000001" title="Standard algebraic matrix multiplication (A * B)." alt="" coords="5,112,138,153"/>
-<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a98d6cc10d243169d78f53d07406ace8b" title="Gets the number of columns." alt="" coords="198,5,330,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,109,184,55,194,51,196,55,187,60,103,114"/>
-<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aca60efe3848c6a7635c9f609ca163528" title="Gets a mutable reference to the underlying std::vector data store." alt="" coords="186,70,343,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="138,113,196,98,197,103,139,118"/>
-<area shape="rect" id="Node000004" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a71134f227c2c22e4ecf24b33ed3c0396" title="Fills the entire matrix with a single value." alt="" coords="192,120,337,145"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="138,130,177,130,177,135,138,135"/>
-<area shape="rect" id="Node000005" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#afadd64902ef9d03291be6e799c38e904" title="Default constructor. Creates an empty 0x0 matrix." alt="" coords="198,169,330,210"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="139,150,185,163,183,168,138,155"/>
-<area shape="rect" id="Node000006" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aa1fa0768048faff36f5dfc56911a8ce4" title="Gets the number of rows." alt="" coords="198,235,330,275"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="97,151,138,185,187,219,197,225,194,230,184,224,134,189,94,155"/>
+<area shape="rect" id="Node000001" title="Standard algebraic matrix multiplication (A * B)." alt="" coords="5,27,138,68"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aca60efe3848c6a7635c9f609ca163528" title="Gets a mutable reference to the underlying std::vector data store." alt="" coords="186,5,343,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,35,170,30,171,35,139,40"/>
+<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#afadd64902ef9d03291be6e799c38e904" title="Default constructor. Creates an empty 0x0 matrix." alt="" coords="198,55,330,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="139,54,184,61,183,66,138,60"/>
 </map>

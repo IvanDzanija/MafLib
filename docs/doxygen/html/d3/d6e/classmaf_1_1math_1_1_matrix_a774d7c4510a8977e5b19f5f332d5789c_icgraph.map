@@ -1,29 +1,34 @@
 <map id="maf::math::Matrix::is_square" name="maf::math::Matrix::is_square">
-<area shape="rect" id="Node000001" title="Checks if the matrix is square (rows == cols)." alt="" coords="735,188,867,229"/>
-<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a90408b80daf821aff91fd2aed917ce8e" title="Checks if the matrix is diagonal." alt="" coords="370,36,502,77"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="787,174,773,137,752,95,723,56,705,40,685,27,661,16,634,10,580,11,527,22,482,38,481,33,526,17,579,5,635,5,662,11,688,22,708,36,727,53,756,93,778,135,792,172"/>
-<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a48ce2d00357e89ece95524bd003b63c6" title="Checks if the matrix is lower triangular." alt="" coords="554,36,687,77"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="772,177,733,134,685,92,666,79,669,75,688,87,737,130,776,174"/>
-<area shape="rect" id="Node000004" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#ae26826bcc4a303b29538a17c0a39de2b" title="Checks if the matrix is singular (non&#45;invertible)." alt="" coords="5,220,138,261"/>
-<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="719,202,612,194,479,189,332,192,186,207,127,222,126,217,185,202,332,187,479,184,613,189,719,197"/>
-<area shape="rect" id="Node000005" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a0f6daf36ebb2efd5970384565469323c" title="Checks if the matrix is symmetric (A == A^T)." alt="" coords="554,216,687,257"/>
-<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="720,223,687,229,687,223,719,218"/>
-<area shape="rect" id="Node000008" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#af79337899f9b0f2613175daf53f18ea9" title="Checks if the matrix is upper triangular." alt="" coords="554,101,687,142"/>
-<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="742,183,663,145,666,140,744,178"/>
-<area shape="rect" id="Node000009" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a12a8c0a0c3d48be5283f473f9b86c7e4" title="Converts this matrix into an identity matrix." alt="" coords="554,281,687,322"/>
-<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="748,239,688,271,664,283,661,278,685,266,746,234"/>
-<area shape="rect" id="Node000011" href="$d4/d02/namespacemaf_1_1math.html#ac44a6962e2d09c20d929223448b4421c" title="Performs a blocked PLU decomposition on a square matrix." alt="" coords="199,289,304,314"/>
-<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="783,244,744,294,718,318,688,336,634,354,578,363,521,364,464,360,363,340,287,317,289,312,364,335,465,354,521,359,577,357,633,349,686,331,715,314,740,290,778,240"/>
-<area shape="rect" id="Node000012" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a65c510831554a29db6115f964b3679b0" title="Performs an in&#45;place transpose of the matrix." alt="" coords="554,396,687,437"/>
-<area shape="poly" id="edge15_Node000001_Node000012" title=" " alt="" coords="785,244,745,310,719,346,688,379,665,397,662,393,685,376,715,343,741,307,780,241"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="539,59,503,59,503,54,539,54"/>
-<area shape="rect" id="Node000006" href="$d4/d02/namespacemaf_1_1math.html#a45286ae95d74e7a19ecf706538b151e7" title="Computes the Cholesky decomposition of a symmetric positive definite matrix." alt="" coords="366,223,506,249"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="539,239,506,239,506,234,539,234"/>
-<area shape="rect" id="Node000007" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#af716a9fdb890f168430aad15c9207a27" title="Checks if the matrix is positive definite." alt="" coords="186,216,318,257"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="351,239,319,239,319,234,351,234"/>
-<area shape="poly" id="edge9_Node000008_Node000002" title=" " alt="" coords="546,98,495,80,496,75,548,93"/>
-<area shape="rect" id="Node000010" href="$d4/d02/namespacemaf_1_1math.html#a4d61c9a4c0434a2e01652894564f7ebb" title="Creates a new identity matrix of a given size." alt="" coords="371,281,501,322"/>
-<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="539,304,502,304,502,299,539,299"/>
-<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="356,304,305,304,305,299,356,299"/>
-<area shape="poly" id="edge13_Node000011_Node000004" title=" " alt="" coords="197,286,133,264,134,259,198,281"/>
+<area shape="rect" id="Node000001" title="Checks if the matrix is square (rows == cols)." alt="" coords="990,159,1122,200"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a90408b80daf821aff91fd2aed917ce8e" title="Checks if the matrix is diagonal." alt="" coords="597,37,730,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1039,146,1023,115,1001,82,974,51,941,27,913,16,883,10,821,11,763,22,713,39,711,34,761,17,821,6,883,5,914,11,943,23,978,47,1006,79,1028,113,1043,144"/>
+<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a48ce2d00357e89ece95524bd003b63c6" title="Checks if the matrix is lower triangular." alt="" coords="810,37,942,77"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="1018,151,941,92,919,80,922,75,943,88,1022,147"/>
+<area shape="rect" id="Node000004" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#ae26826bcc4a303b29538a17c0a39de2b" title="Checks if the matrix is singular (non&#45;invertible)." alt="" coords="5,231,138,272"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="974,182,665,182,440,182,312,185,256,192,186,207,116,233,114,228,185,202,256,187,312,179,440,177,665,177,974,177"/>
+<area shape="rect" id="Node000005" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a0f6daf36ebb2efd5970384565469323c" title="Checks if the matrix is symmetric (A == A^T)." alt="" coords="810,217,942,257"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="976,208,943,218,941,213,975,203"/>
+<area shape="rect" id="Node000010" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#af79337899f9b0f2613175daf53f18ea9" title="Checks if the matrix is upper triangular." alt="" coords="810,102,942,143"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="975,157,941,146,943,141,976,151"/>
+<area shape="rect" id="Node000011" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a12a8c0a0c3d48be5283f473f9b86c7e4" title="Converts this matrix into an identity matrix." alt="" coords="810,282,942,323"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="1022,212,943,271,922,284,919,279,941,267,1018,208"/>
+<area shape="rect" id="Node000015" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a65c510831554a29db6115f964b3679b0" title="Performs an in&#45;place transpose of the matrix." alt="" coords="810,347,942,388"/>
+<area shape="poly" id="edge17_Node000001_Node000015" title=" " alt="" coords="1039,215,999,275,973,307,944,336,926,349,923,345,940,332,969,304,995,272,1034,212"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="794,60,730,60,730,54,794,54"/>
+<area shape="rect" id="Node000006" href="$d6/de6/namespacemaf_1_1math_1_1detail.html#a9823af698a94cb131e27fbd62f84a83e" title="Internal implementation of Cholesky decomposition." alt="" coords="600,217,727,257"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="794,240,728,240,728,234,794,234"/>
+<area shape="rect" id="Node000009" href="$d4/d02/namespacemaf_1_1math.html#a7128b942acd7f39f1716053f0c4650ca" title=" " alt="" coords="565,281,762,307"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="796,262,762,271,718,283,716,278,761,266,794,257"/>
+<area shape="rect" id="Node000007" href="$d4/d02/namespacemaf_1_1math.html#adacdd5d260e55a04182d86ed82d0e0b2" title="Computes the Cholesky decomposition of a symmetric positive definite matrix." alt="" coords="372,224,512,250"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="584,240,512,240,512,234,584,234"/>
+<area shape="rect" id="Node000008" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a40d503bbba1ec9fcbb50f0a90207bd04" title="Checks if the matrix is positive definite." alt="" coords="186,217,318,257"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="356,240,318,240,318,234,356,234"/>
+<area shape="poly" id="edge11_Node000010_Node000002" title=" " alt="" coords="794,100,729,80,731,75,796,95"/>
+<area shape="rect" id="Node000012" href="$d4/d02/namespacemaf_1_1math.html#a4d61c9a4c0434a2e01652894564f7ebb" title="Creates a new identity matrix of a given size." alt="" coords="598,331,729,372"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="795,324,730,339,729,334,794,318"/>
+<area shape="rect" id="Node000013" href="$d6/de6/namespacemaf_1_1math_1_1detail.html#a60463d7cb4da4798efddf0b3042c06c2" title="Internal implementation of PLU decomposition." alt="" coords="366,324,517,350"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="583,349,518,345,518,339,583,344"/>
+<area shape="rect" id="Node000014" href="$d4/d02/namespacemaf_1_1math.html#a5605a040f9b62ca6a92b7e7f91c6ee0f" title="Performs a blocked PLU decomposition on a square matrix." alt="" coords="199,296,304,322"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="350,326,305,319,305,314,351,321"/>
+<area shape="poly" id="edge16_Node000014_Node000004" title=" " alt="" coords="194,293,137,275,139,270,195,288"/>
 </map>

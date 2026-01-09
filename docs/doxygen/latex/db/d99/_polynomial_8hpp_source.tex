@@ -1,0 +1,39 @@
+\doxysection{Polynomial.\+hpp}
+\hypertarget{_polynomial_8hpp_source}{}\label{_polynomial_8hpp_source}\index{include/MafLib/math/polynomial/Polynomial.hpp@{include/MafLib/math/polynomial/Polynomial.hpp}}
+\mbox{\hyperlink{_polynomial_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ POLYNOMIAL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ POLYNOMIAL\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}{Polynomial}}\ \{}
+\DoxyCodeLine{00009\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \_degree;}
+\DoxyCodeLine{00011\ \ \ \ \ std::vector<T>\ \_coeffs;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/\ Constructors\ and\ destructors\ -\/-\/-\/}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}{Polynomial}}(\textcolor{keywordtype}{size\_t}\ degree);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}{Polynomial}}(\textcolor{keywordtype}{size\_t}\ degree,\ T\ *data);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}{Polynomial}}(\textcolor{keywordtype}{size\_t}\ degree,\ \textcolor{keyword}{const}\ std::vector<T>\ \&coeffs);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U,\ \textcolor{keywordtype}{size\_t}\ N>}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}{Polynomial}}(\textcolor{keywordtype}{size\_t}\ degree,\ \textcolor{keyword}{const}\ std::array<U,\ N>\ \&coeffs);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}{Polynomial}}(\textcolor{keywordtype}{size\_t}\ degree,\ std::initializer\_list<U>\ coeffs);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/\ Getters\ and\ setters\ -\/-\/-\/}}
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \}\ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -48,6 +48,7 @@ $(function() { codefold.init(); });
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="../../concepts.html"><span>Concepts</span></a></li>
       <li><a href="../../annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="../../files.html"><span>Files</span></a></li>
       <li>
@@ -115,7 +116,7 @@ $(function() { codefold.init(); });
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>        <span class="comment">// Definition of sigma -&gt; 256 ascii chars</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        std::array&lt;TrieNode *, 256&gt; children;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>        TrieNode *parent;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        <a class="code hl_typedef" href="../../d1/df7/_global_header_8hpp.html#aa720ba8c0d1dcc513c82c51d3f6e9995">uint16</a> child_count = 0;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        <a class="code hl_typedef" href="../../df/dba/namespacemaf.html#a4654f88dcb4e10ac77438dd02e7a4907">uint16</a> child_count = 0;</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        TrieNode(TrieNode *parent = <span class="keyword">nullptr</span>) : parent(parent) {</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>            children.fill(<span class="keyword">nullptr</span>);</div>
@@ -130,14 +131,14 @@ $(function() { codefold.init(); });
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        [[nodiscard]] <span class="keywordtype">bool</span> is_leaf()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> child_count == 0; }</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        [[nodiscard]] TrieNode *transition(<span class="keywordtype">char</span> value) {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keywordflow">return</span> children.at(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="../../d1/df7/_global_header_8hpp.html#aa17fc6cc2c9a4ad80e9fcdd3f64320e1">uint8</a><span class="keyword">&gt;</span>(value));</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            <span class="keywordflow">return</span> children.at(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="../../df/dba/namespacemaf.html#a369c7c8a42bfa1b66b4aa59815849b1f">uint8</a><span class="keyword">&gt;</span>(value));</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        }</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        TrieNode *<a class="code hl_function" href="../../d8/d20/classmaf_1_1_trie.html#ac4cf68fa3c580f117bce94bf916ab028">insert</a>(<span class="keywordtype">char</span> value) {</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            TrieNode *node = transition(value);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keywordflow">if</span> (node == <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                <span class="keyword">auto</span> *new_node = <span class="keyword">new</span> TrieNode(<span class="keyword">this</span>);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                children.at(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="../../d1/df7/_global_header_8hpp.html#aa17fc6cc2c9a4ad80e9fcdd3f64320e1">uint8</a><span class="keyword">&gt;</span>(value)) = new_node;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                children.at(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="../../df/dba/namespacemaf.html#a369c7c8a42bfa1b66b4aa59815849b1f">uint8</a><span class="keyword">&gt;</span>(value)) = new_node;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                ++child_count;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                <span class="keywordflow">return</span> new_node;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            }</div>
@@ -157,7 +158,7 @@ $(function() { codefold.init(); });
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        [[nodiscard]] std::string toString() <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            std::string s = <span class="stringliteral">&quot;Children(&quot;</span> + std::to_string(child_count) + <span class="stringliteral">&quot;):\n&quot;</span>;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">for</span> (<a class="code hl_typedef" href="../../d1/df7/_global_header_8hpp.html#aa720ba8c0d1dcc513c82c51d3f6e9995">uint16</a> i = 0; i &lt; 256; ++i) {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">for</span> (<a class="code hl_typedef" href="../../df/dba/namespacemaf.html#a4654f88dcb4e10ac77438dd02e7a4907">uint16</a> i = 0; i &lt; 256; ++i) {</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                <span class="keywordflow">if</span> (children.at(i) != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                    s += <span class="charliteral">&#39; &#39;</span>;</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    s += <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span><span class="keyword">&gt;</span>(i);</div>
@@ -251,8 +252,6 @@ $(function() { codefold.init(); });
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>} <span class="comment">// namespace maf</span></div>
 <div class="ttc" id="a_global_header_8hpp_html"><div class="ttname"><a href="../../d1/df7/_global_header_8hpp.html">GlobalHeader.hpp</a></div></div>
-<div class="ttc" id="a_global_header_8hpp_html_aa17fc6cc2c9a4ad80e9fcdd3f64320e1"><div class="ttname"><a href="../../d1/df7/_global_header_8hpp.html#aa17fc6cc2c9a4ad80e9fcdd3f64320e1">uint8</a></div><div class="ttdeci">uint8_t uint8</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:26</div></div>
-<div class="ttc" id="a_global_header_8hpp_html_aa720ba8c0d1dcc513c82c51d3f6e9995"><div class="ttname"><a href="../../d1/df7/_global_header_8hpp.html#aa720ba8c0d1dcc513c82c51d3f6e9995">uint16</a></div><div class="ttdeci">uint16_t uint16</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:28</div></div>
 <div class="ttc" id="aclassmaf_1_1_trie_html_a0f0d0ec6fe702684ef8d46a8f309d3a9"><div class="ttname"><a href="../../d8/d20/classmaf_1_1_trie.html#a0f0d0ec6fe702684ef8d46a8f309d3a9">maf::Trie::search</a></div><div class="ttdeci">bool search(const std::string &amp;word)</div><div class="ttdef"><b>Definition</b> Trie.hpp:103</div></div>
 <div class="ttc" id="aclassmaf_1_1_trie_html_a11071ced1c78b069d87a261c57b1b91c"><div class="ttname"><a href="../../d8/d20/classmaf_1_1_trie.html#a11071ced1c78b069d87a261c57b1b91c">maf::Trie::print</a></div><div class="ttdeci">void print() const noexcept</div><div class="ttdef"><b>Definition</b> Trie.hpp:130</div></div>
 <div class="ttc" id="aclassmaf_1_1_trie_html_a521503ef078cfd7e8e61b0df8fbae997"><div class="ttname"><a href="../../d8/d20/classmaf_1_1_trie.html#a521503ef078cfd7e8e61b0df8fbae997">maf::Trie::remove</a></div><div class="ttdeci">bool remove(const std::string &amp;word)</div><div class="ttdef"><b>Definition</b> Trie.hpp:107</div></div>
@@ -260,7 +259,9 @@ $(function() { codefold.init(); });
 <div class="ttc" id="aclassmaf_1_1_trie_html_ab3d1329f9de741d1d2d66daf14d2efd1"><div class="ttname"><a href="../../d8/d20/classmaf_1_1_trie.html#ab3d1329f9de741d1d2d66daf14d2efd1">maf::Trie::Trie</a></div><div class="ttdeci">Trie(TrieNode *root)</div><div class="ttdef"><b>Definition</b> Trie.hpp:92</div></div>
 <div class="ttc" id="aclassmaf_1_1_trie_html_ac4cf68fa3c580f117bce94bf916ab028"><div class="ttname"><a href="../../d8/d20/classmaf_1_1_trie.html#ac4cf68fa3c580f117bce94bf916ab028">maf::Trie::insert</a></div><div class="ttdeci">void insert(const std::string &amp;word)</div><div class="ttdoc">Inserts given word into existant trie.</div><div class="ttdef"><b>Definition</b> Trie.hpp:96</div></div>
 <div class="ttc" id="aclassmaf_1_1_trie_html_adf715267b29aa87e0f1889e5d29bc8f9"><div class="ttname"><a href="../../d8/d20/classmaf_1_1_trie.html#adf715267b29aa87e0f1889e5d29bc8f9">maf::Trie::~Trie</a></div><div class="ttdeci">~Trie()</div><div class="ttdef"><b>Definition</b> Trie.hpp:93</div></div>
-<div class="ttc" id="anamespacemaf_html"><div class="ttname"><a href="../../df/dba/namespacemaf.html">maf</a></div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:34</div></div>
+<div class="ttc" id="anamespacemaf_html"><div class="ttname"><a href="../../df/dba/namespacemaf.html">maf</a></div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:27</div></div>
+<div class="ttc" id="anamespacemaf_html_a369c7c8a42bfa1b66b4aa59815849b1f"><div class="ttname"><a href="../../df/dba/namespacemaf.html#a369c7c8a42bfa1b66b4aa59815849b1f">maf::uint8</a></div><div class="ttdeci">uint8_t uint8</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:29</div></div>
+<div class="ttc" id="anamespacemaf_html_a4654f88dcb4e10ac77438dd02e7a4907"><div class="ttname"><a href="../../df/dba/namespacemaf.html#a4654f88dcb4e10ac77438dd02e7a4907">maf::uint16</a></div><div class="ttdeci">uint16_t uint16</div><div class="ttdef"><b>Definition</b> GlobalHeader.hpp:31</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

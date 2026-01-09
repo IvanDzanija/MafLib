@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['statistics_2eh_0',['Statistics.h',['../da/df2/_statistics_8h.html',1,'']]]
+  ['qr_2ehpp_0',['QR.hpp',['../d7/d99/_q_r_8hpp.html',1,'']]]
 ];

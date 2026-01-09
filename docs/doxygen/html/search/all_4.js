@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['eigen_2ehpp_0',['Eigen.hpp',['../d0/d8e/_eigen_8hpp.html',1,'']]],
-  ['end_1',['end',['../de/d35/classmaf_1_1math_1_1_vector.html#a4b7d99320a69fd965ce3210267d64c0e',1,'maf::math::Vector::end() noexcept'],['../de/d35/classmaf_1_1math_1_1_vector.html#a67de8a29ae52bbb5c487ad55ec90366f',1,'maf::math::Vector::end() const noexcept']]],
-  ['epsilon_2',['EPSILON',['../df/dba/namespacemaf.html#ab1ccbacf86d0e3b14fc056bfd7b25e83',1,'maf']]],
-  ['extendedint_3',['ExtendedInt',['../d2/da4/class_extended_int.html',1,'ExtendedInt'],['../d2/da4/class_extended_int.html#aa04920c7dfe93b6784a50dd554a66081',1,'ExtendedInt::ExtendedInt()'],['../d2/da4/class_extended_int.html#a7cc4867c85d1fd13e6690bfb718565f0',1,'ExtendedInt::ExtendedInt(int value)'],['../d2/da4/class_extended_int.html#a0a304d7cef43d33967a64f059982ae9e',1,'ExtendedInt::ExtendedInt(InfinityType value)']]],
-  ['extendedinteger_2ehpp_4',['ExtendedInteger.hpp',['../d5/dde/_extended_integer_8hpp.html',1,'']]]
+  ['data_0',['data',['../d3/d6e/classmaf_1_1math_1_1_matrix.html#aca60efe3848c6a7635c9f609ca163528',1,'maf::math::Matrix::data() noexcept'],['../d3/d6e/classmaf_1_1math_1_1_matrix.html#a473eb241e2869fb796d58c21fa2d6840',1,'maf::math::Matrix::data() const noexcept'],['../de/d35/classmaf_1_1math_1_1_vector.html#ae7f1be4d6d85f1ce33fcd5cdea8f1def',1,'maf::math::Vector::data()']]],
+  ['daxpy_1',['daxpy',['../d0/d9a/namespacemaf_1_1math_1_1acc.html#a57728e125327664b7118b6b646ff04d4',1,'maf::math::acc']]],
+  ['disjointset_2',['DisjointSet',['../db/da1/classmaf_1_1_disjoint_set.html',1,'maf']]],
+  ['disjointset_2ehpp_3',['DisjointSet.hpp',['../d0/d45/_disjoint_set_8hpp.html',1,'']]],
+  ['dot_5fproduct_4',['dot_product',['../de/d35/classmaf_1_1math_1_1_vector.html#a7c27148cb7d68df78343721cc56d67e0',1,'maf::math::Vector']]]
 ];

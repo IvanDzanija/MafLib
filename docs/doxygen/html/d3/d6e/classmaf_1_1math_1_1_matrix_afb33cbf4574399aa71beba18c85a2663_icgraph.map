@@ -1,13 +1,17 @@
 <map id="maf::math::Matrix::row_span" name="maf::math::Matrix::row_span">
-<area shape="rect" id="Node000001" title="Gets a mutable std::span of a single row." alt="" coords="374,63,506,103"/>
-<area shape="rect" id="Node000002" href="$d4/d02/namespacemaf_1_1math.html#a45286ae95d74e7a19ecf706538b151e7" title="Computes the Cholesky decomposition of a symmetric positive definite matrix." alt="" coords="186,13,326,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="359,61,299,42,300,37,360,55"/>
-<area shape="rect" id="Node000004" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a0440e67c7abf25ef0f37d8d96e9e5cd4" title="Matrix&#45;Vector multiplication (Matrix * column_vector)." alt="" coords="190,63,322,103"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="359,86,322,86,322,80,359,80"/>
-<area shape="rect" id="Node000005" href="$d4/d02/namespacemaf_1_1math.html#ac44a6962e2d09c20d929223448b4421c" title="Performs a blocked PLU decomposition on a square matrix." alt="" coords="203,128,308,153"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="360,111,300,129,299,124,359,105"/>
-<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#af716a9fdb890f168430aad15c9207a27" title="Checks if the matrix is positive definite." alt="" coords="5,5,138,46"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="170,28,138,28,138,23,170,23"/>
-<area shape="rect" id="Node000006" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#ae26826bcc4a303b29538a17c0a39de2b" title="Checks if the matrix is singular (non&#45;invertible)." alt="" coords="5,120,138,161"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="188,143,138,143,138,138,188,138"/>
+<area shape="rect" id="Node000001" title="Gets a mutable std::span of a single row." alt="" coords="573,67,706,107"/>
+<area shape="rect" id="Node000002" href="$d6/de6/namespacemaf_1_1math_1_1detail.html#a9823af698a94cb131e27fbd62f84a83e" title="Internal implementation of Cholesky decomposition." alt="" coords="386,8,513,49"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="558,65,513,50,514,45,559,59"/>
+<area shape="rect" id="Node000005" href="$d6/de6/namespacemaf_1_1math_1_1detail.html#a60463d7cb4da4798efddf0b3042c06c2" title="Internal implementation of PLU decomposition." alt="" coords="374,74,525,100"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="557,90,526,90,526,84,557,84"/>
+<area shape="rect" id="Node000008" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a0440e67c7abf25ef0f37d8d96e9e5cd4" title="Matrix&#45;Vector multiplication (Matrix * column_vector)." alt="" coords="384,124,516,165"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="559,114,517,127,515,122,557,109"/>
+<area shape="rect" id="Node000003" href="$d4/d02/namespacemaf_1_1math.html#adacdd5d260e55a04182d86ed82d0e0b2" title="Computes the Cholesky decomposition of a symmetric positive definite matrix." alt="" coords="186,14,326,40"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="371,30,326,30,327,25,371,25"/>
+<area shape="rect" id="Node000004" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a40d503bbba1ec9fcbb50f0a90207bd04" title="Checks if the matrix is positive definite." alt="" coords="5,5,138,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="170,29,138,29,138,23,170,24"/>
+<area shape="rect" id="Node000006" href="$d4/d02/namespacemaf_1_1math.html#a5605a040f9b62ca6a92b7e7f91c6ee0f" title="Performs a blocked PLU decomposition on a square matrix." alt="" coords="203,74,308,100"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="359,90,309,90,309,84,359,84"/>
+<area shape="rect" id="Node000007" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#ae26826bcc4a303b29538a17c0a39de2b" title="Checks if the matrix is singular (non&#45;invertible)." alt="" coords="5,71,138,111"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="188,91,138,92,138,87,188,86"/>
 </map>

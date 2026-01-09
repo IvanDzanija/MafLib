@@ -1,0 +1,38 @@
+\doxysection{Lin\+Alg.\+hpp}
+\hypertarget{_lin_alg_8hpp_source}{}\label{_lin_alg_8hpp_source}\index{include/MafLib/math/linalg/LinAlg.hpp@{include/MafLib/math/linalg/LinAlg.hpp}}
+\mbox{\hyperlink{_lin_alg_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ LINALG\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ LINALG\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#if\ defined(\_\_APPLE\_\_)\ \&\&\ defined(ACCELERATE\_AVAILABLE)}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_accelerate_wrapper_8hpp}{MafLib/math/linalg/AccelerateWrappers/AccelerateWrapper.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_math_8hpp}{MafLib/math/Math.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ Constants}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{uint8}}\ BLOCK\_SIZE\ =\ 64;}
+\DoxyCodeLine{00015\ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{uint8}}\ FLOAT\_PRECISION\ =\ 5;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ Classes}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29}{Orientation}}\ :\ \mbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{uint8}}\ \{\ \mbox{\hyperlink{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29a66b1fbb126096e2f3d898499c99fb568}{ROW}},\ \mbox{\hyperlink{namespacemaf_1_1math_afe4f407d72235467d014872419cfaa29abbd4c1ae91eacf0b622ff6b811619e14}{COLUMN}}\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ Functions}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_matrix_8hpp}{Matrix.hpp}}"{}}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_vector_8hpp}{Vector.hpp}}"{}}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

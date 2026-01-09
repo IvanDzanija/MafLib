@@ -1,0 +1,28 @@
+\doxysection{Bits.\+hpp}
+\hypertarget{_bits_8hpp_source}{}\label{_bits_8hpp_source}\index{include/MafLib/utility/Bits.hpp@{include/MafLib/utility/Bits.hpp}}
+\mbox{\hyperlink{_bits_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BIT\_TWIDDLING\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BIT\_TWIDDLING\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemaf_1_1util}{maf::util}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ TODO:\ Change\ to\ integral\ template,\ floating\ point\ to?}}
+\DoxyCodeLine{00008\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacemaf_1_1util_ab331fd08e50c92e3c379958f73f8ff21}{same\_sign}}(\textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b)\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordflow}{return}\ ((a\ \string^\ b)\ >=\ 0);}
+\DoxyCodeLine{00010\ \}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacemaf_1_1util_a1fc89e6a016b62d850603a1d9ab579f1}{is\_power\_of\_two}}(\textcolor{keywordtype}{int}\ n)\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordflow}{return}\ (n\ >\ 0)\ \&\&\ ((n\ \&\ (n\ -\/\ 1))\ ==\ 0);}
+\DoxyCodeLine{00014\ \}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespacemaf_1_1util_ae51d0d5b7dd64a53bd29db8ec4ab9811}{most\_significant\_bit}}(\textcolor{keywordtype}{int}\ n)\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{auto}\ d\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(n);}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{return}\ (n\ ==\ 0)\ ?\ 0\ :\ std::ilogb(d)\ +\ 1;}
+\DoxyCodeLine{00019\ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \}\ \ \textcolor{comment}{//\ namespace\ maf::util}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ BIT\_TWIDDLING\_H}}
+
+\end{DoxyCode}

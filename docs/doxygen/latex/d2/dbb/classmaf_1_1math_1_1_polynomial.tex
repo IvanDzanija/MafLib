@@ -1,0 +1,157 @@
+\doxysection{maf\+::math\+::Polynomial\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmaf_1_1math_1_1_polynomial}{}\label{classmaf_1_1math_1_1_polynomial}\index{maf::math::Polynomial$<$ T $>$@{maf::math::Polynomial$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Polynomial.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}{Polynomial}} (size\+\_\+t degree)
+\begin{DoxyCompactList}\small\item\em Constructs an uninitialized polynomial of given degree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmaf_1_1math_1_1_polynomial_acca0d928e47ebd0c75846b6136559d2f}{Polynomial}} (size\+\_\+t degree, T \texorpdfstring{$\ast$}{*}data)
+\begin{DoxyCompactList}\small\item\em Constructs from a raw data pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a0b2d74daa887596c36977ccc90cae501}{Polynomial}} (size\+\_\+t degree, const std\+::vector$<$ T $>$ \&coeffs)
+\begin{DoxyCompactList}\small\item\em Constructs from a std\+::vector. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename U, size\+\_\+t N$>$ }\\\mbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a0e12077b7607420a514cd416c634bd47}{Polynomial}} (size\+\_\+t degree, const std\+::array$<$ U, N $>$ \&coeffs)
+\begin{DoxyCompactList}\small\item\em Constructs from a std\+::array. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename U$>$ }\\\mbox{\hyperlink{classmaf_1_1math_1_1_polynomial_affc7b2721fcd26230ab0206e33812aae}{Polynomial}} (size\+\_\+t degree, std\+::initializer\+\_\+list$<$ U $>$ coeffs)
+\begin{DoxyCompactList}\small\item\em Constructs from a std\+::initializer\+\_\+list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classmaf_1_1math_1_1_polynomial_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}\index{maf::math::Polynomial$<$ T $>$@{maf::math::Polynomial$<$ T $>$}!Polynomial@{Polynomial}}
+\index{Polynomial@{Polynomial}!maf::math::Polynomial$<$ T $>$@{maf::math::Polynomial$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Polynomial()}{Polynomial()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classmaf_1_1math_1_1_polynomial}{maf\+::math\+::\+Polynomial}}$<$ T $>$\+::\+Polynomial (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{degree}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an uninitialized polynomial of given degree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em degree} & Degree of polynomial. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if dimensions are zero. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmaf_1_1math_1_1_polynomial_acca0d928e47ebd0c75846b6136559d2f}\index{maf::math::Polynomial$<$ T $>$@{maf::math::Polynomial$<$ T $>$}!Polynomial@{Polynomial}}
+\index{Polynomial@{Polynomial}!maf::math::Polynomial$<$ T $>$@{maf::math::Polynomial$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Polynomial()}{Polynomial()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_polynomial_acca0d928e47ebd0c75846b6136559d2f} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classmaf_1_1math_1_1_polynomial}{maf\+::math\+::\+Polynomial}}$<$ T $>$\+::\+Polynomial (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{degree}{, }\item[{T \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Constructs from a raw data pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em degree} & Degree of polynomial. \\
+\hline
+{\em coeffs} & Pointer to a C-\/style array of size (degree). The data is COPIED into the polynomial. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if degree is zero or data is nullptr. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmaf_1_1math_1_1_polynomial_a0b2d74daa887596c36977ccc90cae501}\index{maf::math::Polynomial$<$ T $>$@{maf::math::Polynomial$<$ T $>$}!Polynomial@{Polynomial}}
+\index{Polynomial@{Polynomial}!maf::math::Polynomial$<$ T $>$@{maf::math::Polynomial$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Polynomial()}{Polynomial()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_polynomial_a0b2d74daa887596c36977ccc90cae501} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classmaf_1_1math_1_1_polynomial}{maf\+::math\+::\+Polynomial}}$<$ T $>$\+::\+Polynomial (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{degree}{, }\item[{const std\+::vector$<$ T $>$ \&}]{coeffs}{}\end{DoxyParamCaption})}
+
+
+
+Constructs from a std\+::vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em degree} & Degree of polynomial. \\
+\hline
+{\em coeffs} & A std\+::vector of size (degree). \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if degree is zero or vector size does not match. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmaf_1_1math_1_1_polynomial_a0e12077b7607420a514cd416c634bd47}\index{maf::math::Polynomial$<$ T $>$@{maf::math::Polynomial$<$ T $>$}!Polynomial@{Polynomial}}
+\index{Polynomial@{Polynomial}!maf::math::Polynomial$<$ T $>$@{maf::math::Polynomial$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Polynomial()}{Polynomial()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_polynomial_a0e12077b7607420a514cd416c634bd47} 
+template$<$typename T$>$ \\
+template$<$typename U, size\+\_\+t N$>$ \\
+\mbox{\hyperlink{classmaf_1_1math_1_1_polynomial}{maf\+::math\+::\+Polynomial}}$<$ T $>$\+::\+Polynomial (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{degree}{, }\item[{const std\+::array$<$ U, N $>$ \&}]{coeffs}{}\end{DoxyParamCaption})}
+
+
+
+Constructs from a std\+::array. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & Type in the array (allows implicit conversion). \\
+\hline
+{\em N} & Size of the array. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em degree} & Degree of polynomial. \\
+\hline
+{\em coeffs} & A std\+::array$<$\+U, N$>$ where N must equal (degree). \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if degree is zero or array size does not match. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmaf_1_1math_1_1_polynomial_affc7b2721fcd26230ab0206e33812aae}\index{maf::math::Polynomial$<$ T $>$@{maf::math::Polynomial$<$ T $>$}!Polynomial@{Polynomial}}
+\index{Polynomial@{Polynomial}!maf::math::Polynomial$<$ T $>$@{maf::math::Polynomial$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Polynomial()}{Polynomial()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_polynomial_affc7b2721fcd26230ab0206e33812aae} 
+template$<$typename T$>$ \\
+template$<$typename U$>$ \\
+\mbox{\hyperlink{classmaf_1_1math_1_1_polynomial}{maf\+::math\+::\+Polynomial}}$<$ T $>$\+::\+Polynomial (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{degree}{, }\item[{std\+::initializer\+\_\+list$<$ U $>$}]{coeffs}{}\end{DoxyParamCaption})}
+
+
+
+Constructs from a std\+::initializer\+\_\+list. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & Type in the list (allows implicit conversion). \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em degree} & Degree of polynomial. \\
+\hline
+{\em list} & A std\+::initializer\+\_\+list\uline{ of size (degree). }\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & \uline{if degree is zero or list size does not match. }\\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Maf\+Lib/math/polynomial/\mbox{\hyperlink{_polynomial_8hpp}{Polynomial.\+hpp}}\item 
+include/\+Maf\+Lib/math/polynomial/\mbox{\hyperlink{_polynomial_constructors_8hpp}{Polynomial\+Constructors.\+hpp}}\end{DoxyCompactItemize}

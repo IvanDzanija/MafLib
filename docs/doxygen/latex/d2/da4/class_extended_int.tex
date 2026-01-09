@@ -12,8 +12,8 @@ An extended integer class that supports positive and negative infinity.
 \doxysubsubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-enum class \mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96}{Infinity\+Type}} \{ \mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96afd2a016b421e0145e7b62af632d0a04d}{Pos\+Inf}}
-, \mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96a5235470e53e550afd3a6fb293593ab81}{Neg\+Inf}}
+enum class \mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5}{Infinity\+Type}} \+: uint8 \{ \mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5afd2a016b421e0145e7b62af632d0a04d}{Pos\+Inf}}
+, \mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5a5235470e53e550afd3a6fb293593ab81}{Neg\+Inf}}
  \}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Member Functions}
@@ -23,7 +23,7 @@ enum class \mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96
 \item 
 \mbox{\hyperlink{class_extended_int_a7cc4867c85d1fd13e6690bfb718565f0}{Extended\+Int}} (int value)
 \item 
-\mbox{\hyperlink{class_extended_int_a0a304d7cef43d33967a64f059982ae9e}{Extended\+Int}} (\mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96}{Infinity\+Type}} value)
+\mbox{\hyperlink{class_extended_int_a0a304d7cef43d33967a64f059982ae9e}{Extended\+Int}} (\mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5}{Infinity\+Type}} value)
 \item 
 bool \mbox{\hyperlink{class_extended_int_ac4674e6d534e9e6e8e9a5f353e14bad3}{is\+\_\+inf}} () const
 \item 
@@ -66,18 +66,18 @@ This class can represent regular integers as well as positive and negative infin
 \label{doc-enum-members}
 \Hypertarget{class_extended_int_doc-enum-members}
 \doxysubsection{Member Enumeration Documentation}
-\Hypertarget{class_extended_int_ae751430e4eb873b00944a00757db4c96}\index{ExtendedInt@{ExtendedInt}!InfinityType@{InfinityType}}
+\Hypertarget{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5}\index{ExtendedInt@{ExtendedInt}!InfinityType@{InfinityType}}
 \index{InfinityType@{InfinityType}!ExtendedInt@{ExtendedInt}}
 \doxysubsubsection{\texorpdfstring{InfinityType}{InfinityType}}
-{\footnotesize\ttfamily \label{class_extended_int_ae751430e4eb873b00944a00757db4c96} 
-enum class \mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96}{Extended\+Int\+::\+Infinity\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+{\footnotesize\ttfamily \label{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5} 
+enum class \mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5}{Extended\+Int\+::\+Infinity\+Type}} \+: uint8\hspace{0.3cm}{\ttfamily [strong]}}
 
 \begin{DoxyEnumFields}[2]{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{PosInf@{PosInf}!ExtendedInt@{ExtendedInt}}\index{ExtendedInt@{ExtendedInt}!PosInf@{PosInf}}}\Hypertarget{class_extended_int_ae751430e4eb873b00944a00757db4c96afd2a016b421e0145e7b62af632d0a04d}\label{class_extended_int_ae751430e4eb873b00944a00757db4c96afd2a016b421e0145e7b62af632d0a04d} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PosInf@{PosInf}!ExtendedInt@{ExtendedInt}}\index{ExtendedInt@{ExtendedInt}!PosInf@{PosInf}}}\Hypertarget{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5afd2a016b421e0145e7b62af632d0a04d}\label{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5afd2a016b421e0145e7b62af632d0a04d} 
 Pos\+Inf&\\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{NegInf@{NegInf}!ExtendedInt@{ExtendedInt}}\index{ExtendedInt@{ExtendedInt}!NegInf@{NegInf}}}\Hypertarget{class_extended_int_ae751430e4eb873b00944a00757db4c96a5235470e53e550afd3a6fb293593ab81}\label{class_extended_int_ae751430e4eb873b00944a00757db4c96a5235470e53e550afd3a6fb293593ab81} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NegInf@{NegInf}!ExtendedInt@{ExtendedInt}}\index{ExtendedInt@{ExtendedInt}!NegInf@{NegInf}}}\Hypertarget{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5a5235470e53e550afd3a6fb293593ab81}\label{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5a5235470e53e550afd3a6fb293593ab81} 
 Neg\+Inf&\\
 \hline
 
@@ -110,7 +110,7 @@ Extended\+Int\+::\+Extended\+Int (\begin{DoxyParamCaption}\item[{int}]{value}{}\
 \index{ExtendedInt@{ExtendedInt}!ExtendedInt@{ExtendedInt}}
 \doxysubsubsection{\texorpdfstring{ExtendedInt()}{ExtendedInt()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily \label{class_extended_int_a0a304d7cef43d33967a64f059982ae9e} 
-Extended\+Int\+::\+Extended\+Int (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_extended_int_ae751430e4eb873b00944a00757db4c96}{Infinity\+Type}}}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Extended\+Int\+::\+Extended\+Int (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_extended_int_a5f6932462ecd2e428d8ae9a234de40f5}{Infinity\+Type}}}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 

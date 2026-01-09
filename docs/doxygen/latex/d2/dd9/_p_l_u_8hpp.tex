@@ -21,9 +21,13 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 namespace \mbox{\hyperlink{namespacemaf}{maf}}
 \item 
 namespace \mbox{\hyperlink{namespacemaf_1_1math}{maf\+::math}}
+\item 
+namespace \mbox{\hyperlink{namespacemaf_1_1math_1_1detail}{maf\+::math\+::detail}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename T$>$ }\\std\+::tuple$<$ std\+::vector$<$ \mbox{\hyperlink{_global_header_8hpp_a5522c54735d837fae7d6ba026b858441}{uint32}} $>$, \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$, \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ $>$ \mbox{\hyperlink{namespacemaf_1_1math_ac44a6962e2d09c20d929223448b4421c}{maf\+::math\+::plu}} (const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix)
+{\footnotesize template$<$std\+::floating\+\_\+point T$>$ }\\std\+::tuple$<$ std\+::vector$<$ \mbox{\hyperlink{namespacemaf_a9c6f11cfee0c09e2f40fbb271b5a1b04}{uint32}} $>$, \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$, \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ $>$ \mbox{\hyperlink{namespacemaf_1_1math_1_1detail_a60463d7cb4da4798efddf0b3042c06c2}{maf\+::math\+::detail\+::\+\_\+plu}} (\mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&\&\+\_\+U)
+\begin{DoxyCompactList}\small\item\em Internal implementation of PLU decomposition. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Result\+Type = void, Numeric T$>$ }\\auto \mbox{\hyperlink{namespacemaf_1_1math_a5605a040f9b62ca6a92b7e7f91c6ee0f}{maf\+::math\+::plu}} (const \mbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix)
 \begin{DoxyCompactList}\small\item\em Performs a blocked PLU decomposition on a square matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}

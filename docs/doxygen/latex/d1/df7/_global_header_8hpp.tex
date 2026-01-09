@@ -1,17 +1,18 @@
 \doxysection{include/\+Maf\+Lib/main/\+Global\+Header.hpp File Reference}
 \hypertarget{_global_header_8hpp}{}\label{_global_header_8hpp}\index{include/MafLib/main/GlobalHeader.hpp@{include/MafLib/main/GlobalHeader.hpp}}
+{\ttfamily \#include $<$omp.\+h$>$}\newline
 {\ttfamily \#include $<$algorithm$>$}\newline
 {\ttfamily \#include $<$array$>$}\newline
 {\ttfamily \#include $<$cassert$>$}\newline
 {\ttfamily \#include $<$chrono$>$}\newline
 {\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$concepts$>$}\newline
 {\ttfamily \#include $<$cstdint$>$}\newline
 {\ttfamily \#include $<$cstring$>$}\newline
 {\ttfamily \#include $<$execution$>$}\newline
 {\ttfamily \#include $<$iomanip$>$}\newline
 {\ttfamily \#include $<$iostream$>$}\newline
 {\ttfamily \#include $<$memory$>$}\newline
-{\ttfamily \#include $<$omp.\+h$>$}\newline
 {\ttfamily \#include $<$optional$>$}\newline
 {\ttfamily \#include $<$random$>$}\newline
 {\ttfamily \#include $<$ranges$>$}\newline
@@ -38,107 +39,22 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \item 
 namespace \mbox{\hyperlink{namespacemaf}{maf}}
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Macros}
-\begin{DoxyCompactItemize}
-\item 
-\#define \mbox{\hyperlink{_global_header_8hpp_ad51ded0bbd705f02f73fc60c0b721ced}{BLOCK\+\_\+\+SIZE}}~64
-\end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-using \mbox{\hyperlink{_global_header_8hpp_a3626f2f93183532b6e8b19234cc5c4d3}{int8}} = int8\+\_\+t
+using \mbox{\hyperlink{namespacemaf_a4ec9e90b2247dd4ef8023b6d07f46bce}{maf\+::int8}} = int8\+\_\+t
 \item 
-using \mbox{\hyperlink{_global_header_8hpp_aa17fc6cc2c9a4ad80e9fcdd3f64320e1}{uint8}} = uint8\+\_\+t
+using \mbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{maf\+::uint8}} = uint8\+\_\+t
 \item 
-using \mbox{\hyperlink{_global_header_8hpp_aa918a75369e273ba410b034cd2ced87b}{int16}} = int16\+\_\+t
+using \mbox{\hyperlink{namespacemaf_ad8fdcc870f0454cfeda3a0d38839d961}{maf\+::int16}} = int16\+\_\+t
 \item 
-using \mbox{\hyperlink{_global_header_8hpp_aa720ba8c0d1dcc513c82c51d3f6e9995}{uint16}} = uint16\+\_\+t
+using \mbox{\hyperlink{namespacemaf_a4654f88dcb4e10ac77438dd02e7a4907}{maf\+::uint16}} = uint16\+\_\+t
 \item 
-using \mbox{\hyperlink{_global_header_8hpp_a3271a6f688eb2ba4047a2982ff49919a}{int32}} = int32\+\_\+t
+using \mbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{maf\+::int32}} = int32\+\_\+t
 \item 
-using \mbox{\hyperlink{_global_header_8hpp_a5522c54735d837fae7d6ba026b858441}{uint32}} = uint32\+\_\+t
+using \mbox{\hyperlink{namespacemaf_a9c6f11cfee0c09e2f40fbb271b5a1b04}{maf\+::uint32}} = uint32\+\_\+t
 \item 
-using \mbox{\hyperlink{_global_header_8hpp_ad2d958ccdb69773a12a7cb71d87a412e}{int64}} = int64\+\_\+t
+using \mbox{\hyperlink{namespacemaf_aaa8f9513b19617e672f757b67f764f0e}{maf\+::int64}} = int64\+\_\+t
 \item 
-using \mbox{\hyperlink{_global_header_8hpp_aca0ba831b19773ec091e57f5cf76a1fb}{uint64}} = uint64\+\_\+t
+using \mbox{\hyperlink{namespacemaf_a5963b7c995788e68c583df33b93cfefb}{maf\+::uint64}} = uint64\+\_\+t
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Functions}
-\begin{DoxyCompactItemize}
-\item 
-{\footnotesize template$<$typename T$>$ }\\bool \mbox{\hyperlink{namespacemaf_a11dab27cc975212d0cfebee780289026}{maf\+::is\+\_\+close}} (T v1, T v2, double epsilon=\mbox{\hyperlink{namespacemaf_ab1ccbacf86d0e3b14fc056bfd7b25e83}{EPSILON}})
-\item 
-{\footnotesize template$<$typename T, typename U$>$ }\\bool \mbox{\hyperlink{namespacemaf_ab9cb49dc65e09b7c9a78dd81a34e10c3}{maf\+::is\+\_\+close}} (T v1, U v2, double epsilon=\mbox{\hyperlink{namespacemaf_ab1ccbacf86d0e3b14fc056bfd7b25e83}{EPSILON}})
-\end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-constexpr int8\+\_\+t \mbox{\hyperlink{namespacemaf_aa44d65eb8db5d918996e66005cb5d573}{maf\+::\+OUT\+\_\+\+OF\+\_\+\+BOUNDS}} = -\/1
-\item 
-constexpr int8\+\_\+t \mbox{\hyperlink{namespacemaf_a9889e36aacfbf9282d0dfa3851622673}{maf\+::\+NOT\+\_\+\+SQUARE}} = -\/2
-\item 
-constexpr double \mbox{\hyperlink{namespacemaf_ab1ccbacf86d0e3b14fc056bfd7b25e83}{maf\+::\+EPSILON}} = 1e-\/6
-\end{DoxyCompactItemize}
-
-
-\label{doc-define-members}
-\Hypertarget{_global_header_8hpp_doc-define-members}
-\doxysubsection{Macro Definition Documentation}
-\Hypertarget{_global_header_8hpp_ad51ded0bbd705f02f73fc60c0b721ced}\index{GlobalHeader.hpp@{GlobalHeader.hpp}!BLOCK\_SIZE@{BLOCK\_SIZE}}
-\index{BLOCK\_SIZE@{BLOCK\_SIZE}!GlobalHeader.hpp@{GlobalHeader.hpp}}
-\doxysubsubsection{\texorpdfstring{BLOCK\_SIZE}{BLOCK\_SIZE}}
-{\footnotesize\ttfamily \label{_global_header_8hpp_ad51ded0bbd705f02f73fc60c0b721ced} 
-\#define BLOCK\+\_\+\+SIZE~64}
-
-
-
-\label{doc-typedef-members}
-\Hypertarget{_global_header_8hpp_doc-typedef-members}
-\doxysubsection{Typedef Documentation}
-\Hypertarget{_global_header_8hpp_aa918a75369e273ba410b034cd2ced87b}\index{GlobalHeader.hpp@{GlobalHeader.hpp}!int16@{int16}}
-\index{int16@{int16}!GlobalHeader.hpp@{GlobalHeader.hpp}}
-\doxysubsubsection{\texorpdfstring{int16}{int16}}
-{\footnotesize\ttfamily \label{_global_header_8hpp_aa918a75369e273ba410b034cd2ced87b} 
-using \mbox{\hyperlink{_global_header_8hpp_aa918a75369e273ba410b034cd2ced87b}{int16}} = int16\+\_\+t}
-
-\Hypertarget{_global_header_8hpp_a3271a6f688eb2ba4047a2982ff49919a}\index{GlobalHeader.hpp@{GlobalHeader.hpp}!int32@{int32}}
-\index{int32@{int32}!GlobalHeader.hpp@{GlobalHeader.hpp}}
-\doxysubsubsection{\texorpdfstring{int32}{int32}}
-{\footnotesize\ttfamily \label{_global_header_8hpp_a3271a6f688eb2ba4047a2982ff49919a} 
-using \mbox{\hyperlink{_global_header_8hpp_a3271a6f688eb2ba4047a2982ff49919a}{int32}} = int32\+\_\+t}
-
-\Hypertarget{_global_header_8hpp_ad2d958ccdb69773a12a7cb71d87a412e}\index{GlobalHeader.hpp@{GlobalHeader.hpp}!int64@{int64}}
-\index{int64@{int64}!GlobalHeader.hpp@{GlobalHeader.hpp}}
-\doxysubsubsection{\texorpdfstring{int64}{int64}}
-{\footnotesize\ttfamily \label{_global_header_8hpp_ad2d958ccdb69773a12a7cb71d87a412e} 
-using \mbox{\hyperlink{_global_header_8hpp_ad2d958ccdb69773a12a7cb71d87a412e}{int64}} = int64\+\_\+t}
-
-\Hypertarget{_global_header_8hpp_a3626f2f93183532b6e8b19234cc5c4d3}\index{GlobalHeader.hpp@{GlobalHeader.hpp}!int8@{int8}}
-\index{int8@{int8}!GlobalHeader.hpp@{GlobalHeader.hpp}}
-\doxysubsubsection{\texorpdfstring{int8}{int8}}
-{\footnotesize\ttfamily \label{_global_header_8hpp_a3626f2f93183532b6e8b19234cc5c4d3} 
-using \mbox{\hyperlink{_global_header_8hpp_a3626f2f93183532b6e8b19234cc5c4d3}{int8}} = int8\+\_\+t}
-
-\Hypertarget{_global_header_8hpp_aa720ba8c0d1dcc513c82c51d3f6e9995}\index{GlobalHeader.hpp@{GlobalHeader.hpp}!uint16@{uint16}}
-\index{uint16@{uint16}!GlobalHeader.hpp@{GlobalHeader.hpp}}
-\doxysubsubsection{\texorpdfstring{uint16}{uint16}}
-{\footnotesize\ttfamily \label{_global_header_8hpp_aa720ba8c0d1dcc513c82c51d3f6e9995} 
-using \mbox{\hyperlink{_global_header_8hpp_aa720ba8c0d1dcc513c82c51d3f6e9995}{uint16}} = uint16\+\_\+t}
-
-\Hypertarget{_global_header_8hpp_a5522c54735d837fae7d6ba026b858441}\index{GlobalHeader.hpp@{GlobalHeader.hpp}!uint32@{uint32}}
-\index{uint32@{uint32}!GlobalHeader.hpp@{GlobalHeader.hpp}}
-\doxysubsubsection{\texorpdfstring{uint32}{uint32}}
-{\footnotesize\ttfamily \label{_global_header_8hpp_a5522c54735d837fae7d6ba026b858441} 
-using \mbox{\hyperlink{_global_header_8hpp_a5522c54735d837fae7d6ba026b858441}{uint32}} = uint32\+\_\+t}
-
-\Hypertarget{_global_header_8hpp_aca0ba831b19773ec091e57f5cf76a1fb}\index{GlobalHeader.hpp@{GlobalHeader.hpp}!uint64@{uint64}}
-\index{uint64@{uint64}!GlobalHeader.hpp@{GlobalHeader.hpp}}
-\doxysubsubsection{\texorpdfstring{uint64}{uint64}}
-{\footnotesize\ttfamily \label{_global_header_8hpp_aca0ba831b19773ec091e57f5cf76a1fb} 
-using \mbox{\hyperlink{_global_header_8hpp_aca0ba831b19773ec091e57f5cf76a1fb}{uint64}} = uint64\+\_\+t}
-
-\Hypertarget{_global_header_8hpp_aa17fc6cc2c9a4ad80e9fcdd3f64320e1}\index{GlobalHeader.hpp@{GlobalHeader.hpp}!uint8@{uint8}}
-\index{uint8@{uint8}!GlobalHeader.hpp@{GlobalHeader.hpp}}
-\doxysubsubsection{\texorpdfstring{uint8}{uint8}}
-{\footnotesize\ttfamily \label{_global_header_8hpp_aa17fc6cc2c9a4ad80e9fcdd3f64320e1} 
-using \mbox{\hyperlink{_global_header_8hpp_aa17fc6cc2c9a4ad80e9fcdd3f64320e1}{uint8}} = uint8\+\_\+t}
-

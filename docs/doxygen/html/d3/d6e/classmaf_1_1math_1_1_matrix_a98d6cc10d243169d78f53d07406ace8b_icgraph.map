@@ -1,15 +1,19 @@
 <map id="maf::math::Matrix::column_count" name="maf::math::Matrix::column_count">
-<area shape="rect" id="Node000001" title="Gets the number of columns." alt="" coords="188,169,320,210"/>
-<area shape="rect" id="Node000002" href="$d4/d02/namespacemaf_1_1math.html#a3d4733be1cd68ede07a9c2de6728b2d7" title="Checks if two matrices are element&#45;wise equal within a tolerance." alt="" coords="8,5,137,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="228,158,188,110,138,61,119,49,122,44,141,57,192,106,232,155"/>
-<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a74bd8dca601f691a7ec0b1eabf11c18d" title="Standard algebraic matrix multiplication (A * B)." alt="" coords="6,71,139,111"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="203,163,138,127,115,114,117,110,141,122,206,159"/>
-<area shape="rect" id="Node000004" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a0440e67c7abf25ef0f37d8d96e9e5cd4" title="Matrix&#45;Vector multiplication (Matrix * column_vector)." alt="" coords="6,136,139,177"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="172,177,139,171,140,166,173,172"/>
-<area shape="rect" id="Node000005" href="$de/d35/classmaf_1_1math_1_1_vector.html#a3f7dfd09c96426650c80548b86804450" title=" " alt="" coords="5,201,140,242"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="173,207,141,212,140,207,172,201"/>
-<area shape="rect" id="Node000006" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aeb756ee209272516a931a8ff9fccbcac" title="Element&#45;wise matrix addition." alt="" coords="6,267,139,307"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="205,220,141,256,117,268,115,264,138,251,202,216"/>
-<area shape="rect" id="Node000007" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aa73a0427aeb902c0a1e40623f3c6c52b" title="Element&#45;wise matrix subtraction." alt="" coords="6,332,139,373"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="232,224,192,273,141,321,122,334,119,329,138,317,188,269,227,221"/>
+<area shape="rect" id="Node000001" title="Gets the number of columns." alt="" coords="193,235,325,275"/>
+<area shape="rect" id="Node000002" href="$d4/d02/namespacemaf_1_1math.html#a3d4733be1cd68ede07a9c2de6728b2d7" title="Checks if two matrices are element&#45;wise equal within a tolerance." alt="" coords="10,5,140,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,221,205,142,177,99,143,61,126,49,129,44,146,57,181,96,209,140,247,219"/>
+<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a0440e67c7abf25ef0f37d8d96e9e5cd4" title="Matrix&#45;Vector multiplication (Matrix * column_vector)." alt="" coords="9,71,141,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="233,224,194,175,143,126,124,114,127,110,146,122,198,171,237,220"/>
+<area shape="rect" id="Node000004" href="$de/d35/classmaf_1_1math_1_1_vector.html#a3f7dfd09c96426650c80548b86804450" title="Matrix&#45;Vector multiplication (Row Vector * Matrix)." alt="" coords="8,136,142,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="208,229,143,192,119,180,122,175,146,187,211,224"/>
+<area shape="rect" id="Node000005" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aeb756ee209272516a931a8ff9fccbcac" title="Element&#45;wise matrix addition." alt="" coords="9,201,141,242"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="177,243,141,236,142,231,178,238"/>
+<area shape="rect" id="Node000006" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#abc0451295206839219fcf5642e35ba6a" title="Element&#45;wise matrix addition assignment." alt="" coords="9,267,141,307"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="178,272,142,278,141,273,177,267"/>
+<area shape="rect" id="Node000007" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aa73a0427aeb902c0a1e40623f3c6c52b" title="Element&#45;wise matrix subtraction." alt="" coords="9,332,141,373"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="210,286,146,321,121,334,119,329,143,317,208,281"/>
+<area shape="rect" id="Node000008" href="$d4/d02/namespacemaf_1_1math.html#aa539cd7e636fe2beafd205a3b51b0311" title="Element&#45;wise scalar subtraction (scalar &#45; Matrix)." alt="" coords="5,397,145,422"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="238,290,199,339,174,364,146,387,124,399,121,394,143,382,170,360,195,336,234,286"/>
+<area shape="rect" id="Node000009" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a9a145aa09294706b54b47c4de0a10d13" title="Element&#45;wise matrix subtraction assignment." alt="" coords="9,447,141,487"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="246,291,207,363,179,402,146,437,131,448,127,444,143,433,175,399,202,360,241,288"/>
 </map>
