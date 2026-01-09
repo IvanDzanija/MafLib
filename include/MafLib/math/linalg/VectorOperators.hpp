@@ -1,6 +1,5 @@
 #ifndef VECTOR_OPERATORS_H
 #define VECTOR_OPERATORS_H
-#include "MafLib/math/linalg/AccelerateWrappers/VectorRoutines.hpp"
 #pragma once
 #include "Vector.hpp"
 
