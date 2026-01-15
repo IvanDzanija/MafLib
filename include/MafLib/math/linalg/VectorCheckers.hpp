@@ -23,6 +23,29 @@ template <Numeric T>
     return true;
 }
 
+/**
+ * @brief Checks if two Vectors are element-wise equal within a tolerance.
+ * @tparam T Numeric type of the first Vector.
+ * @tparam U Numeric type of the second Vector.
+ * @param eps The absolute tolerance for equality.
+ * @return true if sizes match and all elements are "close".
+ */
+template <Numeric T, Numeric U>
+[[nodiscard]] constexpr bool loosely_equal(const Vector<T>& first,
+                                           const Vector<U>& second,
+                                           double eps = 1e-6) {
+    size_t n = first.size();
+    if (first.size() != second.size()) {
+        return false;
+    }
+    for (size_t i = 0; i < n; ++i) {
+        if (!is_close(first[i], second[i], eps)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 }  // namespace maf::math
 
 #endif
