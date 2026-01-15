@@ -1,6 +1,0 @@
-<map id="maf::math::Vector::outer_product" name="maf::math::Vector::outer_product">
-<area shape="rect" id="Node000001" title="Outer product (Column Vector * Row Vector)." alt="" coords="5,29,140,70"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="38,29,36,19,42,10,54,5,73,3,92,5,104,11,102,16,91,10,72,8,55,10,45,14,41,20,43,28"/>
-<area shape="rect" id="Node000002" href="$de/d35/classmaf_1_1math_1_1_vector.html#aa96c8ef557852ec4425b3399e4c758c7" title="Default constructor." alt="" coords="188,29,322,70"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="140,47,172,47,172,52,140,52"/>
-</map>

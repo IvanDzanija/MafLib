@@ -1,9 +1,0 @@
-<map id="maf::math::Vector::operator&#45;" name="maf::math::Vector::operator&#45;">
-<area shape="rect" id="Node000001" title="Element&#45;wise vector subtraction (Vector &#45; Vector)." alt="" coords="5,63,140,103"/>
-<area shape="rect" id="Node000002" href="$de/d35/classmaf_1_1math_1_1_vector.html#a663a7e4b34644e198a855da680a40dc8" title="Gets the vector&#39;s orientation (ROW or COLUMN)." alt="" coords="200,5,334,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,61,184,47,185,52,141,66"/>
-<area shape="rect" id="Node000003" href="$de/d35/classmaf_1_1math_1_1_vector.html#a486da0689bba119f338f50eb5e334a1a" title="Gets the number of elements in the vector." alt="" coords="188,70,346,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="140,80,172,80,172,86,140,86"/>
-<area shape="rect" id="Node000004" href="$de/d35/classmaf_1_1math_1_1_vector.html#aa96c8ef557852ec4425b3399e4c758c7" title="Default constructor." alt="" coords="200,120,334,161"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="141,100,185,114,184,119,140,105"/>
-</map>

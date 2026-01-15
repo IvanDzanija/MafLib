@@ -1,9 +1,0 @@
-<map id="maf::math::Vector::dot_product" name="maf::math::Vector::dot_product">
-<area shape="rect" id="Node000001" title="Calculates the dot product (inner product) of two Vectors." alt="" coords="5,47,140,88"/>
-<area shape="rect" id="Node000002" href="$de/d35/classmaf_1_1math_1_1_vector.html#ac8e1222d4ef75824b94980aaf6de600f" title="Gets a mutable reference to the element at a specific index with bounds check." alt="" coords="194,5,340,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,48,198,33,200,38,141,53"/>
-<area shape="rect" id="Node000003" href="$de/d35/classmaf_1_1math_1_1_vector.html#a486da0689bba119f338f50eb5e334a1a" title="Gets the number of elements in the vector." alt="" coords="188,55,346,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="140,65,172,65,172,70,140,70"/>
-<area shape="rect" id="Node000004" href="$de/d35/classmaf_1_1math_1_1_vector.html#aa96c8ef557852ec4425b3399e4c758c7" title="Default constructor." alt="" coords="200,104,334,145"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="141,85,185,98,184,103,140,90"/>
-</map>

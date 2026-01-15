@@ -1,7 +1,0 @@
-<map id="maf::math::Matrix::size" name="maf::math::Matrix::size">
-<area shape="rect" id="Node000001" title="Gets the total number of elements (rows * cols)." alt="" coords="210,35,366,60"/>
-<area shape="rect" id="Node000002" href="$d4/d02/namespacemaf_1_1math.html#aa539cd7e636fe2beafd205a3b51b0311" title="Element&#45;wise scalar subtraction (scalar &#45; Matrix)." alt="" coords="14,5,153,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,37,153,31,154,26,194,31"/>
-<area shape="rect" id="Node000003" href="$d4/d02/namespacemaf_1_1math.html#a78bf8c3c2c4809fee2fbe6eee7a9f9d9" title="Creates a new permutation matrix from a permutation vector." alt="" coords="5,55,162,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="194,63,162,67,161,62,194,58"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="maf::math::Matrix::cast" name="maf::math::Matrix::cast">
-<area shape="rect" id="Node000001" title="Creates new matrix with same elements but different type." alt="" coords="5,35,163,60"/>
-<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aca60efe3848c6a7635c9f609ca163528" title="Gets a mutable reference to the underlying std::vector data store." alt="" coords="211,5,368,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,34,195,29,195,34,163,39"/>
-<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#afadd64902ef9d03291be6e799c38e904" title="Default constructor. Creates an empty 0x0 matrix." alt="" coords="223,55,356,96"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="163,56,208,62,207,67,163,61"/>
-</map>

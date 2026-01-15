@@ -1,5 +1,0 @@
-<map id="maf::math::Matrix::Matrix" name="maf::math::Matrix::Matrix">
-<area shape="rect" id="Node000001" title="Constructs from a std::array, filled by rows." alt="" coords="5,5,138,46"/>
-<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aca60efe3848c6a7635c9f609ca163528" title="Gets a mutable reference to the underlying std::vector data store." alt="" coords="186,13,343,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,23,170,23,170,28,138,28"/>
-</map>
