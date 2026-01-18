@@ -1,3 +1,5 @@
+#include <numeric>
+
 #include "ITest.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/math/linalg/LinAlg.hpp"
@@ -22,10 +24,12 @@ private:
 
     void should_construct_vector_of_given_size() {
         math::Vector<int> v_col(5);
+        ASSERT_SAME_TYPE(v_col, math::Vector<int>);
         ASSERT_TRUE(v_col.size() == 5);
         ASSERT_TRUE(v_col.orientation() == math::COLUMN);
 
         math::Vector<double> v_row(3, math::ROW);
+        ASSERT_SAME_TYPE(v_row, math::Vector<double>);
         ASSERT_TRUE(v_row.size() == 3);
         ASSERT_TRUE(v_row.orientation() == math::ROW);
     }
@@ -43,6 +47,7 @@ private:
     void should_construct_from_raw_data() {
         int data[3] = {10, 20, 30};
         math::Vector<int> v(3, data, math::ROW);
+        ASSERT_SAME_TYPE(v, math::Vector<int>);
         ASSERT_TRUE(v.size() == 3);
         ASSERT_TRUE(v.orientation() == math::ROW);
         ASSERT_TRUE(v[0] == 10);
@@ -64,6 +69,7 @@ private:
     void should_construct_from_std_vector_copy() {
         std::vector<int> data = {5, 10, 15};
         math::Vector<int> v(3, data);
+        ASSERT_SAME_TYPE(v, math::Vector<int>);
         ASSERT_TRUE(v.size() == 3);
         ASSERT_TRUE(v[1] == 10);
         data[1] = 99;
@@ -84,6 +90,7 @@ private:
     void should_construct_from_std_vector_move() {
         std::vector<int> data = {5, 10, 15};
         math::Vector<int> v(3, std::move(data));
+        ASSERT_SAME_TYPE(v, math::Vector<int>);
         ASSERT_TRUE(v.size() == 3);
         ASSERT_TRUE(v[1] == 10);
     }
@@ -102,6 +109,7 @@ private:
     void should_construct_from_std_array() {
         std::array<float, 3> data = {1.1f, 2.2f, 3.3f};
         math::Vector<float> v(3, data, math::ROW);
+        ASSERT_SAME_TYPE(v, math::Vector<float>);
         ASSERT_TRUE(v.size() == 3);
         ASSERT_TRUE(v.orientation() == math::ROW);
         ASSERT_TRUE(is_close(v[1], 2.2f));
@@ -232,15 +240,16 @@ private:
     void should_return_transposed_copy() {
         math::Vector<int> v_col(3, math::COLUMN);
         auto v_row = v_col.transposed();
+        ASSERT_SAME_TYPE(v_row, math::Vector<int>);
 
         ASSERT_TRUE(v_col.orientation() == math::COLUMN);
         ASSERT_TRUE(v_row.orientation() == math::ROW);
         ASSERT_TRUE(v_row.size() == 3);
     }
 
-    //    //=============================================================================
-    //    // Operators
-    //    //=============================================================================
+    //=============================================================================
+    // VECTOR OPERATORS TESTS
+    //=============================================================================
     void should_check_equality() {
         math::Vector<int> v1(2);
         v1[0] = 1;
@@ -261,9 +270,8 @@ private:
 
         ASSERT_TRUE(v1 == v2);
         ASSERT_TRUE(!(v1 == v3));
-        ASSERT_TRUE(!(v1 == v4));  // Different size
-        ASSERT_TRUE(!(v1 == v5));  // Different orientation
-        // ASSERT_TRUE(v1 == v6); // Different types -> doesn't compile
+        ASSERT_TRUE(!(v1 == v4));
+        ASSERT_TRUE(!(v1 == v5));
     }
 
     void should_perform_unary_minus() {
@@ -271,8 +279,8 @@ private:
         v[0] = 5;
         v[1] = -10;
         auto v_neg = -v;
-
-        ASSERT_TRUE(v[0] == 5);  // Original unchanged
+        ASSERT_SAME_TYPE(v_neg, math::Vector<int>);
+        ASSERT_TRUE(v[0] == 5);
         ASSERT_TRUE(v_neg[0] == -5);
         ASSERT_TRUE(v_neg[1] == 10);
     }
@@ -285,31 +293,35 @@ private:
         v2[0] = 10;
         v2[1] = 20;
         auto v_sum = v1 + v2;
-
+        ASSERT_SAME_TYPE(v_sum, math::Vector<float>);
         ASSERT_TRUE(v_sum.size() == 2);
-        ASSERT_TRUE(v_sum[0] == 11);
-        ASSERT_TRUE(v_sum[1] + 0.5F == 22.5F);
+        ASSERT_TRUE(is_close(v_sum[0], 11.0F));
+        ASSERT_TRUE(is_close(v_sum[1], 22.0F));
     }
 
-    void should_add_scalar_to_vector() {
+    void should_add_scalar_and_vector() {
         math::Vector<int> v(2);
         v[0] = 1;
         v[1] = 2;
         auto v_sum = v + 10;
+        ASSERT_SAME_TYPE(v_sum, math::Vector<int>);
         ASSERT_TRUE(v_sum[0] == 11);
         ASSERT_TRUE(v_sum[1] == 12);
 
         auto v_sum2 = 10 + v;
+        ASSERT_SAME_TYPE(v_sum2, math::Vector<int>);
         ASSERT_TRUE(v_sum2[0] == 11);
         ASSERT_TRUE(v_sum2[1] == 12);
 
         auto v_sum3 = 10.F + v;
-        ASSERT_TRUE(v_sum3[0] == 11);
-        ASSERT_TRUE(v_sum3[1] == 12);
+        ASSERT_SAME_TYPE(v_sum3, math::Vector<float>);
+        ASSERT_TRUE(is_close(v_sum3[0], 11.0F));
+        ASSERT_TRUE(is_close(v_sum3[1], 12.0F));
 
         auto v_sum4 = v + 10.F;
-        ASSERT_TRUE(v_sum4[0] + 0.5F == 11.5F);
-        ASSERT_TRUE(v_sum4[1] + 0.5F == 12.5F);
+        ASSERT_SAME_TYPE(v_sum4, math::Vector<float>);
+        ASSERT_TRUE(is_close(v_sum4[0], 11.0F));
+        ASSERT_TRUE(is_close(v_sum4[1], 12.0F));
     }
 
     void should_subtract_two_vectors() {
@@ -322,11 +334,12 @@ private:
         auto v_diff = v1 - v2;
 
         ASSERT_TRUE(v_diff.size() == 2);
-        ASSERT_TRUE(v_diff[0] + 0.5F == 9.5F);
+        ASSERT_TRUE(v_diff[0] == 9);
         ASSERT_TRUE(v_diff[1] == 18);
+        ASSERT_SAME_TYPE(v_diff, math::Vector<double>);
     }
 
-    void should_subtract_scalar_from_vector() {
+    void should_subtract_scalar_and_vector() {
         math::Vector<int> v(2);
         v[0] = 11;
         v[1] = 12;
@@ -334,12 +347,14 @@ private:
         ASSERT_TRUE(v_diff[0] == 10);
         ASSERT_TRUE(v_diff[1] == 11);
 
-        auto v_diff2 = 100 - v;
-        ASSERT_TRUE(v_diff2[0] == 89);
-        ASSERT_TRUE(v_diff2[1] == 88);
+        auto v_diff2 = 100.F - v;
+        ASSERT_TRUE(is_close(v_diff2[0], 89.0F));
+        ASSERT_TRUE(is_close(v_diff2[1], 88.0F));
+        ASSERT_SAME_TYPE(v_diff, math::Vector<int>);
+        ASSERT_SAME_TYPE(v_diff2, math::Vector<float>);
     }
 
-    void should_multiply_vector_by_scalar() {
+    void should_multiply_vector_and_scalar() {
         math::Vector<int> v(2);
         v[0] = 2;
         v[1] = 3;
@@ -348,47 +363,58 @@ private:
         ASSERT_TRUE(v_prod[1] == 15);
 
         auto v_prod2 = 5.F * v;
-        ASSERT_TRUE(v_prod2[0] + 0.5F == 10.5F);
-        ASSERT_TRUE(v_prod2[1] == 15);
+        ASSERT_TRUE(is_close(v_prod2[0], 10.0F));
+        ASSERT_TRUE(is_close(v_prod2[1], 15.0F));
+        ASSERT_SAME_TYPE(v_prod, math::Vector<int>);
+        ASSERT_SAME_TYPE(v_prod2, math::Vector<float>);
     }
 
-    //    void should_calculate_dot_product() {
-    //        math::Vector<int> v1(3);
-    //        v1[0] = 1;
-    //        v1[1] = 2;
-    //        v1[2] = 3;
-    //        math::Vector<int> v2(3);
-    //        v2[0] = 4;
-    //        v2[1] = 5;
-    //        v2[2] = 6;
-    //        // 1*4 + 2*5 + 3*6 = 4 + 10 + 18 = 32
-    //        ASSERT_TRUE(v1.dot_product(v2) == 32);
-    //    }
+    void should_calculate_dot_product() {
+        math::Vector<int> v1(3);
+        v1[0] = 1;
+        v1[1] = 2;
+        v1[2] = 3;
+        math::Vector<int> v2(3);
+        v2[0] = 4;
+        v2[1] = 5;
+        v2[2] = 6;
+        ASSERT_TRUE(v1.dot_product(v2) == 32);
+        ASSERT_TRUE(v1.transposed() * v2 == 32);
+
+        bool thrown = false;
+        try {
+            auto v3 = v1 * v2;
+        } catch (const std::invalid_argument& e) {
+            thrown = true;
+        }
+        ASSERT_TRUE(thrown);
+    }
+
+    void should_calculate_outer_product() {
+        math::Vector<int> v_col(2, math::COLUMN);
+        v_col[0] = 1;
+        v_col[1] = 2;
+        math::Vector<double> v_row(3, math::ROW);
+        v_row[0] = 3;
+        v_row[1] = 4;
+        v_row[2] = 5;
+
+        // (2x1) * (1x3) -> (2x3) Matrix
+        // [1*3, 1*4, 1*5] = [3, 4, 5]
+        // [2*3, 2*4, 2*5] = [6, 8, 10]
+        auto m = v_col.outer_product(v_row);
+        ASSERT_TRUE(m.row_count() == 2);
+        ASSERT_TRUE(m.column_count() == 3);
+        ASSERT_TRUE(m.at(0, 0) == 3);
+        ASSERT_TRUE(m.at(0, 1) == 4);
+        ASSERT_TRUE(m.at(0, 2) == 5);
+        ASSERT_TRUE(m.at(1, 0) == 6);
+        ASSERT_TRUE(m.at(1, 1) == 8);
+        ASSERT_TRUE(m.at(1, 2) == 10);
+        ASSERT_SAME_TYPE(m, math::Matrix<double>);
+    }
     //
-    //    void should_calculate_outer_product() {
-    //        math::Vector<int> v_col(2, math::Vector<int>::COLUMN);
-    //        v_col[0] = 1;
-    //        v_col[1] = 2;
-    //        math::Vector<int> v_row(3, math::Vector<int>::ROW);
-    //        v_row[0] = 3;
-    //        v_row[1] = 4;
-    //        v_row[2] = 5;
-    //
-    //        // (2x1) * (1x3) -> (2x3) Matrix
-    //        // [1*3, 1*4, 1*5] = [3, 4, 5]
-    //        // [2*3, 2*4, 2*5] = [6, 8, 10]
-    //        auto m = v_col * v_row;
-    //        ASSERT_TRUE(m.row_count() == 2);
-    //        ASSERT_TRUE(m.column_count() == 3);
-    //        ASSERT_TRUE(m.at(0, 0) == 3);
-    //        ASSERT_TRUE(m.at(0, 1) == 4);
-    //        ASSERT_TRUE(m.at(0, 2) == 5);
-    //        ASSERT_TRUE(m.at(1, 0) == 6);
-    //        ASSERT_TRUE(m.at(1, 1) == 8);
-    //        ASSERT_TRUE(m.at(1, 2) == 10);
-    //    }
-    //
-    //    void should_multiply_row_vector_by_matrix() {
+    //    void should_multiply_row_vector_and_matrix() {
     //        // (1x2) * (2x2) -> (1x2)
     //        math::Vector<int> v_row(2, math::Vector<int>::ROW);
     //        v_row[0] = 1;
@@ -409,7 +435,7 @@ private:
     //        ASSERT_TRUE(res[1] == 100);
     //    }
     //
-    //    void should_multiply_matrix_by_column_vector() {
+    //    void should_multiply_matrix_and_column_vector() {
     //        // (2x2) * (2x1) -> (2x1)
     //        math::Matrix<int> m(2, 2);
     //        m.at(0, 0) = 10;
@@ -430,7 +456,7 @@ private:
     //        ASSERT_TRUE(res[1] == 110);
     //    }
     //
-    //    void should_multiply_row_vector_by_matrix_mixed_types() {
+    //    void should_multiply_row_vector_and_matrix_mixed_types() {
     //        // (1x2) * (2x2) -> (1x2)
     //        math::Vector<int> v_row(2, math::Vector<int>::ROW);
     //        v_row[0] = 1;
@@ -451,7 +477,7 @@ private:
     //        ASSERT_TRUE(is_close(res[1], 100.5));
     //    }
     //
-    //    void should_multiply_matrix_by_column_vector_mixed_types() {
+    //    void should_multiply_matrix_and_column_vector_mixed_types() {
     //        // (2x2) * (2x1) -> (2x1)
     //        math::Matrix<double> m(2, 2);
     //        m.at(0, 0) = 10.5;
@@ -496,21 +522,20 @@ public:
         should_normalize_vector_in_place();
         should_transpose_vector_in_place();
         should_return_transposed_copy();
-        //
         //    // Operators
         should_check_equality();
         should_perform_unary_minus();
         should_add_two_vectors();
-        //    should_add_scalar_to_vector();
-        //    should_subtract_two_vectors();
-        //    should_subtract_scalar_from_vector();
-        //    should_multiply_vector_by_scalar();
-        //    should_calculate_dot_product();
-        //    should_calculate_outer_product();
-        //    should_multiply_row_vector_by_matrix();
-        //    should_multiply_matrix_by_column_vector();
-        //    should_multiply_row_vector_by_matrix_mixed_types();
-        //    should_multiply_matrix_by_column_vector_mixed_types();
+        should_add_scalar_and_vector();
+        should_subtract_two_vectors();
+        should_subtract_scalar_and_vector();
+        should_multiply_vector_and_scalar();
+        should_calculate_dot_product();
+        should_calculate_outer_product();
+        //    should_multiply_row_vector_and_matrix();
+        //    should_multiply_matrix_and_column_vector();
+        //    should_multiply_row_vector_and_matrix_mixed_types();
+        //    should_multiply_matrix_and_column_vector_mixed_types();
         //    std::cout << "--- Operator tests passed ---" << std::endl;
 
         std::cout << "=== All Vector tests passed ===" << std::endl;

@@ -34,13 +34,13 @@ template <Numeric U>
     Matrix<R> result(_rows, _cols);
 
     if (_data.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < _data.size(); ++i) {
             result.data()[i] =
                 static_cast<R>(_data[i]) + static_cast<R>(other.data()[i]);
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < _data.size(); ++i) {
             result.data()[i] =
                 static_cast<R>(_data[i]) + static_cast<R>(other.data()[i]);
@@ -59,12 +59,12 @@ template <Numeric U>
     R r_scalar = static_cast<R>(scalar);
 
     if (_data.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < _data.size(); ++i) {
             result.data()[i] = static_cast<R>(_data[i]) + r_scalar;
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < _data.size(); ++i) {
             result.data()[i] = static_cast<R>(_data[i]) + r_scalar;
         }
@@ -90,12 +90,12 @@ Matrix<T>& Matrix<T>::operator+=(const Matrix<U>& other) {
     }
 
     if (_data.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < _data.size(); ++i) {
             _data[i] += static_cast<T>(other.data()[i]);
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < _data.size(); ++i) {
             _data[i] += static_cast<T>(other.data()[i]);
         }
@@ -113,12 +113,12 @@ Matrix<T>& Matrix<T>::operator+=(const U& scalar) noexcept {
     R r_scalar = static_cast<R>(scalar);
 
     if (_data.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < _data.size(); ++i) {
             _data[i] += r_scalar;
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < _data.size(); ++i) {
             _data[i] += r_scalar;
         }
@@ -138,13 +138,13 @@ template <Numeric U>
 
     Matrix<R> result(_rows, _cols);
     if (_data.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < _data.size(); ++i) {
             result.data()[i] =
                 static_cast<R>(_data[i]) - static_cast<R>(other.data()[i]);
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < _data.size(); ++i) {
             result.data()[i] =
                 static_cast<R>(_data[i]) - static_cast<R>(other.data()[i]);
@@ -163,12 +163,12 @@ template <Numeric U>
     R r_scalar = static_cast<R>(scalar);
 
     if (_data.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < _data.size(); ++i) {
             result.data()[i] = static_cast<R>(_data[i]) - r_scalar;
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < _data.size(); ++i) {
             result.data()[i] = static_cast<R>(_data[i]) - r_scalar;
         }
@@ -189,12 +189,12 @@ template <Numeric T, Numeric U>
     R r_scalar = static_cast<R>(scalar);
 
     if (matrix.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < matrix.size(); ++i) {
             result.data()[i] = r_scalar - static_cast<R>(matrix.data()[i]);
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < matrix.size(); ++i) {
             result.data()[i] = r_scalar - static_cast<R>(matrix.data()[i]);
         }
@@ -212,12 +212,12 @@ Matrix<T>& Matrix<T>::operator-=(const Matrix<U>& other) {
     }
 
     if (_data.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < _data.size(); ++i) {
             _data[i] -= static_cast<T>(other.data()[i]);
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < _data.size(); ++i) {
             _data[i] -= static_cast<T>(other.data()[i]);
         }
@@ -235,12 +235,12 @@ Matrix<T>& Matrix<T>::operator-=(const U& scalar) noexcept {
     R r_scalar = static_cast<R>(scalar);
 
     if (_data.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < _data.size(); ++i) {
             _data[i] -= r_scalar;
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < _data.size(); ++i) {
             _data[i] -= r_scalar;
         }
@@ -258,12 +258,12 @@ template <Numeric U>
     R r_scalar = static_cast<R>(scalar);
 
     if (_data.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < _data.size(); ++i) {
             result.data()[i] = static_cast<R>(_data[i]) * r_scalar;
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < _data.size(); ++i) {
             result.data()[i] = static_cast<R>(_data[i]) * r_scalar;
         }
@@ -288,12 +288,12 @@ Matrix<T>& Matrix<T>::operator*=(const U& scalar) noexcept {
     R r_scalar = static_cast<R>(scalar);
 
     if (_data.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < _data.size(); ++i) {
             _data[i] *= r_scalar;
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < _data.size(); ++i) {
             _data[i] *= r_scalar;
         }
@@ -311,12 +311,12 @@ template <Numeric U>
     R r_scalar_inv = R(1) / static_cast<R>(scalar);
 
     if (_data.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < _data.size(); ++i) {
             result.data()[i] = static_cast<R>(_data[i]) * r_scalar_inv;
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < _data.size(); ++i) {
             result.data()[i] = static_cast<R>(_data[i]) * r_scalar_inv;
         }
@@ -337,12 +337,12 @@ template <Numeric T, Numeric U>
     R r_scalar = static_cast<R>(scalar);
 
     if (matrix.size() > OMP_LINEAR_LIMIT) {
-        #pragma omp parallel for
+#pragma omp parallel for
         for (size_t i = 0; i < matrix.size(); ++i) {
             result.data()[i] = r_scalar / static_cast<R>(matrix.data()[i]);
         }
     } else {
-        #pragma omp simd
+#pragma omp simd
         for (size_t i = 0; i < matrix.size(); ++i) {
             result.data()[i] = r_scalar / static_cast<R>(matrix.data()[i]);
         }
@@ -360,12 +360,12 @@ Matrix<T>& Matrix<T>::operator/=(const U& scalar) noexcept {
         R r_scalar_inv = R(1) / static_cast<R>(scalar);
 
         if (_data.size() > OMP_LINEAR_LIMIT) {
-            #pragma omp parallel for
+#pragma omp parallel for
             for (size_t i = 0; i < _data.size(); ++i) {
                 _data[i] *= r_scalar_inv;
             }
         } else {
-            #pragma omp simd
+#pragma omp simd
             for (size_t i = 0; i < _data.size(); ++i) {
                 _data[i] *= r_scalar_inv;
             }
@@ -374,12 +374,12 @@ Matrix<T>& Matrix<T>::operator/=(const U& scalar) noexcept {
         R r_scalar = static_cast<R>(scalar);
 
         if (_data.size() > OMP_LINEAR_LIMIT) {
-            #pragma omp parallel for
+#pragma omp parallel for
             for (size_t i = 0; i < _data.size(); ++i) {
                 _data[i] /= r_scalar;
             }
         } else {
-            #pragma omp simd
+#pragma omp simd
             for (size_t i = 0; i < _data.size(); ++i) {
                 _data[i] /= r_scalar;
             }

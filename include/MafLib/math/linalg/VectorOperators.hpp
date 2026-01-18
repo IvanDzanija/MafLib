@@ -11,6 +11,8 @@ template <Numeric T>
     if (_orientation != other._orientation || size() != other.size()) {
         return false;
     }
+    // maybe loop over data and actually compare so different types give actually the
+    // same result
     return _data == other._data;
 }
 
@@ -291,8 +293,6 @@ template <Numeric T, Numeric U>
     return vec * scalar;
 }
 
-// TODO: add tests below
-
 // Vector * Scalar
 template <Numeric T>
 template <Numeric U>
@@ -375,10 +375,10 @@ template <Numeric U>
     size_t n = _data.size();
     size_t m = other.size();
 
-    if (_orientation == other._orientation) {
+    if (_orientation == other.orientation()) {
         // 1x1 x 1x1 vector multiplication
         if (n == 1 && m == 1) {
-            return Matrix(1, 1, {_data[0] * other[0]});
+            return Matrix<R>(1, 1, {_data[0] * other[0]});
         }
         throw std::invalid_argument("Vector dimensions do not match!");
     }
@@ -418,7 +418,8 @@ template <Numeric U>
     }
 }
 
-// TODO: Check if makes sense to use BLAS on routines below
+// TODO: USE BLAS HERE ITS FASTER
+// TODO: add tests below
 // Vector * Matrix -> Vector
 
 template <Numeric T>
@@ -447,7 +448,98 @@ auto Vector<T>::operator*(const Matrix<U>& other) const {
     }
     return result;
 }
-// TODO:  add / operator overloads
+
+// Vector / scalar
+template <Numeric T>
+template <Numeric U>
+[[nodiscard]] auto Vector<T>::operator/(const U& scalar) const noexcept {
+    using R = std::common_type_t<T, U, double>;  // Forces double if both are ints
+
+    R r_scalar_inv = R(1) / static_cast<R>(scalar);
+    size_t n = _data.size();
+
+    Vector<R> result(n, _orientation);
+    if (n > OMP_LINEAR_LIMIT) {
+#pragma omp parallel for
+        for (size_t i = 0; i < n; ++i) {
+            result[i] = static_cast<R>(_data[i]) * r_scalar_inv;
+        }
+    } else {
+#pragma omp simd
+        for (size_t i = 0; i < n; ++i) {
+            result[i] = static_cast<R>(_data[i]) * r_scalar_inv;
+        }
+    }
+    return result;
+}
+
+/**
+ * @brief Element-wise scalar division (scalar / Vector).
+ * @tparam U An arithmetic scalar type.
+ * @param scalar The scalar value.
+ * @param vec The vector.
+ * @return A new Vector of the common, promoted type.
+ */
+template <Numeric T, Numeric U>
+[[nodiscard]] auto operator/(const U& scalar, const Vector<T>& vec) noexcept {
+    using R = std::common_type_t<T, U, double>;  // Forces double if both are ints
+
+    R r_scalar = static_cast<R>(scalar);
+    size_t n = vec.size();
+
+    Vector<R> result(n, vec.orientation());
+    if (n > OMP_LINEAR_LIMIT) {
+#pragma omp parallel for
+        for (size_t i = 0; i < n; ++i) {
+            result[i] = r_scalar / static_cast<R>(vec[i]);
+        }
+    } else {
+#pragma omp simd
+        for (size_t i = 0; i < n; ++i) {
+            result[i] = r_scalar / static_cast<R>(vec[i]);
+        }
+    }
+    return result;
+}
+
+// Vector /= scalar
+template <Numeric T>
+template <Numeric U>
+[[nodiscard]] auto Vector<T>::operator/=(const U& scalar) const noexcept {
+    using R = std::common_type_t<T, U>;
+
+    size_t n = _data.size();
+    if constexpr (std::is_floating_point_v<R>) {
+        R r_scalar_inv = R(1) / static_cast<R>(scalar);
+
+        if (n > OMP_LINEAR_LIMIT) {
+#pragma omp parallel for
+            for (size_t i = 0; i < n; ++i) {
+                _data[i] *= r_scalar_inv;
+            }
+        } else {
+#pragma omp simd
+            for (size_t i = 0; i < n; ++i) {
+                _data[i] *= r_scalar_inv;
+            }
+        }
+    } else {
+        R r_scalar = static_cast<R>(scalar);
+
+        if (n > OMP_LINEAR_LIMIT) {
+#pragma omp parallel for
+            for (size_t i = 0; i < n; ++i) {
+                _data[i] /= r_scalar;
+            }
+        } else {
+#pragma omp simd
+            for (size_t i = 0; i < n; ++i) {
+                _data[i] /= r_scalar;
+            }
+        }
+    }
+    return *this;
+}
 
 }  // namespace maf::math
 

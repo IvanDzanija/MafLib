@@ -381,9 +381,6 @@ public:
     template <Numeric U>
     [[nodiscard]] auto operator*(const Vector<U>& other) const;
 
-    // TODO: Refactoring and stopped here. Continue from here
-    // COMPARE BLAS ROUTINES TO OMP ONES
-
     /**
      * @brief Matrix-Vector multiplication (Row Vector * Matrix).
      * @details This must be a (1 x N) * (N x M) multiplication.
@@ -395,6 +392,24 @@ public:
      */
     template <Numeric U>
     [[nodiscard]] auto operator*(const Matrix<U>& other) const;
+
+    /**
+     * @brief Element-wise scalar division (Vector / scalar).
+     * @tparam U An arithmetic scalar type.
+     * @param scalar The scalar value to divide by.
+     * @return A new Vector of the common, promoted type.
+     */
+    template <Numeric U>
+    [[nodiscard]] auto operator/(const U& scalar) const noexcept;
+
+    /**
+     * @brief Element-wise scalar division assignment (Vector / scalar).
+     * @tparam U An arithmetic scalar type.
+     * @param scalar The scalar value to divide by.
+     * @attention This method doesn't cast the Vector if U is a broader type.
+     */
+    template <Numeric U>
+    [[nodiscard]] auto operator/=(const U& scalar) const noexcept;
 
     // --- Printing and debugging ---
 

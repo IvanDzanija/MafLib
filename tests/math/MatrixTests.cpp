@@ -215,15 +215,20 @@ private:
     void should_cast_int_matrix_to_float() {
         math::Matrix<int> m_int(2, 2, {1, 2, 3, 4});
         auto m_float = m_int.cast<float>();
+        ASSERT_SAME_TYPE(m_float, math::Matrix<float>);
 
         ASSERT_TRUE(m_float.row_count() == 2);
         ASSERT_TRUE(m_float.column_count() == 2);
-        ASSERT_TRUE(is_close(m_float.at(0, 0) + 0.5f, 1.5f));
+        ASSERT_TRUE(is_close(m_float.at(0, 0), 1.0f));
+        ASSERT_TRUE(is_close(m_float.at(0, 1), 2.0f));
+        ASSERT_TRUE(is_close(m_float.at(1, 0), 3.0f));
+        ASSERT_TRUE(is_close(m_float.at(1, 1), 4.0f));
     }
 
     void should_cast_float_matrix_to_int() {
         math::Matrix<float> m_float(2, 3, {1.7f, 2.3f, 3.9f, 4.1f, 5.5f, 6.8f});
         auto m_int = m_float.cast<int>();
+        ASSERT_SAME_TYPE(m_int, math::Matrix<int>);
 
         ASSERT_TRUE(m_int.row_count() == 2);
         ASSERT_TRUE(m_int.column_count() == 3);
@@ -238,13 +243,14 @@ private:
     void should_cast_int_matrix_to_double() {
         math::Matrix<int> m_int(3, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
         auto m_double = m_int.cast<double>();
+        ASSERT_SAME_TYPE(m_double, math::Matrix<double>);
 
         ASSERT_TRUE(m_double.row_count() == 3);
         ASSERT_TRUE(m_double.column_count() == 3);
         for (size_t i = 0; i < 3; ++i) {
             for (size_t j = 0; j < 3; ++j) {
-                ASSERT_TRUE(is_close(m_double.at(i, j) + 0.5f,
-                                     static_cast<double>(m_int.at(i, j)) + 0.5f));
+                ASSERT_TRUE(
+                    is_close(m_double.at(i, j), static_cast<double>(m_int.at(i, j))));
             }
         }
     }
@@ -252,6 +258,7 @@ private:
     void should_preserve_matrix_properties_after_cast() {
         auto m_int = math::identity_matrix<int>(4);
         auto m_double = m_int.cast<double>();
+        ASSERT_SAME_TYPE(m_double, math::Matrix<double>);
 
         ASSERT_TRUE(m_double.is_square());
         ASSERT_TRUE(m_double.is_diagonal());
@@ -263,6 +270,7 @@ private:
     void should_cast_negative_values_correctly() {
         math::Matrix<int> m_int(2, 2, {-1, -2, -3, -4});
         auto m_float = m_int.cast<float>();
+        ASSERT_SAME_TYPE(m_float, math::Matrix<float>);
 
         ASSERT_TRUE(is_close(m_float.at(0, 0), -1.0f));
         ASSERT_TRUE(is_close(m_float.at(0, 1), -2.0f));
@@ -284,6 +292,7 @@ private:
         auto m_double = m_int.cast<double>();
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> elapsed = end - start;
+        ASSERT_SAME_TYPE(m_double, math::Matrix<double>);
 
         ASSERT_TRUE(is_close(m_double.at(0, 0), 0.0));
         ASSERT_TRUE(is_close(m_double.at(10, 10), 1010.0));
@@ -298,6 +307,7 @@ private:
         math::Matrix<int> m_int(2, 2, {1, 2, 3, 4});
 
         auto result = m_int.cast<double>() * 2.5;
+        ASSERT_SAME_TYPE(result, math::Matrix<double>);
 
         ASSERT_TRUE(is_close(result.at(0, 0), 2.5));
         ASSERT_TRUE(is_close(result.at(0, 1), 5.0));
@@ -310,6 +320,7 @@ private:
         math::Matrix<int> b(2, 2, {5, 6, 7, 8});
 
         auto c = (a + b).cast<float>();
+        ASSERT_SAME_TYPE(c, math::Matrix<float>);
 
         ASSERT_TRUE(is_close(c.at(0, 0), 6.0f));
         ASSERT_TRUE(is_close(c.at(0, 1), 8.0f));
@@ -386,6 +397,8 @@ private:
         math::Matrix<float> c(2, 2, {1.5, 2.5, 3.5, 4.5});
         auto d = a + b;
         auto e = d + c;
+        ASSERT_SAME_TYPE(d, math::Matrix<int>);
+        ASSERT_SAME_TYPE(e, math::Matrix<float>);
         ASSERT_TRUE(d.at(0, 0) == 11);
         ASSERT_TRUE(d.at(1, 1) == 44);
         ASSERT_TRUE(e.at(0, 0) == 12.5);
@@ -399,6 +412,9 @@ private:
         auto c = a + 10;
         auto d = a + 4.5;
         auto e = 4.5 + a;
+        ASSERT_SAME_TYPE(c, math::Matrix<int>);
+        ASSERT_SAME_TYPE(d, math::Matrix<double>);
+        ASSERT_SAME_TYPE(e, math::Matrix<double>);
         ASSERT_TRUE(c.at(0, 0) == 11);
         ASSERT_TRUE(c.at(0, 1) == 12);
         ASSERT_TRUE(c.at(1, 0) == 13);
@@ -413,9 +429,8 @@ private:
     void should_add_assign_matrix() {
         math::Matrix<float> a(2, 2, {1.5f, 2.5f, 3.5f, 4.5f});
         math::Matrix<int> b(2, 2, {10, 20, 30, 40});
-
         a += b;
-
+        ASSERT_SAME_TYPE(a, math::Matrix<float>);
         ASSERT_TRUE(is_close(a.at(0, 0), 11.5f));
         ASSERT_TRUE(is_close(a.at(0, 1), 22.5f));
         ASSERT_TRUE(is_close(a.at(1, 0), 33.5f));
@@ -424,9 +439,8 @@ private:
 
     void should_add_assign_scalar() {
         math::Matrix<int> a(2, 2, {1, 2, 3, 4});
-
         a += 10;
-
+        ASSERT_SAME_TYPE(a, math::Matrix<int>);
         ASSERT_TRUE(a.at(0, 0) == 11);
         ASSERT_TRUE(a.at(0, 1) == 12);
         ASSERT_TRUE(a.at(1, 0) == 13);
@@ -434,12 +448,14 @@ private:
 
         math::Matrix<double> b(2, 2, {1.5, 2.5, 3.5, 4.5});
         b += 0.5;
+        ASSERT_SAME_TYPE(b, math::Matrix<double>);
         ASSERT_TRUE(is_close(b.at(0, 0), 2.0));
         ASSERT_TRUE(is_close(b.at(0, 1), 3.0));
         ASSERT_TRUE(is_close(b.at(1, 0), 4.0));
         ASSERT_TRUE(is_close(b.at(1, 1), 5.0));
 
         b += 10;
+        ASSERT_SAME_TYPE(b, math::Matrix<double>);
         ASSERT_TRUE(is_close(b.at(0, 0), 12.0));
         ASSERT_TRUE(is_close(b.at(1, 1), 15.0));
     }
@@ -450,6 +466,8 @@ private:
         math::Matrix<float> c(2, 2, {1.5, 2.5, 3.5, 4.5});
         auto d = b - a;
         auto e = b - c;
+        ASSERT_SAME_TYPE(d, math::Matrix<int>);
+        ASSERT_SAME_TYPE(e, math::Matrix<float>);
         ASSERT_TRUE(d.at(0, 0) == 9);
         ASSERT_TRUE(d.at(1, 1) == 36);
         ASSERT_TRUE(e.at(0, 0) == 8.5);
@@ -463,6 +481,9 @@ private:
         auto c = a - 10;
         auto d = a - 4.5;
         auto e = 4.5 - a;
+        ASSERT_SAME_TYPE(c, math::Matrix<int>);
+        ASSERT_SAME_TYPE(d, math::Matrix<double>);
+        ASSERT_SAME_TYPE(e, math::Matrix<double>);
         ASSERT_TRUE(c.at(0, 0) == -9);
         ASSERT_TRUE(c.at(0, 1) == -8);
         ASSERT_TRUE(c.at(1, 0) == -7);
@@ -480,7 +501,7 @@ private:
         math::Matrix<int> b(2, 2, {10, 20, 30, 40});
 
         a -= b;
-
+        ASSERT_SAME_TYPE(a, math::Matrix<float>);
         ASSERT_TRUE(is_close(a.at(0, 0), 1.5f));
         ASSERT_TRUE(is_close(a.at(0, 1), 2.5f));
         ASSERT_TRUE(is_close(a.at(1, 0), 3.5f));
@@ -491,7 +512,7 @@ private:
         math::Matrix<int> a(2, 2, {11, 12, 13, 14});
 
         a -= 10;
-
+        ASSERT_SAME_TYPE(a, math::Matrix<int>);
         ASSERT_TRUE(a.at(0, 0) == 1);
         ASSERT_TRUE(a.at(0, 1) == 2);
         ASSERT_TRUE(a.at(1, 0) == 3);
@@ -499,12 +520,14 @@ private:
 
         math::Matrix<double> b(2, 2, {12.0, 13.0, 14.0, 15.0});
         b -= 0.5;
+        ASSERT_SAME_TYPE(b, math::Matrix<double>);
         ASSERT_TRUE(is_close(b.at(0, 0), 11.5));
         ASSERT_TRUE(is_close(b.at(0, 1), 12.5));
         ASSERT_TRUE(is_close(b.at(1, 0), 13.5));
         ASSERT_TRUE(is_close(b.at(1, 1), 14.5));
 
         b -= 10;
+        ASSERT_SAME_TYPE(b, math::Matrix<double>);
         ASSERT_TRUE(is_close(b.at(0, 0), 1.5));
         ASSERT_TRUE(is_close(b.at(1, 1), 4.5));
     }
@@ -512,18 +535,21 @@ private:
     void should_multiply_matrix_and_scalar() {
         math::Matrix<int> a(2, 2, {1, 2, -3, 4});
         auto b = a * 2.0;
+        ASSERT_SAME_TYPE(b, math::Matrix<double>);
         ASSERT_TRUE(is_close(b.at(0, 0), 2.0));
         ASSERT_TRUE(is_close(b.at(0, 1), 4.0));
         ASSERT_TRUE(is_close(b.at(1, 0), -6.0));
         ASSERT_TRUE(is_close(b.at(1, 1), 8.0));
 
         auto c = 2 * a;
+        ASSERT_SAME_TYPE(c, math::Matrix<int>);
         ASSERT_TRUE(is_close(c.at(0, 0), 2.0));
         ASSERT_TRUE(is_close(c.at(0, 1), 4.0));
         ASSERT_TRUE(is_close(c.at(1, 0), -6.0));
         ASSERT_TRUE(is_close(c.at(1, 1), 8.0));
 
         auto d = a * 2.5f;
+        ASSERT_SAME_TYPE(d, math::Matrix<float>);
         ASSERT_TRUE(is_close(d.at(0, 0), 2.5f));
         ASSERT_TRUE(is_close(d.at(1, 1), 10.0f));
     }
@@ -531,13 +557,13 @@ private:
     void should_multiply_assign_scalar() {
         math::Matrix<int> a(2, 2, {1, 2, 3, 4});
         a *= 2.5f;
-        a.print();
-
+        ASSERT_SAME_TYPE(a, math::Matrix<int>);
         ASSERT_TRUE(a.at(0, 0) == 2);
         ASSERT_TRUE(a.at(1, 1) == 10);
 
         math::Matrix<double> b(2, 2, {1.0, 2.0, 3.0, 4.0});
         b *= 0.5;
+        ASSERT_SAME_TYPE(b, math::Matrix<double>);
         ASSERT_TRUE(is_close(b.at(0, 0), 0.5));
         ASSERT_TRUE(is_close(b.at(1, 1), 2.0));
     }
@@ -545,20 +571,19 @@ private:
     void should_divide_matrix_and_scalar() {
         math::Matrix<int> a(2, 2, {1, 2, 3, 4});
         auto b = a / 2;
-        b.print();
-
+        ASSERT_SAME_TYPE(b, math::Matrix<double>);
         ASSERT_TRUE(is_close(b.at(0, 0), 0.5));
         ASSERT_TRUE(is_close(b.at(1, 1), 2.0));
 
         math::Matrix<float> c(2, 2, {1.0f, 2.0f, 3.0f, 4.0f});
         auto d = c / 0.5;
-
+        ASSERT_SAME_TYPE(d, math::Matrix<double>);
         ASSERT_TRUE(is_close(d.at(0, 0), 2.0));
         ASSERT_TRUE(is_close(d.at(1, 1), 8.0));
 
         math::Matrix<int> e(2, 2, {1, 2, 4, 8});
         auto f = 10.0 / e;
-
+        ASSERT_SAME_TYPE(f, math::Matrix<double>);
         ASSERT_TRUE(is_close(f.at(0, 0), 10.0));
         ASSERT_TRUE(is_close(f.at(0, 1), 5.0));
         ASSERT_TRUE(is_close(f.at(1, 0), 2.5));
@@ -568,18 +593,20 @@ private:
     void should_divide_assign_scalar() {
         math::Matrix<int> a(2, 2, {10, 20, 30, 40});
         a /= 3;
+        ASSERT_SAME_TYPE(a, math::Matrix<int>);
         ASSERT_TRUE(a.at(0, 0) == 3);
         ASSERT_TRUE(a.at(1, 1) == 13);
 
         math::Matrix<float> b(2, 2, {1.0f, 2.0f, 3.0f, 4.0f});
         b /= 2.0f;
+        ASSERT_SAME_TYPE(b, math::Matrix<float>);
         ASSERT_TRUE(is_close(b.at(0, 0), 0.5f));
         ASSERT_TRUE(is_close(b.at(1, 1), 2.0f));
 
         math::Matrix<float> c(2, 2, {5.0f, 10.0f, 15.0f, 20.0f});
         c /= 2.0;
+        ASSERT_SAME_TYPE(c, math::Matrix<float>);
         ASSERT_TRUE(is_close(c.at(0, 0), 2.5f));
-        static_assert(std::is_same_v<typename decltype(c)::value_type, float>);
     }
 
     void should_multiply_matrices() {
@@ -594,6 +621,7 @@ private:
                                        4 * 1.5 + 5 * 2.0 + 6 * 1.0});
 
         auto result = a * b;
+        ASSERT_SAME_TYPE(result, math::Matrix<double>);
         ASSERT_TRUE(result.row_count() == 2 && result.column_count() == 2);
         for (size_t i = 0; i < 2; ++i) {
             for (size_t j = 0; j < 2; ++j) {
@@ -612,6 +640,7 @@ private:
                                      math::COLUMN);
 
         auto result = m * v;
+        ASSERT_SAME_TYPE(result, math::Vector<float>);
         ASSERT_TRUE(result.size() == 2);
         for (size_t i = 0; i < 2; ++i) {
             ASSERT_TRUE(is_close(result.at(i), expected.at(i)));
@@ -851,8 +880,7 @@ private:
 
         auto L = cholesky(m_int);
 
-        static_assert(std::is_same_v<decltype(L), math::Matrix<double>>,
-                      "Integer matrix should auto-promote to double");
+        ASSERT_SAME_TYPE(L, math::Matrix<double>);
 
         auto LLt = L * L.transposed();
         auto m_double = m_int.cast<double>();
@@ -864,8 +892,7 @@ private:
             3, 3, {4.0f, 12.0f, -16.0f, 12.0f, 37.0f, -43.0f, -16.0f, -43.0f, 98.0f});
         auto L = cholesky(m_float);
 
-        static_assert(std::is_same_v<decltype(L), math::Matrix<float>>,
-                      "Float matrix should return float");
+        ASSERT_SAME_TYPE(L, math::Matrix<float>);
 
         auto LLt = L * L.transposed();
         ASSERT_TRUE(math::loosely_equal(LLt, m_float));
@@ -877,8 +904,7 @@ private:
 
         auto L = cholesky(m_double);
 
-        static_assert(std::is_same_v<decltype(L), math::Matrix<double>>,
-                      "Double matrix should return double");
+        ASSERT_SAME_TYPE(L, math::Matrix<double>);
 
         auto LLt = L * L.transposed();
         ASSERT_TRUE(math::loosely_equal(LLt, m_double));
@@ -889,8 +915,7 @@ private:
 
         auto L = cholesky<float>(m_int);
 
-        static_assert(std::is_same_v<decltype(L), math::Matrix<float>>,
-                      "Explicit float template should return float");
+        ASSERT_SAME_TYPE(L, math::Matrix<float>);
 
         auto LLt = L * L.transposed();
         auto m_float = m_int.cast<float>();
@@ -903,8 +928,7 @@ private:
 
         auto L = cholesky<double>(m_float);
 
-        static_assert(std::is_same_v<decltype(L), math::Matrix<double>>,
-                      "Explicit double template should return double");
+        ASSERT_SAME_TYPE(L, math::Matrix<double>);
 
         auto LLt = L * L.transposed();
         auto m_double = m_float.cast<double>();
@@ -916,7 +940,7 @@ private:
 
         auto L = cholesky(I_int);
 
-        static_assert(std::is_same_v<decltype(L), math::Matrix<double>>);
+        ASSERT_SAME_TYPE(L, math::Matrix<double>);
 
         auto I_double = math::identity_matrix<double>(4);
         ASSERT_TRUE(math::loosely_equal(L, I_double));
