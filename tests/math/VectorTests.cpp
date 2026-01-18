@@ -38,7 +38,7 @@ private:
         bool thrown = false;
         try {
             math::Vector<double> v(0);
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -60,7 +60,7 @@ private:
         int data[3] = {1, 2, 3};
         try {
             math::Vector<int> v(0, data);
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -81,7 +81,7 @@ private:
         bool thrown = false;
         try {
             math::Vector<int> v(3, data);
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -100,7 +100,7 @@ private:
         bool thrown = false;
         try {
             math::Vector<int> v(3, std::move(data));
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -120,7 +120,7 @@ private:
         bool thrown = false;
         try {
             math::Vector<int> v(3, data);
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -139,7 +139,7 @@ private:
         ASSERT_TRUE(v.at(1) == 2);
         ASSERT_TRUE(v[2] == 3);
 
-        const auto& cv = v;
+        const auto &cv = v;
         ASSERT_TRUE(cv[0] == 1);
         ASSERT_TRUE(cv.at(1) == 2);
     }
@@ -150,7 +150,7 @@ private:
 
         try {
             v.at(3) = 10;
-        } catch (const std::out_of_range& e) {
+        } catch (const std::out_of_range &e) {
             thrown_at = true;
         }
 
@@ -169,7 +169,7 @@ private:
         }
         ASSERT_TRUE(sum == 60);
 
-        const auto& cv = v;
+        const auto &cv = v;
         int const_sum = std::accumulate(cv.cbegin(), cv.cend(), 0);
         ASSERT_TRUE(const_sum == 60);
     }
@@ -384,7 +384,7 @@ private:
         bool thrown = false;
         try {
             auto v3 = v1 * v2;
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -414,27 +414,41 @@ private:
         ASSERT_SAME_TYPE(m, math::Matrix<double>);
     }
     //
-    //    void should_multiply_row_vector_and_matrix() {
-    //        // (1x2) * (2x2) -> (1x2)
-    //        math::Vector<int> v_row(2, math::Vector<int>::ROW);
-    //        v_row[0] = 1;
-    //        v_row[1] = 2;
-    //
-    //        math::Matrix<int> m(2, 2);
-    //        m.at(0, 0) = 10;
-    //        m.at(0, 1) = 20;
-    //        m.at(1, 0) = 30;
-    //        m.at(1, 1) = 40;
-    //
-    //        auto res = v_row * m;
-    //        // res[0] = (1*10) + (2*30) = 70
-    //        // res[1] = (1*20) + (2*40) = 100
-    //        ASSERT_TRUE(res.size() == 2);
-    //        ASSERT_TRUE(res.orientation() == math::Vector<int>::ROW);
-    //        ASSERT_TRUE(res[0] == 70);
-    //        ASSERT_TRUE(res[1] == 100);
-    //    }
-    //
+    void should_multiply_row_vector_and_matrix() {
+        // (1x2) * (2x2) -> (1x2)
+        math::Vector<int> v_row(2, math::ROW);
+        v_row[0] = 1;
+        v_row[1] = 2;
+
+        math::Matrix<int> m(2, 2);
+        m.at(0, 0) = 10;
+        m.at(0, 1) = 20;
+        m.at(1, 0) = 30;
+        m.at(1, 1) = 40;
+
+        auto res = v_row * m;
+        // res[0] = (1*10) + (2*30) = 70
+        // res[1] = (1*20) + (2*40) = 100
+        ASSERT_TRUE(res.size() == 2);
+        ASSERT_TRUE(res.orientation() == math::ROW);
+        ASSERT_TRUE(res[0] == 70);
+        ASSERT_TRUE(res[1] == 100);
+
+        math::Matrix<double> m1(2, 2);
+        m1.at(0, 0) = 10.5;
+        m1.at(0, 1) = 20.5;
+        m1.at(1, 0) = 30.0;
+        m1.at(1, 1) = 40.0;
+
+        auto res1 = v_row * m1;
+        // res1[0] = (1*10.5) + (2*30.0) = 70.5
+        // res1[1] = (1*20.5) + (2*40.0) = 100.5
+        ASSERT_SAME_TYPE(res1, math::Vector<double>);
+        ASSERT_TRUE(res1.size() == 2);
+        ASSERT_TRUE(is_close(res[0], 70.5));
+        ASSERT_TRUE(is_close(res[1], 100.5));
+    }
+
     //    void should_multiply_matrix_and_column_vector() {
     //        // (2x2) * (2x1) -> (2x1)
     //        math::Matrix<int> m(2, 2);
@@ -457,25 +471,7 @@ private:
     //    }
     //
     //    void should_multiply_row_vector_and_matrix_mixed_types() {
-    //        // (1x2) * (2x2) -> (1x2)
-    //        math::Vector<int> v_row(2, math::Vector<int>::ROW);
-    //        v_row[0] = 1;
-    //        v_row[1] = 2;
-    //
-    //        math::Matrix<double> m(2, 2);
-    //        m.at(0, 0) = 10.5;
-    //        m.at(0, 1) = 20.5;
-    //        m.at(1, 0) = 30.0;
-    //        m.at(1, 1) = 40.0;
-    //
-    //        auto res = v_row * m;
-    //        // res[0] = (1*10.5) + (2*30.0) = 70.5
-    //        // res[1] = (1*20.5) + (2*40.0) = 100.5
-    //        ASSERT_TRUE((std::is_same_v<decltype(res)::value_type, double>));
-    //        ASSERT_TRUE(res.size() == 2);
-    //        ASSERT_TRUE(is_close(res[0], 70.5));
-    //        ASSERT_TRUE(is_close(res[1], 100.5));
-    //    }
+
     //
     //    void should_multiply_matrix_and_column_vector_mixed_types() {
     //        // (2x2) * (2x1) -> (2x1)
@@ -532,7 +528,7 @@ public:
         should_multiply_vector_and_scalar();
         should_calculate_dot_product();
         should_calculate_outer_product();
-        //    should_multiply_row_vector_and_matrix();
+        should_multiply_row_vector_and_matrix();
         //    should_multiply_matrix_and_column_vector();
         //    should_multiply_row_vector_and_matrix_mixed_types();
         //    should_multiply_matrix_and_column_vector_mixed_types();
