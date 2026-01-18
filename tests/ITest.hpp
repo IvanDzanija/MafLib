@@ -35,5 +35,9 @@ protected:
     }
 };
 
+#define ASSERT_SAME_TYPE(expr, Type)                                         \
+    static_assert(std::is_same_v<std::remove_cvref_t<decltype(expr)>, Type>, \
+                  "Type mismatch: " #expr " is not of type " #Type)
+
 #define ASSERT_TRUE(cond) assert_true((cond), __func__, __FILE__, __LINE__)
 }  // namespace maf::test

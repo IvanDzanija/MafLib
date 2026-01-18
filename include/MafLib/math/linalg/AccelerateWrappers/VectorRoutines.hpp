@@ -7,6 +7,10 @@
 
 namespace maf::math::acc {
 
+//=============================================================================
+// BLAS LEVEL 1 ROUTINES
+//=============================================================================
+
 // R = Alpha * X + Y (double)
 [[nodiscard]] inline std::vector<double> daxpy(const std::vector<double>& x,
                                                const std::vector<double>& y,
@@ -91,19 +95,20 @@ inline void inplace_vsaddi(std::vector<int32>& x, const int32 alpha = 1) {
     vDSP_vsaddi(x.data(), 1, &alpha, x.data(), 1, x.size());
 }
 
-// TODO: Fix rest
-// R = X * Alpha
-[[nodiscard]] inline std::vector<float> sscal(const std::vector<float>& x,
-                                              float alpha = 1.0f) {
-    std::vector<float> result(x.begin(), x.end());
-    cblas_sscal(x.size(), alpha, result.data(), 1);
-    return result;
+// Dot product (double)
+[[nodiscard]] inline double ddot(const std::vector<double>& x,
+                                 const std::vector<double>& y) {
+    return cblas_ddot(x.size(), x.data(), 1, y.data(), 1);
 }
 
-// X = X * Alpha
-inline void inplace_sscal(std::vector<float>& x, float alpha = 1.0f) {
-    cblas_sscal(x.size(), alpha, x.data(), 1);
+// Dot product (float)
+[[nodiscard]] inline float sdot(const std::vector<float>& x,
+                                const std::vector<float>& y) {
+    return cblas_sdot(x.size(), x.data(), 1, y.data(), 1);
 }
 
+//=============================================================================
+// BLAS LEVEL 2 ROUTINES
+//=============================================================================
 }  // namespace maf::math::acc
 #endif

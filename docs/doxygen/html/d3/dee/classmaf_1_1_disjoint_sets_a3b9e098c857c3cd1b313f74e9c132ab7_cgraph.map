@@ -1,5 +1,0 @@
-<map id="maf::DisjointSets::unite" name="maf::DisjointSets::unite">
-<area shape="rect" id="Node000001" title="Unites the sets of the 2 elements if not part of the same set." alt="" coords="5,5,136,46"/>
-<area shape="rect" id="Node000002" href="$d3/dee/classmaf_1_1_disjoint_sets.html#a2eb7b814e0059d4cf29988edcd637747" title=" " alt="" coords="184,13,335,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,23,168,23,168,28,136,28"/>
-</map>

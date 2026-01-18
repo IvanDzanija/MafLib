@@ -17,7 +17,7 @@ BreakConstructorInitializers: BeforeColon
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 Cpp11BracedListStyle: true
 DerivePointerAlignment: false
-PointerAlignment: Left
+PointerAlignment: Right
 SpaceAfterCStyleCast: false
 SpaceBeforeParens: ControlStatements
 SpacesInParentheses: false

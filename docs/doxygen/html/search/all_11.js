@@ -1,7 +1,0 @@
-var searchData=
-[
-  ['vector_0',['Vector',['../de/d35/classmaf_1_1math_1_1_vector.html',1,'maf::math::Vector&lt; T &gt;'],['../de/d35/classmaf_1_1math_1_1_vector.html#aa96c8ef557852ec4425b3399e4c758c7',1,'maf::math::Vector::Vector()'],['../de/d35/classmaf_1_1math_1_1_vector.html#a5b5f435bdc127f05fdc705c58395b6ed',1,'maf::math::Vector::Vector(size_t size, T *data, Orientation orientation=COLUMN)'],['../de/d35/classmaf_1_1math_1_1_vector.html#adce45df04dad23e8e7fb2aa5dde3b2cf',1,'maf::math::Vector::Vector(size_t size, Orientation orientation=COLUMN)'],['../de/d35/classmaf_1_1math_1_1_vector.html#ab534ebb245d6771fb5977b241be10f91',1,'maf::math::Vector::Vector(size_t size, const std::vector&lt; T &gt; &amp;data, Orientation orientation=COLUMN)'],['../de/d35/classmaf_1_1math_1_1_vector.html#a716800c73059c5fdcfddc4abd057343c',1,'maf::math::Vector::Vector(size_t size, std::vector&lt; T &gt; &amp;&amp;data, Orientation orientation=COLUMN)'],['../de/d35/classmaf_1_1math_1_1_vector.html#a20d90280ea731664d99eed92bfb5741c',1,'maf::math::Vector::Vector(size_t size, const std::array&lt; U, N &gt; &amp;data, Orientation orientation=COLUMN)']]],
-  ['vector_2ehpp_1',['Vector.hpp',['../db/d20/_vector_8hpp.html',1,'']]],
-  ['vectormethods_2ehpp_2',['VectorMethods.hpp',['../d3/d50/_vector_methods_8hpp.html',1,'']]],
-  ['vectoroperators_2ehpp_3',['VectorOperators.hpp',['../dd/d8d/_vector_operators_8hpp.html',1,'']]]
-];

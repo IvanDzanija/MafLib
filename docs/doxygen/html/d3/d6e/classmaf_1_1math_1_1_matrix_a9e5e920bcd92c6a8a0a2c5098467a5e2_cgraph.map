@@ -1,7 +1,0 @@
-<map id="maf::math::Matrix::Matrix" name="maf::math::Matrix::Matrix">
-<area shape="rect" id="Node000001" title="Constructs from a nested std::vector (vector of vectors)." alt="" coords="5,23,138,64"/>
-<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a3506acc05e298718fb6d5587d6594055" title="Gets a mutable reference to the element at (row, col)." alt="" coords="193,5,336,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,32,177,27,177,32,139,37"/>
-<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aca60efe3848c6a7635c9f609ca163528" title="Gets a mutable reference to the underlying std::vector data store." alt="" coords="186,55,343,80"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="139,49,171,53,170,59,138,54"/>
-</map>
