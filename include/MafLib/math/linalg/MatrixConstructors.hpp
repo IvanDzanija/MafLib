@@ -23,7 +23,7 @@ Matrix<T>::Matrix(size_t rows, size_t cols) : _rows(rows), _cols(cols) {
 
 // Constructs a matrix from a raw data pointer.
 template <Numeric T>
-Matrix<T>::Matrix(size_t rows, size_t cols, T* data) : _rows(rows), _cols(cols) {
+Matrix<T>::Matrix(size_t rows, size_t cols, T *data) : _rows(rows), _cols(cols) {
     if (rows == 0 || cols == 0) {
         throw std::invalid_argument("Matrix dimensions must be greater than zero!");
     }
@@ -36,7 +36,7 @@ Matrix<T>::Matrix(size_t rows, size_t cols, T* data) : _rows(rows), _cols(cols) 
 
 // Constructs from a std::vector, filled by rows.
 template <Numeric T>
-Matrix<T>::Matrix(size_t rows, size_t cols, const std::vector<T>& data)
+Matrix<T>::Matrix(size_t rows, size_t cols, const std::vector<T> &data)
     : _rows(rows), _cols(cols) {
     if (rows == 0 || cols == 0) {
         throw std::invalid_argument("Matrix dimensions must be greater than zero.");
@@ -49,9 +49,22 @@ Matrix<T>::Matrix(size_t rows, size_t cols, const std::vector<T>& data)
     _data.assign(data.begin(), data.end());
 }
 
+// Constructs from a std::vector, move constructor.
+template <Numeric T>
+Matrix<T>::Matrix(size_t rows, size_t cols, std::vector<T> &&data)
+    : _rows(rows), _cols(cols) {
+    if (rows == 0 || cols == 0) {
+        throw std::invalid_argument("Matrix dimensions must be greater than zero.");
+    }
+    if (data.size() != rows * cols) {
+        throw std::invalid_argument("Data size does not match matrix size.");
+    }
+    _data = std::move(data);
+}
+
 // Constructs from a nested std::vector (vector of vectors).
 template <Numeric T>
-Matrix<T>::Matrix(size_t rows, size_t cols, const std::vector<std::vector<T>>& data)
+Matrix<T>::Matrix(size_t rows, size_t cols, const std::vector<std::vector<T>> &data)
     : _rows(rows), _cols(cols) {
     if (rows == 0 || cols == 0) {
         throw std::invalid_argument("Matrix dimensions must be greater than zero.");
@@ -72,7 +85,7 @@ Matrix<T>::Matrix(size_t rows, size_t cols, const std::vector<std::vector<T>>& d
 // Constructs from a std::array, filled by rows.
 template <Numeric T>
 template <size_t N>
-Matrix<T>::Matrix(size_t rows, size_t cols, const std::array<T, N>& data)
+Matrix<T>::Matrix(size_t rows, size_t cols, const std::array<T, N> &data)
     : _rows(rows), _cols(cols) {
     if (rows == 0 || cols == 0) {
         throw std::invalid_argument("Matrix dimensions must be greater than zero.");

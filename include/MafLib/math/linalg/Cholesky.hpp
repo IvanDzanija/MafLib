@@ -12,7 +12,7 @@ namespace detail {
  * Uses blocked algorithm with OpenMP parallelization.
  */
 template <std::floating_point T>
-[[nodiscard]] Matrix<T> _cholesky(const Matrix<T>& matrix) {
+[[nodiscard]] Matrix<T> _cholesky(const Matrix<T> &matrix) {
     if (!matrix.is_symmetric()) {
         throw std::invalid_argument(
             "Matrix must be symmetric to try Cholesky decomposition!");
@@ -27,7 +27,7 @@ template <std::floating_point T>
             T sum = 0;
             auto L_row_j = L.row_span(j);
 
-            #pragma omp simd
+#pragma omp simd
             for (size_t k = 0; k < j; ++k) {
                 sum += L_row_j[k] * L_row_j[k];
             }
@@ -42,7 +42,7 @@ template <std::floating_point T>
                 T sum_i = 0;
                 auto L_row_i = L.row_span(i);
 
-                #pragma omp simd
+#pragma omp simd
                 for (size_t k = 0; k < j; ++k) {
                     sum_i += L_row_i[k] * L_row_j[k];
                 }
@@ -50,7 +50,7 @@ template <std::floating_point T>
             }
         }
 
-        #pragma omp parallel for if (n > 1000)
+#pragma omp parallel for if (n > 1000)
         for (size_t ii = j_end; ii < n; ii += BLOCK_SIZE) {
             const size_t i_end = std::min(ii + BLOCK_SIZE, n);
 
@@ -61,7 +61,7 @@ template <std::floating_point T>
                     T sum = 0;
                     auto L_row_j = L.row_span(j);
 
-                    #pragma omp simd
+#pragma omp simd
                     for (size_t k = 0; k < j; ++k) {
                         sum += L_row_i[k] * L_row_j[k];
                     }
@@ -112,7 +112,7 @@ template <std::floating_point T>
  * @since 2025
  */
 template <typename ResultType = void, Numeric T>
-[[nodiscard]] auto cholesky(const Matrix<T>& matrix) {
+[[nodiscard]] auto cholesky(const Matrix<T> &matrix) {
     using TargetType =
         std::conditional_t<std::is_same_v<ResultType, void>,
                            std::conditional_t<std::is_floating_point_v<T>, T, double>,

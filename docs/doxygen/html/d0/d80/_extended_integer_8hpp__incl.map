@@ -1,9 +1,0 @@
-<map id="include/MafLib/math/ExtendedInteger.hpp" name="include/MafLib/math/ExtendedInteger.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="56,5,200,46"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,65,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,48,63,86,59,82,104,44"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="89,94,168,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="131,46,131,78,126,78,126,46"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="192,94,252,120"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="153,44,197,82,194,86,150,48"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="maf::math::Matrix::print" name="maf::math::Matrix::print">
-<area shape="rect" id="Node000001" title="Prints the matrix contents to std::cout." alt="" coords="5,5,138,46"/>
-<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a3506acc05e298718fb6d5587d6594055" title="Gets a mutable reference to the element at (row, col)." alt="" coords="186,13,329,38"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,23,170,23,170,28,138,28"/>
-</map>

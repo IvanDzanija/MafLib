@@ -1,9 +1,0 @@
-<map id="maf::math::Vector::normalize" name="maf::math::Vector::normalize">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,35,140,75"/>
-<area shape="rect" id="Node000002" href="$de/d35/classmaf_1_1math_1_1_vector.html#aad485062e875a345db7fd5c81f7390ef" title=" " alt="" coords="202,5,336,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,42,187,35,188,41,141,48"/>
-<area shape="rect" id="Node000004" href="$de/d35/classmaf_1_1math_1_1_vector.html#aba91f8219dda3fc1b145ae237f61f01d" title="L2 vector norm." alt="" coords="188,70,351,96"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="140,62,173,67,172,72,140,67"/>
-<area shape="rect" id="Node000003" href="$df/dba/namespacemaf.html#a11dab27cc975212d0cfebee780289026" title=" " alt="" coords="399,13,498,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="337,23,383,23,383,28,337,28"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="maf::math::Matrix::make_identity" name="maf::math::Matrix::make_identity">
-<area shape="rect" id="Node000001" title="Converts this matrix into an identity matrix." alt="" coords="517,5,650,46"/>
-<area shape="rect" id="Node000002" href="$d4/d02/namespacemaf_1_1math.html#a4d61c9a4c0434a2e01652894564f7ebb" title="Creates a new identity matrix of a given size." alt="" coords="339,5,469,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="502,28,470,28,470,23,502,23"/>
-<area shape="rect" id="Node000003" href="$d4/d02/namespacemaf_1_1math.html#ac44a6962e2d09c20d929223448b4421c" title="Performs a blocked PLU decomposition on a square matrix." alt="" coords="186,13,291,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="323,28,292,28,292,23,323,23"/>
-<area shape="rect" id="Node000004" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#ae26826bcc4a303b29538a17c0a39de2b" title="Checks if the matrix is singular (non&#45;invertible)." alt="" coords="5,5,138,46"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="170,28,138,28,138,23,170,23"/>
-</map>
