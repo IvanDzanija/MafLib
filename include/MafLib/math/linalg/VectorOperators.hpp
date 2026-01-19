@@ -467,7 +467,6 @@ template <Numeric U>
         }
     } else {
         for (size_t i = 0; i < r; ++i) {
-#pragma omp simd
             for (size_t j = 0; j < n; ++j) {
                 result[i] += _data[j] * other.at(j, i);
             }
