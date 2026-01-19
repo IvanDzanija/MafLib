@@ -12,7 +12,7 @@ namespace detail {
  * Uses blocked algorithm with OpenMP parallelization.
  */
 template <std::floating_point T>
-[[nodiscard]] Matrix<T> _cholesky(const Matrix<T>& matrix) {
+[[nodiscard]] Matrix<T> _cholesky(const Matrix<T> &matrix) {
     if (!matrix.is_symmetric()) {
         throw std::invalid_argument(
             "Matrix must be symmetric to try Cholesky decomposition!");
@@ -112,7 +112,7 @@ template <std::floating_point T>
  * @since 2025
  */
 template <typename ResultType = void, Numeric T>
-[[nodiscard]] auto cholesky(const Matrix<T>& matrix) {
+[[nodiscard]] auto cholesky(const Matrix<T> &matrix) {
     using TargetType =
         std::conditional_t<std::is_same_v<ResultType, void>,
                            std::conditional_t<std::is_floating_point_v<T>, T, double>,

@@ -369,6 +369,57 @@ private:
         ASSERT_SAME_TYPE(v_prod2, math::Vector<float>);
     }
 
+    void should_multiply_vector_by_scalar_and_assign() {
+        math::Vector<int> v(2);
+        v[0] = 2;
+        v[1] = 3;
+        v *= 5;
+        ASSERT_TRUE(v[0] == 10);
+        ASSERT_TRUE(v[1] == 15);
+
+        math::Vector<float> v2(2);
+        v2[0] = 2.0f;
+        v2[1] = 3.0f;
+        v2 *= 5.0f;
+
+        ASSERT_TRUE(is_close(v2[0], 10.0f));
+        ASSERT_TRUE(is_close(v2[1], 15.0f));
+    }
+
+    void should_divide_vector_by_scalar() {
+        math::Vector<int> v(2);
+        v[0] = 10;
+        v[1] = 15;
+        auto v_div = v / 5;
+        ASSERT_SAME_TYPE(v_div, math::Vector<double>);
+        ASSERT_TRUE(v_div[0] == 2);
+        ASSERT_TRUE(v_div[1] == 3);
+
+        math::Vector<float> v2(2);
+        v2[0] = 10.0f;
+        v2[1] = 15.0f;
+        auto v_div2 = v2 / 5.0f;
+        ASSERT_SAME_TYPE(v_div2, math::Vector<float>);
+        ASSERT_TRUE(is_close(v_div2[0], 2.0f));
+        ASSERT_TRUE(is_close(v_div2[1], 3.0f));
+    }
+
+    void should_divide_vector_by_scalar_and_assign() {
+        math::Vector<int> v(2);
+        v[0] = 10;
+        v[1] = 15;
+        v /= 5;
+        ASSERT_TRUE(v[0] == 2);
+        ASSERT_TRUE(v[1] == 3);
+
+        math::Vector<float> v2(2);
+        v2[0] = 10.0f;
+        v2[1] = 15.0f;
+        v2 /= 5.0f;
+        ASSERT_TRUE(is_close(v2[0], 2.0f));
+        ASSERT_TRUE(is_close(v2[1], 3.0f));
+    }
+
     void should_calculate_dot_product() {
         math::Vector<int> v1(3);
         v1[0] = 1;
@@ -445,55 +496,9 @@ private:
         // res1[1] = (1*20.5) + (2*40.0) = 100.5
         ASSERT_SAME_TYPE(res1, math::Vector<double>);
         ASSERT_TRUE(res1.size() == 2);
-        ASSERT_TRUE(is_close(res[0], 70.5));
-        ASSERT_TRUE(is_close(res[1], 100.5));
+        ASSERT_TRUE(is_close(res1[0], 70.5));
+        ASSERT_TRUE(is_close(res1[1], 100.5));
     }
-
-    //    void should_multiply_matrix_and_column_vector() {
-    //        // (2x2) * (2x1) -> (2x1)
-    //        math::Matrix<int> m(2, 2);
-    //        m.at(0, 0) = 10;
-    //        m.at(0, 1) = 20;
-    //        m.at(1, 0) = 30;
-    //        m.at(1, 1) = 40;
-    //
-    //        math::Vector<int> v_col(2, math::Vector<int>::COLUMN);
-    //        v_col[0] = 1;
-    //        v_col[1] = 2;
-    //
-    //        auto res = m * v_col;
-    //        // res[0] = (10*1) + (20*2) = 50
-    //        // res[1] = (30*1) + (40*2) = 110
-    //        ASSERT_TRUE(res.size() == 2);
-    //        ASSERT_TRUE(res.orientation() == math::Vector<int>::COLUMN);
-    //        ASSERT_TRUE(res[0] == 50);
-    //        ASSERT_TRUE(res[1] == 110);
-    //    }
-    //
-    //    void should_multiply_row_vector_and_matrix_mixed_types() {
-
-    //
-    //    void should_multiply_matrix_and_column_vector_mixed_types() {
-    //        // (2x2) * (2x1) -> (2x1)
-    //        math::Matrix<double> m(2, 2);
-    //        m.at(0, 0) = 10.5;
-    //        m.at(0, 1) = 20.5;
-    //        m.at(1, 0) = 30.0;
-    //        m.at(1, 1) = 40.0;
-    //
-    //        math::Vector<int> v_col(2, math::Vector<int>::COLUMN);
-    //        v_col[0] = 1;
-    //        v_col[1] = 2;
-    //
-    //        auto res = m * v_col;
-    //        // res[0] = (10.5*1) + (20.5*2) = 51.5
-    //        // res[1] = (30.0*1) + (40.0*2) = 110.0
-    //        ASSERT_TRUE((std::is_same_v<decltype(res)::value_type, double>));
-    //        ASSERT_TRUE(res.size() == 2);
-    //        ASSERT_TRUE(res.orientation() == math::Vector<double>::COLUMN);
-    //        ASSERT_TRUE(is_close(res[0], 51.5));
-    //        ASSERT_TRUE(is_close(res[1], 110.0));
-    //    }
 
 public:
     int run_all_tests() override {
@@ -512,13 +517,11 @@ public:
         should_throw_on_out_of_bounds_access();
         should_iterate_over_elements();
         should_check_if_vector_is_null();
-
         should_fill_vector_with_value();
         should_calculate_l2_norm();
         should_normalize_vector_in_place();
         should_transpose_vector_in_place();
         should_return_transposed_copy();
-        //    // Operators
         should_check_equality();
         should_perform_unary_minus();
         should_add_two_vectors();
@@ -526,15 +529,12 @@ public:
         should_subtract_two_vectors();
         should_subtract_scalar_and_vector();
         should_multiply_vector_and_scalar();
+        should_multiply_vector_by_scalar_and_assign();
+        should_divide_vector_by_scalar();
+        should_divide_vector_by_scalar_and_assign();
         should_calculate_dot_product();
         should_calculate_outer_product();
         should_multiply_row_vector_and_matrix();
-        //    should_multiply_matrix_and_column_vector();
-        //    should_multiply_row_vector_and_matrix_mixed_types();
-        //    should_multiply_matrix_and_column_vector_mixed_types();
-        //    std::cout << "--- Operator tests passed ---" << std::endl;
-
-        std::cout << "=== All Vector tests passed ===" << std::endl;
         return 0;
     }
 };

@@ -30,7 +30,7 @@ private:
         bool thrown = false;
         try {
             math::Matrix<double> m(0, 3);
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -51,7 +51,7 @@ private:
         bool thrown = false;
         try {
             math::Matrix<int> m(2, 2, nullptr);
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -73,7 +73,7 @@ private:
         bool thrown = false;
         try {
             math::Matrix<int> m(2, 2, data);
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -93,7 +93,7 @@ private:
         bool thrown = false;
         try {
             math::Matrix<int> m(2, 2, data);
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -117,7 +117,7 @@ private:
         bool thrown = false;
         try {
             math::Matrix<int> m(2, 2, {1, 2, 3});
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -687,7 +687,7 @@ private:
         bool thrown = false;
         try {
             auto [P, L, U] = plu(m);
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -698,7 +698,7 @@ private:
         bool thrown = false;
         try {
             auto [p, L, U] = math::plu(m);
-        } catch (const std::runtime_error& e) {
+        } catch (const std::runtime_error &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -857,7 +857,7 @@ private:
         bool thrown = false;
         try {
             auto L = cholesky(A);
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -869,7 +869,7 @@ private:
         bool thrown = false;
         try {
             auto L = cholesky(A);
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument &e) {
             thrown = true;
         }
         ASSERT_TRUE(thrown);
@@ -1029,7 +1029,6 @@ public:
         should_multiply_assign_scalar();
         should_divide_matrix_and_scalar();
         should_divide_assign_scalar();
-
         should_multiply_matrices();
         should_multiply_matrix_and_vector();
         matmul_time_test();

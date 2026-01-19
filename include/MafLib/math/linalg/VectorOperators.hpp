@@ -1,6 +1,7 @@
 #ifndef VECTOR_OPERATORS_H
 #define VECTOR_OPERATORS_H
 #pragma once
+#include "MafLib/utility/Conversions.hpp"
 #include "Vector.hpp"
 
 namespace maf::math {
@@ -89,7 +90,7 @@ template <Numeric T, Numeric U>
 // Vector + Vector
 template <Numeric T>
 template <Numeric U>
-[[nodiscard]] auto Vector<T>::operator+=(const Vector<U> &other) const {
+auto Vector<T>::operator+=(const Vector<U> &other) {
     if (_orientation != other.orientation() || _data.size() != other.data().size()) {
         throw std::invalid_argument("Vectors must be same orientation and size!");
     }
@@ -112,7 +113,7 @@ template <Numeric U>
 // Vector + Scalar
 template <Numeric T>
 template <Numeric U>
-[[nodiscard]] auto Vector<T>::operator+=(const U &scalar) const noexcept {
+auto Vector<T>::operator+=(const U &scalar) noexcept {
     using R = std::common_type_t<T, U>;
 
     R r_scalar = static_cast<R>(scalar);
@@ -161,7 +162,7 @@ template <Numeric U>
 // Vector - Scalar
 template <Numeric T>
 template <Numeric U>
-auto Vector<T>::operator-(const U &scalar) const noexcept {
+[[nodiscard]] auto Vector<T>::operator-(const U &scalar) const noexcept {
     using R = std::common_type_t<T, U>;
 
     R r_scalar = static_cast<R>(scalar);
@@ -190,7 +191,7 @@ auto Vector<T>::operator-(const U &scalar) const noexcept {
  * @return A new Vector of the common, promoted type.
  */
 template <Numeric T, Numeric U>
-auto operator-(const U &scalar, const Vector<T> &vec) noexcept {
+[[nodiscard]] auto operator-(const U &scalar, const Vector<T> &vec) noexcept {
     using R = std::common_type_t<T, U>;
 
     R r_scalar = static_cast<R>(scalar);
@@ -214,7 +215,7 @@ auto operator-(const U &scalar, const Vector<T> &vec) noexcept {
 // Vector - Vector
 template <Numeric T>
 template <Numeric U>
-[[nodiscard]] auto Vector<T>::operator-=(const Vector<U> &other) const {
+auto Vector<T>::operator-=(const Vector<U> &other) {
     if (_orientation != other.orientation() || _data.size() != other.data().size()) {
         throw std::invalid_argument("Vectors must be same orientation and size!");
     }
@@ -237,7 +238,7 @@ template <Numeric U>
 // Vector - Scalar
 template <Numeric T>
 template <Numeric U>
-[[nodiscard]] auto Vector<T>::operator-=(const U &scalar) const noexcept {
+auto Vector<T>::operator-=(const U &scalar) noexcept {
     using R = std::common_type_t<T, U>;
 
     R r_scalar = static_cast<R>(scalar);
@@ -296,7 +297,7 @@ template <Numeric T, Numeric U>
 // Vector * Scalar
 template <Numeric T>
 template <Numeric U>
-[[nodiscard]] auto Vector<T>::operator*=(const U &scalar) const noexcept {
+auto Vector<T>::operator*=(const U &scalar) noexcept {
     using R = std::common_type_t<T, U>;
 
     R r_scalar = static_cast<R>(scalar);
@@ -319,7 +320,7 @@ template <Numeric U>
 // Vector * Vector -> Scalar
 template <Numeric T>
 template <Numeric U>
-auto Vector<T>::dot_product(const Vector<U> &other) const {
+[[nodiscard]] auto Vector<T>::dot_product(const Vector<U> &other) const {
     size_t n = _data.size();
     if (n != other.size()) {
         throw std::invalid_argument("Vectors must be of same size!");
@@ -355,7 +356,7 @@ auto Vector<T>::dot_product(const Vector<U> &other) const {
 // Vector * Vector -> Scalar
 template <Numeric T>
 template <Numeric U>
-auto Vector<T>::operator*(const Vector<U> &other) const {
+[[nodiscard]] auto Vector<T>::operator*(const Vector<U> &other) const {
     if (_orientation == other._orientation || _orientation == COLUMN) {
         throw std::invalid_argument(
             "Invalid multiplication: Vectors must be of different orientations (row x "
@@ -418,13 +419,10 @@ template <Numeric U>
     }
 }
 
-// TODO: USE BLAS HERE ITS FASTER
-// TODO: add tests below
 // Vector * Matrix -> Vector
-
 template <Numeric T>
 template <Numeric U>
-auto Vector<T>::operator*(const Matrix<U> &other) const {
+[[nodiscard]] auto Vector<T>::operator*(const Matrix<U> &other) const {
     using R = std::common_type_t<T, U>;
 
     size_t n = size();
@@ -439,6 +437,25 @@ auto Vector<T>::operator*(const Matrix<U> &other) const {
             "Invalid multiplication: column Vector * Matrix. "
             "Did you mean Matrix * Vector?");
     }
+
+#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
+    if constexpr (std::is_same_v<R, float>) {
+        return Vector<R>(r,
+                         acc::sgevmm(m,
+                                     r,
+                                     util::convert_if_needed<R>(other.data()),
+                                     util::convert_if_needed<R>(_data)),
+                         ROW);
+
+    } else if constexpr (std::is_same_v<R, double>) {
+        return Vector<R>(r,
+                         acc::dgevmm(m,
+                                     r,
+                                     util::convert_if_needed<R>(other.data()),
+                                     util::convert_if_needed<R>(_data)),
+                         ROW);
+    }
+#endif
 
     Vector<R> result(r, std::vector<R>(r), ROW);
     if (n * m >= OMP_QUADRATIC_LIMIT) {
@@ -463,7 +480,10 @@ auto Vector<T>::operator*(const Matrix<U> &other) const {
 template <Numeric T>
 template <Numeric U>
 [[nodiscard]] auto Vector<T>::operator/(const U &scalar) const noexcept {
-    using R = std::common_type_t<T, U, double>;  // Forces double if both are ints
+    using R =
+        std::conditional_t<std::is_integral_v<T> && std::is_integral_v<U>,
+                           double,
+                           std::common_type_t<T, U>>;  // Forces double if both are ints
 
     R r_scalar_inv = R(1) / static_cast<R>(scalar);
     size_t n = _data.size();
@@ -488,11 +508,14 @@ template <Numeric U>
  * @tparam U An arithmetic scalar type.
  * @param scalar The scalar value.
  * @param vec The vector.
- * @return A new Vector of the common, promoted type.
+ * @return A new Vector of the common, promoted type (forced double if both are int).
  */
 template <Numeric T, Numeric U>
 [[nodiscard]] auto operator/(const U &scalar, const Vector<T> &vec) noexcept {
-    using R = std::common_type_t<T, U, double>;  // Forces double if both are ints
+    using R =
+        std::conditional_t<std::is_integral_v<T> && std::is_integral_v<U>,
+                           double,
+                           std::common_type_t<T, U>>;  // Forces double if both are ints
 
     R r_scalar = static_cast<R>(scalar);
     size_t n = vec.size();
@@ -515,7 +538,7 @@ template <Numeric T, Numeric U>
 // Vector /= scalar
 template <Numeric T>
 template <Numeric U>
-[[nodiscard]] auto Vector<T>::operator/=(const U &scalar) const noexcept {
+auto Vector<T>::operator/=(const U &scalar) noexcept {
     using R = std::common_type_t<T, U>;
 
     size_t n = _data.size();

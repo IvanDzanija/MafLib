@@ -53,7 +53,7 @@ public:
      * @throws std::invalid_argument if size is zero or data is nullptr.
      */
     template <Numeric U>
-    Vector(size_t size, const U* data, Orientation orientation = COLUMN);
+    Vector(size_t size, const U *data, Orientation orientation = COLUMN);
 
     /**
      * @brief Constructs from a std::vector by copying its data.
@@ -64,7 +64,7 @@ public:
      * mismatches.
      */
     template <Numeric U>
-    Vector(size_t size, const std::vector<U>& data, Orientation orientation = COLUMN);
+    Vector(size_t size, const std::vector<U> &data, Orientation orientation = COLUMN);
 
     /**
      * @brief Constructs from a std::vector by moving its data.
@@ -74,7 +74,7 @@ public:
      * @throws std::invalid_argument if size is zero or data size
      * mismatches.
      */
-    Vector(size_t size, std::vector<T>&& data, Orientation orientation = COLUMN);
+    Vector(size_t size, std::vector<T> &&data, Orientation orientation = COLUMN);
 
     /**
      * @brief Constructs from a std::array by copying its data.
@@ -87,13 +87,13 @@ public:
      * mismatches.
      */
     template <Numeric U, size_t N>
-    Vector(size_t size, const std::array<U, N>& data, Orientation orientation = COLUMN);
+    Vector(size_t size, const std::array<U, N> &data, Orientation orientation = COLUMN);
 
     /**
      * @brief Converting constructor.
      */
     template <Numeric U>
-    [[nodiscard]] Vector(const Vector<U>& other);
+    [[nodiscard]] Vector(const Vector<U> &other);
 
     // --- Iterators ---
     /** @brief Returns an iterator to the beginning. */
@@ -157,7 +157,7 @@ public:
      * store.
      * @return const std::vector<T>&
      */
-    [[nodiscard]] const std::vector<T>& data() const noexcept {
+    [[nodiscard]] const std::vector<T> &data() const noexcept {
         return _data;
     }
 
@@ -176,7 +176,7 @@ public:
      * bounds check.
      * @throws std::out_of_range if the index is invalid.
      */
-    T& at(size_t index) {
+    T &at(size_t index) {
         return _data.at(index);
     }
 
@@ -185,7 +185,7 @@ public:
      * bounds check.
      * @throws std::out_of_range if the index is invalid.
      */
-    const T& at(size_t index) const {
+    const T &at(size_t index) const {
         return _data.at(index);
     }
 
@@ -193,7 +193,7 @@ public:
      * @brief Accesses the element at a specific index with no bounds check.
      * @throws std::out_of_range if the index is invalid.
      */
-    T& operator[](size_t index) {
+    T &operator[](size_t index) {
         return _data[index];
     }
 
@@ -201,7 +201,7 @@ public:
      * @brief Accesses the element at a specific index with no bounds check.
      * @throws std::out_of_range if the index is invalid.
      */
-    const T& operator[](size_t index) const {
+    const T &operator[](size_t index) const {
         return _data[index];
     }
 
@@ -239,7 +239,7 @@ public:
      * @param other The vector to compare against.
      * @return true if size, orientation, and all elements are identical.
      */
-    [[nodiscard]] constexpr bool operator==(const Vector& other) const noexcept;
+    [[nodiscard]] constexpr bool operator==(const Vector &other) const noexcept;
 
     /**
      * @brief Unary minus. Returns a new Vector with all elements negated.
@@ -256,7 +256,7 @@ public:
      * match.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator+(const Vector<U>& other) const;
+    [[nodiscard]] auto operator+(const Vector<U> &other) const;
 
     /**
      * @brief Element-wise scalar addition (Vector + scalar).
@@ -265,7 +265,7 @@ public:
      * @return A new Vector of the common, promoted type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator+(const U& scalar) const noexcept;
+    [[nodiscard]] auto operator+(const U &scalar) const noexcept;
 
     /**
      * @brief Element-wise vector addition assignment (Vector + Vector).
@@ -276,7 +276,7 @@ public:
      * match.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator+=(const Vector<U>& other) const;
+    auto operator+=(const Vector<U> &other);
 
     /**
      * @brief Element-wise scalar addition assignment (Vector + scalar).
@@ -285,7 +285,7 @@ public:
      * @attention This method doesn't cast the vector if U is a broader type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator+=(const U& scalar) const noexcept;
+    auto operator+=(const U &scalar) noexcept;
 
     /**
      * @brief Element-wise vector subtraction (Vector - Vector).
@@ -296,7 +296,7 @@ public:
      * match.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator-(const Vector<U>& other) const;
+    [[nodiscard]] auto operator-(const Vector<U> &other) const;
 
     /**
      * @brief Element-wise scalar subtraction (Vector - scalar).
@@ -305,7 +305,7 @@ public:
      * @return A new Vector of the common, promoted type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator-(const U& scalar) const noexcept;
+    [[nodiscard]] auto operator-(const U &scalar) const noexcept;
 
     /**
      * @brief Element-wise vector subtraction assignment (Vector - Vector).
@@ -316,7 +316,7 @@ public:
      * match.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator-=(const Vector<U>& other) const;
+    auto operator-=(const Vector<U> &other);
 
     /**
      * @brief Element-wise scalar subtraction (Vector - scalar).
@@ -325,7 +325,7 @@ public:
      * @attention This method doesn't cast the Vector if U is a broader type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator-=(const U& scalar) const noexcept;
+    auto operator-=(const U &scalar) noexcept;
 
     /**
      * @brief Element-wise scalar multiplication (Vector * scalar).
@@ -334,9 +334,8 @@ public:
      * @return A new Vector of the common, promoted type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator*(const U& scalar) const noexcept;
+    [[nodiscard]] auto operator*(const U &scalar) const noexcept;
 
-    // TODO: add tests from here
     /**
      * @brief Element-wise scalar multiplication assignment (Vector * scalar).
      * @tparam U An arithmetic scalar type.
@@ -344,7 +343,7 @@ public:
      * @attention This method doesn't cast the Vector if U is a broader type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator*=(const U& scalar) const noexcept;
+    auto operator*=(const U &scalar) noexcept;
 
     /**
      * @brief Calculates the dot product (inner product) of two Vectors.
@@ -355,7 +354,7 @@ public:
      * @throws std::invalid_argument if Vector sizes do not match.
      */
     template <Numeric U>
-    [[nodiscard]] auto dot_product(const Vector<U>& other) const;
+    [[nodiscard]] auto dot_product(const Vector<U> &other) const;
 
     /**
      * @brief Outer product (Column Vector * Row Vector).
@@ -366,7 +365,7 @@ public:
      * @throws std::invalid_argument if orientations are not COLUMN * ROW.
      */
     template <Numeric U>
-    [[nodiscard]] auto outer_product(const Vector<U>& other) const;
+    [[nodiscard]] auto outer_product(const Vector<U> &other) const;
 
     /**
      * @brief Dot product (Row Vector * Column Vector).
@@ -379,7 +378,7 @@ public:
      * @throws std::invalid_argument if Vector sizes do not match.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator*(const Vector<U>& other) const;
+    [[nodiscard]] auto operator*(const Vector<U> &other) const;
 
     /**
      * @brief Matrix-Vector multiplication (Row Vector * Matrix).
@@ -391,16 +390,17 @@ public:
      * dimensions mismatch.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator*(const Matrix<U>& other) const;
+    [[nodiscard]] auto operator*(const Matrix<U> &other) const;
 
     /**
      * @brief Element-wise scalar division (Vector / scalar).
      * @tparam U An arithmetic scalar type.
      * @param scalar The scalar value to divide by.
-     * @return A new Vector of the common, promoted type.
+     * @return A new Vector of the common, promoted type (forced double if both are
+     * int).
      */
     template <Numeric U>
-    [[nodiscard]] auto operator/(const U& scalar) const noexcept;
+    [[nodiscard]] auto operator/(const U &scalar) const noexcept;
 
     /**
      * @brief Element-wise scalar division assignment (Vector / scalar).
@@ -409,7 +409,7 @@ public:
      * @attention This method doesn't cast the Vector if U is a broader type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator/=(const U& scalar) const noexcept;
+    auto operator/=(const U &scalar) noexcept;
 
     // --- Printing and debugging ---
 
@@ -422,11 +422,11 @@ public:
             std::cout << std::setprecision(FLOAT_PRECISION);
         }
         if (_orientation == COLUMN) {
-            for (const T& val : _data) {
+            for (const T &val : _data) {
                 std::cout << val << std::endl;
             }
         } else {
-            for (const T& val : _data) {
+            for (const T &val : _data) {
                 std::cout << val << ' ';
             }
             std::cout << std::endl;

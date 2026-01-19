@@ -1,12 +1,8 @@
 #ifndef LINALG_H
 #define LINALG_H
-
-#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
-#include "MafLib/math/linalg/AccelerateWrappers/AccelerateWrapper.hpp"
-#endif
+#pragma once
 
 #include "MafLib/math/Math.hpp"
-#pragma once
 
 namespace maf::math {
 
@@ -27,6 +23,10 @@ enum Orientation : uint8 { ROW, COLUMN };
 // Functions
 
 }  // namespace maf::math
+
+#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
+#include "AccelerateWrappers/AccelerateWrapper.hpp"
+#endif
 
 #include "Matrix.hpp"
 #include "Vector.hpp"

@@ -55,7 +55,7 @@ public:
      * @throws std::invalid_argument if dimensions are zero or data is
      * nullptr.
      */
-    Matrix(size_t rows, size_t cols, T* data);
+    Matrix(size_t rows, size_t cols, T *data);
 
     /**
      * @brief Constructs from a std::vector, filled by rows.
@@ -65,7 +65,18 @@ public:
      * @throws std::invalid_argument if dimensions are zero or data size
      * does not match.
      */
-    Matrix(size_t rows, size_t cols, const std::vector<T>& data);
+    Matrix(size_t rows, size_t cols, const std::vector<T> &data);
+
+    /**
+     * @brief Constructs from a std::vector, filled by rows (move
+     * constructor).
+     * @param rows Number of rows.
+     * @param cols Number of columns.
+     * @param data A std::vector of size (rows * cols) in row-major order.
+     * @throws std::invalid_argument if dimensions are zero or data size
+     * does not match.
+     */
+    Matrix(size_t rows, size_t cols, std::vector<T> &&data);
 
     /**
      * @brief Constructs from a nested std::vector (vector of vectors).
@@ -76,7 +87,7 @@ public:
      * @throws std::invalid_argument if dimensions are zero or data shape
      * does not match.
      */
-    Matrix(size_t rows, size_t cols, const std::vector<std::vector<T>>& data);
+    Matrix(size_t rows, size_t cols, const std::vector<std::vector<T>> &data);
 
     /**
      * @brief Constructs from a std::array, filled by rows.
@@ -89,7 +100,7 @@ public:
      * does not match.
      */
     template <size_t N>
-    Matrix(size_t rows, size_t cols, const std::array<T, N>& data);
+    Matrix(size_t rows, size_t cols, const std::array<T, N> &data);
 
     /**
      * @brief Constructs from a std::initializer_list, filled by rows.
@@ -110,7 +121,7 @@ public:
      * data store.
      * @return std::vector<T>&
      */
-    [[nodiscard]] std::vector<T>& data() noexcept {
+    [[nodiscard]] std::vector<T> &data() noexcept {
         return _data;
     }
 
@@ -119,7 +130,7 @@ public:
      * store.
      * @return const std::vector<T>&
      */
-    [[nodiscard]] const std::vector<T>& data() const noexcept {
+    [[nodiscard]] const std::vector<T> &data() const noexcept {
         return _data;
     }
 
@@ -142,7 +153,7 @@ public:
      * @brief Gets a mutable reference to the element at (row, col).
      * @throws std::out_of_range if the index is invalid.
      */
-    T& at(size_t row, size_t col) {
+    T &at(size_t row, size_t col) {
         return _data.at(_get_index(row, col));
     }
 
@@ -150,7 +161,7 @@ public:
      * @brief Gets a const reference to the element at (row, col).
      * @throws std::out_of_range if the index is invalid.
      */
-    const T& at(size_t row, size_t col) const {
+    const T &at(size_t row, size_t col) const {
         return _data.at(_get_index(row, col));
     }
 
@@ -241,7 +252,7 @@ public:
      * @brief Checks for exact element-wise equality.
      * @details For floating-point, use `loosely_equal()`.
      */
-    [[nodiscard]] constexpr bool operator==(const Matrix& other) const noexcept;
+    [[nodiscard]] constexpr bool operator==(const Matrix &other) const noexcept;
 
     /**
      * @brief Unary minus. Returns a new matrix with all elements negated.
@@ -256,7 +267,7 @@ public:
      * @throws std::invalid_argument if dimensions do not match.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator+(const Matrix<U>& other) const;
+    [[nodiscard]] auto operator+(const Matrix<U> &other) const;
 
     /**
      * @brief Element-wise scalar addition (Matrix + scalar).
@@ -264,7 +275,7 @@ public:
      * @return Matrix of the common, promoted type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator+(const U& scalar) const noexcept;
+    [[nodiscard]] auto operator+(const U &scalar) const noexcept;
 
     /**
      * @brief Element-wise matrix addition assignment.
@@ -273,7 +284,7 @@ public:
      * @throws std::invalid_argument if dimensions do not match.
      */
     template <Numeric U>
-    Matrix<T>& operator+=(const Matrix<U>& other);
+    Matrix<T> &operator+=(const Matrix<U> &other);
 
     /**
      * @brief Element-wise scalar addition assignment (Matrix + scalar).
@@ -282,7 +293,7 @@ public:
      * @return Matrix of the original matrix type.
      */
     template <Numeric U>
-    Matrix<T>& operator+=(const U& scalar) noexcept;
+    Matrix<T> &operator+=(const U &scalar) noexcept;
 
     /**
      * @brief Element-wise matrix subtraction.
@@ -291,7 +302,7 @@ public:
      * @throws std::invalid_argument if dimensions do not match.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator-(const Matrix<U>& other) const;
+    [[nodiscard]] auto operator-(const Matrix<U> &other) const;
 
     /**
      * @brief Element-wise scalar subtraction (Matrix - scalar).
@@ -299,7 +310,7 @@ public:
      * @return Matrix of the common, promoted type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator-(const U& scalar) const noexcept;
+    [[nodiscard]] auto operator-(const U &scalar) const noexcept;
 
     /**
      * @brief Element-wise matrix subtraction assignment.
@@ -308,7 +319,7 @@ public:
      * @throws std::invalid_argument if dimensions do not match.
      */
     template <Numeric U>
-    Matrix<T>& operator-=(const Matrix<U>& other);
+    Matrix<T> &operator-=(const Matrix<U> &other);
 
     /**
      * @brief Element-wise scalar subtraction assignment (Matrix - scalar).
@@ -317,7 +328,7 @@ public:
      * @return Matrix of the original matrix type.
      */
     template <Numeric U>
-    Matrix<T>& operator-=(const U& scalar) noexcept;
+    Matrix<T> &operator-=(const U &scalar) noexcept;
 
     /**
      * @brief Standard algebraic matrix multiplication (A * B).
@@ -329,7 +340,7 @@ public:
      * (A.cols != B.rows).
      */
     template <Numeric U>
-    [[nodiscard]] auto operator*(const Matrix<U>& other) const {
+    [[nodiscard]] auto operator*(const Matrix<U> &other) const {
         if (_cols != other.row_count()) {
             throw std::invalid_argument(
                 "Matrix inner dimensions do not match for multiplication!");
@@ -341,9 +352,9 @@ public:
         const size_t a_cols = _cols;
         Matrix<R> result(a_rows, b_cols);
 
-        const T* a_data = this->_data.data();
-        const U* b_data = other.data().data();
-        R* c_data = result.data().data();
+        const T *a_data = this->_data.data();
+        const U *b_data = other.data().data();
+        R *c_data = result.data().data();
 
         result.fill(R(0));
 
@@ -353,8 +364,8 @@ public:
             if constexpr (std::is_same_v<R, float>) {
                 // Both matrices are float or can be safely converted to float
                 std::vector<float> a_converted, b_converted;
-                const float* a_ptr = a_data;
-                const float* b_ptr = b_data;
+                const float *a_ptr = a_data;
+                const float *b_ptr = b_data;
 
                 // Convert matrix A if needed
                 if constexpr (!std::is_same_v<T, float>) {
@@ -397,8 +408,8 @@ public:
             } else if constexpr (std::is_same_v<R, double>) {
                 // Both matrices are double or can be safely converted to double
                 std::vector<double> a_converted, b_converted;
-                const double* a_ptr;
-                const double* b_ptr;
+                const double *a_ptr;
+                const double *b_ptr;
 
                 // Convert matrix A if needed
                 if constexpr (!std::is_same_v<T, double>) {
@@ -456,7 +467,7 @@ public:
      * @return Matrix of the common, promoted type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator*(const U& scalar) const noexcept;
+    [[nodiscard]] auto operator*(const U &scalar) const noexcept;
 
     /**
      * @brief Element-wise scalar multiplication assignment (Matrix * scalar).
@@ -465,7 +476,7 @@ public:
      * @return Matrix of the original matrix type.
      */
     template <Numeric U>
-    Matrix<T>& operator*=(const U& scalar) noexcept;
+    Matrix<T> &operator*=(const U &scalar) noexcept;
 
     /**
      * @brief Matrix-Vector multiplication (Matrix * column_vector).
@@ -475,37 +486,7 @@ public:
      * dimensions do not match.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator*(const Vector<U>& other) const {
-        using R = std::common_type_t<T, U>;
-
-        const size_t n = this->row_count();
-        const size_t m = this->column_count();
-
-        if (other.orientation() == Orientation::ROW) {
-            throw std::invalid_argument(
-                "Invalid multiplication: matrix * row vector.\n"
-                "Did you mean Vector * Matrix?");
-        }
-
-        if (other.size() != m) {
-            throw std::invalid_argument(
-                "Dimension mismatch in Matrix * Vector multiplication.");
-        }
-
-        Vector<R> result(n, std::vector<R>(n, R(0)), COLUMN);
-
-        #pragma omp parallel for
-        for (size_t i = 0; i < n; ++i) {
-            R sum = R(0);
-            auto L_row_i = row_span(i);
-            #pragma omp simd reduction(+ : sum)
-            for (size_t j = 0; j < m; ++j) {
-                sum += static_cast<R>(L_row_i[j]) * static_cast<R>(other[j]);
-            }
-            result.at(i) = sum;
-        }
-        return result;
-    }
+    [[nodiscard]] auto operator*(const Vector<U> &other) const;
 
     /**
      * @brief Element-wise scalar division (Matrix / scalar).
@@ -513,7 +494,7 @@ public:
      * @return Matrix of the common, promoted type.
      */
     template <Numeric U>
-    [[nodiscard]] auto operator/(const U& scalar) const noexcept;
+    [[nodiscard]] auto operator/(const U &scalar) const noexcept;
 
     /**
      * @brief Element-wise scalar division assignment (Matrix / scalar).
@@ -522,7 +503,7 @@ public:
      * @return Matrix of the original matrix type.
      */
     template <Numeric U>
-    Matrix<T>& operator/=(const U& scalar) noexcept;
+    Matrix<T> &operator/=(const U &scalar) noexcept;
 
     // --- Debugging and printing ---
 
@@ -572,7 +553,7 @@ private:
      */
     void _invert_sign() {
         if (_data.size() > OMP_LINEAR_LIMIT) {
-            #pragma omp parallel for
+#pragma omp parallel for
             for (size_t i = 0; i < _data.size(); ++i) {
                 _data[i] = -_data[i];
             }
@@ -585,13 +566,13 @@ private:
 
     // Fallback matrix multiplication implementation
     template <typename A, typename B, typename C>
-    void _fallback_matrix_multiply(const A* a_data,
-                                   const B* b_data,
-                                   C* c_data,
+    void _fallback_matrix_multiply(const A *a_data,
+                                   const B *b_data,
+                                   C *c_data,
                                    size_t a_rows,
                                    size_t a_cols,
                                    size_t b_cols) const {
-        #pragma omp parallel for collapse(2) if (a_rows * b_cols > 10000)
+#pragma omp parallel for collapse(2) if (a_rows * b_cols > 10000)
         for (size_t ii = 0; ii < a_rows; ii += BLOCK_SIZE) {
             for (size_t jj = 0; jj < b_cols; jj += BLOCK_SIZE) {
                 for (size_t kk = 0; kk < a_cols; kk += BLOCK_SIZE) {
@@ -606,7 +587,7 @@ private:
                             const size_t b_offset = k * b_cols;
                             const size_t c_offset = i * b_cols;
 
-                            #pragma omp simd
+#pragma omp simd
                             for (size_t j = jj; j < j_end; ++j) {
                                 c_data[c_offset + j] +=
                                     a_ik * static_cast<C>(b_data[b_offset + j]);

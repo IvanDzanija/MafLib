@@ -1,5 +1,5 @@
 #include "MafLib/main/GlobalHeader.hpp"
-#include "MafLib/utility/UtilMath.hpp"
+#include "MafLib/utility/Math.hpp"
 
 namespace maf::math {
 using namespace util;
