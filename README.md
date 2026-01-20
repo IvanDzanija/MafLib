@@ -1,229 +1,143 @@
 # MafLib
 
-A modern, header-only C++ framework for numerical computing and linear algebra
-operations, designed with performance and ease of use in mind.
+MafLib is a modern, header-only C++ library providing mathematical utilities, linear algebra operations, data structures, and algorithms for numerical computing applications.
 
 ## Overview
 
-Framework is a small experimental C++ library that provides essential building
-blocks for numerical computing applications. Built with modern C++ standards and
-optimized for performance, it aims to deliver a clean, intuitive API for
-mathematical operations commonly needed in computational finance, scientific
-computing, and numerical analysis.
+MafLib is designed as a comprehensive C++ library that combines mathematical computation capabilities with essential data structures and algorithms. The library emphasizes performance through modern C++ features, template-based design, and platform-specific optimizations.
 
-## Features
+## Core Components
 
-- **Header-Only Design**: Easy integration into existing projects without
-  complex build configurations
-- **Modern C++ Standards**: Leverages C++20/C++23 features for clean, expressive
-  code
-- **CMake Integration**: Simple build system with separate debug and release
-  configurations
-- **Cross-Platform**: Works on macOS, Linux, and other Unix-like systems
-- **Performance Focused**: Optimized for numerical computations with Clang
-  compiler support
-- **Comprehensive Testing**: Built-in test suite using CTest
+### Linear Algebra
+- Matrix operations with row-major dense storage
+- Vector operations and utilities
+- Matrix decompositions: PLU, QR, Cholesky
+- Eigenvalue and eigenvector computation
+- Principal Component Analysis (PCA)
+- Norms and matrix/vector checkers
+- Platform-optimized routines using Apple Accelerate framework (macOS) and BLAS/LAPACK
 
-## Project Structure
+### Mathematical Utilities
+- Extended integer arithmetic
+- Polynomial operations and constructors
+- Random variable generators
+- Statistical functions
+- Modular arithmetic
+- Bit manipulation utilities
+- Type conversions
 
-```
-Framework/
-├── CMakeLists.txt          # Main CMake configuration
-├── include/                # Public header files
-├── src/                    # Implementation files
-├── examples/               # Example applications
-├── tests/                  # Unit tests
-└── build/                  # Build directory (generated)
-    ├── clang-debug/        # Debug build artifacts
-    └── clang-release/      # Release build artifacts
-```
+### Data Structures
+- Tree implementations: AVL, B-tree, Binary tree
+- Trie for string operations
+- Disjoint set (union-find)
+
+### Parsers
+- Finance CSV parser (in development)
+
+## Key Features
+
+- **Header-Only Design**: Simple integration into existing projects without complex build configurations
+- **Modern C++20**: Leverages concepts, ranges, and other modern C++ features
+- **Performance Optimized**: 
+  - OpenMP parallelization for intensive computations
+  - Apple Accelerate framework support on macOS
+  - Cache-friendly blocking strategies
+  - Compiler optimizations with Clang
+- **Template-Based**: Generic programming for flexibility across numeric types
+- **Well-Tested**: Comprehensive test suite covering core functionality
 
 ## Requirements
 
-- **C++ Compiler**: Clang with C++20 support (or later)
-- **CMake**: Version 3.15 or higher
-- **Operating System**: macOS, Linux (Ubuntu with Sway), or other Unix-like
-  systems
+- **Compiler**: Clang with C++20 support (AppleClang on macOS or Clang on Linux)
+- **CMake**: Version 3.20 or higher
+- **OpenMP**: Required for parallel operations
+- **Platform**: macOS or Linux
 
-## Quick Start
+## Building and Testing
 
-### Building the Project
+### Quick Build Scripts
 
-#### Debug Build
-
+Debug build and test:
 ```bash
-cmake --preset clang-debug && cmake --build --preset clang-debug
+./debug_build_and_test.sh
 ```
 
-#### Release Build
-
+Release build and test:
 ```bash
-cmake --preset clang-release && cmake --build --preset clang-release
+./release_build_and_test.sh
 ```
 
-### Running Tests
+### Manual Build
 
-#### Debug Mode
-
+Configure and build (debug):
 ```bash
-ctest --preset clang-debug
+cmake --preset clang-debug
+cmake --build --preset clang-debug
 ```
 
-#### Release Mode
-
+Configure and build (release):
 ```bash
-ctest --preset clang-release
+cmake --preset clang-release
+cmake --build --preset clang-release
 ```
 
-### Running Examples
-
-After building in release mode:
-
+Run tests:
 ```bash
-./build/clang-release/examples/example
+ctest --preset clang-debug  # or clang-release
 ```
 
-## Usage
+## Integration
 
-Since Framework is header-only, simply include the necessary headers in your
-project:
+MafLib is designed for easy integration. Since it is header-only, include it in your CMake project:
 
+```cmake
+add_subdirectory(path/to/MafLib)
+target_link_libraries(your_target PRIVATE MafLib::MafLib)
+```
+
+Then include headers as needed:
 ```cpp
-#include <framework/your_header.h>
+#include <MafLib/math/linalg/Matrix.hpp>
+#include <MafLib/math/linalg/Vector.hpp>
 
 int main() {
+    maf::math::Matrix<double> m(3, 3);
     // Your code here
     return 0;
 }
 ```
 
-## CMake Integration
-
-To use Framework in your CMake project:
-
-```cmake
-# Add Framework to your project
-add_subdirectory(path/to/Framework)
-
-# Link against Framework
-target_link_libraries(your_target PRIVATE framework)
-```
-
-## Development
-
-### Compiler Flags
-
-The project is configured to use Clang with optimizations:
-
-- **Debug**: Includes debugging symbols and assertions
-- **Release**: Maximum optimization levels for performance
-
-### Code Style
-
-- Modern C++ idioms and best practices
-- STL-compliant interfaces where applicable
-- Template-heavy design for compile-time optimization
-- Clear, expressive naming conventions
-
-### Contributing
-
-Contributions are welcome! When contributing:
-
-1. Follow the existing code style
-2. Add tests for new functionality
-3. Ensure all tests pass in both debug and release modes
-4. Update documentation as needed
-
-## Design Philosophy
-
-Framework is built around several key principles:
-
-- **Simplicity**: Clean, intuitive APIs that are easy to understand and use
-- **Performance**: Compile-time optimization through templates and modern C++
-  features
-- **Correctness**: Comprehensive testing to ensure reliability
-- **Flexibility**: Modular design allowing users to include only what they need
-- **Maintainability**: Clear code structure and documentation
-
-## Use Cases
-
-Framework is suitable for:
-
-- Numerical analysis and scientific computing
-- Financial modeling and simulations
-- Linear algebra operations
-- Matrix computations
-- Educational projects in numerical methods
-- Prototyping mathematical algorithms
-
-## Performance
-
-The framework is designed with performance in mind:
-
-- Template-based design for zero-overhead abstractions
-- Optimized compilation with Clang
-- Expression templates for efficient mathematical operations (where applicable)
-- Minimal runtime overhead
-
-## Platform Support
-
-Tested and supported on:
-
-- **macOS**: AppleClang compiler
-- **Linux**: Ubuntu with Clang
-- **Build Tools**: CMake 3.15+
-
-## Future Development
-
-Potential areas for expansion:
-
-- Additional numerical algorithms
-- GPU acceleration support via OpenMP/CUDA
-- Extended matrix operations
-- Integration with BLAS/LAPACK for optimal performance
-- Additional platform support
-
 ## Documentation
 
-For detailed documentation:
+Documentation is generated using Doxygen. The library uses the `maf` namespace with subnamespaces for different components:
+- `maf::math` - Mathematical functions and linear algebra
+- `maf::util` - Utility functions
 
-- See header files for API documentation
-- Check the `examples/` directory for usage examples
-- Review tests in `tests/` for additional code samples
+Header files contain detailed API documentation.
+
+## Project Status
+
+MafLib is under active development. Current focus areas include:
+- Expanding linear algebra operations
+- Completing parser implementations
+- Improving platform compatibility
+- Enhancing performance optimizations
+- Adding more comprehensive examples
+
+## Future Plans
+
+- Extended numerical algorithms and special functions
+- Additional matrix factorization methods
+- More data structure implementations
+- Enhanced CSV and data parsing capabilities
+- Potential GPU acceleration
+- Broader platform support
 
 ## License
 
-This project is released under the MIT License. See `LICENSE` file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Author
 
-**Ivan Dzanija**
-
+Ivan Dzanija
 - GitHub: [@IvanDzanija](https://github.com/IvanDzanija)
-
-## Acknowledgments
-
-Built as an experimental framework to explore modern C++ design patterns and
-numerical computing techniques.
-
----
-
-**Note**: This is an experimental project under active development. APIs may
-change as the framework evolves.
-
-## Getting Help
-
-If you encounter issues or have questions:
-
-1. Check the examples directory for usage patterns
-2. Review the test suite for expected behavior
-3. Open an issue on GitHub with detailed information
-
-## Versioning
-
-This project is currently in experimental/development phase. Semantic versioning
-will be adopted upon the first stable release.
-
----
-
-_Last updated: November 2025_
