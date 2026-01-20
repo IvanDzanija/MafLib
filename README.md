@@ -27,12 +27,13 @@ MafLib is designed as a comprehensive C++ library that combines mathematical com
 - Type conversions
 
 ### Data Structures
-- Tree implementations: AVL, B-tree, Binary tree
+- Tree implementations: B-tree, Binary tree
 - Trie for string operations
 - Disjoint set (union-find)
+- AVL tree (basic structure, in development)
 
 ### Parsers
-- Finance CSV parser (in development)
+- Finance CSV parser (planned)
 
 ## Key Features
 
@@ -50,7 +51,7 @@ MafLib is designed as a comprehensive C++ library that combines mathematical com
 
 - **Compiler**: Clang with C++20 support (AppleClang on macOS or Clang on Linux)
 - **CMake**: Version 3.20 or higher
-- **OpenMP**: Required for parallel operations
+- **OpenMP**: Required for parallel operations (automatically configured via Homebrew on macOS)
 - **Platform**: macOS or Linux
 
 ## Building and Testing
