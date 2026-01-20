@@ -3,6 +3,7 @@
 #pragma once
 
 #include "LinAlg.hpp"
+#include "MatrixView.hpp"
 
 namespace maf::math {
 /**
@@ -150,6 +151,22 @@ public:
     }
 
     /**
+     * @brief Accesses the element at (row, col) with no bounds check.
+     */
+    [[nodiscard]] T *operator[](size_t ind) noexcept {
+        // TODO: add tests
+        return &_data[ind * _cols];
+    }
+
+    /**
+     * @brief Accesses the element at (row, col) with no bounds check.
+     */
+    [[nodiscard]] const T *operator[](size_t ind) const noexcept {
+        // TODO: add tests
+        return &_data[ind * _cols];
+    }
+
+    /**
      * @brief Gets a mutable reference to the element at (row, col).
      * @throws std::out_of_range if the index is invalid.
      */
@@ -179,6 +196,30 @@ public:
      */
     [[nodiscard]] std::span<const T> row_span(size_t row) const {
         return std::span<const T>(&_data.at(_get_index(row, 0)), _cols);
+    }
+
+    /**
+     * @brief Creates a view (sub-matrix) into this matrix.
+     * @param row Starting row index of the view.
+     * @param col Starting column index of the view.
+     * @param height Height (number of rows) of the view.
+     * @param width Width (number of columns) of the view.
+     * @return MatrixView<T> representing the specified sub-matrix.
+     * @throws std::invalid_argument if height or width is zero.
+     * @throws std::out_of_range if the requested view exceeds matrix
+     * dimensions.
+     */
+    [[nodiscard]] MatrixView<T> view(size_t row,
+                                     size_t col,
+                                     size_t height,
+                                     size_t width) {
+        if (height == 0 || width == 0) {
+            throw std::invalid_argument("View dimensions must be greater than zero.");
+        }
+        if (row + height > _rows || col + width > _cols) {
+            throw std::out_of_range("Requested view exceeds matrix dimensions.");
+        }
+        return MatrixView<T>(&_data[(row * _cols) + col], height, width, _cols);
     }
 
     // --- Checkers ---
@@ -546,6 +587,21 @@ private:
             throw std::out_of_range("Index out of bounds.");
         }
         return (row * _cols) + col;
+    }
+
+    /** * @brief Internal-only accessor for high-performance kernels.
+     * No bounds checking. Use only when indices are guaranteed to be valid.
+     */
+    [[nodiscard]] constexpr T &_unchecked_at(size_t row, size_t col) noexcept {
+        return _data[(row * _cols) + col];
+    }
+
+    /** * @brief Internal-only accessor for high-performance kernels.
+     * No bounds checking. Use only when indices are guaranteed to be valid.
+     */
+    [[nodiscard]] constexpr const T &_unchecked_at(size_t row,
+                                                   size_t col) const noexcept {
+        return _data[(row * _cols) + col];
     }
 
     /**

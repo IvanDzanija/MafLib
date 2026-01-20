@@ -91,7 +91,7 @@ template <Numeric T>
     try {
         plu(*this);
         return false;
-    } catch (const std::runtime_error& e) {
+    } catch (const std::runtime_error &e) {
         return true;
     }
 }
@@ -114,8 +114,8 @@ template <Numeric T>
  * @return true if dimensions match and all elements are "close".
  */
 template <Numeric T, Numeric U>
-[[nodiscard]] constexpr bool loosely_equal(const Matrix<T>& first,
-                                           const Matrix<U>& second,
+[[nodiscard]] constexpr bool loosely_equal(const Matrix<T> &first,
+                                           const Matrix<U> &second,
                                            double eps = 1e-6) {
     size_t n = first.row_count();
     size_t m = first.column_count();
