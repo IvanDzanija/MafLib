@@ -19,9 +19,9 @@ namespace maf::math {
  */
 template <Numeric T>
 [[nodiscard]] Matrix<T> inline identity_matrix(size_t size) {
-    Matrix<T> result(size, size);
-    result.make_identity();
-    return result;
+  Matrix<T> result(size, size);  // This is slower then specialized constructor
+  result.make_identity();
+  return result;
 }
 
 /**
@@ -33,9 +33,9 @@ template <Numeric T>
  */
 template <Numeric U>
 [[nodiscard]] inline Matrix<U> ones(size_t rows, size_t cols) {
-    Matrix<U> result(rows, cols);
-    result.fill(U(1));
-    return result;
+  Matrix<U> result(rows, cols);
+  result.fill(U(1));
+  return result;
 }
 
 /**
@@ -46,17 +46,15 @@ template <Numeric U>
  * @return A sparse permutation Matrix<T>.
  */
 template <Numeric T>
-[[nodiscard]] Matrix<T> inline permutation_matrix(const std::vector<uint32>& perm) {
-    size_t n = perm.size();
-    Matrix<T> result(n, n);  // Initializes to zero
-
-    #pragma omp parallel for if (n > 256)
-    for (size_t i = 0; i < n; ++i) {
-        const size_t j = perm.at(i);
-        result.at(i, j) = static_cast<T>(1);
-    }
-
-    return result;
+[[nodiscard]] Matrix<T> inline permutation_matrix(const std::vector<uint32> &perm) {
+  size_t n = perm.size();
+  Matrix<T> result(n, n);  // Initializes to zero
+#pragma omp parallel for if (n > 256)
+  for (size_t i = 0; i < n; ++i) {
+    const size_t j = perm.at(i);
+    result[i][j] = static_cast<T>(1);
+  }
+  return result;
 }
 
 }  // namespace maf::math
