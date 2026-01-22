@@ -531,7 +531,6 @@ class Matrix {
   size_t _rows;
   size_t _cols;
   std::vector<T> _data;
-  std::complex<float> _complex;
 
   /**
    * @brief Internal check if a row/column index is within bounds.
