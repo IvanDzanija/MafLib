@@ -93,10 +93,9 @@ private:
     double _start;
 
     /**
-     * @brief Calculate the error for the current iteration.
-     * @param tolerance The tolerance for convergence.
-     * @param max_iterations The maximum number of iterations to perform.
-     * @return The error for the current iteration.
+     * @brief Calculate the error at the given point.
+     * @param current_point The current point at which to evaluate the error.
+     * @return The absolute difference between f(current_point) and current_point.
      */
     double _get_error(double current_point) {
         return std::abs(_function(current_point) - current_point);
