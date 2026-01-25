@@ -141,11 +141,31 @@ class Vector {
   // --- Getters ---
 
   /**
+   * @brief Gets a const pointer to the underlying data.
+   * store.
+   * @return const T*
+   */
+  [[nodiscard]] const T *data() const noexcept { return _data.data(); }
+
+  /**
+   * @brief Gets a mutable pointer to the underlying data.
+   * @return T*
+   */
+  [[nodiscard]] T *data() noexcept { return _data.data(); }
+
+  /**
    * @brief Gets a const reference to the underlying std::vector data
    * store.
    * @return const std::vector<T>&
    */
-  [[nodiscard]] const std::vector<T> &data() const noexcept { return _data; }
+  [[nodiscard]] const std::vector<T> &data_vector() const noexcept { return _data; }
+
+  /**
+   * @brief Gets a mutable reference to the underlying std::vector
+   * data store.
+   * @return std::vector<T>&
+   */
+  [[nodiscard]] std::vector<T> &data_vector() noexcept { return _data; }
 
   /** @brief Gets the number of elements in the vector. */
   [[nodiscard]] size_t size() const noexcept { return _data.size(); }
@@ -188,14 +208,14 @@ class Vector {
    * @throws std::out_of_range if the requested view exceeds Vector
    * dimensions.
    */
-  [[nodiscard]] VectorView<T> view(size_t index, size_t length) {
+  [[nodiscard]] VectorView<T> view(size_t index, size_t length, size_t inc = 1) {
     if (length == 0) {
       throw std::invalid_argument("View dimensions must be greater than zero.");
     }
     if (index + length > size()) {
       throw std::out_of_range("Requested view exceeds Vector dimensions.");
     }
-    return VectorView<T>(&_data[index], length);
+    return VectorView<T>(&_data[index], length, inc);
   }
 
   // --- Checkers ---

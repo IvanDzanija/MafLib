@@ -12,7 +12,7 @@ static std::vector<To> convert_if_needed(const std::vector<From> &src) {
     std::vector<To> dst;
     dst.reserve(src.size());
     for (const From &v : src) {
-      dst.push_back(static_cast<To>(v));
+      dst.emplace_back(static_cast<To>(v));
     }
     return dst;
   }

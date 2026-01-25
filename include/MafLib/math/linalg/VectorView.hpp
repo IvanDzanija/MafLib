@@ -22,6 +22,8 @@ class VectorView {
   /** @brief The numeric type of the vector elements. */
   using value_type = T;
 
+  /** @brief Default constructor creating an empty VectorView. */
+  VectorView() = default;
   /** @brief Constructs a VectorView.
    * @param data Pointer to the starting element of the subvector.
    * @param size The logical number of elements in the subvector.
@@ -30,6 +32,14 @@ class VectorView {
    */
   VectorView(T *data, size_t size, size_t inc = 1)
       : _data(data), _size(size), _inc(inc) {}
+
+  // VectorView
+  //
+
+  /** @brief Returns a pointer to the underlying data (mutable). */
+  [[nodiscard]] T *data() noexcept { return _data; }
+  /** @brief Returns a pointer to the underlying data (const). */
+  [[nodiscard]] const T *data() const noexcept { return _data; }
 
   /** @brief Accesses element at index i with the stride. */
   [[nodiscard]] T &operator[](size_t ind) noexcept { return _data[ind * _inc]; }
@@ -63,13 +73,12 @@ class VectorView {
   [[nodiscard]] size_t size() const noexcept { return _size; }
 
   /** @brief Gets the increment (stride) of the VectorView. */
-  [[nodiscard]] size_t increment() const noexcept { return _inc; }
+  [[nodiscard]] size_t get_increment() const noexcept { return _inc; }
 
  private:
   T *_data;      // Starting point
   size_t _size;  // Logical length
   size_t _inc;   // Distance between elements (1 = contiguous)
 };
-
 }  // namespace maf::math
 #endif

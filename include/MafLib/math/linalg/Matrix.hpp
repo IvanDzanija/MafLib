@@ -129,18 +129,30 @@ class Matrix {
   // --- Getters and setters ---
 
   /**
+   * @brief Gets a mutable pointer to the underlying data.
+   * @return T*
+   */
+  [[nodiscard]] T *data() noexcept { return _data.data(); }
+
+  /**
+   * @brief Gets a const pointer to the underlying data.
+   * @return const std::vector<T>&
+   */
+  [[nodiscard]] const T *data() const noexcept { return _data.data(); }
+
+  /**
    * @brief Gets a mutable reference to the underlying std::vector
    * data store.
    * @return std::vector<T>&
    */
-  [[nodiscard]] std::vector<T> &data() noexcept { return _data; }
+  [[nodiscard]] std::vector<T> &data_vector() noexcept { return _data; }
 
   /**
    * @brief Gets a const reference to the underlying std::vector data
    * store.
    * @return const std::vector<T>&
    */
-  [[nodiscard]] const std::vector<T> &data() const noexcept { return _data; }
+  [[nodiscard]] const std::vector<T> &data_vector() const noexcept { return _data; }
 
   /** @brief Gets the number of rows. */
   [[nodiscard]] size_t row_count() const noexcept { return _rows; }
@@ -152,7 +164,7 @@ class Matrix {
   [[nodiscard]] size_t size() const noexcept { return _data.size(); }
 
   /**
-   * @brief Accesses the element at (row, col) with no bounds check.
+   * @brief Accesses the element at [row][col] with no bounds check.
    */
   [[nodiscard]] T *operator[](size_t ind) noexcept {
     // TODO: add tests
@@ -160,7 +172,7 @@ class Matrix {
   }
 
   /**
-   * @brief Accesses the element at (row, col) with no bounds check.
+   * @brief Accesses the element at [row][col] with no bounds check.
    */
   [[nodiscard]] const T *operator[](size_t ind) const noexcept {
     // TODO: add tests
@@ -389,8 +401,8 @@ class Matrix {
     Matrix<R> result(a_rows, b_cols);
 
     const T *a_data = this->_data.data();
-    const U *b_data = other.data().data();
-    R *c_data = result.data().data();
+    const U *b_data = other.data();
+    R *c_data = result.data();
 
     result.fill(R(0));
 

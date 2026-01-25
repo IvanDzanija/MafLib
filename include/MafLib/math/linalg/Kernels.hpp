@@ -29,11 +29,11 @@ auto gemv(OP trans, MatrixView<T> A, VectorView<U> x) {
 
     if constexpr (std::is_same_v<R, float>) {
       cblas_sgemv(CblasRowMajor, blas_trans, (int)A.row_count(), (int)A.column_count(),
-                  1.0F, A.data_ptr(), (int)A.stride(), x.data_ptr(), (int)x.increment(),
-                  0.0F, y.data(), 1);
+                  1.0F, A.data_ptr(), (int)A.get_stride(), x.data(),
+                  (int)x.get_increment(), 0.0F, y.data(), 1);
     } else {
       cblas_dgemv(CblasRowMajor, blas_trans, (int)A.row_count(), (int)A.column_count(),
-                  1.0, A.data_ptr(), (int)A.stride(), x.data_ptr(), (int)x.increment(),
+                  1.0, A.data(), (int)A.get_stride(), x.data(), (int)x.get_increment(),
                   0.0, y.data(), 1);
     }
     return y;
@@ -46,6 +46,7 @@ auto gemv(OP trans, MatrixView<T> A, VectorView<U> x) {
       for (size_t i = 0; i < A.row_count(); ++i) {
         auto row = A.row_span(i);
         R sum = 0;
+#pragma omp simd
         for (size_t j = 0; j < A.column_count(); ++j) {
           sum += row[j] * x[j];
         }
@@ -55,6 +56,7 @@ auto gemv(OP trans, MatrixView<T> A, VectorView<U> x) {
       for (size_t i = 0; i < A.row_count(); ++i) {
         auto row = A.row_span(i);
         R sum = 0;
+#pragma omp simd
         for (size_t j = 0; j < A.column_count(); ++j) {
           sum += row[j] * x[j];
         }
@@ -80,8 +82,8 @@ auto gemv(OP trans, MatrixView<T> A, VectorView<U> x) {
         y[j] = sum;
       }
     }
-    return y;
   }
+  return y;
 }
 
 }  // namespace maf::math::kernels

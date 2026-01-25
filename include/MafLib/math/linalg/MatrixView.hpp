@@ -24,16 +24,29 @@ class MatrixView {
   /** @brief The numeric type of the matrix elements. */
   using value_type = T;
 
+  /** @brief Default constructor creating an empty MatrixView. */
+  MatrixView() = default;
+
+  /** @brief Constructs a MatrixView.
+   * @param data Pointer to the starting element of the submatrix.
+   * @param r The logical number of rows in the submatrix.
+   * @param c The logical number of columns in the submatrix.
+   * @param s The stride (parent Matrix width) between rows.
+   */
   MatrixView(T *data, size_t r, size_t c, size_t s)
       : _data(data), _rows(r), _cols(c), _stride(s) {}
 
-  /**
-   * @brief Accesses the element at [row][col] with no bounds check.
+  /** @brief Returns a pointer to the underlying data (mutable). */
+  [[nodiscard]] T *data() noexcept { return _data; }
+  /** @brief Returns a pointer to the underlying data (const). */
+  [[nodiscard]] const T *data() const noexcept { return _data; }
+
+  /** @brief Provides unchecked access to row r.
+   * @return A pointer to the first element of row r (use as view[r][c]).
    */
   [[nodiscard]] T *operator[](size_t r) noexcept { return _data + (r * _stride); }
-
-  /**
-   * @brief Accesses the element at (row, col) with no bounds check.
+  /** @brief Provides unchecked access to row r.
+   * @return A pointer to the first element of row r (use as view[r][c]).
    */
   [[nodiscard]] const T *operator[](size_t r) const noexcept {
     return _data + (r * _stride);
@@ -49,7 +62,6 @@ class MatrixView {
     }
     return _data[row * _stride + col];
   }
-
   /**
    * @brief Gets a const reference to the element at (row, col).
    * @throws std::out_of_range if the index is invalid.
@@ -62,7 +74,7 @@ class MatrixView {
   }
 
   /**
-   * @brief Gets a const std::span of a single row.
+   * @brief Gets a std::span of a single row.
    * @throws std::out_of_range if the row is invalid.
    */
   [[nodiscard]] std::span<T> row_span(size_t r) {
@@ -71,7 +83,6 @@ class MatrixView {
     }
     return std::span<T>(_data + (r * _stride), _cols);
   }
-
   /** @brief Returns a const span of a single row.
    * @throws std::out_of_range if the row is invalid.
    */

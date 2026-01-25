@@ -317,13 +317,13 @@ template <Numeric U>
   if constexpr (std::is_same_v<R, float>) {
     return Vector<R>(_rows,
                      acc::sgemvm(_rows, _cols, util::convert_if_needed<R>(_data),
-                                 util::convert_if_needed<R>(other.data())),
+                                 util::convert_if_needed<R>(other.data_vector())),
                      COLUMN);
 
   } else if constexpr (std::is_same_v<R, double>) {
     return Vector<R>(_rows,
                      acc::dgemvm(_rows, _cols, util::convert_if_needed<R>(_data),
-                                 util::convert_if_needed<R>(other.data())),
+                                 util::convert_if_needed<R>(other.data_vector())),
                      COLUMN);
   }
 #endif

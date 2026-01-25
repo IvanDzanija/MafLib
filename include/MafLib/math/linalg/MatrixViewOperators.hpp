@@ -31,14 +31,14 @@ auto operator*(const T &A, const V &x) {
   if constexpr (std::is_same_v<T, MatrixView<T_type>>) {
     A_view = A;
   } else {
-    A_view = A.view();
+    A_view = A.view(0, 0, A.row_count(), A.column_count());
   }
 
   // GEMV does the conversion of types internally
   if constexpr (std::is_same_v<V, VectorView<V_type>>) {
     return kernels::gemv(kernels::OP::NoTrans, A_view, x);
   } else {
-    return kernels::gemv(kernels::OP::NoTrans, A_view, x.view());
+    return kernels::gemv(kernels::OP::NoTrans, A_view, x.view(0, x.size()));
   }
 }
 
@@ -68,14 +68,14 @@ auto operator*(const V &x, const T &A) {
   if constexpr (std::is_same_v<T, MatrixView<T_type>>) {
     A_view = A;
   } else {
-    A_view = A.view();
+    A_view = A.view(0, 0, A.row_count(), A.column_count());
   }
 
   // GEMV does the conversion of types internally
   if constexpr (std::is_same_v<V, VectorView<V_type>>) {
     return kernels::gemv(kernels::OP::Trans, A_view, x);
   } else {
-    return kernels::gemv(kernels::OP::Trans, A_view, x.view());
+    return kernels::gemv(kernels::OP::Trans, A_view, x.view(0, x.size()));
   }
 }
 }  // namespace maf::math
