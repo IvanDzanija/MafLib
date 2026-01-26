@@ -60,6 +60,12 @@ public:
      */
     SolverResult<double> solve(double tolerance = 1e-7,
                                uint32_t max_iterations = 1000) {
+        if (!_function) {
+            return {.solution = NAN,
+                    .error = NAN,
+                    .error_message = "Function is not defined."};
+        }
+
         double x = _start;
         double error = _get_error(x);
         uint32_t iterations = 0;
