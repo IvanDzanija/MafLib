@@ -56,7 +56,7 @@ public:
      * @brief Find the fixed point using the Fixed Point Iteration method.
      * @param tolerance The tolerance for convergence.
      * @param max_iterations The maximum number of iterations to perform.
-     * @return A pair containing the fixed point and the error or an error message;
+     * @return A SolverResult containing the solution, error, and optionally an error message.
      */
     SolverResult<double> solve(double tolerance = 1e-7,
                                uint32_t max_iterations = 1000) {
