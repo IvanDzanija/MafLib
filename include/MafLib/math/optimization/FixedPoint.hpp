@@ -3,7 +3,7 @@
 
 #pragma once
 #include "MafLib/main/GlobalHeader.hpp"
-#include "SolverResult.hpp"
+#include "OptimizerResult.hpp"
 
 namespace maf::math {
 /**
@@ -12,7 +12,7 @@ namespace maf::math {
  */
 class FixedPoint {
 public:
-    FixedPoint() = default;
+    FixedPoint() = delete;  // Make sure function is provided.
     /**
      * @brief Constructor for FixedPoint class.
      * @param function The function for which to find the fixed point.
@@ -56,16 +56,11 @@ public:
      * @brief Find the fixed point using the Fixed Point Iteration method.
      * @param tolerance The tolerance for convergence.
      * @param max_iterations The maximum number of iterations to perform.
-     * @return A SolverResult containing the solution, error, and optionally an error message.
+     * @return A OptimizerResult containing the solution, error, and optionally an error
+     * message.
      */
-    SolverResult<double> solve(double tolerance = 1e-7,
-                               uint32_t max_iterations = 1000) {
-        if (!_function) {
-            return {.solution = NAN,
-                    .error = NAN,
-                    .error_message = "Function is not defined."};
-        }
-
+    OptimizerResult<double> solve(double tolerance = 1e-7,
+                                  uint32_t max_iterations = 1000) {
         double x = _start;
         double error = _get_error(x);
         uint32_t iterations = 0;

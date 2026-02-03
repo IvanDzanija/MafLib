@@ -4,8 +4,8 @@
 namespace maf::test {
 class ITest {
 private:
-    uint32 _passed = 0;
-    uint32 _failed = 0;
+    std::atomic<uint32> _passed = 0;
+    std::atomic<uint32> _failed = 0;
 
 public:
     virtual ~ITest() = default;
@@ -21,8 +21,8 @@ public:
 
 protected:
     void assert_true(bool condition,
-                     const std::string& msg,
-                     const char* file,
+                     const std::string &msg,
+                     const char *file,
                      int line) {
         if (!condition) {
             assert(condition);

@@ -13,9 +13,11 @@
 #include <cstdint>
 #include <cstring>
 #include <execution>
+#include <functional>
 #include <iomanip>
 #include <iostream>
 #include <memory>
+#include <numbers>
 #include <optional>
 #include <random>
 #include <ranges>

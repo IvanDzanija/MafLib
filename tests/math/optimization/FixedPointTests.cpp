@@ -1,13 +1,12 @@
 #include "ITest.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/math/optimization/FixedPoint.hpp"
-#include "MafLib/math/optimization/SolverResult.hpp"
 
 namespace maf::test {
 using namespace maf;
 using namespace std::chrono;
 
-class OptimizationTests : public ITest {
+class FixedPointTests : public ITest {
 private:
     void should_perform_fixed_point_iteration() {
         auto func = [](double x) { return std::cos(x); };
@@ -16,7 +15,7 @@ private:
         uint32 max_iterations = 1000;
 
         maf::math::FixedPoint fp(func, initial_guess);
-        math::SolverResult result = fp.solve(tolerance, max_iterations);
+        math::OptimizerResult<double> result = fp.solve(tolerance, max_iterations);
 
         double expected = 0.739085;
         ASSERT_TRUE(std::abs(result.solution - expected) < tolerance);
@@ -29,7 +28,7 @@ private:
         uint32 max_iterations = 100;
 
         maf::math::FixedPoint fp(func, initial_guess);
-        math::SolverResult result = fp.solve(tolerance, max_iterations);
+        math::OptimizerResult<double> result = fp.solve(tolerance, max_iterations);
         ASSERT_TRUE(!result);
     }
 
