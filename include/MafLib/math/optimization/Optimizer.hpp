@@ -18,7 +18,7 @@ public:
     /** @brief Get the function being optimized/solved.
      * @return The function.
      */
-    [[nodiscard]] std::function<T(T)> get_function() const {
+    [[nodiscard]] const std::function<T(T)> &get_function() const {
         return _function;
     }
 
@@ -26,6 +26,9 @@ public:
      * @param function The function to set.
      */
     void set_function(const std::function<T(T)> &function) {
+        if (!function) {
+            throw std::invalid_argument("Function cannot be empty.");
+        }
         _function = function;
     }
 

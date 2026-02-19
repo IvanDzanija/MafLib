@@ -3,14 +3,15 @@
 
 #pragma once
 #include "MafLib/main/GlobalHeader.hpp"
-#include "OptimizerResult.hpp"
+#include "Optimizer.hpp"
 
 namespace maf::math {
 /**
  * @brief Class for finding fixed points of a function using the Fixed Point Iteration
  * method.
  */
-class FixedPoint {
+template <std::floating_point T>
+class FixedPoint : public Optimizer<T> {
 public:
     FixedPoint() = delete;  // Make sure function is provided.
     /**
@@ -18,37 +19,22 @@ public:
      * @param function The function for which to find the fixed point.
      * @param start The initial guess for the fixed point.
      */
-    FixedPoint(const std::function<double(double)> &function, double start)
+    explicit FixedPoint(const std::function<double(double)> &function, double start)
         : _function(function), _start(start) {}
-
-    /** @brief Get the function for which to find the fixed point.
-     * @return The function.
-     */
-    [[nodiscard]] std::function<double(double)> get_function() const {
-        return _function;
-    }
 
     /**
      * @brief Get the initial guess for the fixed point.
      * @return The initial guess.
      */
-    [[nodiscard]] double get_start() const {
+    [[nodiscard]] T get_start() const {
         return _start;
-    }
-
-    /**
-     * @brief Set the function for which to find the fixed point.
-     * @param function The function to set.
-     */
-    void set_function(const std::function<double(double)> &function) {
-        _function = function;
     }
 
     /**
      * @brief Set the initial guess for the fixed point.
      * @param start The initial guess to set.
      */
-    void set_start(double start) {
+    void set_start(T start) {
         _start = start;
     }
 
@@ -59,11 +45,11 @@ public:
      * @return A OptimizerResult containing the solution, error, and optionally an error
      * message.
      */
-    OptimizerResult<double> solve(double tolerance = 1e-7,
-                                  uint32_t max_iterations = 1000) {
+    [[nodiscard]] OptimizerResult<T> solve(double tolerance = 1e-7,
+                                           uint32 max_iterations = 1000) override {
         double x = _start;
         double error = _get_error(x);
-        uint32_t iterations = 0;
+        uint32 iterations = 0;
 
         while (error > tolerance && iterations < max_iterations) {
             x = _function(x);
