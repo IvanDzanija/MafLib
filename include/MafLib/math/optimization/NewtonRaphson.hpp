@@ -61,7 +61,7 @@ public:
      * message.
      */
     [[nodiscard]] OptimizerResult<T> solve(T tolerance = static_cast<T>(1e-7),
-                                           uint32 max_iterations = 100) override {
+                                           int32 max_iterations = 100) override {
         if (!_derivative) {
             return _secant_solve(tolerance, max_iterations);
         }
@@ -83,7 +83,7 @@ private:
      * @return A OptimizerResult containing the solution, error, and optionally an error
      * message.
      */
-    OptimizerResult<T> _newton_raphson_solve(T tolerance, uint32 max_iterations) {
+    OptimizerResult<T> _newton_raphson_solve(T tolerance, int32 max_iterations) {
         // This gets called only if the derivative is provided.
         T x = _start;
         while (max_iterations-- > 0) {
@@ -119,7 +119,7 @@ private:
      * @return A OptimizerResult containing the solution, error, and optionally an error
      * message.
      */
-    OptimizerResult<T> _secant_solve(T tolerance, uint32 max_iterations) {
+    OptimizerResult<T> _secant_solve(T tolerance, int32 max_iterations) {
         return OptimizerResult<T>{
             .solution = std::nan,
             .error = std::nan,
