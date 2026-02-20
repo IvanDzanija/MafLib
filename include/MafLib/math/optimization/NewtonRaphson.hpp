@@ -126,8 +126,8 @@ private:
      */
     OptimizerResult<T> _secant_solve(T tolerance, int32 max_iterations) {
         return OptimizerResult<T>{
-            .solution = std::numeric_limits<double>::quiet_NaN(),
-            .error = std::numeric_limits<double>::quiet_NaN(),
+            .solution = std::numeric_limits<T>::quiet_NaN(),
+            .error = std::numeric_limits<T>::quiet_NaN(),
             .error_message = "Secant method not implemented yet."};
     }
 };
