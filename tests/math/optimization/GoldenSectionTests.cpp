@@ -40,7 +40,7 @@ private:
 public:
     int run_all_tests() override {
         should_find_minimum_with_golden_section();
-        // This method is deterministic and always finds at least a local minima.
+        // This method is deterministic and always finds at least a local minimum.
         check_inheritance_and_methods();
         return 0;
     }

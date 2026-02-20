@@ -79,7 +79,7 @@ public:
 private:
     /** @brief The derivative of the function. */
     std::optional<std::function<T(T)>> _derivative;
-    /** @brief The initial guess for the fixed point. */
+    /** @brief The initial guess for the root. */
     T _start;
 
     /** @brief Find the root using the Newton-Raphson method.
