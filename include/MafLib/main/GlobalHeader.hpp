@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <array>
+#include <atomic>
 #include <cassert>
 #include <chrono>
 #include <cmath>
@@ -13,9 +14,12 @@
 #include <cstdint>
 #include <cstring>
 #include <execution>
+#include <functional>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <memory>
+#include <numbers>
 #include <optional>
 #include <random>
 #include <ranges>
@@ -33,6 +37,8 @@ using int32 = int32_t;
 using uint32 = uint32_t;
 using int64 = int64_t;
 using uint64 = uint64_t;
+using char8 = char8_t;
+using char16 = char16_t;
 
 }  // namespace maf
 
