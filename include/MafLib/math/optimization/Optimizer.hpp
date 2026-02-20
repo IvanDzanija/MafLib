@@ -36,7 +36,7 @@ public:
     /** @brief Solve for the root/fixed point or local/global minima.
      * @param tolerance The tolerance for convergence.
      * @param max_iterations The maximum number of iterations.
-     * @return A OptimizerResult containing the solution and metadata.
+     * @return An OptimizerResult containing the solution and metadata.
      */
     [[nodiscard]] virtual OptimizerResult<T> solve(
         T tolerance,
