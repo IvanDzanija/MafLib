@@ -44,7 +44,11 @@ public:
      * @param derivative The derivative function to set.
      */
     void set_derivative(const std::function<T(T)> &derivative) {
-        _derivative = derivative;
+        if (!derivative) {
+            _derivative.reset();
+        } else {
+            _derivative = derivative;
+        }
     }
 
     /** @brief Set the initial guess for the root.
