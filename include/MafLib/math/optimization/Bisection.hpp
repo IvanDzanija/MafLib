@@ -1,6 +1,7 @@
 #ifndef BISECTION_HPP
 #define BISECTION_HPP
 
+#include <limits>
 #pragma once
 #include "Optimizer.hpp"
 #include "OptimizerResult.hpp"
@@ -64,8 +65,8 @@ public:
         T fb = this->_function(b);
 
         if (fa * fb > 0) {
-            return {.solution = std::nan,
-                    .error = std::nan,
+            return {.solution = std::numeric_limits<double>::quiet_NaN(),
+                    .error = std::numeric_limits<double>::quiet_NaN(),
                     .error_message =
                         "Function has the same sign at the interval endpoints."};
         }

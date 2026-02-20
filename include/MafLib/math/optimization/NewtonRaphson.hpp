@@ -1,6 +1,7 @@
 #ifndef NEWTON_RAPHSON_HPP
 #define NEWTON_RAPHSON_HPP
 
+#include <limits>
 #pragma once
 #include "MafLib/main/GlobalHeader.hpp"
 #include "Optimizer.hpp"
@@ -121,8 +122,8 @@ private:
      */
     OptimizerResult<T> _secant_solve(T tolerance, int32 max_iterations) {
         return OptimizerResult<T>{
-            .solution = std::nan,
-            .error = std::nan,
+            .solution = std::numeric_limits<double>::quiet_NaN(),
+            .error = std::numeric_limits<double>::quiet_NaN(),
             .error_message = "Secant method not implemented yet."};
     }
 };
