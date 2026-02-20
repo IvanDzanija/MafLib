@@ -1,7 +1,6 @@
 #ifndef GOLDEN_SECTION_HPP
 #define GOLDEN_SECTION_HPP
 
-#include <numbers>
 #pragma once
 #include "Optimizer.hpp"
 
