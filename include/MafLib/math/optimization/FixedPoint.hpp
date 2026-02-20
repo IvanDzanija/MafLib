@@ -19,7 +19,7 @@ public:
      * @param function The function for which to find the fixed point.
      * @param start The initial guess for the fixed point.
      */
-    explicit FixedPoint(const std::function<double(double)> &function, double start)
+    explicit FixedPoint(const std::function<T(T)> &function, T start)
         : Optimizer<T>(function), _start(start) {}
 
     /**
@@ -45,16 +45,14 @@ public:
      * @return A OptimizerResult containing the solution, error, and optionally an error
      * message.
      */
-    [[nodiscard]] OptimizerResult<T> solve(double tolerance = 1e-7,
-                                           uint32 max_iterations = 1000) override {
-        double x = _start;
-        double error = _get_error(x);
-        uint32 iterations = 0;
+    [[nodiscard]] OptimizerResult<T> solve(T tolerance = static_cast<T>(1e7),
+                                           int32 max_iterations = 1000) override {
+        T x = _start;
+        T error = _get_error(x);
 
-        while (error > tolerance && iterations < max_iterations) {
+        while (error > tolerance && max_iterations-- > 0) {
             x = this->_function(x);
             error = _get_error(x);
-            iterations++;
 
             if (std::isinf(x) || std::isnan(x)) {
                 return {.solution = x,
@@ -75,14 +73,14 @@ public:
 
 private:
     /** @brief The initial guess for the fixed point. */
-    double _start;
+    T _start;
 
     /**
      * @brief Calculate the error at the given point.
      * @param current_point The current point at which to evaluate the error.
      * @return The absolute difference between f(current_point) and current_point.
      */
-    double _get_error(double current_point) {
+    T _get_error(T current_point) {
         return std::abs(this->_function(current_point) - current_point);
     }
 };

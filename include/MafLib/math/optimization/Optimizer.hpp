@@ -40,7 +40,7 @@ public:
      */
     [[nodiscard]] virtual OptimizerResult<T> solve(
         T tolerance,
-        uint32 max_iterations) = 0;  // Pure virtual
+        int32 max_iterations) = 0;  // Pure virtual
 
 protected:
     /** @brief The function to optimize/solve. */

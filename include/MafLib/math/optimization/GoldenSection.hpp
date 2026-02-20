@@ -57,7 +57,7 @@ public:
     }
 
     [[nodiscard]] OptimizerResult<T> solve(T tolerance = static_cast<T>(1e-7),
-                                           uint32_t max_iterations = 100) override {
+                                           int32 max_iterations = 100) override {
         T a = _lower_bound;
         T b = _upper_bound;
         T h = b - a;

@@ -7,7 +7,7 @@
 
 namespace maf::math {
 /**
- * @brief Class for finding fixed points of a function using the Newton-Raphson method.
+ * @brief Class for finding roots of a function using the Newton-Raphson method.
  * @tparam T The floating-point type to use (e.g., float, double).
  */
 template <std::floating_point T>
@@ -16,9 +16,9 @@ public:
     NewtonRaphson() = delete;  // Make sure the function is provided.
 
     /** @brief Constructor for NewtonRaphson class.
-     * @param function The function for which to find the fixed point.
+     * @param function The function for which to find the root.
      * @param derivative The derivative of the function.
-     * @param start The initial guess for the fixed point.
+     * @param start The initial guess for the root.
      */
     NewtonRaphson(const std::function<T(T)> &function,
                   const std::function<T(T)> &derivative,
@@ -32,7 +32,7 @@ public:
         return _derivative;
     }
 
-    /** @brief Get the initial guess for the fixed point.
+    /** @brief Get the initial guess for the root.
      * @return The initial guess.
      */
     [[nodiscard]] T get_start() const {
@@ -46,15 +46,15 @@ public:
         _derivative = derivative;
     }
 
-    /** @brief Set the initial guess for the fixed point.
+    /** @brief Set the initial guess for the root.
      * @param start The initial guess to set.
      */
     void set_start(T start) {
         _start = start;
     }
 
-    /** @brief Find the fixed point using the Newton-Raphson method.
-     * @detail If the derivative is not provided, the secant method will be used.
+    /** @brief Find the root using the Newton-Raphson method.
+     * @details If the derivative is not provided, the secant method will be used.
      * @param tolerance The tolerance for convergence.
      * @param max_iterations The maximum number of iterations to perform.
      * @return A OptimizerResult containing the solution, error, and optionally an error
@@ -77,7 +77,7 @@ private:
     /** @brief The initial guess for the fixed point. */
     T _start;
 
-    /** @brief Find the fixed point using the Newton-Raphson method.
+    /** @brief Find the root using the Newton-Raphson method.
      * @param tolerance The tolerance for convergence.
      * @param max_iterations The maximum number of iterations to perform.
      * @return A OptimizerResult containing the solution, error, and optionally an error
@@ -113,7 +113,7 @@ private:
                 .error_message = "Maximum iterations reached without convergence."};
     }
 
-    /** @brief Find the fixed point using the secant method.
+    /** @brief Find the root using the secant method.
      * @param tolerance The tolerance for convergence.
      * @param max_iterations The maximum number of iterations to perform.
      * @return A OptimizerResult containing the solution, error, and optionally an error
@@ -121,8 +121,8 @@ private:
      */
     OptimizerResult<T> _secant_solve(T tolerance, uint32 max_iterations) {
         return OptimizerResult<T>{
-            .solution = NAN,
-            .error = NAN,
+            .solution = std::nan,
+            .error = std::nan,
             .error_message = "Secant method not implemented yet."};
     }
 };

@@ -57,15 +57,15 @@ public:
     }
 
     [[nodiscard]] OptimizerResult<T> solve(T tolerance = static_cast<T>(1e-7),
-                                           uint32 max_iterations = 100) override {
+                                           int32 max_iterations = 100) override {
         T a = _lower_bound;
         T b = _upper_bound;
         T fa = this->_function(a);
         T fb = this->_function(b);
 
         if (fa * fb > 0) {
-            return {.solution = NAN,
-                    .error = NAN,
+            return {.solution = std::nan,
+                    .error = std::nan,
                     .error_message =
                         "Function has the same sign at the interval endpoints."};
         }
