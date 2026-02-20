@@ -65,8 +65,8 @@ public:
         T fb = this->_function(b);
 
         if (fa * fb > 0) {
-            return {.solution = std::numeric_limits<double>::quiet_NaN(),
-                    .error = std::numeric_limits<double>::quiet_NaN(),
+            return {.solution = std::numeric_limits<T>::quiet_NaN(),
+                    .error = std::numeric_limits<T>::quiet_NaN(),
                     .error_message =
                         "Function has the same sign at the interval endpoints."};
         }
