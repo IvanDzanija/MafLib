@@ -1,21 +1,10 @@
 # tests/math/CMakeLists.txt
-cmake_minimum_required(VERSION 3.16)
 
-set(TEST_NAME LinAlgTests)
+message(STATUS "Building math tests for MafLib")
 
-add_executable(${TEST_NAME}
-    LinAlgTests.cpp
-)
+# Add subfolders for categories
+add_subdirectory(linalg)
+add_subdirectory(optimization)
 
-target_link_libraries(${TEST_NAME}
-    PRIVATE
-        MafLib::MafLib
-)
-
-target_include_directories(${TEST_NAME}
-    PRIVATE
-        ${PROJECT_SOURCE_DIR}/include
-        ${PROJECT_SOURCE_DIR}/tests
-)
-
-add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+# Make the current directory visible for includes
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})

@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <array>
+#include <atomic>
 #include <cassert>
 #include <chrono>
 #include <cmath>
@@ -13,9 +14,12 @@
 #include <cstdint>
 #include <cstring>
 #include <execution>
+#include <functional>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <memory>
+#include <numbers>
 #include <optional>
 #include <random>
 #include <ranges>

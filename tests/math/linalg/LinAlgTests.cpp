@@ -1,6 +1,5 @@
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MatrixTests.cpp"
-#include "OptimizationTests.cpp"
 #include "VectorTests.cpp"
 
 int main() {
@@ -11,11 +10,6 @@ int main() {
 
     auto vector_tests = maf::test::VectorTests();
     vector_tests.run_all_tests();
-
-    std::cout << "=== Running Optimization tests ===" << std::endl;
-    auto optimization_tests = maf::test::OptimizationTests();
-    optimization_tests.run_all_tests();
-    optimization_tests.print_summary();
 
     return 0;
 }
