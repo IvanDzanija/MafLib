@@ -29,7 +29,7 @@ public:
     /** @brief Get the derivative of the function.
      * @return The derivative function.
      */
-    [[nodiscard]] const std::function<T(T)> &get_derivative() const {
+    [[nodiscard]] const std::optional<std::function<T(T)>> &get_derivative() const {
         return _derivative;
     }
 

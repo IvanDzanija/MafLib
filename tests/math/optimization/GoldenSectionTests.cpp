@@ -14,7 +14,7 @@ private:
         constexpr double lower_bound = 1.0;
         constexpr double upper_bound = 3.0;
         constexpr double tolerance = 1e-6;
-        constexpr uint32 max_iterations = 100;
+        constexpr int32 max_iterations = 100;
 
         maf::math::GoldenSection<double> gs(func, lower_bound, upper_bound);
         math::OptimizerResult<double> result = gs.solve(tolerance, max_iterations);
@@ -30,7 +30,7 @@ private:
         optimizers.push_back(std::make_shared<maf::math::GoldenSection<double>>(gs));
 
         constexpr double tolerance = 1e-6;
-        constexpr uint32 max_iterations = 100;
+        constexpr int32 max_iterations = 100;
         auto result = optimizers[0]->solve(tolerance, max_iterations);
 
         constexpr double expected = 2.0;

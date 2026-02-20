@@ -10,10 +10,10 @@ using namespace std::chrono;
 class FixedPointTests : public ITest {
 private:
     void should_perform_fixed_point_iteration() {
-        auto func = [](double x) { return std::cos(x); };
+        constexpr auto func = [](double x) { return std::cos(x); };
         constexpr double initial_guess = 0.5;
         constexpr double tolerance = 1e-6;
-        constexpr uint32 max_iterations = 1000;
+        constexpr int32 max_iterations = 1000;
 
         maf::math::FixedPoint<double> fp(func, initial_guess);
         math::OptimizerResult<double> result = fp.solve(tolerance, max_iterations);
@@ -23,10 +23,10 @@ private:
     }
 
     void should_handle_non_converging_fixed_point() {
-        auto func = [](double x) { return 2 * x; };
+        constexpr auto func = [](double x) { return 2 * x; };
         constexpr double initial_guess = 1.0;
         constexpr double tolerance = 1e-6;
-        constexpr uint32 max_iterations = 100;
+        constexpr int32 max_iterations = 100;
 
         maf::math::FixedPoint<double> fp(func, initial_guess);
         math::OptimizerResult<double> result = fp.solve(tolerance, max_iterations);
@@ -39,7 +39,7 @@ private:
         optimizers.push_back(std::make_shared<maf::math::FixedPoint<double>>(fp));
 
         constexpr double tolerance = 1e-6;
-        constexpr uint32 max_iterations = 1000;
+        constexpr int32 max_iterations = 1000;
         auto result = optimizers[0]->solve(tolerance, max_iterations);
 
         constexpr double expected = 0.739085;

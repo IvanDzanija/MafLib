@@ -56,7 +56,7 @@ public:
     }
 
     /**
-     * @brief Find the root using the Golden Section method.
+     * @brief Find the minimum on set interval using the Golden Section Search method.
      * @param tolerance The tolerance for convergence.
      * @param max_iterations The maximum number of iterations to perform.
      * @return An OptimizerResult containing the solution, error, and optionally an
