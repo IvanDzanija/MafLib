@@ -55,6 +55,13 @@ public:
         _upper_bound = upper_bound;
     }
 
+    /**
+     * @brief Find the root using the Golden Section method.
+     * @param tolerance The tolerance for convergence.
+     * @param max_iterations The maximum number of iterations to perform.
+     * @return An OptimizerResult containing the solution, error, and optionally an
+     * error message.
+     */
     [[nodiscard]] OptimizerResult<T> solve(T tolerance = static_cast<T>(1e-7),
                                            int32 max_iterations = 100) override {
         T a = _lower_bound;
@@ -90,7 +97,7 @@ public:
         }
         // This should probably never happen since this method will find the local
         // minima at least.
-        if (max_iterations == 0 && h > tolerance) {
+        if (max_iterations <= 0 && h > tolerance) {
             return {.solution = (a + b) / static_cast<T>(2),
                     .error = h / static_cast<T>(2),
                     .error_message =

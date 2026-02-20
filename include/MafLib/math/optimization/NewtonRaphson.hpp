@@ -62,8 +62,8 @@ public:
      * @details If the derivative is not provided, the secant method will be used.
      * @param tolerance The tolerance for convergence.
      * @param max_iterations The maximum number of iterations to perform.
-     * @return A OptimizerResult containing the solution, error, and optionally an error
-     * message.
+     * @return An OptimizerResult containing the solution, error, and optionally an
+     * error message.
      */
     [[nodiscard]] OptimizerResult<T> solve(T tolerance = static_cast<T>(1e-7),
                                            int32 max_iterations = 100) override {
@@ -85,8 +85,8 @@ private:
     /** @brief Find the root using the Newton-Raphson method.
      * @param tolerance The tolerance for convergence.
      * @param max_iterations The maximum number of iterations to perform.
-     * @return A OptimizerResult containing the solution, error, and optionally an error
-     * message.
+     * @return An OptimizerResult containing the solution, error, and optionally an
+     * error message.
      */
     OptimizerResult<T> _newton_raphson_solve(T tolerance, int32 max_iterations) {
         // This gets called only if the derivative is provided.
@@ -121,8 +121,8 @@ private:
     /** @brief Find the root using the secant method.
      * @param tolerance The tolerance for convergence.
      * @param max_iterations The maximum number of iterations to perform.
-     * @return A OptimizerResult containing the solution, error, and optionally an error
-     * message.
+     * @return An OptimizerResult containing the solution, error, and optionally an
+     * error message.
      */
     OptimizerResult<T> _secant_solve(T tolerance, int32 max_iterations) {
         return OptimizerResult<T>{
