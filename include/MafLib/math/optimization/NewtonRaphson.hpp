@@ -3,7 +3,7 @@
 
 #pragma once
 #include "MafLib/main/GlobalHeader.hpp"
-#include "OptimizerResult.hpp"
+#include "Optimizer.hpp"
 
 namespace maf::math {
 /**
@@ -11,9 +11,9 @@ namespace maf::math {
  * @tparam T The floating-point type to use (e.g., float, double).
  */
 template <std::floating_point T>
-class NewtonRaphson {
+class NewtonRaphson : public Optimizer<T> {
 public:
-    NewtonRaphson() = default;
+    NewtonRaphson() = delete;  // Make sure the function is provided.
 
     /** @brief Constructor for NewtonRaphson class.
      * @param function The function for which to find the fixed point.
@@ -23,14 +23,7 @@ public:
     NewtonRaphson(const std::function<T(T)> &function,
                   const std::function<T(T)> &derivative,
                   T start)
-        : _function(function), _derivative(derivative), _start(start) {}
-
-    /** @brief Get the function for which to find the fixed point.
-     * @return The function.
-     */
-    [[nodiscard]] std::function<T(T)> get_function() const {
-        return _function;
-    }
+        : Optimizer<T>(function), _derivative(derivative), _start(start) {}
 
     /** @brief Get the derivative of the function.
      * @return The derivative function.
@@ -44,13 +37,6 @@ public:
      */
     [[nodiscard]] T get_start() const {
         return _start;
-    }
-
-    /** @brief Set the function for which to find the fixed point.
-     * @param function The function to set.
-     */
-    void set_function(const std::function<T(T)> &function) {
-        _function = function;
     }
 
     /** @brief Set the derivative of the function.
@@ -75,23 +61,17 @@ public:
      * message.
      */
     OptimizerResult<T> solve(T tolerance = static_cast<T>(1e-7),
-                             uint32_t max_iterations = 100) {
-        if (!_function) {
-            return {.solution = NAN,
-                    .error = NAN,
-                    .error_message = "Function is not defined."};
-        }
+                             uint32 max_iterations = 100) {
         if (!_derivative) {
             return _secant_solve(tolerance, max_iterations);
         }
+        // NOTE:
         // Pure method implementation of Newton-Raphson should be provided as well for
         // pure speed and constexpr contexts
         return _newton_raphson_solve(tolerance, max_iterations);
     }
 
 private:
-    /** @brief The function for which to find the fixed point. */
-    std::function<T(T)> _function;
     /** @brief The derivative of the function. */
     std::optional<std::function<T(T)>> _derivative;
     /** @brief The initial guess for the fixed point. */
@@ -103,7 +83,8 @@ private:
      * @return A OptimizerResult containing the solution, error, and optionally an error
      * message.
      */
-    OptimizerResult<T> _newton_raphson_solve(T tolerance, uint32_t max_iterations) {
+    OptimizerResult<T> _newton_raphson_solve(T tolerance, uint32 max_iterations) {
+        // This gets called only if the derivative is provided.
         T x = _start;
         while (max_iterations-- > 0) {
             T f_x = _function(x);
@@ -115,7 +96,11 @@ private:
                             "Derivative is too small; potential division by zero."};
             }
             T x_new = x - (f_x / f_prime_x);
-            T rel_error = std::abs(x_new - x) / std::abs(x);
+            T denom = std::abs(x);
+            if (denom < std::numeric_limits<T>::epsilon()) {
+                denom = std::numeric_limits<T>::epsilon();
+            }
+            T rel_error = std::abs(x_new - x) / denom;
             if (rel_error < tolerance) {
                 return {.solution = x_new,
                         .error = rel_error,
@@ -134,7 +119,7 @@ private:
      * @return A OptimizerResult containing the solution, error, and optionally an error
      * message.
      */
-    OptimizerResult<T> _secant_solve(T tolerance, uint32_t max_iterations) {
+    OptimizerResult<T> _secant_solve(T tolerance, uint32 max_iterations) {
         return OptimizerResult<T>{
             .solution = NAN,
             .error = NAN,

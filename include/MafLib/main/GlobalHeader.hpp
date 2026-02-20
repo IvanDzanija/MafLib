@@ -17,6 +17,7 @@
 #include <functional>
 #include <iomanip>
 #include <iostream>
+#include <limits>
 #include <memory>
 #include <numbers>
 #include <optional>

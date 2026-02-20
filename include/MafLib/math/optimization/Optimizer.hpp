@@ -1,6 +1,7 @@
 #ifndef OPTIMIZER_HPP
 #define OPTIMIZER_HPP
 
+#include <stdexcept>
 #pragma once
 #include "MafLib/main/GlobalHeader.hpp"
 #include "OptimizerResult.hpp"
@@ -51,7 +52,12 @@ protected:
     /** @brief Protected constructor with function.
      * @param function The function to optimize/solve.
      */
-    explicit Optimizer(const std::function<T(T)> &function) : _function(function) {}
+    explicit Optimizer(const std::function<T(T)> &function) {
+        if (!function) {
+            throw std::invalid_argument("Function cannot be empty.");
+        }
+        _function = function;
+    }
 };
 }  // namespace maf::math
 

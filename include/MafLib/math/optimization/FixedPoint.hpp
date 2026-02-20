@@ -20,7 +20,7 @@ public:
      * @param start The initial guess for the fixed point.
      */
     explicit FixedPoint(const std::function<double(double)> &function, double start)
-        : _function(function), _start(start) {}
+        : Optimizer<T>(function), _start(start) {}
 
     /**
      * @brief Get the initial guess for the fixed point.
@@ -52,7 +52,7 @@ public:
         uint32 iterations = 0;
 
         while (error > tolerance && iterations < max_iterations) {
-            x = _function(x);
+            x = this->_function(x);
             error = _get_error(x);
             iterations++;
 
@@ -74,8 +74,6 @@ public:
     }
 
 private:
-    /** @brief The function for which to find the fixed point. */
-    std::function<double(double)> _function;
     /** @brief The initial guess for the fixed point. */
     double _start;
 
@@ -85,7 +83,7 @@ private:
      * @return The absolute difference between f(current_point) and current_point.
      */
     double _get_error(double current_point) {
-        return std::abs(_function(current_point) - current_point);
+        return std::abs(this->_function(current_point) - current_point);
     }
 };
 }  // namespace maf::math

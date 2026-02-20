@@ -1,7 +1,10 @@
+#include <numbers>
+
 #include "ITest.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/math/optimization/Bisection.hpp"
 #include "MafLib/math/optimization/Optimizer.hpp"
+#include "MafLib/utility/Math.hpp"
 
 namespace maf::test {
 using namespace maf;
@@ -10,25 +13,25 @@ class BisectionTests : public ITest {
 private:
     void should_find_root_with_bisection() {
         auto func = [](double x) { return x * x - 2; };
-        double lower_bound = 1.0;
-        double upper_bound = 2.0;
-        double tolerance = 1e-6;
-        uint32 max_iterations = 100;
+        constexpr double lower_bound = 1.0;
+        constexpr double upper_bound = 2.0;
+        constexpr double tolerance = 1e-6;
+        constexpr uint32 max_iterations = 100;
 
         maf::math::Bisection<double> bisection(func, lower_bound, upper_bound);
         math::OptimizerResult<double> result =
             bisection.solve(tolerance, max_iterations);
 
         double expected = std::numbers::sqrt2;
-        ASSERT_TRUE(std::abs(result.solution - expected) < tolerance);
+        ASSERT_TRUE(util::is_close(expected, result.solution, tolerance));
     }
 
     void should_handle_wrong_initial_interval() {
         auto func = [](double x) { return x * x - 2; };
-        double lower_bound = 1.5;
-        double upper_bound = 2.0;
-        double tolerance = 1e-6;
-        uint32 max_iterations = 100;
+        constexpr double lower_bound = 1.5;
+        constexpr double upper_bound = 2.0;
+        constexpr double tolerance = 1e-6;
+        constexpr uint32 max_iterations = 100;
 
         maf::math::Bisection<double> bisection(func, lower_bound, upper_bound);
         math::OptimizerResult<double> result =
@@ -41,10 +44,10 @@ private:
 
     void should_handle_non_converging_bisection() {
         auto func = [](double x) { return x * x - 2; };
-        double lower_bound = 0.0;
-        double upper_bound = 2.0;
-        double tolerance = 1e-6;
-        uint32 max_iterations = 2;
+        constexpr double lower_bound = 0.0;
+        constexpr double upper_bound = 2.0;
+        constexpr double tolerance = 1e-6;
+        constexpr uint32 max_iterations = 2;
 
         maf::math::Bisection<double> bisection(func, lower_bound, upper_bound);
         math::OptimizerResult<double> result =
@@ -56,14 +59,16 @@ private:
     }
 
     void check_inheritance_and_methods() {
-        maf::math::Bisection<double> bisection([](double x) { return x; }, 0.0, 1.0);
-        ASSERT_TRUE(dynamic_cast<maf::math::Optimizer<double> *>(&bisection) !=
-                    nullptr);
+        std::vector<std::shared_ptr<maf::math::Optimizer<double>>> optimizers;
+        maf::math::Bisection<double> bisection(
+            [](double x) { return x * x - 2; }, 1.0, 2.0);
+        optimizers.push_back(std::make_shared<maf::math::Bisection<double>>(bisection));
 
-        bisection.set_lower_bound(1.0);
-        bisection.set_upper_bound(2.0);
-        ASSERT_TRUE(bisection.get_lower_bound() == 1.0);
-        ASSERT_TRUE(bisection.get_upper_bound() == 2.0);
+        constexpr double tolerance = 1e-6;
+        constexpr uint32 max_iterations = 100;
+        auto result = optimizers[0]->solve(tolerance, max_iterations);
+        double expected = std::numbers::sqrt2;
+        ASSERT_TRUE(util::is_close(expected, result.solution, tolerance));
     }
 
 public:
