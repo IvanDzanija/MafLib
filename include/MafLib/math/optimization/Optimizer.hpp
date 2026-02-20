@@ -38,9 +38,9 @@ public:
      * @param max_iterations The maximum number of iterations.
      * @return A OptimizerResult containing the solution and metadata.
      */
-    virtual OptimizerResult<T> solve(
-        T tolerance = static_cast<T>(1e-7),
-        uint32_t max_iterations = 100) = 0;  // Pure virtual
+    [[nodiscard]] virtual OptimizerResult<T> solve(
+        T tolerance,
+        uint32 max_iterations) = 0;  // Pure virtual
 
 protected:
     /** @brief The function to optimize/solve. */

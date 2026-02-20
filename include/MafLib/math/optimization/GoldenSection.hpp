@@ -89,6 +89,8 @@ public:
                 f2 = this->_function(x2);
             }
         }
+        // This should probably never happen since this method will find the local
+        // minima at least.
         if (max_iterations == 0 && h > tolerance) {
             return {.solution = (a + b) / static_cast<T>(2),
                     .error = h / static_cast<T>(2),

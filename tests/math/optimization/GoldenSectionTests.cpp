@@ -2,6 +2,7 @@
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/math/optimization/GoldenSection.hpp"
 #include "MafLib/math/optimization/Optimizer.hpp"
+#include "MafLib/utility/Math.hpp"
 
 namespace maf::test {
 using namespace maf;
@@ -10,15 +11,15 @@ class GoldenSectionTests : public ITest {
 private:
     void should_find_minimum_with_golden_section() {
         auto func = [](double x) { return (x - 2) * (x - 2); };
-        double lower_bound = 1.0;
-        double upper_bound = 3.0;
-        double tolerance = 1e-6;
-        uint32 max_iterations = 100;
+        constexpr double lower_bound = 1.0;
+        constexpr double upper_bound = 3.0;
+        constexpr double tolerance = 1e-6;
+        constexpr uint32 max_iterations = 100;
 
         maf::math::GoldenSection<double> gs(func, lower_bound, upper_bound);
         math::OptimizerResult<double> result = gs.solve(tolerance, max_iterations);
 
-        double expected = 2.0;
+        constexpr double expected = 2.0;
         ASSERT_TRUE(std::abs(result.solution - expected) < tolerance);
     }
 
@@ -28,9 +29,12 @@ private:
             [](double x) { return (x - 2) * (x - 2); }, 1.0, 3.0);
         optimizers.push_back(std::make_shared<maf::math::GoldenSection<double>>(gs));
 
-        auto result = optimizers[0]->solve();
-        double expected = 2.0;
-        ASSERT_TRUE(std::abs(result.solution - expected) < 1e-6);
+        constexpr double tolerance = 1e-6;
+        constexpr uint32 max_iterations = 100;
+        auto result = optimizers[0]->solve(tolerance, max_iterations);
+
+        constexpr double expected = 2.0;
+        ASSERT_TRUE(util::is_close(expected, result.solution, tolerance));
     }
 
 public:

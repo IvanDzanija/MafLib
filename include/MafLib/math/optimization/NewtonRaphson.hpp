@@ -28,7 +28,7 @@ public:
     /** @brief Get the derivative of the function.
      * @return The derivative function.
      */
-    [[nodiscard]] std::function<T(T)> get_derivative() const {
+    [[nodiscard]] const std::function<T(T)> &get_derivative() const {
         return _derivative;
     }
 
@@ -60,8 +60,8 @@ public:
      * @return A OptimizerResult containing the solution, error, and optionally an error
      * message.
      */
-    OptimizerResult<T> solve(T tolerance = static_cast<T>(1e-7),
-                             uint32 max_iterations = 100) {
+    [[nodiscard]] OptimizerResult<T> solve(T tolerance = static_cast<T>(1e-7),
+                                           uint32 max_iterations = 100) override {
         if (!_derivative) {
             return _secant_solve(tolerance, max_iterations);
         }
@@ -87,7 +87,7 @@ private:
         // This gets called only if the derivative is provided.
         T x = _start;
         while (max_iterations-- > 0) {
-            T f_x = _function(x);
+            T f_x = this->_function(x);
             T f_prime_x = _derivative.value()(x);
             if (std::abs(f_prime_x) <= std::numeric_limits<T>::epsilon()) {
                 return {.solution = x,
@@ -109,7 +109,7 @@ private:
             x = x_new;
         }
         return {.solution = x,
-                .error = std::abs(_function(x)),
+                .error = std::abs(this->_function(x)),
                 .error_message = "Maximum iterations reached without convergence."};
     }
 
