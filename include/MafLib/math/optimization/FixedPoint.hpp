@@ -45,7 +45,7 @@ public:
      * @return A OptimizerResult containing the solution, error, and optionally an error
      * message.
      */
-    [[nodiscard]] OptimizerResult<T> solve(T tolerance = static_cast<T>(1e7),
+    [[nodiscard]] OptimizerResult<T> solve(T tolerance = static_cast<T>(1e-7),
                                            int32 max_iterations = 1000) override {
         T x = _start;
         T error = _get_error(x);
