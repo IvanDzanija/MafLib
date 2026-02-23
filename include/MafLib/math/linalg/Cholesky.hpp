@@ -8,70 +8,70 @@ namespace detail {
 /**
  * @brief Internal implementation of Cholesky decomposition.
  *
- * Computes L where A = LL^T for symmetric positive definite matrix A.
+ * Computes L where A = LL^T for Hermitian symmetric positive definite matrix A.
  * Uses blocked algorithm with OpenMP parallelization.
  */
 template <std::floating_point T>
 [[nodiscard]] Matrix<T> _cholesky(const Matrix<T> &matrix) {
-    if (!matrix.is_symmetric()) {
-        throw std::invalid_argument(
-            "Matrix must be symmetric to try Cholesky decomposition!");
-    }
+  if (!matrix.is_symmetric()) {
+    throw std::invalid_argument(
+        "Matrix must be symmetric to try Cholesky decomposition!");
+  }
 
-    size_t n = matrix.row_count();
-    Matrix<T> L(n, n);
+  size_t n = matrix.row_count();
+  Matrix<T> L(n, n);
 
-    for (size_t jj = 0; jj < n; jj += BLOCK_SIZE) {
-        const size_t j_end = std::min(jj + BLOCK_SIZE, n);
-        for (size_t j = jj; j < j_end; ++j) {
-            T sum = 0;
-            auto L_row_j = L.row_span(j);
-
-#pragma omp simd
-            for (size_t k = 0; k < j; ++k) {
-                sum += L_row_j[k] * L_row_j[k];
-            }
-
-            T diag_val = matrix.at(j, j) - sum;
-            if (diag_val <= 0) {
-                throw std::invalid_argument("Matrix is not positive definite!");
-            }
-            L_row_j[j] = std::sqrt(diag_val);
-
-            for (size_t i = j + 1; i < j_end; ++i) {
-                T sum_i = 0;
-                auto L_row_i = L.row_span(i);
+  for (size_t jj = 0; jj < n; jj += BLOCK_SIZE) {
+    const size_t j_end = std::min(jj + BLOCK_SIZE, n);
+    for (size_t j = jj; j < j_end; ++j) {
+      T sum = 0;
+      auto L_row_j = L.row_span(j);
 
 #pragma omp simd
-                for (size_t k = 0; k < j; ++k) {
-                    sum_i += L_row_i[k] * L_row_j[k];
-                }
-                L_row_i[j] = (matrix.at(i, j) - sum_i) / L_row_j[j];
-            }
+      for (size_t k = 0; k < j; ++k) {
+        sum += L_row_j[k] * L_row_j[k];
+      }
+
+      T diag_val = matrix.at(j, j) - sum;
+      if (diag_val <= 0) {
+        throw std::invalid_argument("Matrix is not positive definite!");
+      }
+      L_row_j[j] = std::sqrt(diag_val);
+
+      for (size_t i = j + 1; i < j_end; ++i) {
+        T sum_i = 0;
+        auto L_row_i = L.row_span(i);
+
+#pragma omp simd
+        for (size_t k = 0; k < j; ++k) {
+          sum_i += L_row_i[k] * L_row_j[k];
         }
+        L_row_i[j] = (matrix.at(i, j) - sum_i) / L_row_j[j];
+      }
+    }
 
 #pragma omp parallel for if (n > 1000)
-        for (size_t ii = j_end; ii < n; ii += BLOCK_SIZE) {
-            const size_t i_end = std::min(ii + BLOCK_SIZE, n);
+    for (size_t ii = j_end; ii < n; ii += BLOCK_SIZE) {
+      const size_t i_end = std::min(ii + BLOCK_SIZE, n);
 
-            for (size_t i = ii; i < i_end; ++i) {
-                auto L_row_i = L.row_span(i);
+      for (size_t i = ii; i < i_end; ++i) {
+        auto L_row_i = L.row_span(i);
 
-                for (size_t j = jj; j < j_end; ++j) {
-                    T sum = 0;
-                    auto L_row_j = L.row_span(j);
+        for (size_t j = jj; j < j_end; ++j) {
+          T sum = 0;
+          auto L_row_j = L.row_span(j);
 
 #pragma omp simd
-                    for (size_t k = 0; k < j; ++k) {
-                        sum += L_row_i[k] * L_row_j[k];
-                    }
-                    L_row_i[j] = (matrix.at(i, j) - sum) / L_row_j[j];
-                }
-            }
+          for (size_t k = 0; k < j; ++k) {
+            sum += L_row_i[k] * L_row_j[k];
+          }
+          L_row_i[j] = (matrix.at(i, j) - sum) / L_row_j[j];
         }
+      }
     }
+  }
 
-    return L;
+  return L;
 }
 
 }  // namespace detail
@@ -113,20 +113,20 @@ template <std::floating_point T>
  */
 template <typename ResultType = void, Numeric T>
 [[nodiscard]] auto cholesky(const Matrix<T> &matrix) {
-    using TargetType =
-        std::conditional_t<std::is_same_v<ResultType, void>,
-                           std::conditional_t<std::is_floating_point_v<T>, T, double>,
-                           ResultType>;
+  using TargetType =
+      std::conditional_t<std::is_same_v<ResultType, void>,
+                         std::conditional_t<std::is_floating_point_v<T>, T, double>,
+                         ResultType>;
 
-    static_assert(std::is_floating_point_v<TargetType>,
-                  "Cholesky result type must be floating point!");
+  static_assert(std::is_floating_point_v<TargetType>,
+                "Cholesky result type must be floating point!");
 
-    if constexpr (std::is_same_v<TargetType, T>) {
-        return detail::_cholesky(matrix);
-    } else {
-        auto converted = matrix.template cast<TargetType>();
-        return detail::_cholesky(converted);
-    }
+  if constexpr (std::is_same_v<TargetType, T>) {
+    return detail::_cholesky(matrix);
+  } else {
+    auto converted = matrix.template cast<TargetType>();
+    return detail::_cholesky(converted);
+  }
 }
 
 }  // namespace maf::math

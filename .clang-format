@@ -1,24 +1,5 @@
 ---
 BasedOnStyle: Google
-IndentWidth: 4
-TabWidth: 4
-UseTab: Never
 ColumnLimit: 88
-AccessModifierOffset: -4
-IndentCaseLabels: true
-AlignAfterOpenBracket: Align
-AllowShortFunctionsOnASingleLine: Empty
-AllowShortIfStatementsOnASingleLine: false
-AllowShortLoopsOnASingleLine: false
-BinPackArguments: false
-BinPackParameters: false
-BreakBeforeBraces: Attach
-BreakConstructorInitializers: BeforeColon
-ConstructorInitializerAllOnOneLineOrOnePerLine: true
-Cpp11BracedListStyle: true
-DerivePointerAlignment: false
 PointerAlignment: Right
-SpaceAfterCStyleCast: false
-SpaceBeforeParens: ControlStatements
-SpacesInParentheses: false
 Standard: c++20

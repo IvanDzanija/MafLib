@@ -9,7 +9,6 @@ project(MafLib
 if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     message(FATAL_ERROR "This project requires Clang (or AppleClang), but ${CMAKE_CXX_COMPILER_ID} was found.")
 endif()
-
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
