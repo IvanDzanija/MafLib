@@ -5,17 +5,8 @@
 #include "LinAlg.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/utility/Math.hpp"
-#include "VectorView.hpp"
 
 namespace maf::math {
-template <typename T>
-concept _VectorViewCompatible = std::is_same_v<T, VectorView<typename T::value_type>> ||
-                                std::is_same_v<T, Vector<typename T::value_type>>;
-
-/** @brief Concept for types compatible with VectorView. */
-template <typename T>
-concept VectorViewCompatible = Numeric<T> && _VectorViewCompatible<T>;
-
 using namespace maf::util;
 /**
  * @brief A general-purpose mathematical vector class.
@@ -215,7 +206,27 @@ class Vector {
     if (index + length > size()) {
       throw std::out_of_range("Requested view exceeds Vector dimensions.");
     }
-    return VectorView<T>(&_data[index], length, inc);
+    return VectorView<T>(&_data[index], length, _orientation, inc);
+  }
+
+  /**
+   * @brief Creates a const view (sub-Vector) into this Vector.
+   * @param col Starting index of the view.
+   * @param length Length of the view.
+   * @return VectorView<T> representing the specified sub-Vector.
+   * @throws std::invalid_argument if length is zero.
+   * @throws std::out_of_range if the requested view exceeds Vector
+   * dimensions.
+   */
+  [[nodiscard]] VectorView<const T> view(size_t index, size_t length,
+                                         size_t inc = 1) const {
+    if (length == 0) {
+      throw std::invalid_argument("View dimensions must be greater than zero.");
+    }
+    if (index + length > size()) {
+      throw std::out_of_range("Requested view exceeds Vector dimensions.");
+    }
+    return VectorView<const T>(&_data[index], length, _orientation, inc);
   }
 
   // --- Checkers ---

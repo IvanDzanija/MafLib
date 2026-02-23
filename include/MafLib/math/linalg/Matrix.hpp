@@ -5,16 +5,8 @@
 #include "LinAlg.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/utility/Math.hpp"
-#include "MatrixView.hpp"
 
 namespace maf::math {
-template <typename T>
-concept _MatrixViewCompatible = std::is_same_v<T, MatrixView<typename T::value_type>> ||
-                                std::is_same_v<T, Matrix<typename T::value_type>>;
-
-/** @brief Concept for types compatible with MatrixView. */
-template <typename T>
-concept MatrixViewCompatible = Numeric<T> && _MatrixViewCompatible<T>;
 
 using namespace maf::util;
 /**

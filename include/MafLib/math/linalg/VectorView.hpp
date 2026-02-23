@@ -20,32 +20,29 @@ template <Numeric T>
 class VectorView {
  public:
   /** @brief The numeric type of the vector elements. */
-  using value_type = T;
+  using value_type = std::remove_const_t<T>;
 
   /** @brief Default constructor creating an empty VectorView. */
-  VectorView() = default;
+  explicit VectorView() = default;
   /** @brief Constructs a VectorView.
    * @param data Pointer to the starting element of the subvector.
    * @param size The logical number of elements in the subvector.
    * @param inc The stride (increment) between elements (default: 1 for
    * contiguous).
    */
-  VectorView(T *data, size_t size, size_t inc = 1)
-      : _data(data), _size(size), _inc(inc) {}
-
-  // VectorView
-  //
+  explicit VectorView(T *data, size_t size, Orientation orientation, size_t inc = 1)
+      : _data(data), _size(size), _orientation(orientation), _inc(inc) {}
 
   /** @brief Returns a pointer to the underlying data (mutable). */
   [[nodiscard]] T *data() noexcept { return _data; }
   /** @brief Returns a pointer to the underlying data (const). */
-  [[nodiscard]] const T *data() const noexcept { return _data; }
+  [[nodiscard]] const value_type *data() const noexcept { return _data; }
 
   /** @brief Accesses element at index i with the stride. */
   [[nodiscard]] T &operator[](size_t ind) noexcept { return _data[ind * _inc]; }
 
   /** @brief Accesses element at index i with the stride (const). */
-  [[nodiscard]] const T &operator[](size_t ind) const noexcept {
+  [[nodiscard]] const value_type &operator[](size_t ind) const noexcept {
     return _data[ind * _inc];
   }
 
@@ -62,7 +59,7 @@ class VectorView {
   /** @brief Gets a const reference to the element at index i.
    * @throws std::out_of_range if the index is invalid.
    */
-  [[nodiscard]] const T &at(size_t ind) const {
+  [[nodiscard]] const value_type &at(size_t ind) const {
     if (ind >= _size) {
       throw std::out_of_range("VectorView index out of bounds");
     }
@@ -75,10 +72,41 @@ class VectorView {
   /** @brief Gets the increment (stride) of the VectorView. */
   [[nodiscard]] size_t get_increment() const noexcept { return _inc; }
 
+  /** @brief Gets the orientation of the VectorView. */
+  [[nodiscard]] Orientation orientation() const noexcept { return _orientation; }
+
+  /**
+   * @brief Prints the VectorView contents to std::cout.
+   * @details Sets floating point precision for readability.
+   */
+  void print() const {
+    if constexpr (std::is_floating_point_v<T>) {
+      std::cout << std::setprecision(FLOAT_PRECISION);
+    }
+    for (size_t i = 0; i < _size; i += _inc) {
+      std::cout << _data[i] << std::endl;
+    }
+    //    if (_orientation == COLUMN) {
+    //      for (const T &val : _data) {
+    //        std::cout << val << std::endl;
+    //      }
+    //    } else {
+    //      for (const T &val : _data) {
+    //        std::cout << val << ' ';
+    //      }
+    //      std::cout << std::endl;
+    //    }
+    std::cout << std::fixed;
+  }
+
  private:
-  T *_data;      // Starting point
-  size_t _size;  // Logical length
-  size_t _inc;   // Distance between elements (1 = contiguous)
+  T *_data;                  // Starting point
+  size_t _size;              // Logical length
+  Orientation _orientation;  // Orientation of the view (ROW or COLUMN)
+  size_t _inc;               // Distance between elements (1 = contiguous)
 };
+
 }  // namespace maf::math
+
+#include "VectorViewOperators.hpp"
 #endif

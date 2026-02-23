@@ -2,7 +2,6 @@
 #define MATRIX_VIEW_H
 
 #pragma once
-#include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/utility/Math.hpp"
 
 namespace maf::math {
@@ -22,10 +21,10 @@ template <Numeric T>
 class MatrixView {
  public:
   /** @brief The numeric type of the matrix elements. */
-  using value_type = T;
+  using value_type = std::remove_const_t<T>;
 
   /** @brief Default constructor creating an empty MatrixView. */
-  MatrixView() = default;
+  explicit MatrixView() = default;
 
   /** @brief Constructs a MatrixView.
    * @param data Pointer to the starting element of the submatrix.
@@ -33,13 +32,13 @@ class MatrixView {
    * @param c The logical number of columns in the submatrix.
    * @param s The stride (parent Matrix width) between rows.
    */
-  MatrixView(T *data, size_t r, size_t c, size_t s)
+  explicit MatrixView(T *data, size_t r, size_t c, size_t s)
       : _data(data), _rows(r), _cols(c), _stride(s) {}
 
   /** @brief Returns a pointer to the underlying data (mutable). */
   [[nodiscard]] T *data() noexcept { return _data; }
   /** @brief Returns a pointer to the underlying data (const). */
-  [[nodiscard]] const T *data() const noexcept { return _data; }
+  [[nodiscard]] const value_type *data() const noexcept { return _data; }
 
   /** @brief Provides unchecked access to row r.
    * @return A pointer to the first element of row r (use as view[r][c]).
@@ -48,7 +47,7 @@ class MatrixView {
   /** @brief Provides unchecked access to row r.
    * @return A pointer to the first element of row r (use as view[r][c]).
    */
-  [[nodiscard]] const T *operator[](size_t r) const noexcept {
+  [[nodiscard]] const value_type *operator[](size_t r) const noexcept {
     return _data + (r * _stride);
   }
 
@@ -60,17 +59,18 @@ class MatrixView {
     if (row >= _rows || col >= _cols) {
       throw std::out_of_range("View index out of bounds");
     }
-    return _data[row * _stride + col];
+    return _data[(row * _stride) + col];
   }
+
   /**
    * @brief Gets a const reference to the element at (row, col).
    * @throws std::out_of_range if the index is invalid.
    */
-  [[nodiscard]] const T &at(size_t row, size_t col) const {
+  [[nodiscard]] const value_type &at(size_t row, size_t col) const {
     if (row >= _rows || col >= _cols) {
       throw std::out_of_range("View index out of bounds");
     }
-    return _data[row * _stride + col];
+    return _data[(row * _stride) + col];
   }
 
   /**
@@ -83,10 +83,11 @@ class MatrixView {
     }
     return std::span<T>(_data + (r * _stride), _cols);
   }
+
   /** @brief Returns a const span of a single row.
    * @throws std::out_of_range if the row is invalid.
    */
-  [[nodiscard]] std::span<const T> row_span(size_t r) const {
+  [[nodiscard]] std::span<const value_type> row_span(size_t r) const {
     if (r >= _rows) {
       throw std::out_of_range("Row index out of bounds");
     }
@@ -102,13 +103,29 @@ class MatrixView {
   /** @brief Gets the stride of parent Matrix. */
   [[nodiscard]] size_t get_stride() const noexcept { return _stride; }
 
+  /**
+   * @brief Prints the MatrixView contents to std::cout.
+   * @details Sets floating point precision for readability.
+   */
+  void print() const {
+    if constexpr (std::is_floating_point_v<T>) {
+      std::cout << std::fixed << std::setprecision(FLOAT_PRECISION);
+    }
+    for (size_t i = 0; i < _rows; ++i) {
+      for (size_t j = 0; j < _cols; ++j) {
+        std::cout << this->at(i, j) << ' ';
+      }
+      std::cout << std::endl;
+    }
+  }
+
  private:
   T *_data;        // Pointer to the start of the submatrix (top-left)
   size_t _rows;    // Logical height
   size_t _cols;    // Logical width
   size_t _stride;  // Parent Matrix width
 };
-template <typename T>
-concept MatrixViewType = std::is_same_v<T, MatrixView<typename T::value_type>>;
 }  // namespace maf::math
+
+#include "MatrixViewOperators.hpp"
 #endif
