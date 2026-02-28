@@ -627,5 +627,6 @@ class Matrix {
 #include "MatrixMethods.hpp"
 #include "MatrixOperators.hpp"
 #include "PLU.hpp"
+#include "QR.hpp"
 
 #endif
