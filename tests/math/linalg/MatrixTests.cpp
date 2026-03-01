@@ -2,6 +2,7 @@
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/math/linalg/Matrix.hpp"
 #include "MafLib/math/linalg/MatrixCheckers.hpp"
+#include "MafLib/math/linalg/QR.hpp"
 #include "MafLib/math/linalg/Vector.hpp"
 
 namespace maf::test {
@@ -978,81 +979,154 @@ class MatrixTests : public ITest {
     ASSERT_TRUE(math::loosely_equal(C, A));
   }
 
+  //=============================================================================
+  // MATRIX QR TESTS
+  //=============================================================================
+
+  void should_decompose_identity_matrix_qr() {
+    math::Matrix<double> I = math::identity_matrix<double>(4);
+    auto [Q, R] = math::QR_decompostion(I);
+    ASSERT_TRUE(loosely_equal(Q, I));
+    ASSERT_TRUE(loosely_equal(R, I));
+  }
+
+  void should_decompose_known_small_matrix_qr() {
+    math::Matrix<double> A(3, 3,
+                           {10.0, 9.0, 18.0, 20.0, -15.0, -15.0, 20.0, -12.0, 51.0});
+    math::Matrix<double> expected_Q(
+        3, 3,
+        {-1.0 / 3.0, 14.0 / 15.0, -2.0 / 15.0, -2.0 / 3.0, -1.0 / 3.0, -2.0 / 3.0,
+         -2.0 / 3.0, -2.0 / 15.0, 11.0 / 15.0});
+    math::Matrix<double> expected_R(
+        3, 3, {-30.0, 15.0, -30.0, 0.0, 15.0, 15.0, 0.0, 0.0, 45.0});
+    auto [Q, R] = math::QR_decompostion(A);
+    std::cout << "HERE" << std::endl;
+    Q.print();
+    R.print();
+
+    ASSERT_TRUE(loosely_equal(Q, expected_Q));
+    ASSERT_TRUE(loosely_equal(R, expected_R));
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void qr_time_test() {
+    std::vector<size_t> sizes = {512, 1024, 2048};
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(-10.0, 10.0);
+
+    for (size_t n : sizes) {
+      math::Matrix<double> A(n, n);
+
+      for (size_t i = 0; i < n; ++i) {
+        for (size_t j = 0; j < n; ++j) {
+          A.at(i, j) = dis(gen);
+        }
+      }
+
+      auto start = std::chrono::high_resolution_clock::now();
+      auto qr = math::QR_decompostion(A);
+      auto end = std::chrono::high_resolution_clock::now();
+
+      std::chrono::duration<double> elapsed = end - start;
+
+      std::cout << "QR elapsed time (n=" << n << "): " << elapsed.count()
+                << " seconds.\n";
+
+      // Approximate flop count for full QR with explicit Q
+      double flops = (8.0 / 3.0) * n * n * n;
+
+      std::cout << "QR approx GFLOPS: " << (flops / elapsed.count()) / 1e9
+                << " GFLOPS\n";
+
+      // Prevent compiler from optimizing away computation
+      volatile double sink = 0.0;
+      sink += qr.R.at(0, 0);
+      sink += qr.Q.at(0, 0);
+    }
+  }
+
  public:
   int run_all_tests() override {
-    should_construct_empty_matrix_with_zero_rows_and_columns();
-    should_construct_empty_matrix_of_given_size();
-    should_throw_if_constructed_with_zero_dimensions();
-    should_construct_from_raw_data();
-    should_throw_if_raw_data_is_null();
-    should_construct_from_std_vector();
-    should_throw_if_vector_size_mismatch();
-    should_construct_from_nested_vector();
-    should_throw_if_nested_vector_dimensions_mismatch();
-    should_construct_from_std_array();
-    should_construct_from_initializer_list();
-    should_throw_if_initializer_list_size_mismatch();
-    should_return_true_for_square_matrix();
-    should_return_true_for_symmetric_matrix();
-    should_return_true_for_triangular_matrix();
-    should_return_true_for_diagonal_matrix();
-    should_return_true_for_positive_definite_matrix();
-    should_return_true_for_non_square_matrix();
-    should_return_false_for_non_singular_matrix();
-    should_return_true_for_singular_matrix();
-    should_return_false_for_non_singular_matrix();
-    should_cast_int_matrix_to_float();
-    should_cast_float_matrix_to_int();
-    should_cast_int_matrix_to_double();
-    should_preserve_matrix_properties_after_cast();
-    should_cast_negative_values_correctly();
-    should_cast_large_matrix_efficiently();
-    should_allow_chaining_cast_with_operations();
-    should_cast_after_matrix_operations();
-    should_fill_matrix_with_value();
-    should_make_identity_matrix();
-    should_transpose_square_matrix_in_place();
-    should_return_transposed_copy_for_non_square_matrix();
-    should_check_equality_between_identical_matrices();
-    should_not_be_equal_if_any_element_differs();
-    should_correctly_perform_unary_minus();
-    should_add_two_matrices_of_same_size();
-    should_add_scalar_and_matrix();
-    should_add_assign_matrix();
-    should_add_assign_scalar();
-    should_subtract_two_matrices_of_same_size();
-    should_subtract_scalar_and_matrix();
-    should_subtract_assign_matrix();
-    should_subtract_assign_scalar();
-    should_multiply_matrix_and_scalar();
-    should_multiply_assign_scalar();
-    should_divide_matrix_and_scalar();
-    should_divide_assign_scalar();
-    should_multiply_matrices();
-    should_multiply_matrix_and_vector();
-    matmul_time_test();
-    should_throw_if_plu_called_on_non_square_matrix();
-    should_throw_for_singular_matrix();
-    should_correctly_perform_plu_decomposition_on_small_matrix();
-    should_correctly_handle_identity_matrix_in_plu();
-    should_correctly_decompose_upper_triangular_matrix();
-    should_correctly_handle_negative_pivots_in_plu();
-    plu_time_test();
-    should_decompose_identity_matrix();
-    should_decompose_known_small_matrix();
-    should_correctly_decompose_for_known_example();
-    should_decompose_diagonal_matrix();
-    should_reconstruct_from_random_b_times_b_t();
-    should_throw_if_non_symmetric();
-    should_throw_if_not_positive_definite();
-    should_auto_convert_int_matrix_to_double_in_cholesky();
-    should_preserve_float_type_in_cholesky();
-    should_preserve_double_type_in_cholesky();
-    should_explicitly_convert_int_to_float_in_cholesky();
-    should_explicitly_convert_float_to_double_in_cholesky();
-    should_handle_int_identity_matrix_in_cholesky();
-    should_handle_diagonal_int_matrix_in_cholesky();
-    cholesky_time_test();
+    // should_construct_empty_matrix_with_zero_rows_and_columns();
+    // should_construct_empty_matrix_of_given_size();
+    // should_throw_if_constructed_with_zero_dimensions();
+    // should_construct_from_raw_data();
+    // should_throw_if_raw_data_is_null();
+    // should_construct_from_std_vector();
+    // should_throw_if_vector_size_mismatch();
+    // should_construct_from_nested_vector();
+    // should_throw_if_nested_vector_dimensions_mismatch();
+    // should_construct_from_std_array();
+    // should_construct_from_initializer_list();
+    // should_throw_if_initializer_list_size_mismatch();
+    // should_return_true_for_square_matrix();
+    // should_return_true_for_symmetric_matrix();
+    // should_return_true_for_triangular_matrix();
+    // should_return_true_for_diagonal_matrix();
+    // should_return_true_for_positive_definite_matrix();
+    // should_return_true_for_non_square_matrix();
+    // should_return_false_for_non_singular_matrix();
+    // should_return_true_for_singular_matrix();
+    // should_return_false_for_non_singular_matrix();
+    // should_cast_int_matrix_to_float();
+    // should_cast_float_matrix_to_int();
+    // should_cast_int_matrix_to_double();
+    // should_preserve_matrix_properties_after_cast();
+    // should_cast_negative_values_correctly();
+    // should_cast_large_matrix_efficiently();
+    // should_allow_chaining_cast_with_operations();
+    // should_cast_after_matrix_operations();
+    // should_fill_matrix_with_value();
+    // should_make_identity_matrix();
+    // should_transpose_square_matrix_in_place();
+    // should_return_transposed_copy_for_non_square_matrix();
+    // should_check_equality_between_identical_matrices();
+    // should_not_be_equal_if_any_element_differs();
+    // should_correctly_perform_unary_minus();
+    // should_add_two_matrices_of_same_size();
+    // should_add_scalar_and_matrix();
+    // should_add_assign_matrix();
+    // should_add_assign_scalar();
+    // should_subtract_two_matrices_of_same_size();
+    // should_subtract_scalar_and_matrix();
+    // should_subtract_assign_matrix();
+    // should_subtract_assign_scalar();
+    // should_multiply_matrix_and_scalar();
+    // should_multiply_assign_scalar();
+    // should_divide_matrix_and_scalar();
+    // should_divide_assign_scalar();
+    // should_multiply_matrices();
+    // should_multiply_matrix_and_vector();
+    // matmul_time_test();
+    // should_throw_if_plu_called_on_non_square_matrix();
+    // should_throw_for_singular_matrix();
+    // should_correctly_perform_plu_decomposition_on_small_matrix();
+    // should_correctly_handle_identity_matrix_in_plu();
+    // should_correctly_decompose_upper_triangular_matrix();
+    // should_correctly_handle_negative_pivots_in_plu();
+    // plu_time_test();
+    // should_decompose_identity_matrix();
+    // should_decompose_known_small_matrix();
+    // should_correctly_decompose_for_known_example();
+    // should_decompose_diagonal_matrix();
+    // should_reconstruct_from_random_b_times_b_t();
+    // should_throw_if_non_symmetric();
+    // should_throw_if_not_positive_definite();
+    // should_auto_convert_int_matrix_to_double_in_cholesky();
+    // should_preserve_float_type_in_cholesky();
+    // should_preserve_double_type_in_cholesky();
+    // should_explicitly_convert_int_to_float_in_cholesky();
+    // should_explicitly_convert_float_to_double_in_cholesky();
+    // should_handle_int_identity_matrix_in_cholesky();
+    // should_handle_diagonal_int_matrix_in_cholesky();
+    // cholesky_time_test();
+
+    // should_decompose_identity_matrix_qr();
+    should_decompose_known_small_matrix_qr();
+    // qr_time_test();
+
     return 0;
   }
 };

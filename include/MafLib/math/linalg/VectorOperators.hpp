@@ -357,7 +357,7 @@ template <Numeric U>
 template <Numeric T>
 template <Numeric U>
 [[nodiscard]] auto Vector<T>::operator*(const Vector<U> &other) const {
-  if (_orientation == other._orientation || _orientation == COLUMN) {
+  if (_orientation == other.orientation() || _orientation == COLUMN) {
     throw std::invalid_argument(
         "Invalid multiplication: Vectors must be of different orientations (row x "
         "column) for dot product. If you are certain that you want the dot "
