@@ -1,0 +1,146 @@
+\doxysection{Vector\+View\+Operators.\+hpp}
+\hypertarget{_vector_view_operators_8hpp_source}{}\label{_vector_view_operators_8hpp_source}\index{include/MafLib/math/linalg/VectorViewOperators.hpp@{include/MafLib/math/linalg/VectorViewOperators.hpp}}
+\doxymbox{\hyperlink{_vector_view_operators_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VECTOR\_VIEW\_OPERATORS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VECTOR\_VIEW\_OPERATORS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{utility_2_math_8hpp}{MafLib/utility/Math.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_view_kernels_8hpp}{ViewKernels.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ @brief\ Vector-\/Matrix\ multiplication\ operator.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ This\ operator\ overload\ allows\ for\ the\ multiplication\ of\ a\ Vector-\/like}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ object\ with\ a\ Matrix-\/like\ object.\ It\ supports\ both\ VectorView\ and}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ Vector\ types\ for\ the\ Vector\ operand,\ and\ MatrixView\ and\ Matrix\ types}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ for\ the\ Matrix\ operand.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ The\ multiplication\ is\ performed\ using\ the\ GEMV\ kernel,\ which\ handles}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ the\ actual\ computation\ efficiently,\ including\ any\ necessary\ type}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ conversions.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ @attention\ This\ operator\ uses\ fast\ BLAS\ implementation\ if\ both\ types}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ are\ floating\ point\ type\ and\ are\ the\ same,\ otherwise\ uses\ naive\ algorithm.}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ It\ is\ usually\ worth\ casting\ a\ buffer\ for\ BLAS\ performance\ gains\ before\ hand.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ @tparam\ V\ The\ type\ of\ the\ Vector-\/like\ object\ (VectorView\ or\ Vector).}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ the\ Matrix-\/like\ object\ (MatrixView\ or\ Matrix).}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ @param\ x\ The\ Vector-\/like\ operand.}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ @param\ A\ The\ Matrix-\/like\ operand.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ *\ @return\ A\ new\ Vector\ resulting\ from\ the\ multiplication\ x\ *\ A.}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00029\ \textcolor{keyword}{template}\ <VectorViewCompatible\ V,\ MatrixViewCompatible\ T>}
+\DoxyCodeLine{00030\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{namespacemaf_1_1math_aa10366118175f185d9656b48350bbb87}{operator*}}(V\ \&x,\ T\ \&A)\ \{}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordflow}{if}\ (A.row\_count()\ !=\ x.size()\ ||\ x.orientation()\ !=\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297a9940ad68617dac484ce18ec7b07beabc}{ROW}})\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Inner\ dimensions\ do\ not\ match\ for\ Vector-\/Matrix\ multiplication!"{}});}
+\DoxyCodeLine{00034\ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{using\ }T\_type\ =\ \textcolor{keyword}{typename}\ T::value\_type;}
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{using\ }V\_type\ =\ \textcolor{keyword}{typename}\ V::value\_type;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<V,\ VectorView<V\_type>>\ \&\&}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::is\_same\_v<T,\ MatrixView<T\_type>>)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908}{kernels::gemv}}(\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a01473171826aa7c969fb1d7433923d59}{kernels::OP::Trans}},\ A,\ x);}
+\DoxyCodeLine{00042\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<V,\ VectorView<V\_type>>)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908}{kernels::gemv}}(\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a01473171826aa7c969fb1d7433923d59}{kernels::OP::Trans}},}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ A.view(0,\ 0,\ A.row\_count(),\ A.column\_count()),\ x);}
+\DoxyCodeLine{00045\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ MatrixView<T\_type>>)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908}{kernels::gemv}}(\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a01473171826aa7c969fb1d7433923d59}{kernels::OP::Trans}},\ A,\ x.view(0,\ x.size()));}
+\DoxyCodeLine{00047\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908}{kernels::gemv}}(\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a01473171826aa7c969fb1d7433923d59}{kernels::OP::Trans}},}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ A.view(0,\ 0,\ A.row\_count(),\ A.column\_count()),}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x.view(0,\ x.size()));}
+\DoxyCodeLine{00051\ \ \ \}}
+\DoxyCodeLine{00052\ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00065\ \textcolor{keyword}{template}\ <VectorViewCompatible\ V,\ VectorViewCompatible\ T>}
+\DoxyCodeLine{00066\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{namespacemaf_1_1math_aa10366118175f185d9656b48350bbb87}{operator*}}(\textcolor{keyword}{const}\ V\ \&x,\ \textcolor{keyword}{const}\ T\ \&y)\ \{}
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ x.size();}
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordtype}{size\_t}\ m\ =\ y.size();}
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordflow}{if}\ (n\ !=\ m)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Dimensions\ do\ not\ match!"{}});}
+\DoxyCodeLine{00071\ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \textcolor{keyword}{using\ }T\_type\ =\ \textcolor{keyword}{typename}\ T::value\_type;}
+\DoxyCodeLine{00074\ \ \ \textcolor{keyword}{using\ }V\_type\ =\ \textcolor{keyword}{typename}\ V::value\_type;}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordflow}{if}\ (x.orientation()\ ==\ y.orientation()\ ||\ x.orientation()\ ==\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}})\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Invalid\ multiplication:\ Vectors\ must\ be\ of\ different\ orientations\ (row\ x\ "{}}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}column)\ for\ dot\ product.\ If\ you\ are\ certain\ that\ you\ want\ the\ dot\ "{}}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}product,\ use\ the\ dot\_product()\ method\ which\ does\ not\ require\ specific\ "{}}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}orientations."{}});}
+\DoxyCodeLine{00081\ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<V,\ VectorView<V\_type>>\ \&\&}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::is\_same\_v<T,\ VectorView<T\_type>>)\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214}{kernels::dot}}(x,\ y);}
+\DoxyCodeLine{00086\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<V,\ VectorView<V\_type>>)\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214}{kernels::dot}}(x,\ y.view(0,\ y.size()));}
+\DoxyCodeLine{00088\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ VectorView<T\_type>>)\ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214}{kernels::dot}}(x.view(0,\ x.size()),\ y);}
+\DoxyCodeLine{00090\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214}{kernels::dot}}(x.view(0,\ x.size()),\ y.view(0,\ y.size()));}
+\DoxyCodeLine{00092\ \ \ \}}
+\DoxyCodeLine{00093\ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00104\ \textcolor{keyword}{template}\ <VectorViewCompatible\ V,\ VectorViewCompatible\ T>}
+\DoxyCodeLine{00105\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{namespacemaf_1_1math_a94325f2b65087a56dc02cbd0bacb7b22}{outer\_product}}(\textcolor{keyword}{const}\ V\ \&x,\ \textcolor{keyword}{const}\ T\ \&y)\ \{}
+\DoxyCodeLine{00106\ \ \ \textcolor{keyword}{using\ }T\_type\ =\ \textcolor{keyword}{typename}\ T::value\_type;}
+\DoxyCodeLine{00107\ \ \ \textcolor{keyword}{using\ }V\_type\ =\ \textcolor{keyword}{typename}\ V::value\_type;}
+\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T\_type,\ V\_type>;}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ x.size();}
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordtype}{size\_t}\ m\ =\ y.size();}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \textcolor{keywordflow}{if}\ (x.orientation()\ ==\ y.orientation())\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{comment}{//\ 1x1\ x\ 1x1\ vector\ multiplication}}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ 1\ \&\&\ m\ ==\ 1)\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<R>}}(1,\ 1,\ \{x[0]\ *\ y[0]\});}
+\DoxyCodeLine{00117\ \ \ \ \ \}}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vector\ orientations\ do\ not\ match\ for\ outer\ product!"{}});}
+\DoxyCodeLine{00119\ \ \ \}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{keywordflow}{switch}\ (x.orientation())\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}}:\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_same\_v<V,\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<V\_type>}}>\ \&\&}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ std::is\_same\_v<T,\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<T\_type>}}>)\ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a0a6841ab0c398890da60f2221df5c986}{kernels::outer}}(x,\ y);}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_same\_v<V,\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<V\_type>}}>)\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a0a6841ab0c398890da60f2221df5c986}{kernels::outer}}(x,\ y.view(0,\ y.size()));}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_same\_v<T,\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<T\_type>}}>)\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a0a6841ab0c398890da60f2221df5c986}{kernels::outer}}(x.view(0,\ x.size()),\ y);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a0a6841ab0c398890da60f2221df5c986}{kernels::outer}}(x.view(0,\ x.size()),\ y.view(0,\ y.size()));}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ !=\ m)\ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Resulting\ operation\ is\ a\ vector\ dot\ product,\ but\ vector\ dimensions\ do\ "{}}}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}not\ "{}}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}match!"{}});}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}This\ results\ in\ a\ 1x1\ matrix.\ Consider\ using\ vector\ dot\ "{}}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}product."{}}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_same\_v<V,\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<V\_type>}}>\ \&\&}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ std::is\_same\_v<T,\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<T\_type>}}>)\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<R>}}(1,\ 1,\ \{\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214}{kernels::dot}}(x,\ y)\});}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_same\_v<V,\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<V\_type>}}>)\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<R>}}(1,\ 1,\ \{\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214}{kernels::dot}}(x,\ y.view(0,\ y.size()))\});}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_same\_v<T,\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<T\_type>}}>)\ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<R>}}(1,\ 1,\ \{\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214}{kernels::dot}}(x.view(0,\ x.size()),\ y)\});}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<R>}}(1,\ 1,\ \{\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214}{kernels::dot}}(x.view(0,\ x.size()),\ y.view(0,\ y.size()))\});}
+\DoxyCodeLine{00156\ \ \ \}}
+\DoxyCodeLine{00157\ \}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

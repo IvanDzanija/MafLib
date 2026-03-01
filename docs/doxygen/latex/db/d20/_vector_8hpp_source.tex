@@ -1,0 +1,220 @@
+\doxysection{Vector.\+hpp}
+\hypertarget{_vector_8hpp_source}{}\label{_vector_8hpp_source}\index{include/MafLib/math/linalg/Vector.hpp@{include/MafLib/math/linalg/Vector.hpp}}
+\doxymbox{\hyperlink{_vector_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VECTOR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VECTOR\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_accelerate_wrapper_8hpp}{AccelerateWrappers/AccelerateWrapper.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_lin_alg_8hpp}{LinAlg.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{utility_2_math_8hpp}{MafLib/utility/Math.hpp}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{using\ namespace\ }maf::util;}
+\DoxyCodeLine{00028\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00029\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}\ \{}
+\DoxyCodeLine{00030\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a7b8c419bb2ead188469aea139cf8edc6}{value\_type}}\ =\ T;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{comment}{//\ -\/-\/-\/\ Constructors\ -\/-\/-\/}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00040\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}()\ :\ \_orientation(\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}})\ \{\}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00048\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}(\textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}},\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}\ =\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}});}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00059\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}(\textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}},\ \textcolor{keyword}{const}\ U\ *\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}},\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}\ =\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}});}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00070\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}(\textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}},\ \textcolor{keyword}{const}\ std::vector<U>\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}},\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}\ =\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}});}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00080\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}(\textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}},\ std::vector<T>\ \&\&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}},\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}\ =\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}});}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{keyword}{template}\ <Numeric\ U,\ \textcolor{keywordtype}{size\_t}\ N>}
+\DoxyCodeLine{00093\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}(\textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}},\ \textcolor{keyword}{const}\ std::array<U,\ N>\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}},\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}\ =\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}});}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00099\ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<U>}}\ \&other);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \textcolor{comment}{//\ -\/-\/-\/\ Iterators\ -\/-\/-\/}}
+\DoxyCodeLine{00103\ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a36d6a5a5315a1c2ae9bad35ca5aa448a}{begin}}()\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.begin();\ \}}
+\DoxyCodeLine{00105\ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a4b7d99320a69fd965ce3210267d64c0e}{end}}()\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.end();\ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00108\ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a7b7e8fda09c78bbd67569affd7020d65}{begin}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.begin();\ \}}
+\DoxyCodeLine{00110\ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a67de8a29ae52bbb5c487ad55ec90366f}{end}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.end();\ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00113\ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ad86b36b09c3a0b866d8508e013aa09fc}{cbegin}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.cbegin();\ \}}
+\DoxyCodeLine{00115\ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_afa7ada2f328c3eff483b60d552bff19e}{cend}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.cend();\ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00118\ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a00b8fd60ab243cb2d89c724b3bbc91cd}{rbegin}}()\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.rbegin();\ \}}
+\DoxyCodeLine{00120\ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8e539abf87cedeb0708b3bdcbee815bd}{rend}}()\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.rend();\ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00123\ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a528f46939b872577c016af6d44219562}{rbegin}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.rbegin();\ \}}
+\DoxyCodeLine{00125\ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ac558c55e469ae006b9c26362b1a8eb1a}{rend}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.rend();\ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00128\ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ad8b6a7d8d3c11d9ada93dc01a7a6dead}{crbegin}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.crbegin();\ \}}
+\DoxyCodeLine{00130\ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a363f377d18c73b7b353b6d81fcb48e0c}{crend}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.crend();\ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \textcolor{comment}{//\ -\/-\/-\/\ Getters\ -\/-\/-\/}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00139\ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ T\ *\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.data();\ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00145\ \ \ [[nodiscard]]\ T\ *\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a3cca61baab5751e49a075e35ee5e8454}{data}}()\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.data();\ \}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00152\ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ std::vector<T>\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a6b4000caab61817d32f8de3fef04cb2a}{data\_vector}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data;\ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00159\ \ \ [[nodiscard]]\ std::vector<T>\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a732a9720069e7dd5b68baaa7430a10ec}{data\_vector}}()\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data;\ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00162\ \ \ [[nodiscard]]\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data.size();\ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00165\ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_orientation;\ \}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00172\ \ \ T\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ac8e1222d4ef75824b94980aaf6de600f}{at}}(\textcolor{keywordtype}{size\_t}\ index)\ \{\ \textcolor{keywordflow}{return}\ \_data.at(index);\ \}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00179\ \ \ \textcolor{keyword}{const}\ T\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_acc3db1eff1dee2710a1e3a837b75a1c2}{at}}(\textcolor{keywordtype}{size\_t}\ index)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_data.at(index);\ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00185\ \ \ T\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a6a49c85c7e94b1d06e2cd7a55bfef9e4}{operator[]}}(\textcolor{keywordtype}{size\_t}\ index)\ \{\ \textcolor{keywordflow}{return}\ \_data[index];\ \}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00191\ \ \ \textcolor{keyword}{const}\ T\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a60ccbf803cb44df10138684693c50125}{operator[]}}(\textcolor{keywordtype}{size\_t}\ index)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_data[index];\ \}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00202\ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<T>}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ab4a0ac259c4b813b12689a85214f0592}{view}}(\textcolor{keywordtype}{size\_t}\ index,\ \textcolor{keywordtype}{size\_t}\ length,\ \textcolor{keywordtype}{size\_t}\ inc\ =\ 1)\ \{}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordflow}{if}\ (length\ ==\ 0)\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}View\ dimensions\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00205\ \ \ \ \ \}}
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keywordflow}{if}\ (index\ +\ length\ >\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}())\ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Requested\ view\ exceeds\ Vector\ dimensions."{}});}
+\DoxyCodeLine{00208\ \ \ \ \ \}}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<T>}}(\&\_data[index],\ length,\ \_orientation,\ inc);}
+\DoxyCodeLine{00210\ \ \ \}}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00221\ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<const\ T>}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a854e8ab5e57f2a6e480ca196de8d4eaa}{view}}(\textcolor{keywordtype}{size\_t}\ index,\ \textcolor{keywordtype}{size\_t}\ length,}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ inc\ =\ 1)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordflow}{if}\ (length\ ==\ 0)\ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}View\ dimensions\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00225\ \ \ \ \ \}}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keywordflow}{if}\ (index\ +\ length\ >\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}())\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Requested\ view\ exceeds\ Vector\ dimensions."{}});}
+\DoxyCodeLine{00228\ \ \ \ \ \}}
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<const\ T>}}(\&\_data[index],\ length,\ \_orientation,\ inc);}
+\DoxyCodeLine{00230\ \ \ \}}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \textcolor{comment}{//\ -\/-\/-\/\ Checkers\ -\/-\/-\/}}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00238\ \ \ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aad485062e875a345db7fd5c81f7390ef}{is\_null}}()\ const\ noexcept;}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ \textcolor{comment}{//\ -\/-\/-\/\ Methods\ -\/-\/-\/}}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00243\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a7112b999c9d59b392fba991a752af923}{fill}}(T\ value)\ noexcept;}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00246\ \ \ [[nodiscard]]\ T\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a9ea665a8b70c85be70957d511865ff28}{norm}}()\ const\ noexcept;}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00249\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a02e4aff220cd36bb92d84d08def1fdb2}{normalize}}();}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00252\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a6257e58bd19631bdfb91b72c1da6d2c2}{transpose}}()\ noexcept;}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00256\ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}<T>\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f1900daefc1a467b50da3c889612c75}{transposed}}()\ const\ noexcept;}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \ \ \textcolor{comment}{//\ -\/-\/-\/\ Operators\ -\/-\/-\/}}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00266\ \ \ [[nodiscard]]\ constexpr\ \textcolor{keywordtype}{bool}\ operator==(const\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}\ \&other)\ const\ noexcept;}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00272\ \ \ [[nodiscard]]\ auto\ operator-\/()\ const\ noexcept;}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00282\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00283\ \ \ [[nodiscard]]\ auto\ operator+(const\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}<U>\ \&other)\ const;}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00291\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00292\ \ \ [[nodiscard]]\ auto\ operator+(const\ U\ \&scalar)\ const\ noexcept;}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00302\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00303\ \ \ auto\ operator+=(const\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}<U>\ \&other);}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00311\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00312\ \ \ auto\ operator+=(const\ U\ \&scalar)\ noexcept;}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00322\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00323\ \ \ [[nodiscard]]\ auto\ operator-\/(const\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}<U>\ \&other)\ const;}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00331\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00332\ \ \ [[nodiscard]]\ auto\ operator-\/(const\ U\ \&scalar)\ const\ noexcept;}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00342\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00343\ \ \ auto\ operator-\/=(const\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}<U>\ \&other);}
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00351\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00352\ \ \ auto\ operator-\/=(const\ U\ \&scalar)\ noexcept;}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00360\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00361\ \ \ [[nodiscard]]\ auto\ operator*(const\ U\ \&scalar)\ const\ noexcept;}
+\DoxyCodeLine{00362\ }
+\DoxyCodeLine{00369\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00370\ \ \ auto\ operator*=(const\ U\ \&scalar)\ noexcept;}
+\DoxyCodeLine{00371\ }
+\DoxyCodeLine{00380\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00381\ \ \ [[nodiscard]]\ auto\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a7c27148cb7d68df78343721cc56d67e0}{dot\_product}}(const\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}<U>\ \&other)\ const;}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00391\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00392\ \ \ [[nodiscard]]\ auto\ \doxymbox{\hyperlink{namespacemaf_1_1math_a94325f2b65087a56dc02cbd0bacb7b22}{outer\_product}}(const\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}<U>\ \&other)\ const;}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00404\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00405\ \ \ [[nodiscard]]\ auto\ operator*(const\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}<U>\ \&other)\ const;}
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00416\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00417\ \ \ [[nodiscard]]\ auto\ operator*(const\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}<U>\ \&other)\ const;}
+\DoxyCodeLine{00418\ }
+\DoxyCodeLine{00426\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00427\ \ \ [[nodiscard]]\ auto\ operator/(const\ U\ \&scalar)\ const\ noexcept;}
+\DoxyCodeLine{00428\ }
+\DoxyCodeLine{00435\ \ \ template\ <Numeric\ U>}
+\DoxyCodeLine{00436\ \ \ auto\ operator/=(const\ U\ \&scalar)\ noexcept;}
+\DoxyCodeLine{00437\ }
+\DoxyCodeLine{00438\ \ \ \textcolor{comment}{//\ -\/-\/-\/\ Printing\ and\ debugging\ -\/-\/-\/}}
+\DoxyCodeLine{00439\ }
+\DoxyCodeLine{00444\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_afe41f68eb599cda7645d60999069d2fd}{print}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00445\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_floating\_point\_v<T>)\ \{}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ std::cout\ <<\ std::setprecision(FLOAT\_PRECISION);}
+\DoxyCodeLine{00447\ \ \ \ \ \}}
+\DoxyCodeLine{00448\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_orientation\ ==\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}})\ \{}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\ \&val\ :\ \_data)\ \{}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ std::cout\ <<\ val\ <<\ std::endl;}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00452\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\ \&val\ :\ \_data)\ \{}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ std::cout\ <<\ val\ <<\ \textcolor{charliteral}{'\ '};}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ std::cout\ <<\ std::endl;}
+\DoxyCodeLine{00457\ \ \ \ \ \}}
+\DoxyCodeLine{00458\ \ \ \ \ std::cout\ <<\ std::fixed;}
+\DoxyCodeLine{00459\ \ \ \}}
+\DoxyCodeLine{00460\ }
+\DoxyCodeLine{00461\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00463\ \ \ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}\ \_orientation;}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00466\ \ \ std::vector<T>\ \_data;}
+\DoxyCodeLine{00467\ }
+\DoxyCodeLine{00471\ \ \ \textcolor{keywordtype}{void}\ \_invert\_sign()\ \{}
+\DoxyCodeLine{00472\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_data.size()\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00473\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \_data.size();\ ++i)\ \{}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \_data[i]\ =\ -\/\_data[i];}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00477\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00478\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \_data.size();\ ++i)\ \{}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \_data[i]\ =\ -\/\_data[i];}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00482\ \ \ \ \ \}}
+\DoxyCodeLine{00483\ \ \ \}}
+\DoxyCodeLine{00484\ \};}
+\DoxyCodeLine{00485\ }
+\DoxyCodeLine{00486\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00487\ }
+\DoxyCodeLine{00488\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_checkers_8hpp}{VectorCheckers.hpp}}"{}}}
+\DoxyCodeLine{00489\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_constructors_8hpp}{VectorConstructors.hpp}}"{}}}
+\DoxyCodeLine{00490\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_methods_8hpp}{VectorMethods.hpp}}"{}}}
+\DoxyCodeLine{00491\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_operators_8hpp}{VectorOperators.hpp}}"{}}}
+\DoxyCodeLine{00492\ }
+\DoxyCodeLine{00493\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

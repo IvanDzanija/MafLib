@@ -1,0 +1,48 @@
+\doxysection{Math.\+hpp}
+\hypertarget{utility_2_math_8hpp_source}{}\label{utility_2_math_8hpp_source}\index{include/MafLib/utility/Math.hpp@{include/MafLib/utility/Math.hpp}}
+\doxymbox{\hyperlink{utility_2_math_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ UTIL\_MATH\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ UTIL\_MATH\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1util}{maf::util}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ CONCEPTS}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00012\ \textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptmaf_1_1util_1_1_numeric}{Numeric}}\ =\ std::is\_arithmetic\_v<T>;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ ENUMS}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}\ :\ \doxymbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{uint8}}\ \{\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297a9940ad68617dac484ce18ec7b07beabc}{ROW}},\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}}\ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ CONSTANTS}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{00023\ \textcolor{comment}{/***\ @brief\ Constant\ used\ as\ OMP\ lower\ bound\ for\ linear\ algorithms.\ */}}
+\DoxyCodeLine{00024\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ OMP\_LINEAR\_LIMIT\ =\ 500000;}
+\DoxyCodeLine{00025\ \textcolor{comment}{/***\ @brief\ Constant\ used\ as\ OMP\ lower\ bound\ for\ quadratic\ algorithms.\ */}}
+\DoxyCodeLine{00026\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ OMP\_QUADRATIC\_LIMIT\ =\ 500\ *\ 500;}
+\DoxyCodeLine{00027\ \textcolor{comment}{/***\ @brief\ Constant\ used\ as\ OMP\ lower\ bound\ for\ cubic\ algorithms.\ */}}
+\DoxyCodeLine{00028\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ OMP\_CUBIC\_LIMIT\ =\ 50\ *\ 50;}
+\DoxyCodeLine{00030\ \textcolor{keyword}{inline}\ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{uint8}}\ BLOCK\_SIZE\ =\ 64;}
+\DoxyCodeLine{00032\ \textcolor{keyword}{inline}\ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{uint8}}\ FLOAT\_PRECISION\ =\ 5;}
+\DoxyCodeLine{00034\ \textcolor{keyword}{inline}\ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ EPSILON\ =\ 1e-\/6;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ Methods}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{00048\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00049\ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{namespacemaf_1_1util_ae4cf9e3bb378a55e4cb78fd699dfd4ff}{is\_close}}(T\ v1,\ U\ v2,\ \textcolor{keywordtype}{double}\ epsilon\ =\ EPSILON)\ \{}
+\DoxyCodeLine{00050\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordflow}{return}\ std::abs(\textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(v1)\ -\/\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(v2))\ <\ epsilon;}
+\DoxyCodeLine{00052\ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \}\ \ \textcolor{comment}{//\ namespace\ maf::util}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

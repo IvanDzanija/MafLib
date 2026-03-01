@@ -1,0 +1,5 @@
+<map id="maf::math::Matrix::operator+=" name="maf::math::Matrix::operator+=">
+<area shape="rect" id="Node000001" title="Element&#45;wise scalar addition assignment (Matrix + scalar)." alt="" coords="5,5,138,46"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#afadd64902ef9d03291be6e799c38e904" title="Default constructor. Creates an empty 0x0 matrix." alt="" coords="186,5,318,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,23,173,25,168,26,138,28"/>
+</map>

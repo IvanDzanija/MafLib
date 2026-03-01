@@ -1,0 +1,59 @@
+\doxysection{Fixed\+Point.\+hpp}
+\hypertarget{_fixed_point_8hpp_source}{}\label{_fixed_point_8hpp_source}\index{include/MafLib/math/optimization/FixedPoint.hpp@{include/MafLib/math/optimization/FixedPoint.hpp}}
+\doxymbox{\hyperlink{_fixed_point_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ FIXED\_POINT\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ FIXED\_POINT\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_optimizer_8hpp}{Optimizer.hpp}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{template}\ <std::\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}\ T>}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point_a3c326955ce45099f5146d396c7752d0f}{FixedPoint}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}}<T>\ \{}
+\DoxyCodeLine{00015\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point_a3c326955ce45099f5146d396c7752d0f}{FixedPoint}}()\ =\ \textcolor{keyword}{delete};\ \ \textcolor{comment}{//\ Make\ sure\ function\ is\ provided.}}
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point_a7191627b12d28d8cdf021aba7d35bbc8}{FixedPoint}}(\textcolor{keyword}{const}\ std::function<T(T)>\ \&function,\ T\ start)}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}}<T>(function),\ \_start(start)\ \{\}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00029\ \ \ [[nodiscard]]\ T\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point_a2b5897cdba095a6091a82b9f55e122bb}{get\_start}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_start;\ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point_abb08ffe657503fd26359c122f0ac9ed6}{set\_start}}(T\ start)\ \{\ \_start\ =\ start;\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00044\ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{OptimizerResult<T>}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point_aa7be58499fff62b9565639fc83a570f9}{solve}}(T\ tolerance\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(1e-\/7),}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}}\ max\_iterations\ =\ 1000)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00046\ \ \ \ \ T\ x\ =\ \_start;}
+\DoxyCodeLine{00047\ \ \ \ \ T\ error\ =\ \_get\_error(x);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{while}\ (error\ >\ tolerance\ \&\&\ max\_iterations-\/-\/\ >\ 0)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ x\ =\ this-\/>\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}(x);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ error\ =\ \_get\_error(x);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::isinf(x)\ ||\ std::isnan(x))\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{.solution\ =\ x,}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .error\ =\ error,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .error\_message\ =\ \textcolor{stringliteral}{"{}Method\ diverged\ (NaN\ or\ Infinity)."{}}\};}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{if}\ (error\ >\ tolerance)\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{.solution\ =\ x,}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .error\ =\ error,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .error\_message\ =\ \textcolor{stringliteral}{"{}Method\ did\ not\ converge\ within\ the\ iteration\ limit."{}}\};}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ \{.solution\ =\ x,\ .error\ =\ error,\ .error\_message\ =\ std::nullopt\};}
+\DoxyCodeLine{00067\ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00071\ \ \ T\ \_start;}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00078\ \ \ T\ \_get\_error(T\ current\_point)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordflow}{return}\ std::abs(this-\/>\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}(current\_point)\ -\/\ current\_point);}
+\DoxyCodeLine{00080\ \ \ \}}
+\DoxyCodeLine{00081\ \};}
+\DoxyCodeLine{00082\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

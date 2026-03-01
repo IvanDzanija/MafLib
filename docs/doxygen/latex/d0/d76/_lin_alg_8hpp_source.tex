@@ -1,0 +1,64 @@
+\doxysection{Lin\+Alg.\+hpp}
+\hypertarget{_lin_alg_8hpp_source}{}\label{_lin_alg_8hpp_source}\index{include/MafLib/math/linalg/LinAlg.hpp@{include/MafLib/math/linalg/LinAlg.hpp}}
+\doxymbox{\hyperlink{_lin_alg_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ LINALG\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ LINALG\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{utility_2_math_8hpp}{MafLib/utility/Math.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{using\ namespace\ }maf::util;}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ Classes}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{MatrixView}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ Concepts}}
+\DoxyCodeLine{00027\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00028\ \textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptmaf_1_1math_1_1_vector_type}{VectorType}}\ =\ \textcolor{keyword}{requires}\ \{\ \textcolor{keyword}{typename}\ std::remove\_cvref\_t<T>::value\_type;\ \}\ \&\&}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Numeric<typename\ std::remove\_cvref\_t<T>::value\_type>\ \&\&}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::same\_as<std::remove\_cvref\_t<T>,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<typename\ std::remove\_cvref\_t<T>::value\_type}}>>;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00037\ \textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptmaf_1_1math_1_1_vector_view_type}{VectorViewType}}\ =}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{requires}\ \{\ \textcolor{keyword}{typename}\ std::remove\_cvref\_t<T>::value\_type;\ \}\ \&\&}
+\DoxyCodeLine{00039\ \ \ \ \ Numeric<typename\ std::remove\_cvref\_t<T>::value\_type>\ \&\&}
+\DoxyCodeLine{00040\ \ \ \ \ std::same\_as<std::remove\_cvref\_t<T>,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{VectorView<typename\ std::remove\_cvref\_t<T>::value\_type}}>>;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00047\ \textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptmaf_1_1math_1_1_vector_view_compatible}{VectorViewCompatible}}\ =\ \doxymbox{\hyperlink{conceptmaf_1_1math_1_1_vector_view_type}{VectorViewType<T>}}\ ||\ \doxymbox{\hyperlink{conceptmaf_1_1math_1_1_vector_type}{VectorType<T>}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00053\ \textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptmaf_1_1math_1_1_matrix_type}{MatrixType}}\ =\ \textcolor{keyword}{requires}\ \{\ \textcolor{keyword}{typename}\ std::remove\_cvref\_t<T>::value\_type;\ \}\ \&\&}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Numeric<typename\ std::remove\_cvref\_t<T>::value\_type>\ \&\&}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::same\_as<std::remove\_cvref\_t<T>,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<typename\ std::remove\_cvref\_t<T>::value\_type}}>>;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00062\ \textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptmaf_1_1math_1_1_matrix_view_type}{MatrixViewType}}\ =}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{requires}\ \{\ \textcolor{keyword}{typename}\ std::remove\_cvref\_t<T>::value\_type;\ \}\ \&\&}
+\DoxyCodeLine{00064\ \ \ \ \ Numeric<typename\ std::remove\_cvref\_t<T>::value\_type>\ \&\&}
+\DoxyCodeLine{00065\ \ \ \ \ std::same\_as<std::remove\_cvref\_t<T>,}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{MatrixView<typename\ std::remove\_cvref\_t<T>::value\_type}}>>;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00071\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00072\ \textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptmaf_1_1math_1_1_matrix_view_compatible}{MatrixViewCompatible}}\ =\ \doxymbox{\hyperlink{conceptmaf_1_1math_1_1_matrix_view_type}{MatrixViewType<T>}}\ ||\ \doxymbox{\hyperlink{conceptmaf_1_1math_1_1_matrix_type}{MatrixType<T>}};}
+\DoxyCodeLine{00073\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_matrix_8hpp}{Matrix.hpp}}"{}}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_8hpp}{Vector.hpp}}"{}}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

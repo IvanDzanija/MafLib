@@ -1,0 +1,48 @@
+\doxysection{Optimizer.\+hpp}
+\hypertarget{_optimizer_8hpp_source}{}\label{_optimizer_8hpp_source}\index{include/MafLib/math/optimization/Optimizer.hpp@{include/MafLib/math/optimization/Optimizer.hpp}}
+\doxymbox{\hyperlink{_optimizer_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ OPTIMIZER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ OPTIMIZER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_optimizer_result_8hpp}{OptimizerResult.hpp}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}\ <std::\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}\ T>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}}\ \{}
+\DoxyCodeLine{00016\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a329df7dd6df98b63308ea00eb754aee6}{\string~Optimizer}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00022\ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ std::function<T(T)>\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a3c73d3374da043a465816b809205c9b0}{get\_function}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}};\ \}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_ad51593bad51b6d9f41392c374b1e5c6f}{set\_function}}(\textcolor{keyword}{const}\ std::function<T(T)>\ \&function)\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{if}\ (!function)\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Function\ cannot\ be\ empty."{}});}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}\ =\ function;}
+\DoxyCodeLine{00032\ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00039\ \ \ [[nodiscard]]\ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{OptimizerResult<T>}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a007c3a463607c4ce090ba43f2cd15472}{solve}}(}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ T\ tolerance,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}}\ max\_iterations)\ =\ 0;\ \ \textcolor{comment}{//\ Pure\ virtual}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00045\ \ \ std::function<T(T)>\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_acc1a6ba07534c566c9798419c938406b}{Optimizer}}(\textcolor{keyword}{const}\ std::function<T(T)>\ \&function)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{if}\ (!function)\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Function\ cannot\ be\ empty."{}});}
+\DoxyCodeLine{00056\ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}\ =\ function;}
+\DoxyCodeLine{00058\ \ \ \}}
+\DoxyCodeLine{00059\ \};}
+\DoxyCodeLine{00060\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

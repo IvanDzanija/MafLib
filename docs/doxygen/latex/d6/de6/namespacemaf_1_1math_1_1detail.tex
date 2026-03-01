@@ -1,0 +1,81 @@
+\doxysection{maf::\+math::\+detail Namespace Reference}
+\hypertarget{namespacemaf_1_1math_1_1detail}{}\label{namespacemaf_1_1math_1_1detail}\index{maf::math::detail@{maf::math::detail}}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\using \doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail_a7ea52b131af7ccc3b444f62b0db646ac}{float\+\_\+promote\+\_\+t}} = std::\+conditional\+\_\+t$<$std::\+is\+\_\+floating\+\_\+point\+\_\+v$<$T$>$, T, double$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$std::\+floating\+\_\+point T$>$ }\\\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail_a9823af698a94cb131e27fbd62f84a83e}{\+\_\+cholesky}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix)
+\begin{DoxyCompactList}\small\item\em Internal implementation of Cholesky decomposition. \end{DoxyCompactList}\item 
+{\footnotesize template$<$std::\+floating\+\_\+point T$>$ }\\std::\+tuple$<$ std::\+vector$<$ \doxymbox{\hyperlink{namespacemaf_a9c6f11cfee0c09e2f40fbb271b5a1b04}{uint32}} $>$, \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$, \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ $>$ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail_a60463d7cb4da4798efddf0b3042c06c2}{\+\_\+plu}} (\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&\&\+\_\+U)
+\begin{DoxyCompactList}\small\item\em Internal implementation of PLU decomposition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-typedef-members}
+\Hypertarget{namespacemaf_1_1math_1_1detail_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespacemaf_1_1math_1_1detail_a7ea52b131af7ccc3b444f62b0db646ac}\index{maf::math::detail@{maf::math::detail}!float\_promote\_t@{float\_promote\_t}}
+\index{float\_promote\_t@{float\_promote\_t}!maf::math::detail@{maf::math::detail}}
+\doxysubsubsection{\texorpdfstring{float\_promote\_t}{float\_promote\_t}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_1_1detail_a7ea52b131af7ccc3b444f62b0db646ac} 
+template$<$typename T$>$ \\
+using \doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail_a7ea52b131af7ccc3b444f62b0db646ac}{maf::\+math::\+detail::\+float\+\_\+promote\+\_\+t}} = std::\+conditional\+\_\+t$<$std::\+is\+\_\+floating\+\_\+point\+\_\+v$<$T$>$, T, double$>$}
+
+
+
+\label{doc-func-members}
+\Hypertarget{namespacemaf_1_1math_1_1detail_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacemaf_1_1math_1_1detail_a9823af698a94cb131e27fbd62f84a83e}\index{maf::math::detail@{maf::math::detail}!\_cholesky@{\_cholesky}}
+\index{\_cholesky@{\_cholesky}!maf::math::detail@{maf::math::detail}}
+\doxysubsubsection{\texorpdfstring{\_cholesky()}{\_cholesky()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_1_1detail_a9823af698a94cb131e27fbd62f84a83e} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ maf::\+math::\+detail::\+\+\_\+cholesky (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&}]{matrix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Internal implementation of Cholesky decomposition. 
+
+Computes L where A = LL\texorpdfstring{$^\wedge$}{\string^}T for Hermitian symmetric positive definite matrix A. Uses blocked algorithm with Open\+MP parallelization. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d6/de6/namespacemaf_1_1math_1_1detail_a9823af698a94cb131e27fbd62f84a83e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d6/de6/namespacemaf_1_1math_1_1detail_a9823af698a94cb131e27fbd62f84a83e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemaf_1_1math_1_1detail_a60463d7cb4da4798efddf0b3042c06c2}\index{maf::math::detail@{maf::math::detail}!\_plu@{\_plu}}
+\index{\_plu@{\_plu}!maf::math::detail@{maf::math::detail}}
+\doxysubsubsection{\texorpdfstring{\_plu()}{\_plu()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_1_1detail_a60463d7cb4da4798efddf0b3042c06c2} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+std::\+tuple$<$ std::\+vector$<$ \doxymbox{\hyperlink{namespacemaf_a9c6f11cfee0c09e2f40fbb271b5a1b04}{uint32}} $>$, \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$, \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ $>$ maf::\+math::\+detail::\+\+\_\+plu (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&\&}]{\+\_\+U}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Internal implementation of PLU decomposition. 
+
+Computes L and U where P \texorpdfstring{$\ast$}{*} A = L \texorpdfstring{$\ast$}{*} U for square matrix A. Uses blocked algorithm with Open\+MP parallelization. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d6/de6/namespacemaf_1_1math_1_1detail_a60463d7cb4da4798efddf0b3042c06c2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d6/de6/namespacemaf_1_1math_1_1detail_a60463d7cb4da4798efddf0b3042c06c2_icgraph}
+\end{center}
+\end{figure}

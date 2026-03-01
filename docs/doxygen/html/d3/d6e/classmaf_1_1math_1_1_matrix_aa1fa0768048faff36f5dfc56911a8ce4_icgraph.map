@@ -1,0 +1,31 @@
+<map id="maf::math::Matrix::row_count" name="maf::math::Matrix::row_count">
+<area shape="rect" id="Node000001" title="Gets the number of rows." alt="" coords="618,288,751,329"/>
+<area shape="rect" id="Node000002" href="$d6/de6/namespacemaf_1_1math_1_1detail.html#a9823af698a94cb131e27fbd62f84a83e" title="Internal implementation of Cholesky decomposition." alt="" coords="408,8,536,49"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="674,272,661,226,640,170,610,113,591,87,569,64,537,44,536,39,572,60,595,83,614,110,645,168,666,224,679,274"/>
+<area shape="rect" id="Node000005" href="$d6/de6/namespacemaf_1_1math_1_1detail.html#a60463d7cb4da4798efddf0b3042c06c2" title="Internal implementation of PLU decomposition." alt="" coords="396,74,548,100"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="670,272,655,236,634,193,605,150,569,114,548,103,548,97,572,110,609,147,638,190,660,234,675,274"/>
+<area shape="rect" id="Node000008" href="$d4/d02/namespacemaf_1_1math.html#a3d4733be1cd68ede07a9c2de6728b2d7" title="Checks if two matrices are element&#45;wise equal within a tolerance." alt="" coords="408,124,537,165"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="659,275,621,227,596,202,569,180,537,164,537,158,572,175,600,198,625,223,665,276"/>
+<area shape="rect" id="Node000009" href="$de/d35/classmaf_1_1math_1_1_vector.html#a3f7dfd09c96426650c80548b86804450" title="Matrix&#45;Vector multiplication (Row Vector * Matrix)." alt="" coords="405,189,539,230"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="636,280,569,245,540,233,540,228,571,241,641,279"/>
+<area shape="rect" id="Node000010" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aeb756ee209272516a931a8ff9fccbcac" title="Element&#45;wise matrix addition." alt="" coords="406,255,538,295"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="600,296,539,288,538,283,605,295"/>
+<area shape="rect" id="Node000011" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#abc0451295206839219fcf5642e35ba6a" title="Element&#45;wise matrix addition assignment." alt="" coords="406,320,538,361"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="600,321,539,333,538,328,605,320"/>
+<area shape="rect" id="Node000012" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aa73a0427aeb902c0a1e40623f3c6c52b" title="Element&#45;wise matrix subtraction." alt="" coords="406,385,538,426"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="639,336,571,375,540,388,538,383,569,370,634,338"/>
+<area shape="rect" id="Node000013" href="$d4/d02/namespacemaf_1_1math.html#aa539cd7e636fe2beafd205a3b51b0311" title="Element&#45;wise scalar subtraction (scalar &#45; Matrix)." alt="" coords="402,450,542,476"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="665,340,626,394,600,419,572,440,543,453,541,448,569,435,597,415,622,390,660,343"/>
+<area shape="rect" id="Node000014" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a9a145aa09294706b54b47c4de0a10d13" title="Element&#45;wise matrix subtraction assignment." alt="" coords="406,500,538,541"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="672,341,657,379,634,418,606,457,572,490,540,508,538,503,569,486,602,453,630,415,652,376,668,345"/>
+<area shape="rect" id="Node000015" href="$d4/d02/namespacemaf_1_1math.html#ae14afbf9f10452228d7577bd94190353" title="Computes the QR decomposition of a matrix A using Householder reflections." alt="" coords="374,565,570,590"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="679,342,667,393,646,449,615,506,595,532,572,554,552,567,550,562,569,550,591,528,610,503,641,447,662,391,675,346"/>
+<area shape="rect" id="Node000003" href="$d4/d02/namespacemaf_1_1math.html#adacdd5d260e55a04182d86ed82d0e0b2" title="Computes the Cholesky decomposition of a symmetric positive definite matrix." alt="" coords="186,14,326,40"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="391,29,328,30,325,25,395,26"/>
+<area shape="rect" id="Node000004" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a40d503bbba1ec9fcbb50f0a90207bd04" title="Checks if the matrix is positive definite." alt="" coords="5,5,138,46"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="168,28,140,28,137,24,172,25"/>
+<area shape="rect" id="Node000006" href="$d4/d02/namespacemaf_1_1math.html#a5605a040f9b62ca6a92b7e7f91c6ee0f" title="Performs a blocked PLU decomposition on a square matrix." alt="" coords="203,74,308,100"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="379,88,310,89,308,85,383,86"/>
+<area shape="rect" id="Node000007" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#ae26826bcc4a303b29538a17c0a39de2b" title="Checks if the matrix is singular (non&#45;invertible)." alt="" coords="5,71,138,111"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="186,90,140,92,137,87,190,87"/>
+</map>

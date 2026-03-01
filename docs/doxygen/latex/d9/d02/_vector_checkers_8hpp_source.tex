@@ -1,0 +1,42 @@
+\doxysection{Vector\+Checkers.\+hpp}
+\hypertarget{_vector_checkers_8hpp_source}{}\label{_vector_checkers_8hpp_source}\index{include/MafLib/math/linalg/VectorCheckers.hpp@{include/MafLib/math/linalg/VectorCheckers.hpp}}
+\doxymbox{\hyperlink{_vector_checkers_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VECTOR\_CHECKERS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VECTOR\_CHECKERS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_8hpp}{Vector.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ Checks\ if\ vector\ is\ null\ vector}}
+\DoxyCodeLine{00016\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00017\ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aad485062e875a345db7fd5c81f7390ef}{Vector<T>::is\_null}}()\ const\ noexcept\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ T\&\ val\ :\ \_data)\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{namespacemaf_1_1util_ae4cf9e3bb378a55e4cb78fd699dfd4ff}{is\_close}}(val,\ 0))\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00024\ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{template}\ <Numeric\ T,\ Numeric\ U>}
+\DoxyCodeLine{00034\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{namespacemaf_1_1math_a3d4733be1cd68ede07a9c2de6728b2d7}{loosely\_equal}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<T>}}\&\ first,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<U>}}\&\ second,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ eps\ =\ 1e-\/6)\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ first.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}();}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordflow}{if}\ (first.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}()\ !=\ second.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}())\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{namespacemaf_1_1util_ae4cf9e3bb378a55e4cb78fd699dfd4ff}{is\_close}}(first[i],\ second[i],\ eps))\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00047\ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,161 @@
+\doxysection{QR.\+hpp}
+\hypertarget{_q_r_8hpp_source}{}\label{_q_r_8hpp_source}\index{include/MafLib/math/linalg/QR.hpp@{include/MafLib/math/linalg/QR.hpp}}
+\doxymbox{\hyperlink{_q_r_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ QR\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ QR\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_matrix_8hpp}{Matrix.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_matrix_view_8hpp}{MatrixView.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_8hpp}{Vector.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_view_8hpp}{VectorView.hpp}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00035\ \textcolor{keyword}{template}\ <std::\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}\ T>}
+\DoxyCodeLine{00036\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structmaf_1_1math_1_1_q_r_result}{QRResult}}\ \{}
+\DoxyCodeLine{00037\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<T>}}\ \doxymbox{\hyperlink{structmaf_1_1math_1_1_q_r_result_ad48c2f6396586a5318cdde8369754c5a}{Q}};}
+\DoxyCodeLine{00038\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<T>}}\ \doxymbox{\hyperlink{structmaf_1_1math_1_1_q_r_result_ad9e012e488744e4d9ce9403c17c07d9a}{R}};}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail}{detail}}\ \{}
+\DoxyCodeLine{00058\ \textcolor{keyword}{template}\ <std::\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}\ T>}
+\DoxyCodeLine{00059\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ T\ householder\_column(\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{MatrixView<T>}}\ A\_work,\ \textcolor{keywordtype}{size\_t}\ j)\ \{}
+\DoxyCodeLine{00060\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ m\ =\ A\_work.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view_a941d23fedfe623554aa311fcb3dbedb4}{row\_count}}();}
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordflow}{if}\ (j\ >=\ m)\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Householder\ column\ index\ out\ of\ range!"{}});}
+\DoxyCodeLine{00063\ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \textcolor{comment}{//\ sigma\ =\ x\_tail\string^2}}
+\DoxyCodeLine{00066\ \ \ T\ sigma\ =\ 0.0;}
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ j\ +\ 1;\ i\ <\ m;\ ++i)\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ sigma\ +=\ A\_work[i][j]\ *\ A\_work[i][j];}
+\DoxyCodeLine{00069\ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \textcolor{comment}{//\ Simple\ case,\ already\ in\ canonical\ form}}
+\DoxyCodeLine{00072\ \ \ \textcolor{keywordflow}{if}\ (sigma\ ==\ 0.0)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{return}\ 0.0;}
+\DoxyCodeLine{00074\ \ \ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \textcolor{keyword}{const}\ T\ alpha\ =\ A\_work.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view_aa4dd12fcd2457a05d5f29fb5997f1e32}{at}}(j,\ j);}
+\DoxyCodeLine{00077\ \ \ \textcolor{keyword}{const}\ T\ normx\ =\ std::sqrt(alpha\ *\ alpha\ +\ sigma);}
+\DoxyCodeLine{00078\ \ \ \textcolor{keyword}{const}\ T\ beta\ =\ (alpha\ <=\ 0.0)\ ?\ normx\ :\ -\/normx;\ \ \textcolor{comment}{//\ stability\ trick}}
+\DoxyCodeLine{00079\ \ \ \textcolor{keyword}{const}\ T\ u0\_inv\ =\ 1.0\ /\ (alpha\ -\/\ beta);}
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ j\ +\ 1;\ i\ <\ m;\ ++i)\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ A\_work[i][j]\ *=\ u0\_inv;}
+\DoxyCodeLine{00082\ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ A\_work[j][j]\ =\ beta;}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ T\ vTv\ =\ 1.0;}
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ j\ +\ 1;\ i\ <\ m;\ ++i)\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ vTv\ +=\ A\_work[i][j]\ *\ A\_work[i][j];}
+\DoxyCodeLine{00089\ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \textcolor{keywordflow}{return}\ T(2)\ /\ vTv;}
+\DoxyCodeLine{00091\ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00109\ \textcolor{keyword}{template}\ <std::\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}\ T>}
+\DoxyCodeLine{00110\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ Vector<T>\ load\_reflector(\textcolor{keyword}{const}\ Matrix<T>\ \&A\_work,\ \textcolor{keywordtype}{size\_t}\ j)\ \{}
+\DoxyCodeLine{00111\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ m\ =\ A\_work.row\_count();}
+\DoxyCodeLine{00112\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ len\ =\ m\ -\/\ j;}
+\DoxyCodeLine{00113\ \ \ Vector<T>\ v\_out(len,\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}});}
+\DoxyCodeLine{00114\ \ \ v\_out[0]\ =\ 1.0;}
+\DoxyCodeLine{00115\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 1;\ i\ <\ len;\ ++i)\ \{}
+\DoxyCodeLine{00116\ \ \ \ \ v\_out[i]\ =\ A\_work[i\ +\ j][j];}
+\DoxyCodeLine{00117\ \ \ \}}
+\DoxyCodeLine{00118\ \ \ \textcolor{keywordflow}{return}\ v\_out;}
+\DoxyCodeLine{00119\ \}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00122\ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail_a7ea52b131af7ccc3b444f62b0db646ac}{float\_promote\_t}}\ =\ std::conditional\_t<std::is\_floating\_point\_v<T>,\ T,\ \textcolor{keywordtype}{double}>;}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \}\ \ \textcolor{comment}{//\ namespace\ detail}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00127\ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{namespacemaf_1_1math_a3ee3725e7ac4fbf68a11b1fee76d907c}{QRResultType}}\ =\ \doxymbox{\hyperlink{structmaf_1_1math_1_1_q_r_result}{QRResult<detail::float\_promote\_t<T>}}>;}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00146\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00147\ [[nodiscard]]\ \doxymbox{\hyperlink{namespacemaf_1_1math_a3ee3725e7ac4fbf68a11b1fee76d907c}{QRResultType<T>}}\ \doxymbox{\hyperlink{namespacemaf_1_1math_ae14afbf9f10452228d7577bd94190353}{QR\_decompostion}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<T>}}\ \&A,\ \textcolor{keywordtype}{bool}\ full\_Q\ =\ \textcolor{keyword}{false},}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ full\_R\ =\ \textcolor{keyword}{false})\ \{}
+\DoxyCodeLine{00149\ \ \ \textcolor{keyword}{using\ }DataType\ =\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail_a7ea52b131af7ccc3b444f62b0db646ac}{detail::float\_promote\_t<T>}};}
+\DoxyCodeLine{00150\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ m\ =\ A.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa1fa0768048faff36f5dfc56911a8ce4}{row\_count}}();}
+\DoxyCodeLine{00151\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ n\ =\ A.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a98d6cc10d243169d78f53d07406ace8b}{column\_count}}();}
+\DoxyCodeLine{00152\ \ \ \textcolor{keywordflow}{if}\ (m\ ==\ 0\ ||\ n\ ==\ 0)\ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ perform\ QR\ decomposition\ on\ empty\ matrix!"{}});}
+\DoxyCodeLine{00154\ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \textcolor{comment}{//\ Smaller\ dimension\ determines\ number\ of\ reflectors}}
+\DoxyCodeLine{00157\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ k\ =\ std::min(m,\ n);}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<DataType>}}\ A\_work\ =\ A.template\ cast<DataType>();}
+\DoxyCodeLine{00160\ \ \ std::vector<DataType>\ tau(k,\ 0.0);}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ k;\ ++j)\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keyword}{auto}\ Aw\_view\ =\ A\_work.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a4543983313872f9ca5b96ba2bbd54bcc}{view}}(0,\ 0,\ m,\ n);}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ tau[j]\ =\ detail::householder\_column(Aw\_view,\ j);}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordflow}{if}\ (tau[j]\ ==\ 0.0)\ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00168\ \ \ \ \ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<DataType>}}\ v\ =\ detail::load\_reflector(A\_work,\ j);}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keyword}{auto}\ v\_view\ =\ v.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ab4a0ac259c4b813b12689a85214f0592}{view}}(0,\ v.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}());}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{if}\ (j\ +\ 1\ <\ n)\ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ A\_block\ =\ A\_work.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a4543983313872f9ca5b96ba2bbd54bcc}{view}}(j,\ j\ +\ 1,\ m\ -\/\ j,\ n\ -\/\ (j\ +\ 1));}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \textcolor{comment}{//\ w\ =\ A\_block\string^T\ *\ v}}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<DataType>}}\ w\ =\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908}{kernels::gemv}}(\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a01473171826aa7c969fb1d7433923d59}{kernels::OP::Trans}},\ A\_block,\ v\_view);}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ w\_view\ =\ w.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ab4a0ac259c4b813b12689a85214f0592}{view}}(0,\ w.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}());}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \textcolor{comment}{//\ A\_block\ =\ A\_block\ -\/\ (v\_view\ *\ w\_view)\ *\ tau[j];}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a16e5396f4e2c040a00a2c151ba5cbce1}{kernels::ger}}(A\_block,\ v\_view,\ w\_view,\ -\/tau[j]);}
+\DoxyCodeLine{00182\ \ \ \ \ \}}
+\DoxyCodeLine{00183\ \ \ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \textcolor{comment}{//\ Get\ R}}
+\DoxyCodeLine{00186\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<DataType>}}\ R(full\_R\ ?\ m\ :\ k,\ n);}
+\DoxyCodeLine{00187\ \ \ R.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a71134f227c2c22e4ecf24b33ed3c0396}{fill}}(0.0);}
+\DoxyCodeLine{00188\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ R.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa1fa0768048faff36f5dfc56911a8ce4}{row\_count}}();\ ++i)\ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ i;\ j\ <\ n;\ ++j)\ \{}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ R[i][j]\ =\ A\_work[i][j];}
+\DoxyCodeLine{00191\ \ \ \ \ \}}
+\DoxyCodeLine{00192\ \ \ \}}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \textcolor{comment}{//\ Get\ Q}}
+\DoxyCodeLine{00195\ \ \ \textcolor{keyword}{auto}\ Q\_full\ =\ \doxymbox{\hyperlink{namespacemaf_1_1math_a4d61c9a4c0434a2e01652894564f7ebb}{identity\_matrix<DataType>}}(m);}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ t\ =\ 0;\ t\ <\ k;\ ++t)\ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ j\ =\ (k\ -\/\ 1)\ -\/\ t;}
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordflow}{if}\ (tau[j]\ ==\ 0.0)\ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00201\ \ \ \ \ \}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<DataType>}}\ v\ =\ detail::load\_reflector(A\_work,\ j);}
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keyword}{auto}\ v\_view\ =\ v.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ab4a0ac259c4b813b12689a85214f0592}{view}}(0,\ v.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}());}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keyword}{auto}\ Qblock\ =\ Q\_full.view(j,\ j,\ m\ -\/\ j,\ m\ -\/\ j);}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<DataType>}}\ w\ =\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908}{kernels::gemv}}(\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a01473171826aa7c969fb1d7433923d59}{kernels::OP::Trans}},\ Qblock,\ v\_view);}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \ \ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a16e5396f4e2c040a00a2c151ba5cbce1}{kernels::ger}}(Qblock,\ v\_view,\ w.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ab4a0ac259c4b813b12689a85214f0592}{view}}(0,\ w.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}()),\ -\/tau[j]);}
+\DoxyCodeLine{00211\ \ \ \}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \textcolor{comment}{//\ Thin\ or\ full\ Q}}
+\DoxyCodeLine{00214\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<DataType>}}\ Q\ =\ full\_Q\ ?\ std::move(Q\_full)\ :\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<DataType>}}(m,\ k);}
+\DoxyCodeLine{00215\ \ \ \textcolor{keywordflow}{if}\ (!full\_Q)\ \{}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ m;\ ++i)\ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ k;\ ++j)\ \{}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ Q[i][j]\ =\ Q\_full[i][j];}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00220\ \ \ \ \ \}}
+\DoxyCodeLine{00221\ \ \ \}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \textcolor{keywordflow}{return}\ \{std::move(Q),\ std::move(R)\};}
+\DoxyCodeLine{00224\ \}}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00227\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

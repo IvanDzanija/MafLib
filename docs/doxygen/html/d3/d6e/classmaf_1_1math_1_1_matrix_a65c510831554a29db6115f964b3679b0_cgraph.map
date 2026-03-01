@@ -1,0 +1,7 @@
+<map id="maf::math::Matrix::transpose" name="maf::math::Matrix::transpose">
+<area shape="rect" id="Node000001" title="Performs an in&#45;place transpose of the matrix." alt="" coords="5,27,138,68"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a3506acc05e298718fb6d5587d6594055" title="Gets a mutable reference to the element at (row, col)." alt="" coords="186,5,329,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,34,173,31,168,33,139,40"/>
+<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a774d7c4510a8977e5b19f5f332d5789c" title="Checks if the matrix is square (rows == cols)." alt="" coords="191,55,324,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="138,55,179,63,174,64,138,60"/>
+</map>

@@ -1,0 +1,18 @@
+<map id="maf::math::Vector::operator*" name="maf::math::Vector::operator*">
+<area shape="rect" id="Node000001" title="Dot product (Row Vector * Column Vector)." alt="" coords="5,190,140,230"/>
+<area shape="rect" id="Node000002" href="$de/d35/classmaf_1_1math_1_1_vector.html#a7c27148cb7d68df78343721cc56d67e0" title="Calculates the dot product (inner product) of two Vectors." alt="" coords="188,108,322,149"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,187,196,154,192,158,121,192"/>
+<area shape="rect" id="Node000007" href="$de/d35/classmaf_1_1math_1_1_vector.html#aa96c8ef557852ec4425b3399e4c758c7" title="Default constructor." alt="" coords="382,203,517,244"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="140,210,368,218,366,223,140,215"/>
+<area shape="rect" id="Node000008" href="$de/d35/classmaf_1_1math_1_1_vector.html#a663a7e4b34644e198a855da680a40dc8" title="Gets the vector&#39;s orientation (ROW or COLUMN)." alt="" coords="188,247,322,288"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="139,228,176,242,171,242,139,234"/>
+<area shape="rect" id="Node000003" href="$de/d35/classmaf_1_1math_1_1_vector.html#a8f02b32c5f55c5f27708afcd50e9918b" title="Gets a const pointer to the underlying data. store." alt="" coords="370,5,529,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="277,106,318,72,369,40,384,36,379,38,371,45,321,77,280,110"/>
+<area shape="rect" id="Node000004" href="$d0/d9a/namespacemaf_1_1math_1_1acc.html#a0f65ed83214add340b9128c3bc0882d9" title=" " alt="" coords="378,55,521,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="318,105,369,89,392,84,387,86,371,94,320,110"/>
+<area shape="rect" id="Node000005" href="$d0/d9a/namespacemaf_1_1math_1_1acc.html#ac0f84d113312134278b0aeebe3ca3581" title=" " alt="" coords="378,104,521,130"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="322,122,365,121,360,123,323,127"/>
+<area shape="rect" id="Node000006" href="$de/d35/classmaf_1_1math_1_1_vector.html#a486da0689bba119f338f50eb5e334a1a" title="Gets the number of elements in the vector." alt="" coords="370,153,529,179"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="322,139,367,150,362,150,322,144"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="292,147,371,189,384,197,378,196,369,194,291,152"/>
+</map>

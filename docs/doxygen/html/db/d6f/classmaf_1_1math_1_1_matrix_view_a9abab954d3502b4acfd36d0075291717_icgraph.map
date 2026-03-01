@@ -1,0 +1,16 @@
+<map id="maf::math::MatrixView::data" name="maf::math::MatrixView::data">
+<area shape="rect" id="Node000001" title="Returns a pointer to the underlying data (mutable)." alt="" coords="454,102,607,142"/>
+<area shape="rect" id="Node000002" href="$d2/d2c/namespacemaf_1_1math_1_1kernels.html#ad71b365885ef9cac18d73bee09e86908" title="General matrix&#45;vector multiplication (GEMV)." alt="" coords="263,44,393,85"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="439,97,394,86,394,81,444,97"/>
+<area shape="rect" id="Node000006" href="$d2/d2c/namespacemaf_1_1math_1_1kernels.html#a16e5396f4e2c040a00a2c151ba5cbce1" title="General rank&#45;1 update (GER)." alt="" coords="250,109,406,135"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="436,122,407,125,406,120,441,122"/>
+<area shape="rect" id="Node000007" href="$db/d6f/classmaf_1_1math_1_1_matrix_view.html#a1a4409d54853fafe9023bf3517e71b1f" title="Constructs a MatrixView." alt="" coords="251,159,404,200"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="444,147,403,161,402,156,439,148"/>
+<area shape="rect" id="Node000003" href="$d4/d02/namespacemaf_1_1math.html#ab04fc934438c0cc896bf9602f59f7a0f" title=" " alt="" coords="33,5,174,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="245,49,169,34,169,29,250,47"/>
+<area shape="rect" id="Node000004" href="$d4/d02/namespacemaf_1_1math.html#ae5b017fcb650b29ac314dbf4a81192f6" title=" " alt="" coords="33,55,174,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="245,67,175,69,174,64,249,65"/>
+<area shape="rect" id="Node000005" href="$d4/d02/namespacemaf_1_1math.html#ae14afbf9f10452228d7577bd94190353" title="Computes the QR decomposition of a matrix A using Householder reflections." alt="" coords="5,105,202,131"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="245,85,162,107,160,102,250,82"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="232,121,203,123,202,117,237,120"/>
+</map>

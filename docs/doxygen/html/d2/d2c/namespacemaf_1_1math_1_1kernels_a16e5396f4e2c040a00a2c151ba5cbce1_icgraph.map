@@ -1,0 +1,5 @@
+<map id="maf::math::kernels::ger" name="maf::math::kernels::ger">
+<area shape="rect" id="Node000001" title="General rank&#45;1 update (GER)." alt="" coords="250,5,406,31"/>
+<area shape="rect" id="Node000002" href="$d4/d02/namespacemaf_1_1math.html#ae14afbf9f10452228d7577bd94190353" title="Computes the QR decomposition of a matrix A using Householder reflections." alt="" coords="5,5,202,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,18,202,21,202,16,237,18"/>
+</map>

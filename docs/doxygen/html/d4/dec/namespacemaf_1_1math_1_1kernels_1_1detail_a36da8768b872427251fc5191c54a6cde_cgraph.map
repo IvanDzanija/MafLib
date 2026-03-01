@@ -1,0 +1,9 @@
+<map id="maf::math::kernels::detail::no_trans_gemv" name="maf::math::kernels::detail::no_trans_gemv">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,71,163,111"/>
+<area shape="rect" id="Node000002" href="$db/d6f/classmaf_1_1math_1_1_matrix_view.html#a36d6c7ab732b0a81e0097881d0220808" title="Gets the number of columns." alt="" coords="211,5,364,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,68,209,50,205,53,150,73"/>
+<area shape="rect" id="Node000003" href="$db/d6f/classmaf_1_1math_1_1_matrix_view.html#a941d23fedfe623554aa311fcb3dbedb4" title="Gets the number of rows." alt="" coords="211,71,364,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="162,88,198,90,193,92,163,94"/>
+<area shape="rect" id="Node000004" href="$db/d6f/classmaf_1_1math_1_1_matrix_view.html#ace0019d93cd6ddcc3074176ab81be986" title="Gets a std::span of a single row." alt="" coords="211,136,364,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="150,109,210,130,205,131,149,115"/>
+</map>

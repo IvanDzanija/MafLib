@@ -1,0 +1,7 @@
+<map id="maf::math::Vector::normalize" name="maf::math::Vector::normalize">
+<area shape="rect" id="Node000001" title="Normalizes the vector in&#45;place (divides by its L2 norm)." alt="" coords="5,23,140,64"/>
+<area shape="rect" id="Node000002" href="$d0/d8d/namespacemaf_1_1util.html#ae4cf9e3bb378a55e4cb78fd699dfd4ff" title="Check if two numeric values of potentially different types are close to each other within a given eps..." alt="" coords="207,5,332,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,32,194,27,189,29,141,37"/>
+<area shape="rect" id="Node000003" href="$de/d35/classmaf_1_1math_1_1_vector.html#a9ea665a8b70c85be70957d511865ff28" title="Calculates the L2 norm (Euclidean length) of the vector." alt="" coords="188,55,351,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="140,49,175,55,169,56,140,54"/>
+</map>

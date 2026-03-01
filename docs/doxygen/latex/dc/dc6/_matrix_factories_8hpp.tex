@@ -1,0 +1,44 @@
+\doxysection{include/\+\+Maf\+Lib/\+math/\+linalg/\+\+Matrix\+Factories.hpp File Reference}
+\hypertarget{_matrix_factories_8hpp}{}\label{_matrix_factories_8hpp}\index{include/MafLib/math/linalg/MatrixFactories.hpp@{include/MafLib/math/linalg/MatrixFactories.hpp}}
+
+
+Contains various implementations for producing specific matrices.  
+
+
+{\ttfamily \+\#include "{}Matrix.\+hpp"{}}\newline
+Include dependency graph for Matrix\+Factories.\+hpp:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/d1b/_matrix_factories_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/dbf/_matrix_factories_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf}{maf}}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf_1_1math}{maf::\+math}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$Numeric T$>$ }\\\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \doxymbox{\hyperlink{namespacemaf_1_1math_a4d61c9a4c0434a2e01652894564f7ebb}{maf::\+math::\+identity\+\_\+matrix}} (size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Creates a new identity matrix of a given size. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ U $>$ \doxymbox{\hyperlink{namespacemaf_1_1math_a44a90b54cc59e94a6502aa223b893215}{maf::\+math::\+ones}} (size\+\_\+t rows, size\+\_\+t cols)
+\begin{DoxyCompactList}\small\item\em Creates a new matrix filled with ones. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric T$>$ }\\\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \doxymbox{\hyperlink{namespacemaf_1_1math_a78bf8c3c2c4809fee2fbe6eee7a9f9d9}{maf::\+math::\+permutation\+\_\+matrix}} (const std::\+vector$<$ \doxymbox{\hyperlink{namespacemaf_a9c6f11cfee0c09e2f40fbb271b5a1b04}{uint32}} $>$ \&perm)
+\begin{DoxyCompactList}\small\item\em Creates a new permutation matrix from a permutation vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains various implementations for producing specific matrices. 
+
+This file is intended to be included at the {\itshape end} of \doxylink{_matrix_8hpp}{Matrix.\+hpp} and should not be included directly anywhere else. 

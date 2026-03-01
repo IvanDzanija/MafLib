@@ -1,0 +1,91 @@
+\doxysection{Newton\+Raphson.\+hpp}
+\hypertarget{_newton_raphson_8hpp_source}{}\label{_newton_raphson_8hpp_source}\index{include/MafLib/math/optimization/NewtonRaphson.hpp@{include/MafLib/math/optimization/NewtonRaphson.hpp}}
+\doxymbox{\hyperlink{_newton_raphson_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ NEWTON\_RAPHSON\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ NEWTON\_RAPHSON\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_optimizer_8hpp}{Optimizer.hpp}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}\ <std::\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}\ T>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_newton_raphson_a86f630ec5a145a54abb47244e969b74c}{NewtonRaphson}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}}<T>\ \{}
+\DoxyCodeLine{00016\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_newton_raphson_a86f630ec5a145a54abb47244e969b74c}{NewtonRaphson}}()\ =\ \textcolor{keyword}{delete};\ \ \textcolor{comment}{//\ Make\ sure\ the\ function\ is\ provided.}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00024\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_newton_raphson_aa32b11a8ac30d2bc8bbe33e2a1df287a}{NewtonRaphson}}(\textcolor{keyword}{const}\ std::function<T(T)>\ \&function,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<T(T)>\ \&derivative,\ T\ start)}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}}<T>(function),\ \_derivative(derivative),\ \_start(start)\ \{\}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ std::optional<std::function<T(T)>>\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_newton_raphson_af724a334dec9c9c9c3c10b26a5de2195}{get\_derivative}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{return}\ \_derivative;}
+\DoxyCodeLine{00033\ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00038\ \ \ [[nodiscard]]\ T\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_newton_raphson_a2128404f52918a61c0dccdd52fa5d18e}{get\_start}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_start;\ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_newton_raphson_a7f9b4901d1e7308ffa6cc2392ec9d9c4}{set\_derivative}}(\textcolor{keyword}{const}\ std::function<T(T)>\ \&derivative)\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{if}\ (!derivative)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \_derivative.reset();}
+\DoxyCodeLine{00046\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \_derivative\ =\ derivative;}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_newton_raphson_ace65c0e661472608d14e6a93cc1a086b}{set\_start}}(T\ start)\ \{\ \_start\ =\ start;\ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00063\ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{OptimizerResult<T>}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_newton_raphson_aba1ce4efa587cd0ac603c1184d7bc20b}{solve}}(T\ tolerance\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(1e-\/7),}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}}\ max\_iterations\ =\ 100)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\_derivative)\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_secant\_solve(tolerance,\ max\_iterations);}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//\ NOTE:}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{comment}{//\ Pure\ method\ implementation\ of\ Newton-\/Raphson\ should\ be\ provided\ as\ well\ for}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{comment}{//\ pure\ speed\ and\ constexpr\ contexts}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{return}\ \_newton\_raphson\_solve(tolerance,\ max\_iterations);}
+\DoxyCodeLine{00072\ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00076\ \ \ std::optional<std::function<T(T)>>\ \_derivative;}
+\DoxyCodeLine{00078\ \ \ T\ \_start;}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00086\ \ \ \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{OptimizerResult<T>}}\ \_newton\_raphson\_solve(T\ tolerance,\ \doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}}\ max\_iterations)\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{comment}{//\ This\ gets\ called\ only\ if\ the\ derivative\ is\ provided.}}
+\DoxyCodeLine{00088\ \ \ \ \ T\ x\ =\ \_start;}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{while}\ (max\_iterations-\/-\/\ >\ 0)\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ T\ f\_x\ =\ this-\/>\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}(x);}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ T\ f\_prime\_x\ =\ \_derivative.value()(x);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::abs(f\_prime\_x)\ <=\ std::numeric\_limits<T>::epsilon())\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ .solution\ =\ x,}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ .error\ =\ std::abs(f\_x),}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ .error\_message\ =\ \textcolor{stringliteral}{"{}Derivative\ is\ too\ small;\ potential\ division\ by\ zero."{}}\};}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ T\ x\_new\ =\ x\ -\/\ (f\_x\ /\ f\_prime\_x);}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ T\ denom\ =\ std::abs(x);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (denom\ <\ std::numeric\_limits<T>::epsilon())\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ denom\ =\ std::numeric\_limits<T>::epsilon();}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ T\ rel\_error\ =\ std::abs(x\_new\ -\/\ x)\ /\ denom;}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (rel\_error\ <\ tolerance)\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{.solution\ =\ x\_new,\ .error\ =\ rel\_error,\ .error\_message\ =\ std::nullopt\};}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ x\ =\ x\_new;}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{return}\ \{.solution\ =\ x,}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ .error\ =\ std::abs(this-\/>\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}(x)),}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ .error\_message\ =\ \textcolor{stringliteral}{"{}Maximum\ iterations\ reached\ without\ convergence."{}}\};}
+\DoxyCodeLine{00112\ \ \ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00120\ \ \ OptimizerResult<T>\ \_secant\_solve(T\ tolerance,\ \doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}}\ max\_iterations)\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordflow}{return}\ OptimizerResult<T>\{.solution\ =\ std::numeric\_limits<T>::quiet\_NaN(),}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .error\ =\ std::numeric\_limits<T>::quiet\_NaN(),}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .error\_message\ =\ \textcolor{stringliteral}{"{}Secant\ method\ not\ implemented\ yet."{}}\};}
+\DoxyCodeLine{00124\ \ \ \}}
+\DoxyCodeLine{00125\ \};}
+\DoxyCodeLine{00126\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

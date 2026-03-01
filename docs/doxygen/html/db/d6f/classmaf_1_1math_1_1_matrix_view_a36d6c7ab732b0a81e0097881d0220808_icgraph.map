@@ -1,0 +1,20 @@
+<map id="maf::math::MatrixView::column_count" name="maf::math::MatrixView::column_count">
+<area shape="rect" id="Node000001" title="Gets the number of columns." alt="" coords="659,62,813,102"/>
+<area shape="rect" id="Node000002" href="$d2/d2c/namespacemaf_1_1math_1_1kernels.html#ad71b365885ef9cac18d73bee09e86908" title="General matrix&#45;vector multiplication (GEMV)." alt="" coords="263,46,393,86"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="690,53,653,35,611,19,567,10,533,8,455,19,411,31,372,48,370,43,410,26,453,14,533,3,568,5,612,14,655,30,695,54"/>
+<area shape="rect" id="Node000006" href="$d2/d2c/namespacemaf_1_1math_1_1kernels.html#a16e5396f4e2c040a00a2c151ba5cbce1" title="General rank&#45;1 update (GER)." alt="" coords="250,127,406,152"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="694,110,655,133,612,149,559,158,505,160,406,155,406,149,505,155,558,152,611,144,653,129,689,112"/>
+<area shape="rect" id="Node000007" href="$d4/dec/namespacemaf_1_1math_1_1kernels_1_1detail.html#a36da8768b872427251fc5191c54a6cde" title=" " alt="" coords="454,28,611,69"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="641,67,612,64,612,59,647,67"/>
+<area shape="rect" id="Node000008" href="$d4/dec/namespacemaf_1_1math_1_1kernels_1_1detail.html#a654bce50e886af201dfe65bde4034576" title=" " alt="" coords="464,94,601,134"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="647,96,602,106,601,101,641,97"/>
+<area shape="rect" id="Node000003" href="$d4/d02/namespacemaf_1_1math.html#ab04fc934438c0cc896bf9602f59f7a0f" title=" " alt="" coords="33,23,174,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="245,56,174,48,174,42,250,54"/>
+<area shape="rect" id="Node000004" href="$d4/d02/namespacemaf_1_1math.html#ae5b017fcb650b29ac314dbf4a81192f6" title=" " alt="" coords="33,72,174,98"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="245,74,175,82,174,76,250,72"/>
+<area shape="rect" id="Node000005" href="$d4/d02/namespacemaf_1_1math.html#ae14afbf9f10452228d7577bd94190353" title="Computes the QR decomposition of a matrix A using Householder reflections." alt="" coords="5,123,202,148"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="258,91,202,113,160,125,159,119,201,108,253,93"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="232,138,202,140,202,135,237,138"/>
+<area shape="poly" id="edge8_Node000007_Node000002" title=" " alt="" coords="436,57,393,63,393,58,441,56"/>
+<area shape="poly" id="edge10_Node000008_Node000002" title=" " alt="" coords="447,95,393,84,394,79,452,95"/>
+</map>

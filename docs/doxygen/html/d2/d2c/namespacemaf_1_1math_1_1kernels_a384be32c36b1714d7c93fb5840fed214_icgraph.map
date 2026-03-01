@@ -1,0 +1,7 @@
+<map id="maf::math::kernels::dot" name="maf::math::kernels::dot">
+<area shape="rect" id="Node000001" title="Computes the dot product of two vectors." alt="" coords="221,31,377,56"/>
+<area shape="rect" id="Node000002" href="$d4/d02/namespacemaf_1_1math.html#acba2308243a7c752babb68c81fb392af" title="Computes the dot product of two vectors." alt="" coords="19,5,159,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,33,160,29,160,24,208,32"/>
+<area shape="rect" id="Node000003" href="$d4/d02/namespacemaf_1_1math.html#a94325f2b65087a56dc02cbd0bacb7b22" title="Computes the outer product of two vectors." alt="" coords="5,55,173,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="203,55,173,61,173,55,208,54"/>
+</map>

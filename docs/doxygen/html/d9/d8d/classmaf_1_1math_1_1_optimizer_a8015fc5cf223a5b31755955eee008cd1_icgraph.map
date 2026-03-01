@@ -1,0 +1,11 @@
+<map id="maf::math::Optimizer::Optimizer" name="maf::math::Optimizer::Optimizer">
+<area shape="rect" id="Node000001" title="Protected default constructor &#45; only derived classes can construct." alt="" coords="239,104,383,145"/>
+<area shape="rect" id="Node000002" href="$d9/d32/classmaf_1_1math_1_1_bisection.html#a07e41a952abe832d5eca51fd1160b436" title="Constructor for Bisection class." alt="" coords="27,5,169,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="260,97,190,61,161,49,160,44,192,57,265,95"/>
+<area shape="rect" id="Node000003" href="$df/dce/classmaf_1_1math_1_1_fixed_point.html#a7191627b12d28d8cdf021aba7d35bbc8" title="Constructor for FixedPoint class." alt="" coords="23,71,173,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,112,174,105,173,100,226,110"/>
+<area shape="rect" id="Node000004" href="$d8/dbf/classmaf_1_1math_1_1_golden_section.html#a9ab68d5a6a8a5a1f738acef12a0d405a" title="Constructor for GoldenSection class." alt="" coords="11,136,185,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="221,138,186,146,184,141,226,137"/>
+<area shape="rect" id="Node000005" href="$d5/d67/classmaf_1_1math_1_1_newton_raphson.html#aa32b11a8ac30d2bc8bbe33e2a1df287a" title="Constructor for NewtonRaphson class." alt="" coords="5,201,191,242"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="263,152,192,191,161,203,159,198,190,186,258,154"/>
+</map>

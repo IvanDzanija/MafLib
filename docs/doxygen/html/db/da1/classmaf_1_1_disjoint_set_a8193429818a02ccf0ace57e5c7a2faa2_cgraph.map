@@ -1,0 +1,5 @@
+<map id="maf::DisjointSet::get_representative" name="maf::DisjointSet::get_representative">
+<area shape="rect" id="Node000001" title="Retrieves a mutable reference to the representative element of the set containing handle." alt="" coords="5,5,147,46"/>
+<area shape="rect" id="Node000002" href="$db/da1/classmaf_1_1_disjoint_set.html#a8ba4ca7bf154318426dbafbbe294c6ba" title="Finds the representative handle of the set containing a." alt="" coords="195,13,339,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,23,182,25,177,26,147,28"/>
+</map>

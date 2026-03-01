@@ -1,0 +1,279 @@
+\doxysection{maf::\+math::\+Vector\+View\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmaf_1_1math_1_1_vector_view}{}\label{classmaf_1_1math_1_1_vector_view}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+
+
+A lightweight view into a subvector of an existing \doxylink{classmaf_1_1math_1_1_vector}{Vector}. This class does not own the data; it provides a window into the data of another \doxylink{classmaf_1_1math_1_1_vector}{Vector}.  
+
+
+
+
+{\ttfamily \+\#include $<$Vector\+View.\+hpp$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c}{value\+\_\+type}} = std::\+remove\+\_\+const\+\_\+t$<$T$>$
+\begin{DoxyCompactList}\small\item\em The numeric type of the vector elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a185af5ff3b8b0b3116f7475a815f09eb}{Vector\+View}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor creating an empty \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a647af898d37b31c1669680b160c2a3f9}{Vector\+View}} (T \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a111d37b27369beb875a8b8848f76f32d}{data}}, size\+\_\+t \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aba677fd2d14a9d5f93f9042ef91f3626}{size}}, \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aa0553516cebaa8c584049e4ab814de8f}{orientation}}, size\+\_\+t inc=1)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View}. \end{DoxyCompactList}\item 
+T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a111d37b27369beb875a8b8848f76f32d}{data}} () noexcept
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the underlying data (mutable). \end{DoxyCompactList}\item 
+const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c}{value\+\_\+type}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_afc98f2e9e238a5875997b496e7828a89}{data}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the underlying data (const). \end{DoxyCompactList}\item 
+T \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_ae7211eae2205cfbe6e14b78ca9619f69}{operator\+[$\,$]\+}} (size\+\_\+t ind) noexcept
+\begin{DoxyCompactList}\small\item\em Accesses element at index i with the stride. \end{DoxyCompactList}\item 
+const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c}{value\+\_\+type}} \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_affba57c0d5ba0305a029f5a3084e99c6}{operator\+[$\,$]\+}} (size\+\_\+t ind) const noexcept
+\begin{DoxyCompactList}\small\item\em Accesses element at index i with the stride (const). \end{DoxyCompactList}\item 
+T \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aff60a87e9477400b138e7016afa7ce9b}{at}} (size\+\_\+t ind)
+\begin{DoxyCompactList}\small\item\em Gets a mutable reference to the element at index i. \end{DoxyCompactList}\item 
+const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c}{value\+\_\+type}} \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_abe890ebc951098e5099e1d65388d8bb7}{at}} (size\+\_\+t ind) const
+\begin{DoxyCompactList}\small\item\em Gets a const reference to the element at index i. \end{DoxyCompactList}\item 
+size\+\_\+t \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aba677fd2d14a9d5f93f9042ef91f3626}{size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets the size of the \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View}. \end{DoxyCompactList}\item 
+size\+\_\+t \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aa21ab8fb8d009b0306ba00366f816005}{get\+\_\+increment}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets the increment (stride) of the \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aa0553516cebaa8c584049e4ab814de8f}{orientation}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets the orientation of the \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View}. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a09db5472fc99830215ae275730f31279}{print}} () const
+\begin{DoxyCompactList}\small\item\em Prints the \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View} contents to std::\+cout. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$Numeric T$>$\newline
+class maf::\+math::\+\+Vector\+View$<$ T $>$}
+A lightweight view into a subvector of an existing \doxylink{classmaf_1_1math_1_1_vector}{Vector}. This class does not own the data; it provides a window into the data of another \doxylink{classmaf_1_1math_1_1_vector}{Vector}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The numeric type of the vector elements (e.\+g., float, double).\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxySince}{Since}
+2025 
+\end{DoxySince}
+
+
+\label{doc-typedef-members}
+\Hypertarget{classmaf_1_1math_1_1_vector_view_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c} 
+template$<$Numeric T$>$ \\
+using \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+value\+\_\+type = std::\+remove\+\_\+const\+\_\+t$<$T$>$}
+
+
+
+The numeric type of the vector elements. 
+
+
+
+\label{doc-constructors}
+\Hypertarget{classmaf_1_1math_1_1_vector_view_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmaf_1_1math_1_1_vector_view_a185af5ff3b8b0b3116f7475a815f09eb}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!VectorView@{VectorView}}
+\index{VectorView@{VectorView}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{VectorView()}{VectorView()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_a185af5ff3b8b0b3116f7475a815f09eb} 
+template$<$Numeric T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+\+Vector\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [default]}}
+
+
+
+Default constructor creating an empty \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View}. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_view_a647af898d37b31c1669680b160c2a3f9}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!VectorView@{VectorView}}
+\index{VectorView@{VectorView}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{VectorView()}{VectorView()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_a647af898d37b31c1669680b160c2a3f9} 
+template$<$Numeric T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+\+Vector\+View (\begin{DoxyParamCaption}\item[{T \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{, }\item[{\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}}]{orientation}{, }\item[{size\+\_\+t}]{inc}{ = {\ttfamily 1}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \doxylink{classmaf_1_1math_1_1_vector_view_a111d37b27369beb875a8b8848f76f32d}{data}} & Pointer to the starting element of the subvector. \\
+\hline
+{\em \doxylink{classmaf_1_1math_1_1_vector_view_aba677fd2d14a9d5f93f9042ef91f3626}{size}} & The logical number of elements in the subvector. \\
+\hline
+{\em inc} & The stride (increment) between elements (default:\+ 1 for contiguous). \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{db/d29/classmaf_1_1math_1_1_vector_view_a647af898d37b31c1669680b160c2a3f9_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classmaf_1_1math_1_1_vector_view_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmaf_1_1math_1_1_vector_view_aff60a87e9477400b138e7016afa7ce9b}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!at@{at}}
+\index{at@{at}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_aff60a87e9477400b138e7016afa7ce9b} 
+template$<$Numeric T$>$ \\
+T \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+at (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{ind}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Gets a mutable reference to the element at index i. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+out\+\_\+of\+\_\+range} & if the index is invalid. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmaf_1_1math_1_1_vector_view_abe890ebc951098e5099e1d65388d8bb7}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!at@{at}}
+\index{at@{at}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_abe890ebc951098e5099e1d65388d8bb7} 
+template$<$Numeric T$>$ \\
+const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c}{value\+\_\+type}} \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+at (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{ind}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Gets a const reference to the element at index i. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+out\+\_\+of\+\_\+range} & if the index is invalid. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmaf_1_1math_1_1_vector_view_afc98f2e9e238a5875997b496e7828a89}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!data@{data}}
+\index{data@{data}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_afc98f2e9e238a5875997b496e7828a89} 
+template$<$Numeric T$>$ \\
+const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c}{value\+\_\+type}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a pointer to the underlying data (const). 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_view_a111d37b27369beb875a8b8848f76f32d}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!data@{data}}
+\index{data@{data}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_a111d37b27369beb875a8b8848f76f32d} 
+template$<$Numeric T$>$ \\
+T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a pointer to the underlying data (mutable). 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{db/d29/classmaf_1_1math_1_1_vector_view_a111d37b27369beb875a8b8848f76f32d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_view_aa21ab8fb8d009b0306ba00366f816005}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!get\_increment@{get\_increment}}
+\index{get\_increment@{get\_increment}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_increment()}{get\_increment()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_aa21ab8fb8d009b0306ba00366f816005} 
+template$<$Numeric T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+get\+\_\+increment (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Gets the increment (stride) of the \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View}. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{db/d29/classmaf_1_1math_1_1_vector_view_aa21ab8fb8d009b0306ba00366f816005_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_view_affba57c0d5ba0305a029f5a3084e99c6}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!operator\+[]\+@{operator[]}}
+\index{operator\+[]\+@{operator[]}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_affba57c0d5ba0305a029f5a3084e99c6} 
+template$<$Numeric T$>$ \\
+const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c}{value\+\_\+type}} \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{ind}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Accesses element at index i with the stride (const). 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_view_ae7211eae2205cfbe6e14b78ca9619f69}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!operator\+[]\+@{operator[]}}
+\index{operator\+[]\+@{operator[]}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_ae7211eae2205cfbe6e14b78ca9619f69} 
+template$<$Numeric T$>$ \\
+T \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{ind}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Accesses element at index i with the stride. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_view_aa0553516cebaa8c584049e4ab814de8f}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!orientation@{orientation}}
+\index{orientation@{orientation}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{orientation()}{orientation()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_aa0553516cebaa8c584049e4ab814de8f} 
+template$<$Numeric T$>$ \\
+\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+orientation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Gets the orientation of the \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View}. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{db/d29/classmaf_1_1math_1_1_vector_view_aa0553516cebaa8c584049e4ab814de8f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_view_a09db5472fc99830215ae275730f31279}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!print@{print}}
+\index{print@{print}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_a09db5472fc99830215ae275730f31279} 
+template$<$Numeric T$>$ \\
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+print (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prints the \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View} contents to std::\+cout. 
+
+Sets floating point precision for readability. \Hypertarget{classmaf_1_1math_1_1_vector_view_aba677fd2d14a9d5f93f9042ef91f3626}\index{maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}!size@{size}}
+\index{size@{size}!maf::math::VectorView$<$ T $>$@{maf::math::VectorView$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_view_aba677fd2d14a9d5f93f9042ef91f3626} 
+template$<$Numeric T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{maf::\+math::\+\+Vector\+View}}$<$ T $>$::\+size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Gets the size of the \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View}. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{db/d29/classmaf_1_1math_1_1_vector_view_aba677fd2d14a9d5f93f9042ef91f3626_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+include/\+\+Maf\+Lib/\+math/\+linalg/\+\doxymbox{\hyperlink{_lin_alg_8hpp}{Lin\+Alg.\+hpp}}\item 
+include/\+\+Maf\+Lib/\+math/\+linalg/\+\doxymbox{\hyperlink{_vector_view_8hpp}{Vector\+View.\+hpp}}\end{DoxyCompactItemize}

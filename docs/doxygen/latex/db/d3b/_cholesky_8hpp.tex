@@ -1,0 +1,48 @@
+\doxysection{include/\+\+Maf\+Lib/\+math/\+linalg/\+\+Cholesky.hpp File Reference}
+\hypertarget{_cholesky_8hpp}{}\label{_cholesky_8hpp}\index{include/MafLib/math/linalg/Cholesky.hpp@{include/MafLib/math/linalg/Cholesky.hpp}}
+
+
+High-\/performance Cholesky decomposition for symmetric positive definite matrices.  
+
+
+{\ttfamily \+\#include "{}Matrix.\+hpp"{}}\newline
+Include dependency graph for Cholesky.\+hpp:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{df/d50/_cholesky_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d3/df7/_cholesky_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf}{maf}}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf_1_1math}{maf::\+math}}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail}{maf::\+math::\+detail}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$std::\+floating\+\_\+point T$>$ }\\\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail_a9823af698a94cb131e27fbd62f84a83e}{maf::\+math::\+detail::\+\+\_\+cholesky}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix)
+\begin{DoxyCompactList}\small\item\em Internal implementation of Cholesky decomposition. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Result\+Type = void, Numeric T$>$ }\\auto \doxymbox{\hyperlink{namespacemaf_1_1math_adacdd5d260e55a04182d86ed82d0e0b2}{maf::\+math::\+cholesky}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&matrix)
+\begin{DoxyCompactList}\small\item\em Computes the Cholesky decomposition of a symmetric positive definite matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+High-\/performance Cholesky decomposition for symmetric positive definite matrices. 
+
+This header defines the {\ttfamily cholesky} function, which computes the Cholesky decomposition of a given square, symmetric, positive definite matrix. The implementation uses a blocked algorithm for improved cache performance and is parallelized with Open\+MP for multi-\/threading and SIMD vectorization.
+
+The function checks for symmetry and detects non-\/positive-\/definiteness during the computation. It supports both single and double precision floating point types, and allows for an optional template parameter to specify the result type.
+
+More information:\+ \href{https://en.wikipedia.org/wiki/Cholesky_decomposition}{\texttt{https:\+/\+/\+en.\+wikipedia.\+org/\+wiki/\+\+Cholesky\+\_\+decomposition}} 

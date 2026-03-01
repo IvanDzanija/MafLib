@@ -1,0 +1,25 @@
+\doxysection{maf::\+math::\+Vector\+Type Concept Reference}
+\hypertarget{conceptmaf_1_1math_1_1_vector_type}{}\label{conceptmaf_1_1math_1_1_vector_type}\index{maf::math::VectorType@{maf::math::VectorType}}
+
+
+Clean Vector concept. Removes qualifiers and checks the value type of the Vector is Numeric concept.  
+
+
+
+
+{\ttfamily \+\#include $<$Lin\+Alg.\+hpp$>$}
+
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptmaf_1_1math_1_1_vector_type}{VectorType}}\ =\ \textcolor{keyword}{requires}\ \{\ \textcolor{keyword}{typename}\ std::remove\_cvref\_t<T>::value\_type;\ \}\ \&\&}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Numeric<typename\ std::remove\_cvref\_t<T>::value\_type>\ \&\&}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::same\_as<std::remove\_cvref\_t<T>,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<typename\ std::remove\_cvref\_t<T>::value\_type}}>>}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Detailed Description}
+Clean Vector concept. Removes qualifiers and checks the value type of the Vector is Numeric concept. 

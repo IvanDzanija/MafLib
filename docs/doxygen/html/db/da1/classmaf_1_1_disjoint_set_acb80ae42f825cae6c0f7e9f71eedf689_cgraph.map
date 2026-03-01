@@ -1,0 +1,5 @@
+<map id="maf::DisjointSet::united" name="maf::DisjointSet::united">
+<area shape="rect" id="Node000001" title="Checks if two elements are in the same set." alt="" coords="5,5,164,31"/>
+<area shape="rect" id="Node000002" href="$db/da1/classmaf_1_1_disjoint_set.html#a8ba4ca7bf154318426dbafbbe294c6ba" title="Finds the representative handle of the set containing a." alt="" coords="212,5,356,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="164,16,199,18,194,18,164,21"/>
+</map>

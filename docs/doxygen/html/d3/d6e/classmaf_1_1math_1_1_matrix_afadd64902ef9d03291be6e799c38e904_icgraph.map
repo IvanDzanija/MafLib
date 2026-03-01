@@ -1,0 +1,37 @@
+<map id="maf::math::Matrix::Matrix" name="maf::math::Matrix::Matrix">
+<area shape="rect" id="Node000001" title="Default constructor. Creates an empty 0x0 matrix." alt="" coords="211,512,343,553"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a09dcb25a107fe1aabfd3cb68b3e093e5" title="Creates new matrix with same elements but different type." alt="" coords="5,5,163,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="269,496,256,393,233,258,219,190,202,129,182,79,161,45,148,34,146,29,165,42,187,77,207,128,224,189,239,257,261,392,274,497"/>
+<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a74bd8dca601f691a7ec0b1eabf11c18d" title="Standard algebraic matrix multiplication (A * B)." alt="" coords="18,55,150,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="273,496,269,419,254,316,239,262,220,208,194,157,161,111,149,99,147,94,165,107,198,154,225,206,244,260,259,315,274,418,279,497"/>
+<area shape="rect" id="Node000004" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a74cdbcec5a2d49b7ad25238bff35d511" title="Element&#45;wise scalar multiplication (Matrix * scalar)." alt="" coords="18,120,150,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="271,497,264,430,246,345,231,300,213,256,189,214,161,176,149,164,147,159,165,172,194,211,218,253,236,298,251,344,269,430,276,497"/>
+<area shape="rect" id="Node000005" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#afc828dd83e33b3836d701ae66556da35" title="Element&#45;wise scalar multiplication assignment (Matrix * scalar)." alt="" coords="18,186,150,226"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="268,497,257,442,237,374,206,304,185,271,161,241,148,230,146,225,165,238,189,268,211,301,242,372,262,441,274,497"/>
+<area shape="rect" id="Node000006" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aeb756ee209272516a931a8ff9fccbcac" title="Element&#45;wise matrix addition." alt="" coords="18,251,150,292"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="264,497,250,455,228,404,199,352,161,307,147,295,145,290,164,303,203,349,233,402,255,453,269,498"/>
+<area shape="rect" id="Node000007" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a9af3087cf2cffb81494b7b0fd93e0da1" title="Element&#45;wise scalar addition (Matrix + scalar)." alt="" coords="18,316,150,357"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="256,499,218,436,191,402,161,372,145,360,143,355,164,368,195,398,222,433,262,498"/>
+<area shape="rect" id="Node000008" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#abc0451295206839219fcf5642e35ba6a" title="Element&#45;wise matrix addition assignment." alt="" coords="18,382,150,422"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="242,503,205,470,161,438,141,426,139,421,164,433,209,466,247,501"/>
+<area shape="rect" id="Node000009" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a333d450ecc9bc2c9795a28225f4bc4af" title="Element&#45;wise scalar addition assignment (Matrix + scalar)." alt="" coords="18,447,150,488"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="198,508,147,491,145,486,203,506"/>
+<area shape="rect" id="Node000010" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a4b3270a4dbe4f6685d73ab3255b48031" title="Unary minus. Returns a new matrix with all elements negated." alt="" coords="18,512,150,553"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="193,535,152,535,149,531,197,531"/>
+<area shape="rect" id="Node000011" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aa73a0427aeb902c0a1e40623f3c6c52b" title="Element&#45;wise matrix subtraction." alt="" coords="18,578,150,618"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="199,561,148,579,144,575,202,557"/>
+<area shape="rect" id="Node000012" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aa9cd98b5b4a8a5ca4dcd3754103be672" title="Element&#45;wise scalar subtraction (Matrix &#45; scalar)." alt="" coords="18,643,150,684"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="243,566,209,600,164,632,142,644,138,641,161,628,205,596,246,562"/>
+<area shape="rect" id="Node000013" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a9a145aa09294706b54b47c4de0a10d13" title="Element&#45;wise matrix subtraction assignment." alt="" coords="18,708,150,749"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="258,570,222,633,195,667,164,698,146,710,142,706,161,693,191,664,218,630,260,565"/>
+<area shape="rect" id="Node000014" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#af07439a5d4d5f3a5428a5dc0ca0e5cf5" title="Element&#45;wise scalar subtraction assignment (Matrix &#45; scalar)." alt="" coords="18,774,150,814"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="267,566,255,612,233,664,203,716,164,763,148,775,144,772,161,759,199,713,228,661,250,611,265,571"/>
+<area shape="rect" id="Node000015" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a5f79fb873c0dfad4bcceb21e01a51d44" title="Element&#45;wise scalar division (Matrix / scalar)." alt="" coords="18,839,150,880"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="272,566,262,625,242,693,211,764,189,798,165,828,149,840,145,837,161,824,185,795,206,762,237,691,257,623,270,571"/>
+<area shape="rect" id="Node000016" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a7e3e3b9913372166ad409ae8103e7ebd" title="Element&#45;wise scalar division assignment (Matrix / scalar)." alt="" coords="18,904,150,945"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="275,566,269,636,251,722,236,768,218,812,194,855,165,893,150,906,146,902,161,890,189,852,213,810,231,766,246,721,264,635,273,571"/>
+<area shape="rect" id="Node000017" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#abb9958be5cb5f23b76672a475e205cb5" title="Checks for exact element&#45;wise equality." alt="" coords="18,970,150,1010"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="277,567,274,647,259,750,244,805,225,860,198,912,165,959,150,971,147,967,161,955,194,909,220,858,239,804,254,749,269,647,275,572"/>
+<area shape="rect" id="Node000018" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a246ca1334c2afc425a2eafc68b48fa38" title="Creates and returns a new matrix that is the transpose of this one." alt="" coords="18,1035,150,1076"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="272,566,260,673,237,807,205,937,186,988,165,1024,150,1037,147,1032,161,1020,181,986,200,935,232,806,255,672,270,571"/>
+</map>

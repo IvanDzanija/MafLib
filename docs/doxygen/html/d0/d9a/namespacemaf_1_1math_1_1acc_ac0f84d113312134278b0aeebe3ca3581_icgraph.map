@@ -1,0 +1,9 @@
+<map id="maf::math::acc::sdot" name="maf::math::acc::sdot">
+<area shape="rect" id="Node000001" title=" " alt="" coords="370,46,512,72"/>
+<area shape="rect" id="Node000002" href="$de/d35/classmaf_1_1math_1_1_vector.html#a7c27148cb7d68df78343721cc56d67e0" title="Calculates the dot product (inner product) of two Vectors." alt="" coords="188,39,322,79"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="351,59,323,62,322,56,357,59"/>
+<area shape="rect" id="Node000003" href="$de/d35/classmaf_1_1math_1_1_vector.html#a00b97a160b42a4eeb740eb693a3f8bd5" title="Dot product (Row Vector * Column Vector)." alt="" coords="5,5,140,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="169,45,140,41,140,35,175,43"/>
+<area shape="rect" id="Node000004" href="$de/d35/classmaf_1_1math_1_1_vector.html#a5664c855ed6b5b75f47bce2bfd322ae0" title="Outer product (Column Vector * Row Vector)." alt="" coords="5,71,140,111"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="169,74,140,82,139,77,175,73"/>
+</map>

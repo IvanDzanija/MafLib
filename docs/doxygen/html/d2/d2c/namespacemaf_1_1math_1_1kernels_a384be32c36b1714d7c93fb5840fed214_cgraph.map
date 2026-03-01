@@ -1,0 +1,9 @@
+<map id="maf::math::kernels::dot" name="maf::math::kernels::dot">
+<area shape="rect" id="Node000001" title="Computes the dot product of two vectors." alt="" coords="5,78,162,104"/>
+<area shape="rect" id="Node000002" href="$db/d29/classmaf_1_1math_1_1_vector_view.html#a111d37b27369beb875a8b8848f76f32d" title="Returns a pointer to the underlying data (mutable)." alt="" coords="210,5,365,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,75,209,50,205,53,127,80"/>
+<area shape="rect" id="Node000003" href="$db/d29/classmaf_1_1math_1_1_vector_view.html#aa21ab8fb8d009b0306ba00366f816005" title="Gets the increment (stride) of the VectorView." alt="" coords="210,71,365,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="162,88,197,90,192,92,163,94"/>
+<area shape="rect" id="Node000004" href="$db/d29/classmaf_1_1math_1_1_vector_view.html#aba677fd2d14a9d5f93f9042ef91f3626" title="Gets the size of the VectorView." alt="" coords="210,136,365,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="126,102,210,130,205,132,126,107"/>
+</map>

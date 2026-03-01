@@ -1,0 +1,5 @@
+<map id="maf::math::MatrixView::MatrixView" name="maf::math::MatrixView::MatrixView">
+<area shape="rect" id="Node000001" title="Constructs a MatrixView." alt="" coords="5,5,159,46"/>
+<area shape="rect" id="Node000002" href="$db/d6f/classmaf_1_1math_1_1_matrix_view.html#a9abab954d3502b4acfd36d0075291717" title="Returns a pointer to the underlying data (mutable)." alt="" coords="207,5,360,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,23,194,25,189,26,159,28"/>
+</map>

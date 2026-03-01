@@ -1,0 +1,13 @@
+<map id="maf::math::MatrixView::row_span" name="maf::math::MatrixView::row_span">
+<area shape="rect" id="Node000001" title="Gets a std::span of a single row." alt="" coords="633,47,787,88"/>
+<area shape="rect" id="Node000002" href="$d4/dec/namespacemaf_1_1math_1_1kernels_1_1detail.html#a36da8768b872427251fc5191c54a6cde" title=" " alt="" coords="428,47,585,88"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="615,68,586,70,586,65,620,67"/>
+<area shape="rect" id="Node000003" href="$d2/d2c/namespacemaf_1_1math_1_1kernels.html#ad71b365885ef9cac18d73bee09e86908" title="General matrix&#45;vector multiplication (GEMV)." alt="" coords="250,47,380,88"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="410,68,381,70,380,65,415,67"/>
+<area shape="rect" id="Node000004" href="$d4/d02/namespacemaf_1_1math.html#ab04fc934438c0cc896bf9602f59f7a0f" title=" " alt="" coords="33,5,174,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="232,50,162,34,162,29,237,48"/>
+<area shape="rect" id="Node000005" href="$d4/d02/namespacemaf_1_1math.html#ae5b017fcb650b29ac314dbf4a81192f6" title=" " alt="" coords="33,55,174,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="232,68,174,70,174,65,237,67"/>
+<area shape="rect" id="Node000006" href="$d4/d02/namespacemaf_1_1math.html#ae14afbf9f10452228d7577bd94190353" title="Computes the QR decomposition of a matrix A using Householder reflections." alt="" coords="5,104,202,130"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="237,86,162,106,161,101,232,87"/>
+</map>

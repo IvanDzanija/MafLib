@@ -1,0 +1,87 @@
+\doxysection{Polynomial\+Constructors.\+hpp}
+\hypertarget{_polynomial_constructors_8hpp_source}{}\label{_polynomial_constructors_8hpp_source}\index{include/MafLib/math/polynomial/PolynomialConstructors.hpp@{include/MafLib/math/polynomial/PolynomialConstructors.hpp}}
+\doxymbox{\hyperlink{_polynomial_constructors_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ POLYNOMIAL\_CONSTRUCTORS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ POLYNOMIAL\_CONSTRUCTORS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_polynomial_8hpp}{Polynomial.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ Constructs\ an\ uninitialized\ polynomial\ of\ size\ rows\ x\ cols.}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00016\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}{Polynomial<T>::Polynomial}}(\textcolor{keywordtype}{size\_t}\ degree)\ :\ \_degree(degree)\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{if}\ (degree\ ==\ 0)\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Polynomial\ degree\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00019\ \ \ \ \ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \_coeffs.resize(degree);}
+\DoxyCodeLine{00022\ \}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ Constructs\ a\ polynomial\ from\ a\ raw\ data\ pointer.}}
+\DoxyCodeLine{00025\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00026\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}{Polynomial<T>::Polynomial}}(\textcolor{keywordtype}{size\_t}\ degree,\ T*\ data)\ :\ \_degree(degree)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{if}\ (degree\ ==\ 0)\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Polynomial\ degree\ must\ be\ greater\ than\ zero!"{}});}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{if}\ (data\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Data\ pointer\ cannot\ be\ null!"{}});}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \_coeffs.assign(data,\ data\ +\ degree);}
+\DoxyCodeLine{00035\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ Constructs\ from\ a\ std::vector}}
+\DoxyCodeLine{00038\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00039\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}{Polynomial<T>::Polynomial}}(\textcolor{keywordtype}{size\_t}\ degree,\ \textcolor{keyword}{const}\ std::vector<T>\&\ coeffs)}
+\DoxyCodeLine{00040\ \ \ \ \ :\ \_degree(degree)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{if}\ (degree\ ==\ 0)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Polynomial\ degree\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (coeffs.size()\ !=\ degree)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ throw\ std::invalid\_argument(}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Number\ of\ coefficients\ must\ match\ the\ degree\ of\ the\ polynomial"{}});}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \_coeffs.assign(coeffs.begin(),\ coeffs.end());}
+\DoxyCodeLine{00051\ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ Constructs\ from\ a\ std::array}}
+\DoxyCodeLine{00054\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00055\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U,\ \textcolor{keywordtype}{size\_t}\ N>}
+\DoxyCodeLine{00056\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}{Polynomial<T>::Polynomial}}(\textcolor{keywordtype}{size\_t}\ degree,\ \textcolor{keyword}{const}\ std::array<U,\ N>\&\ coeffs)}
+\DoxyCodeLine{00057\ \ \ \ \ :\ \_degree(degree)\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{if}\ (degree\ ==\ 0)\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Polynomial\ degree\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{if}\ (coeffs.size()\ !=\ degree)\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ throw\ std::invalid\_argument(}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Number\ of\ coefficients\ must\ match\ the\ degree\ of\ the\ polynomial"{}});}
+\DoxyCodeLine{00065\ \ \ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \_coeffs.assign(coeffs.begin(),\ coeffs.end());}
+\DoxyCodeLine{00068\ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{comment}{//\ Constructs\ from\ a\ std::initializer\_list}}
+\DoxyCodeLine{00071\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00072\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00073\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_polynomial_a440b4128c1a9d9573da7b6972e6f6b79}{Polynomial<T>::Polynomial}}(\textcolor{keywordtype}{size\_t}\ degree,\ std::initializer\_list<U>\ coeffs)}
+\DoxyCodeLine{00074\ \ \ \ \ :\ \_degree(degree)\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordflow}{if}\ (degree\ ==\ 0)\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Polynomial\ degree\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00077\ \ \ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(coeffs.size())\ !=\ degree)\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ throw\ std::invalid\_argument(}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Number\ of\ coefficients\ must\ match\ the\ degree\ of\ the\ polynomial"{}});}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \_coeffs.assign(coeffs.begin(),\ coeffs.end());}
+\DoxyCodeLine{00084\ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

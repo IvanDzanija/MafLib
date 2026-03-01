@@ -1,0 +1,9 @@
+<map id="maf::math::VectorView::VectorView" name="maf::math::VectorView::VectorView">
+<area shape="rect" id="Node000001" title="Constructs a VectorView." alt="" coords="5,71,161,111"/>
+<area shape="rect" id="Node000002" href="$db/d29/classmaf_1_1math_1_1_vector_view.html#a111d37b27369beb875a8b8848f76f32d" title="Returns a pointer to the underlying data (mutable)." alt="" coords="209,5,364,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,68,208,50,204,53,149,73"/>
+<area shape="rect" id="Node000003" href="$db/d29/classmaf_1_1math_1_1_vector_view.html#aa0553516cebaa8c584049e4ab814de8f" title="Gets the orientation of the VectorView." alt="" coords="209,71,364,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="160,88,196,90,190,92,161,94"/>
+<area shape="rect" id="Node000004" href="$db/d29/classmaf_1_1math_1_1_vector_view.html#aba677fd2d14a9d5f93f9042ef91f3626" title="Gets the size of the VectorView." alt="" coords="209,136,364,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="149,109,209,130,204,131,148,115"/>
+</map>

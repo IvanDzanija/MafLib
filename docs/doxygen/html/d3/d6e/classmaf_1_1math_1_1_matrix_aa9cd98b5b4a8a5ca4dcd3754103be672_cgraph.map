@@ -1,0 +1,7 @@
+<map id="maf::math::Matrix::operator&#45;" name="maf::math::Matrix::operator&#45;">
+<area shape="rect" id="Node000001" title="Element&#45;wise scalar subtraction (Matrix &#45; scalar)." alt="" coords="5,27,138,68"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aa9212394167230bb799584278e8b9af2" title="Gets a mutable pointer to the underlying data." alt="" coords="186,5,343,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,35,173,32,168,33,139,40"/>
+<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#afadd64902ef9d03291be6e799c38e904" title="Default constructor. Creates an empty 0x0 matrix." alt="" coords="198,55,330,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="138,54,186,63,181,64,138,60"/>
+</map>

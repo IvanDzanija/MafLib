@@ -1,0 +1,104 @@
+\doxysection{maf::\+math::\+Optimizer\+Result\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structmaf_1_1math_1_1_optimizer_result}{}\label{structmaf_1_1math_1_1_optimizer_result}\index{maf::math::OptimizerResult$<$ T $>$@{maf::math::OptimizerResult$<$ T $>$}}
+
+
+Struct to hold the result of a solver operation.  
+
+
+
+
+{\ttfamily \+\#include $<$Optimizer\+Result.\+hpp$>$}
+
+
+
+Collaboration diagram for maf::\+math::\+Optimizer\+Result\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{d2/d1b/structmaf_1_1math_1_1_optimizer_result__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result_a20b31aacfa9ca79d585e0d6abfd3a18e}{operator bool}} () const
+\begin{DoxyCompactList}\small\item\em Check if the solver was successful. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result_ad493ff7e90a7a7f7ae3287ef43a91119}{solution}}
+\begin{DoxyCompactList}\small\item\em The solution found by the solver. \end{DoxyCompactList}\item 
+double \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result_ad28db12fe47737aa0212dd5f2bf9ed97}{error}}
+\begin{DoxyCompactList}\small\item\em The error associated with the solution. \end{DoxyCompactList}\item 
+std::\+optional$<$ std::\+string\+\_\+view $>$ \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result_a3cc063263868c1910407ae22a4ccb900}{error\+\_\+message}}
+\begin{DoxyCompactList}\small\item\em An optional error message if the solver failed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+struct maf::\+math::\+\+Optimizer\+Result$<$ T $>$}
+Struct to hold the result of a solver operation. 
+
+\label{doc-func-members}
+\Hypertarget{structmaf_1_1math_1_1_optimizer_result_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structmaf_1_1math_1_1_optimizer_result_a20b31aacfa9ca79d585e0d6abfd3a18e}\index{maf::math::OptimizerResult$<$ T $>$@{maf::math::OptimizerResult$<$ T $>$}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!maf::math::OptimizerResult$<$ T $>$@{maf::math::OptimizerResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily \label{structmaf_1_1math_1_1_optimizer_result_a20b31aacfa9ca79d585e0d6abfd3a18e} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{maf::\+math::\+\+Optimizer\+Result}}$<$ T $>$::\+operator bool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Check if the solver was successful. 
+
+\begin{DoxyReturn}{Returns}
+True if the solver succeeded, false otherwise. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{structmaf_1_1math_1_1_optimizer_result_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structmaf_1_1math_1_1_optimizer_result_ad28db12fe47737aa0212dd5f2bf9ed97}\index{maf::math::OptimizerResult$<$ T $>$@{maf::math::OptimizerResult$<$ T $>$}!error@{error}}
+\index{error@{error}!maf::math::OptimizerResult$<$ T $>$@{maf::math::OptimizerResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily \label{structmaf_1_1math_1_1_optimizer_result_ad28db12fe47737aa0212dd5f2bf9ed97} 
+template$<$typename T$>$ \\
+double \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{maf::\+math::\+\+Optimizer\+Result}}$<$ T $>$::\+error}
+
+
+
+The error associated with the solution. 
+
+\begin{DoxyAttention}{Attention}
+This is meaningful only if the solver succeeded. 
+\end{DoxyAttention}
+\Hypertarget{structmaf_1_1math_1_1_optimizer_result_a3cc063263868c1910407ae22a4ccb900}\index{maf::math::OptimizerResult$<$ T $>$@{maf::math::OptimizerResult$<$ T $>$}!error\_message@{error\_message}}
+\index{error\_message@{error\_message}!maf::math::OptimizerResult$<$ T $>$@{maf::math::OptimizerResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{error\_message}{error\_message}}
+{\footnotesize\ttfamily \label{structmaf_1_1math_1_1_optimizer_result_a3cc063263868c1910407ae22a4ccb900} 
+template$<$typename T$>$ \\
+std::\+optional$<$std::\+string\+\_\+view$>$ \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{maf::\+math::\+\+Optimizer\+Result}}$<$ T $>$::\+error\+\_\+message}
+
+
+
+An optional error message if the solver failed. 
+
+\Hypertarget{structmaf_1_1math_1_1_optimizer_result_ad493ff7e90a7a7f7ae3287ef43a91119}\index{maf::math::OptimizerResult$<$ T $>$@{maf::math::OptimizerResult$<$ T $>$}!solution@{solution}}
+\index{solution@{solution}!maf::math::OptimizerResult$<$ T $>$@{maf::math::OptimizerResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{solution}{solution}}
+{\footnotesize\ttfamily \label{structmaf_1_1math_1_1_optimizer_result_ad493ff7e90a7a7f7ae3287ef43a91119} 
+template$<$typename T$>$ \\
+T \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{maf::\+math::\+\+Optimizer\+Result}}$<$ T $>$::\+solution}
+
+
+
+The solution found by the solver. 
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+include/\+\+Maf\+Lib/\+math/\+optimization/\+\doxymbox{\hyperlink{_optimizer_result_8hpp}{Optimizer\+Result.\+hpp}}\end{DoxyCompactItemize}

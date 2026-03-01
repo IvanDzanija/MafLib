@@ -1,0 +1,24 @@
+\doxysection{Optimizer\+Result.\+hpp}
+\hypertarget{_optimizer_result_8hpp_source}{}\label{_optimizer_result_8hpp_source}\index{include/MafLib/math/optimization/OptimizerResult.hpp@{include/MafLib/math/optimization/OptimizerResult.hpp}}
+\doxymbox{\hyperlink{_optimizer_result_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ OPTIMIZER\_RESULT\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ OPTIMIZER\_RESULT\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\doxymbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}>}}
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{OptimizerResult}}\ \{}
+\DoxyCodeLine{00013\ \ \ T\ \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result_ad493ff7e90a7a7f7ae3287ef43a91119}{solution}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00018\ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result_ad28db12fe47737aa0212dd5f2bf9ed97}{error}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00021\ \ \ std::optional<std::string\_view>\ \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result_a3cc063263868c1910407ae22a4ccb900}{error\_message}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{operator}\ bool()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ !\doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result_a3cc063263868c1910407ae22a4ccb900}{error\_message}}.has\_value();\ \}}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

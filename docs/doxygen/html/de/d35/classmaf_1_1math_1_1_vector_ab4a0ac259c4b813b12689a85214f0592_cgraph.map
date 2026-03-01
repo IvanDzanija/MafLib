@@ -1,0 +1,5 @@
+<map id="maf::math::Vector::view" name="maf::math::Vector::view">
+<area shape="rect" id="Node000001" title="Creates a view (sub&#45;Vector) into this Vector." alt="" coords="5,5,167,31"/>
+<area shape="rect" id="Node000002" href="$de/d35/classmaf_1_1math_1_1_vector.html#a486da0689bba119f338f50eb5e334a1a" title="Gets the number of elements in the vector." alt="" coords="215,5,373,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,16,201,18,196,18,167,21"/>
+</map>

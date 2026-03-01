@@ -1,0 +1,29 @@
+\doxysection{Conversions.\+hpp}
+\hypertarget{_conversions_8hpp_source}{}\label{_conversions_8hpp_source}\index{include/MafLib/utility/Conversions.hpp@{include/MafLib/utility/Conversions.hpp}}
+\doxymbox{\hyperlink{_conversions_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ UTIL\_CONVERSIONS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ UTIL\_CONVERSIONS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1util}{maf::util}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ To,\ \textcolor{keyword}{typename}\ From>}
+\DoxyCodeLine{00008\ \textcolor{keyword}{static}\ std::vector<To>\ convert\_if\_needed(\textcolor{keyword}{const}\ std::vector<From>\ \&src)\ \{}
+\DoxyCodeLine{00009\ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<To,\ From>)\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordflow}{return}\ src;}
+\DoxyCodeLine{00011\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ std::vector<To>\ dst;}
+\DoxyCodeLine{00013\ \ \ \ \ dst.reserve(src.size());}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ From\ \&v\ :\ src)\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ dst.emplace\_back(\textcolor{keyword}{static\_cast<}To\textcolor{keyword}{>}(v));}
+\DoxyCodeLine{00016\ \ \ \ \ \}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{return}\ dst;}
+\DoxyCodeLine{00018\ \ \ \}}
+\DoxyCodeLine{00019\ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \}\ \ \textcolor{comment}{//\ namespace\ maf::util}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

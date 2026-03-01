@@ -1,0 +1,29 @@
+<map id="maf::math::Vector::data" name="maf::math::Vector::data">
+<area shape="rect" id="Node000001" title="Gets a const pointer to the underlying data. store." alt="" coords="432,328,591,353"/>
+<area shape="rect" id="Node000002" href="$de/d35/classmaf_1_1math_1_1_vector.html#a7c27148cb7d68df78343721cc56d67e0" title="Calculates the dot product (inner product) of two Vectors." alt="" coords="250,71,384,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="494,313,449,236,417,190,382,146,348,114,347,109,386,142,421,187,453,233,499,314"/>
+<area shape="rect" id="Node000005" href="$d2/d2c/namespacemaf_1_1math_1_1kernels.html#ad71b365885ef9cac18d73bee09e86908" title="General matrix&#45;vector multiplication (GEMV)." alt="" coords="252,156,382,197"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="488,315,443,266,382,212,365,200,364,195,386,208,446,262,493,316"/>
+<area shape="rect" id="Node000009" href="$de/d35/classmaf_1_1math_1_1_vector.html#a9788849517cae340aa15007d1aa5c285" title="Element&#45;wise vector subtraction assignment (Vector &#45; Vector)." alt="" coords="250,221,384,262"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="469,321,383,277,360,265,359,260,385,273,474,320"/>
+<area shape="rect" id="Node000010" href="$de/d35/classmaf_1_1math_1_1_vector.html#aafcb79286a9e9a85ca763923c3f9d3a2" title="Converting constructor." alt="" coords="250,287,384,327"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="415,325,385,321,384,316,420,324"/>
+<area shape="rect" id="Node000011" href="$de/d35/classmaf_1_1math_1_1_vector.html#a20d90280ea731664d99eed92bfb5741c" title="Constructs from a std::array by copying its data." alt="" coords="250,352,384,393"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="414,357,385,364,383,359,419,355"/>
+<area shape="rect" id="Node000012" href="$de/d35/classmaf_1_1math_1_1_vector.html#aa71376d41514904ec98f245a7f0cd734" title="Constructs from a std::vector by copying its data." alt="" coords="250,417,384,458"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="473,359,360,419,358,414,468,362"/>
+<area shape="rect" id="Node000013" href="$de/d35/classmaf_1_1math_1_1_vector.html#a791bd6bc5808495544d2d1ca64fd4d18" title="Constructs from a raw data pointer." alt="" coords="250,483,384,523"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="493,364,446,418,386,472,365,485,363,480,382,468,442,414,488,367"/>
+<area shape="rect" id="Node000014" href="$de/d35/classmaf_1_1math_1_1_vector.html#a716800c73059c5fdcfddc4abd057343c" title="Constructs from a std::vector by moving its data." alt="" coords="250,548,384,589"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="501,365,457,449,424,495,386,537,368,550,366,545,382,533,420,492,452,446,496,369"/>
+<area shape="rect" id="Node000003" href="$de/d35/classmaf_1_1math_1_1_vector.html#a00b97a160b42a4eeb740eb693a3f8bd5" title="Dot product (Row Vector * Column Vector)." alt="" coords="36,5,171,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="233,67,172,49,170,44,237,65"/>
+<area shape="rect" id="Node000004" href="$de/d35/classmaf_1_1math_1_1_vector.html#a5664c855ed6b5b75f47bce2bfd322ae0" title="Outer product (Column Vector * Row Vector)." alt="" coords="36,71,171,111"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="232,93,172,93,170,89,237,89"/>
+<area shape="rect" id="Node000006" href="$d4/d02/namespacemaf_1_1math.html#ab04fc934438c0cc896bf9602f59f7a0f" title=" " alt="" coords="33,136,174,161"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="234,167,175,160,173,155,238,164"/>
+<area shape="rect" id="Node000007" href="$d4/d02/namespacemaf_1_1math.html#ae5b017fcb650b29ac314dbf4a81192f6" title=" " alt="" coords="33,185,174,210"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="234,186,176,193,173,188,238,183"/>
+<area shape="rect" id="Node000008" href="$d4/d02/namespacemaf_1_1math.html#ae14afbf9f10452228d7577bd94190353" title="Computes the QR decomposition of a matrix A using Householder reflections." alt="" coords="5,234,202,260"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="253,205,203,226,167,236,164,231,201,220,257,201"/>
+</map>

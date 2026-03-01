@@ -12,13 +12,11 @@
  * should not be included directly anywhere else.
  */
 namespace maf::math {
-// Checks if matrix is square.
 template <Numeric T>
 [[nodiscard]] constexpr bool Matrix<T>::is_square() const {
   return _rows == _cols;
 }
 
-// Checks if matrix is symmetric.
 template <Numeric T>
 [[nodiscard]] constexpr bool Matrix<T>::is_symmetric() const {
   if (!is_square()) {
@@ -34,7 +32,6 @@ template <Numeric T>
   return true;
 }
 
-// Checks if matrix is upper triangular.
 template <Numeric T>
 [[nodiscard]] constexpr bool Matrix<T>::is_upper_triangular() const {
   if (!is_square()) {
@@ -52,7 +49,6 @@ template <Numeric T>
   return true;
 }
 
-// Checks if matrix is lower triangular.
 template <Numeric T>
 [[nodiscard]] constexpr bool Matrix<T>::is_lower_triangular() const {
   if (!is_square()) {
@@ -71,7 +67,6 @@ template <Numeric T>
   return true;
 }
 
-// Checks if matrix is diagonal.
 template <Numeric T>
 [[nodiscard]] constexpr bool Matrix<T>::is_diagonal() const {
   if (!is_square()) {
@@ -81,7 +76,6 @@ template <Numeric T>
   return is_upper_triangular() && is_lower_triangular();
 }
 
-// Checks if matrix is singular.
 template <Numeric T>
 [[nodiscard]] constexpr bool Matrix<T>::is_singular() const {
   if (!is_square()) {

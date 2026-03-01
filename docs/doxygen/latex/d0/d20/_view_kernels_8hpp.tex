@@ -1,0 +1,51 @@
+\doxysection{include/\+\+Maf\+Lib/\+math/\+linalg/\+\+View\+Kernels.hpp File Reference}
+\hypertarget{_view_kernels_8hpp}{}\label{_view_kernels_8hpp}\index{include/MafLib/math/linalg/ViewKernels.hpp@{include/MafLib/math/linalg/ViewKernels.hpp}}
+{\ttfamily \+\#include "{}Accelerate\+Wrappers/\+\+Accelerate\+Wrapper.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}Lin\+Alg.\+hpp"{}}\newline
+Include dependency graph for View\+Kernels.\+hpp:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/d95/_view_kernels_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/dac/_view_kernels_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf}{maf}}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf_1_1math}{maf::\+math}}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels}{maf::\+math::\+kernels}}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_1_1detail}{maf::\+math::\+kernels::\+detail}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9}{maf::\+math::\+kernels::\+\+OP}} :\+ uint8 \{ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a2c01bf6305d59f47917ffbcfcbe71f0d}{maf::\+math::\+kernels::\+\+No\+Trans}}
+, \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a01473171826aa7c969fb1d7433923d59}{maf::\+math::\+kernels::\+\+Trans}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$Numeric T, Numeric U, Numeric R = std::\+common\+\_\+type\+\_\+t$<$\+T, U$>$$>$ }\\void \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_1_1detail_a36da8768b872427251fc5191c54a6cde}{maf::\+math::\+kernels::\+detail::\+no\+\_\+trans\+\_\+gemv}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{Matrix\+View}}$<$ T $>$ \&A, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&x, \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ R $>$ \&y)
+\item 
+{\footnotesize template$<$Numeric T, Numeric U, Numeric R = std::\+common\+\_\+type\+\_\+t$<$\+T, U$>$$>$ }\\void \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_1_1detail_a654bce50e886af201dfe65bde4034576}{maf::\+math::\+kernels::\+detail::\+trans\+\_\+gemv}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ T $>$ \&x, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{Matrix\+View}}$<$ U $>$ \&A, \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector}}$<$ R $>$ \&y)
+\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908}{maf::\+math::\+kernels::\+gemv}} (\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9}{OP}} trans, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{Matrix\+View}}$<$ T $>$ \&A, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&x)
+\begin{DoxyCompactList}\small\item\em General matrix-\/vector multiplication (GEMV). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\void \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a16e5396f4e2c040a00a2c151ba5cbce1}{maf::\+math::\+kernels::\+ger}} (\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{Matrix\+View}}$<$ T $>$ \&A, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&x, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&y, double alpha=1.\+0)
+\begin{DoxyCompactList}\small\item\em General rank-\/1 update (GER). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214}{maf::\+math::\+kernels::\+dot}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ T $>$ \&x, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&y)
+\begin{DoxyCompactList}\small\item\em Computes the dot product of two vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a0a6841ab0c398890da60f2221df5c986}{maf::\+math::\+kernels::\+outer}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ T $>$ \&x, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&y)
+\begin{DoxyCompactList}\small\item\em Computes the outer product of two vectors. \end{DoxyCompactList}\end{DoxyCompactItemize}

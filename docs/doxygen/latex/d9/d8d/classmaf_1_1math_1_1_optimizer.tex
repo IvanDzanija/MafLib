@@ -1,0 +1,182 @@
+\doxysection{maf::\+math::\+Optimizer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmaf_1_1math_1_1_optimizer}{}\label{classmaf_1_1math_1_1_optimizer}\index{maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}}
+
+
+Class for optimization algorithms.  
+
+
+
+
+{\ttfamily \+\#include $<$Optimizer.\+hpp$>$}
+
+
+
+Inheritance diagram for maf::\+math::\+Optimizer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d4/d36/classmaf_1_1math_1_1_optimizer__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a329df7dd6df98b63308ea00eb754aee6}{\texorpdfstring{$\sim$}{\string~}\+Optimizer}} ()=default
+\item 
+const std::\+function$<$ T(T)$>$ \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a3c73d3374da043a465816b809205c9b0}{get\+\_\+function}} () const
+\begin{DoxyCompactList}\small\item\em Get the function being optimized/\+solved. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_ad51593bad51b6d9f41392c374b1e5c6f}{set\+\_\+function}} (const std::\+function$<$ T(T)$>$ \&function)
+\begin{DoxyCompactList}\small\item\em Set the function to optimize/\+solve. \end{DoxyCompactList}\item 
+virtual \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{Optimizer\+Result}}$<$ T $>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a007c3a463607c4ce090ba43f2cd15472}{solve}} (T tolerance, \doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}} max\+\_\+iterations)=0
+\begin{DoxyCompactList}\small\item\em Solve for the root/\+fixed point or local/\+global minima. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}} ()=default
+\begin{DoxyCompactList}\small\item\em Protected default constructor -\/ only derived classes can construct. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_acc1a6ba07534c566c9798419c938406b}{Optimizer}} (const std::\+function$<$ T(T)$>$ \&function)
+\begin{DoxyCompactList}\small\item\em Protected constructor with function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+function$<$ T(T)$>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\+\_\+function}}
+\begin{DoxyCompactList}\small\item\em The function to optimize/\+solve. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$std::\+floating\+\_\+point T$>$\newline
+class maf::\+math::\+\+Optimizer$<$ T $>$}
+Class for optimization algorithms. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The floating-\/point type to use (e.\+g., float, double). \\
+\hline
+\end{DoxyTemplParams}
+
+
+\label{doc-constructors}
+\Hypertarget{classmaf_1_1math_1_1_optimizer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmaf_1_1math_1_1_optimizer_a329df7dd6df98b63308ea00eb754aee6}\index{maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}!````~Optimizer@{\texorpdfstring{$\sim$}{\string~}Optimizer}}
+\index{````~Optimizer@{\texorpdfstring{$\sim$}{\string~}Optimizer}!maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Optimizer()}{\string~Optimizer()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_optimizer_a329df7dd6df98b63308ea00eb754aee6} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+virtual \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer}}$<$ T $>$::\+\texorpdfstring{$\sim$}{\string~}\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+\Hypertarget{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}\index{maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}!Optimizer@{Optimizer}}
+\index{Optimizer@{Optimizer}!maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Optimizer()}{Optimizer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer}}$<$ T $>$::\+\+Optimizer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [default]}}
+
+
+
+Protected default constructor -\/ only derived classes can construct. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/d8d/classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_optimizer_acc1a6ba07534c566c9798419c938406b}\index{maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}!Optimizer@{Optimizer}}
+\index{Optimizer@{Optimizer}!maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Optimizer()}{Optimizer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_optimizer_acc1a6ba07534c566c9798419c938406b} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer}}$<$ T $>$::\+\+Optimizer (\begin{DoxyParamCaption}\item[{const std::\+function$<$ T(T)$>$ \&}]{function}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [protected]}}
+
+
+
+Protected constructor with function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em function} & The function to optimize/\+solve. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classmaf_1_1math_1_1_optimizer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmaf_1_1math_1_1_optimizer_a3c73d3374da043a465816b809205c9b0}\index{maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}!get\_function@{get\_function}}
+\index{get\_function@{get\_function}!maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_function()}{get\_function()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_optimizer_a3c73d3374da043a465816b809205c9b0} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+const std::\+function$<$ T(T)$>$ \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer}}$<$ T $>$::\+get\+\_\+function (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Get the function being optimized/\+solved. 
+
+\begin{DoxyReturn}{Returns}
+The function. 
+\end{DoxyReturn}
+\Hypertarget{classmaf_1_1math_1_1_optimizer_ad51593bad51b6d9f41392c374b1e5c6f}\index{maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}!set\_function@{set\_function}}
+\index{set\_function@{set\_function}!maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_function()}{set\_function()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_optimizer_ad51593bad51b6d9f41392c374b1e5c6f} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer}}$<$ T $>$::\+set\+\_\+function (\begin{DoxyParamCaption}\item[{const std::\+function$<$ T(T)$>$ \&}]{function}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the function to optimize/\+solve. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em function} & The function to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmaf_1_1math_1_1_optimizer_a007c3a463607c4ce090ba43f2cd15472}\index{maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}!solve@{solve}}
+\index{solve@{solve}!maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_optimizer_a007c3a463607c4ce090ba43f2cd15472} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+virtual \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{Optimizer\+Result}}$<$ T $>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer}}$<$ T $>$::\+solve (\begin{DoxyParamCaption}\item[{T}]{tolerance}{, }\item[{\doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}}}]{max\+\_\+iterations}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [pure virtual]}}
+
+
+
+Solve for the root/\+fixed point or local/\+global minima. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tolerance} & The tolerance for convergence. \\
+\hline
+{\em max\+\_\+iterations} & The maximum number of iterations. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An \doxylink{structmaf_1_1math_1_1_optimizer_result}{Optimizer\+Result} containing the solution and metadata. 
+\end{DoxyReturn}
+
+
+Implemented in \doxymbox{\hyperlink{classmaf_1_1math_1_1_bisection_a94cb7295f68961ee874997a3d3166605}{maf::\+math::\+\+Bisection$<$ T $>$}}, \doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point_aa7be58499fff62b9565639fc83a570f9}{maf::\+math::\+\+Fixed\+Point$<$ T $>$}}, \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_ac29234bd33ea96107b972e232c686a69}{maf::\+math::\+\+Golden\+Section$<$ T $>$}}, and \doxymbox{\hyperlink{classmaf_1_1math_1_1_newton_raphson_aba1ce4efa587cd0ac603c1184d7bc20b}{maf::\+math::\+\+Newton\+Raphson$<$ T $>$}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classmaf_1_1math_1_1_optimizer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}\index{maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}!\_function@{\_function}}
+\index{\_function@{\_function}!maf::math::Optimizer$<$ T $>$@{maf::math::Optimizer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\_function}{\_function}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+std::\+function$<$T(T)$>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer}}$<$ T $>$::\+\+\_\+function\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The function to optimize/\+solve. 
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+include/\+\+Maf\+Lib/\+math/\+optimization/\+\doxymbox{\hyperlink{_optimizer_8hpp}{Optimizer.\+hpp}}\end{DoxyCompactItemize}

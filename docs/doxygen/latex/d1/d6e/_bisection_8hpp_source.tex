@@ -1,0 +1,73 @@
+\doxysection{Bisection.\+hpp}
+\hypertarget{_bisection_8hpp_source}{}\label{_bisection_8hpp_source}\index{include/MafLib/math/optimization/Bisection.hpp@{include/MafLib/math/optimization/Bisection.hpp}}
+\doxymbox{\hyperlink{_bisection_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BISECTION\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BISECTION\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_optimizer_8hpp}{Optimizer.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_optimizer_result_8hpp}{OptimizerResult.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{template}\ <std::\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}\ T>}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_bisection_aa6f0c46a67b626b4f4b42ced49d43e1d}{Bisection}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}}<T>\ \{}
+\DoxyCodeLine{00015\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_bisection_aa6f0c46a67b626b4f4b42ced49d43e1d}{Bisection}}()\ =\ \textcolor{keyword}{delete};\ \ \textcolor{comment}{//\ Make\ sure\ function\ is\ provided.}}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_bisection_a07e41a952abe832d5eca51fd1160b436}{Bisection}}(\textcolor{keyword}{const}\ std::function<T(T)>\ \&function,\ T\ lower\_bound,\ T\ upper\_bound)}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}}<T>(function),\ \_lower\_bound(lower\_bound),\ \_upper\_bound(upper\_bound)\ \{\}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \ \ [[nodiscard]]\ T\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_bisection_a766679087446d8a9e903580faacbdcfb}{get\_lower\_bound}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_lower\_bound;\ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ \ \ [[nodiscard]]\ T\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_bisection_a18683c9efedac491bae176b6bf46804b}{get\_upper\_bound}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_upper\_bound;\ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_bisection_a3c508ec325e75c1d482813d7392ade35}{set\_lower\_bound}}(T\ lower\_bound)\ \{\ \_lower\_bound\ =\ lower\_bound;\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_bisection_adfaa26fe24d7f29cb2a15117655cf843}{set\_upper\_bound}}(T\ upper\_bound)\ \{\ \_upper\_bound\ =\ upper\_bound;\ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00055\ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{OptimizerResult<T>}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_bisection_a94cb7295f68961ee874997a3d3166605}{solve}}(T\ tolerance\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(1e-\/7),}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}}\ max\_iterations\ =\ 100)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00057\ \ \ \ \ T\ a\ =\ \_lower\_bound;}
+\DoxyCodeLine{00058\ \ \ \ \ T\ b\ =\ \_upper\_bound;}
+\DoxyCodeLine{00059\ \ \ \ \ T\ fa\ =\ this-\/>\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}(a);}
+\DoxyCodeLine{00060\ \ \ \ \ T\ fb\ =\ this-\/>\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}(b);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{if}\ (fa\ *\ fb\ >\ 0)\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{.solution\ =\ std::numeric\_limits<T>::quiet\_NaN(),}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .error\ =\ std::numeric\_limits<T>::quiet\_NaN(),}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .error\_message\ =\ \textcolor{stringliteral}{"{}Function\ has\ the\ same\ sign\ at\ the\ interval\ endpoints."{}}\};}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ T\ c\ =\ a;}
+\DoxyCodeLine{00069\ \ \ \ \ T\ fc\ =\ fa;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{while}\ (max\_iterations-\/-\/\ >\ 0)\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ c\ =\ (a\ +\ b)\ /\ 2;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ fc\ =\ this-\/>\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}(c);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::abs(fc)\ <\ std::numeric\_limits<T>::epsilon()\ ||\ (b\ -\/\ a)\ /\ 2\ <\ tolerance)\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{.solution\ =\ c,\ .error\ =\ std::abs(fc),\ .error\_message\ =\ std::nullopt\};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fa\ *\ fc\ <\ 0)\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ b\ =\ c;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ fb\ =\ fc;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ a\ =\ c;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ fa\ =\ fc;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{return}\ \{.solution\ =\ c,}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ .error\ =\ std::abs(fc),}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ .error\_message\ =\ \textcolor{stringliteral}{"{}Maximum\ iterations\ reached\ without\ convergence."{}}\};}
+\DoxyCodeLine{00091\ \ \ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00095\ \ \ T\ \_lower\_bound;}
+\DoxyCodeLine{00097\ \ \ T\ \_upper\_bound;}
+\DoxyCodeLine{00098\ \};}
+\DoxyCodeLine{00099\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

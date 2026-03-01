@@ -1,0 +1,5 @@
+<map id="maf::math::permutation_matrix" name="maf::math::permutation_matrix">
+<area shape="rect" id="Node000001" title="Creates a new permutation matrix from a permutation vector." alt="" coords="5,5,162,46"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a45aa75653ab2200d6de78ec7accbda5b" title="Gets the total number of elements (rows * cols)." alt="" coords="210,13,366,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,23,197,25,192,26,162,28"/>
+</map>

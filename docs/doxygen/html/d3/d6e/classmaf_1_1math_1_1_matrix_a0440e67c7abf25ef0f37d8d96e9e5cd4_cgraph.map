@@ -1,0 +1,15 @@
+<map id="maf::math::Matrix::operator*" name="maf::math::Matrix::operator*">
+<area shape="rect" id="Node000001" title="Matrix&#45;Vector multiplication (Matrix * column_vector)." alt="" coords="5,153,138,194"/>
+<area shape="rect" id="Node000002" href="$de/d35/classmaf_1_1math_1_1_vector.html#a6b4000caab61817d32f8de3fef04cb2a" title="Gets a const reference to the underlying std::vector data store." alt="" coords="202,5,336,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,151,127,104,155,78,184,55,194,52,190,55,187,60,158,82,131,108,90,155"/>
+<area shape="rect" id="Node000003" href="$d0/d9a/namespacemaf_1_1math_1_1acc.html#a4623bc3e02b40761807e97700753965b" title=" " alt="" coords="186,70,353,96"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="103,151,141,128,185,106,206,100,201,103,187,111,144,132,106,155"/>
+<area shape="rect" id="Node000004" href="$de/d35/classmaf_1_1math_1_1_vector.html#a663a7e4b34644e198a855da680a40dc8" title="Gets the vector&#39;s orientation (ROW or COLUMN)." alt="" coords="202,120,336,161"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="137,160,189,153,185,156,139,165"/>
+<area shape="rect" id="Node000005" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#afb33cbf4574399aa71beba18c85a2663" title="Gets a mutable std::span of a single row." alt="" coords="203,185,336,226"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="137,182,190,191,185,194,138,187"/>
+<area shape="rect" id="Node000006" href="$d0/d9a/namespacemaf_1_1math_1_1acc.html#a63b68222d1669958840b4e97fb5a3eb8" title=" " alt="" coords="186,250,353,276"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="105,192,187,235,206,245,201,245,185,240,105,197"/>
+<area shape="rect" id="Node000007" href="$de/d35/classmaf_1_1math_1_1_vector.html#a486da0689bba119f338f50eb5e334a1a" title="Gets the number of elements in the vector." alt="" coords="190,300,348,325"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="89,192,131,240,157,265,187,286,197,293,192,293,184,291,154,269,127,244,87,197"/>
+</map>

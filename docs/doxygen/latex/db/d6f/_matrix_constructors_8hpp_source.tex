@@ -1,0 +1,115 @@
+\doxysection{Matrix\+Constructors.\+hpp}
+\hypertarget{_matrix_constructors_8hpp_source}{}\label{_matrix_constructors_8hpp_source}\index{include/MafLib/math/linalg/MatrixConstructors.hpp@{include/MafLib/math/linalg/MatrixConstructors.hpp}}
+\doxymbox{\hyperlink{_matrix_constructors_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MATRIX\_CONSTRUCTORS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MATRIX\_CONSTRUCTORS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_matrix_8hpp}{Matrix.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ Constructs\ an\ uninitialized\ matrix\ of\ size\ rows\ x\ cols.}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00016\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_afadd64902ef9d03291be6e799c38e904}{Matrix<T>::Matrix}}(\textcolor{keywordtype}{size\_t}\ rows,\ \textcolor{keywordtype}{size\_t}\ cols)\ :\ \_rows(rows),\ \_cols(cols)\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{if}\ (rows\ ==\ 0\ ||\ cols\ ==\ 0)\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Matrix\ dimensions\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00019\ \ \ \ \ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \_data.resize(rows\ *\ cols);}
+\DoxyCodeLine{00022\ \}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ Constructs\ a\ matrix\ from\ a\ raw\ data\ pointer.}}
+\DoxyCodeLine{00025\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00026\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_afadd64902ef9d03291be6e799c38e904}{Matrix<T>::Matrix}}(\textcolor{keywordtype}{size\_t}\ rows,\ \textcolor{keywordtype}{size\_t}\ cols,\ T\ *\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}})\ :\ \_rows(rows),\ \_cols(cols)\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{if}\ (rows\ ==\ 0\ ||\ cols\ ==\ 0)\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Matrix\ dimensions\ must\ be\ greater\ than\ zero!"{}});}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Data\ pointer\ cannot\ be\ null!"{}});}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \_data.assign(\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}},\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}\ +\ (rows\ *\ cols));}
+\DoxyCodeLine{00035\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ Constructs\ from\ a\ std::vector,\ filled\ by\ rows.}}
+\DoxyCodeLine{00038\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00039\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_afadd64902ef9d03291be6e799c38e904}{Matrix<T>::Matrix}}(\textcolor{keywordtype}{size\_t}\ rows,\ \textcolor{keywordtype}{size\_t}\ cols,\ \textcolor{keyword}{const}\ std::vector<T>\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}})}
+\DoxyCodeLine{00040\ \ \ \ \ :\ \_rows(rows),\ \_cols(cols)\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{if}\ (rows\ ==\ 0\ ||\ cols\ ==\ 0)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Matrix\ dimensions\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}.size()\ !=\ rows\ *\ cols)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ throw\ std::invalid\_argument(\textcolor{stringliteral}{"{}Data\ size\ does\ not\ match\ matrix\ size."{}});}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \_data.assign(\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}.begin(),\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}.end());}
+\DoxyCodeLine{00050\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ Constructs\ from\ a\ std::vector,\ move\ constructor.}}
+\DoxyCodeLine{00053\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00054\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_afadd64902ef9d03291be6e799c38e904}{Matrix<T>::Matrix}}(\textcolor{keywordtype}{size\_t}\ rows,\ \textcolor{keywordtype}{size\_t}\ cols,\ std::vector<T>\ \&\&\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}})}
+\DoxyCodeLine{00055\ \ \ \ \ :\ \_rows(rows),\ \_cols(cols)\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{if}\ (rows\ ==\ 0\ ||\ cols\ ==\ 0)\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Matrix\ dimensions\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}.size()\ !=\ rows\ *\ cols)\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ throw\ std::invalid\_argument(\textcolor{stringliteral}{"{}Data\ size\ does\ not\ match\ matrix\ size."{}});}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ \ \ \ \ \_data\ =\ std::move(\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}});}
+\DoxyCodeLine{00063\ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{comment}{//\ Constructs\ from\ a\ nested\ std::vector\ (vector\ of\ vectors).}}
+\DoxyCodeLine{00066\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00067\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_afadd64902ef9d03291be6e799c38e904}{Matrix<T>::Matrix}}(\textcolor{keywordtype}{size\_t}\ rows,\ \textcolor{keywordtype}{size\_t}\ cols,\ \textcolor{keyword}{const}\ std::vector<std::vector<T>>\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}})}
+\DoxyCodeLine{00068\ \ \ \ \ :\ \_rows(rows),\ \_cols(cols)\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (rows\ ==\ 0\ ||\ cols\ ==\ 0)\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Matrix\ dimensions\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}.size()\ !=\ rows\ ||\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}.at(0).size()\ !=\ cols)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ throw\ std::invalid\_argument(\textcolor{stringliteral}{"{}Data\ size\ does\ not\ match\ matrix\ size."{}});}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \_data.resize(rows\ *\ cols);}
+\DoxyCodeLine{00078\ \ \ \ \ for\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ rows;\ ++i)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ cols;\ ++j)\ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \_data.at(\_get\_index(i,\ j))\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}.at(i).\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(j));}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{comment}{//\ Constructs\ from\ a\ std::array,\ filled\ by\ rows.}}
+\DoxyCodeLine{00086\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00087\ \textcolor{keyword}{template}\ <\textcolor{keywordtype}{size\_t}\ N>}
+\DoxyCodeLine{00088\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_afadd64902ef9d03291be6e799c38e904}{Matrix<T>::Matrix}}(\textcolor{keywordtype}{size\_t}\ rows,\ \textcolor{keywordtype}{size\_t}\ cols,\ \textcolor{keyword}{const}\ std::array<T,\ N>\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}})}
+\DoxyCodeLine{00089\ \ \ \ \ :\ \_rows(rows),\ \_cols(cols)\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{if}\ (rows\ ==\ 0\ ||\ cols\ ==\ 0)\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Matrix\ dimensions\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00092\ \ \ \ \ \}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{if}\ (N\ !=\ rows\ *\ cols)\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Data\ size\ does\ not\ match\ matrix\ size."{}});}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \_data.assign(\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}.begin(),\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}.end());}
+\DoxyCodeLine{00098\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{comment}{//\ Constructs\ from\ a\ std::initializer\_list,\ filled\ by\ rows.}}
+\DoxyCodeLine{00101\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00102\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00103\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_afadd64902ef9d03291be6e799c38e904}{Matrix<T>::Matrix}}(\textcolor{keywordtype}{size\_t}\ rows,\ \textcolor{keywordtype}{size\_t}\ cols,\ std::initializer\_list<U>\ list)}
+\DoxyCodeLine{00104\ \ \ \ \ :\ \_rows(rows),\ \_cols(cols)\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{if}\ (rows\ ==\ 0\ ||\ cols\ ==\ 0)\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Matrix\ dimensions\ must\ be\ greater\ than\ zero."{}});}
+\DoxyCodeLine{00107\ \ \ \ \ \}}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(list.size())\ !=\ rows\ *\ cols)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ throw\ std::invalid\_argument(\textcolor{stringliteral}{"{}Data\ size\ does\ not\ match\ matrix\ size."{}});}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \_data.assign(list.begin(),\ list.end());}
+\DoxyCodeLine{00112\ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

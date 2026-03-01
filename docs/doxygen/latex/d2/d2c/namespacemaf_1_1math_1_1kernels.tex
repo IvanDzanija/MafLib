@@ -1,0 +1,237 @@
+\doxysection{maf::\+math::\+kernels Namespace Reference}
+\hypertarget{namespacemaf_1_1math_1_1kernels}{}\label{namespacemaf_1_1math_1_1kernels}\index{maf::math::kernels@{maf::math::kernels}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_1_1detail}{detail}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9}{OP}} :\+ uint8 \{ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a2c01bf6305d59f47917ffbcfcbe71f0d}{No\+Trans}}
+, \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a01473171826aa7c969fb1d7433923d59}{Trans}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908}{gemv}} (\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9}{OP}} trans, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{Matrix\+View}}$<$ T $>$ \&A, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&x)
+\begin{DoxyCompactList}\small\item\em General matrix-\/vector multiplication (GEMV). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\void \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a16e5396f4e2c040a00a2c151ba5cbce1}{ger}} (\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{Matrix\+View}}$<$ T $>$ \&A, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&x, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&y, double alpha=1.\+0)
+\begin{DoxyCompactList}\small\item\em General rank-\/1 update (GER). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214}{dot}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ T $>$ \&x, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&y)
+\begin{DoxyCompactList}\small\item\em Computes the dot product of two vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric T, Numeric U$>$ }\\auto \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a0a6841ab0c398890da60f2221df5c986}{outer}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ T $>$ \&x, const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&y)
+\begin{DoxyCompactList}\small\item\em Computes the outer product of two vectors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{namespacemaf_1_1math_1_1kernels_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9}\index{maf::math::kernels@{maf::math::kernels}!OP@{OP}}
+\index{OP@{OP}!maf::math::kernels@{maf::math::kernels}}
+\doxysubsubsection{\texorpdfstring{OP}{OP}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9} 
+enum class \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9}{maf::\+math::\+kernels::\+\+OP}} :\+ \doxymbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{uint8}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NoTrans@{NoTrans}!maf::math::kernels@{maf::math::kernels}}
+\index{maf::math::kernels@{maf::math::kernels}!NoTrans@{NoTrans}}
+}\Hypertarget{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a2c01bf6305d59f47917ffbcfcbe71f0d}\label{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a2c01bf6305d59f47917ffbcfcbe71f0d} 
+No\+Trans&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Trans@{Trans}!maf::math::kernels@{maf::math::kernels}}
+\index{maf::math::kernels@{maf::math::kernels}!Trans@{Trans}}
+}\Hypertarget{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a01473171826aa7c969fb1d7433923d59}\label{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a01473171826aa7c969fb1d7433923d59} 
+Trans&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{namespacemaf_1_1math_1_1kernels_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214}\index{maf::math::kernels@{maf::math::kernels}!dot@{dot}}
+\index{dot@{dot}!maf::math::kernels@{maf::math::kernels}}
+\doxysubsubsection{\texorpdfstring{dot()}{dot()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214} 
+template$<$Numeric T, Numeric U$>$ \\
+auto maf::\+math::\+kernels::\+dot (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ T $>$ \&}]{x}{, }\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Computes the dot product of two vectors. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of vector x. \\
+\hline
+{\em U} & Numeric type of vector y.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The first input vector. \\
+\hline
+{\em y} & The second input vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting scalar which is the dot product of x and y. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if dimensions do not match or if orientations are not compatible for dot product (row x column). \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/d2c/namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/d2c/namespacemaf_1_1math_1_1kernels_a384be32c36b1714d7c93fb5840fed214_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908}\index{maf::math::kernels@{maf::math::kernels}!gemv@{gemv}}
+\index{gemv@{gemv}!maf::math::kernels@{maf::math::kernels}}
+\doxysubsubsection{\texorpdfstring{gemv()}{gemv()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908} 
+template$<$Numeric T, Numeric U$>$ \\
+auto maf::\+math::\+kernels::\+gemv (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9}{OP}}}]{trans}{, }\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{Matrix\+View}}$<$ T $>$ \&}]{A}{, }\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&}]{x}{}\end{DoxyParamCaption})}
+
+
+
+General matrix-\/vector multiplication (GEMV). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of matrix A. \\
+\hline
+{\em U} & Numeric type of vector x.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyAttention}{Attention}
+If types of \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View} and \doxylink{classmaf_1_1math_1_1_matrix_view}{Matrix\+View} are the same and are floating-\/point types, the function will attempt to use optimized BLAS routines if available Otherwise, it will fall back to a manual implementation.
+\end{DoxyAttention}
+
+\begin{DoxyParams}{Parameters}
+{\em trans} & Specifies whether to transpose matrix A. \\
+\hline
+{\em A} & The input matrix. \\
+\hline
+{\em x} & The input vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting vector y = A \texorpdfstring{$\ast$}{*} x or y = A\texorpdfstring{$^\wedge$}{\string^}T \texorpdfstring{$\ast$}{*} x. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/d2c/namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/d2c/namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemaf_1_1math_1_1kernels_a16e5396f4e2c040a00a2c151ba5cbce1}\index{maf::math::kernels@{maf::math::kernels}!ger@{ger}}
+\index{ger@{ger}!maf::math::kernels@{maf::math::kernels}}
+\doxysubsubsection{\texorpdfstring{ger()}{ger()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_1_1kernels_a16e5396f4e2c040a00a2c151ba5cbce1} 
+template$<$Numeric T, Numeric U$>$ \\
+void maf::\+math::\+kernels::\+ger (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{Matrix\+View}}$<$ T $>$ \&}]{A}{, }\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&}]{x}{, }\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&}]{y}{, }\item[{double}]{alpha}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})}
+
+
+
+General rank-\/1 update (GER). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of matrix A. \\
+\hline
+{\em U} & Numeric type of vectors x and y.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyAttention}{Attention}
+If types of \doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View} and \doxylink{classmaf_1_1math_1_1_matrix_view}{Matrix\+View} are the same and are floating-\/point types, the function will attempt to use optimized BLAS routines if available Otherwise, it will fall back to a manual implementation.
+\end{DoxyAttention}
+
+\begin{DoxyParams}{Parameters}
+{\em A} & The input matrix to be updated in-\/place. \\
+\hline
+{\em x} & The first input vector. \\
+\hline
+{\em y} & The second input vector. \\
+\hline
+{\em alpha} & The scalar multiplier for the rank-\/1 update (default is 1.\+0). \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/d2c/namespacemaf_1_1math_1_1kernels_a16e5396f4e2c040a00a2c151ba5cbce1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/d2c/namespacemaf_1_1math_1_1kernels_a16e5396f4e2c040a00a2c151ba5cbce1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemaf_1_1math_1_1kernels_a0a6841ab0c398890da60f2221df5c986}\index{maf::math::kernels@{maf::math::kernels}!outer@{outer}}
+\index{outer@{outer}!maf::math::kernels@{maf::math::kernels}}
+\doxysubsubsection{\texorpdfstring{outer()}{outer()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1math_1_1kernels_a0a6841ab0c398890da60f2221df5c986} 
+template$<$Numeric T, Numeric U$>$ \\
+auto maf::\+math::\+kernels::\+outer (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ T $>$ \&}]{x}{, }\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ U $>$ \&}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Computes the outer product of two vectors. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type of vector x. \\
+\hline
+{\em U} & Numeric type of vector y.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The first input vector. \\
+\hline
+{\em y} & The second input vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting matrix which is the outer product of x and y. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{d2/d2c/namespacemaf_1_1math_1_1kernels_a0a6841ab0c398890da60f2221df5c986_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{d2/d2c/namespacemaf_1_1math_1_1kernels_a0a6841ab0c398890da60f2221df5c986_icgraph}
+\end{center}
+\end{figure}

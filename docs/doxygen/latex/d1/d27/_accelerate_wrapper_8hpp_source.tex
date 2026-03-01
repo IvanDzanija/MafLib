@@ -1,0 +1,22 @@
+\doxysection{Accelerate\+Wrapper.\+hpp}
+\hypertarget{_accelerate_wrapper_8hpp_source}{}\label{_accelerate_wrapper_8hpp_source}\index{include/MafLib/math/linalg/AccelerateWrappers/AccelerateWrapper.hpp@{include/MafLib/math/linalg/AccelerateWrappers/AccelerateWrapper.hpp}}
+\doxymbox{\hyperlink{_accelerate_wrapper_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ACCELERATE\_WRAPPER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ACCELERATE\_WRAPPER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#if\ defined(\_\_APPLE\_\_)\ \&\&\ defined(ACCELERATE\_AVAILABLE)}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vecLib/cblas\_new.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vecLib/clapack.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vecLib/vDSP.h>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_matrix_routines_8hpp}{MatrixRoutines.hpp}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_matrix_routines_8hpp}{VectorMatrixRoutines.hpp}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_routines_8hpp}{VectorRoutines.hpp}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

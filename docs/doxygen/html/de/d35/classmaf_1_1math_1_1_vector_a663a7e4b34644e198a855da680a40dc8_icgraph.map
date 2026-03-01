@@ -1,0 +1,29 @@
+<map id="maf::math::Vector::orientation" name="maf::math::Vector::orientation">
+<area shape="rect" id="Node000001" title="Gets the vector&#39;s orientation (ROW or COLUMN)." alt="" coords="188,397,322,438"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a0440e67c7abf25ef0f37d8d96e9e5cd4" title="Matrix&#45;Vector multiplication (Matrix * column_vector)." alt="" coords="6,5,139,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="248,381,240,316,221,231,207,186,188,141,166,99,138,61,127,49,125,44,142,57,170,96,193,139,212,184,226,230,245,315,254,382"/>
+<area shape="rect" id="Node000003" href="$de/d35/classmaf_1_1math_1_1_vector.html#a00b97a160b42a4eeb740eb693a3f8bd5" title="Dot product (Row Vector * Column Vector)." alt="" coords="5,71,140,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="245,382,234,328,213,260,182,189,161,156,138,126,126,114,124,109,142,122,166,153,186,187,218,258,239,326,251,382"/>
+<area shape="rect" id="Node000004" href="$de/d35/classmaf_1_1math_1_1_vector.html#a0829be3ec6913e833fbfd9764cde5324" title="Element&#45;wise vector addition (Vector + Vector)." alt="" coords="5,136,140,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="241,382,226,341,204,290,175,238,138,192,125,180,123,175,142,188,179,235,209,287,231,339,246,382"/>
+<area shape="rect" id="Node000005" href="$de/d35/classmaf_1_1math_1_1_vector.html#ac407d9fd6c17717e6fb6871dd4419e49" title="Element&#45;wise vector addition assignment (Vector + Vector)." alt="" coords="5,201,140,242"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="233,384,194,321,168,287,138,257,123,245,121,240,141,253,172,284,199,318,239,383"/>
+<area shape="rect" id="Node000006" href="$de/d35/classmaf_1_1math_1_1_vector.html#a1efd12a6bd6634efbc9750dd0558fc7c" title="Element&#45;wise vector subtraction (Vector &#45; Vector)." alt="" coords="5,267,140,307"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="219,388,182,356,138,323,120,310,118,305,141,318,185,351,224,386"/>
+<area shape="rect" id="Node000007" href="$de/d35/classmaf_1_1math_1_1_vector.html#a9788849517cae340aa15007d1aa5c285" title="Element&#45;wise vector subtraction assignment (Vector &#45; Vector)." alt="" coords="5,332,140,373"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="180,393,132,376,130,371,185,390"/>
+<area shape="rect" id="Node000008" href="$de/d35/classmaf_1_1math_1_1_vector.html#a5664c855ed6b5b75f47bce2bfd322ae0" title="Outer product (Column Vector * Row Vector)." alt="" coords="5,397,140,438"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="170,419,141,420,139,415,174,416"/>
+<area shape="rect" id="Node000009" href="$de/d35/classmaf_1_1math_1_1_vector.html#aafcb79286a9e9a85ca763923c3f9d3a2" title="Converting constructor." alt="" coords="5,463,140,503"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="180,446,133,464,130,460,184,442"/>
+<area shape="rect" id="Node000010" href="$de/d35/classmaf_1_1math_1_1_vector.html#a20d90280ea731664d99eed92bfb5741c" title="Constructs from a std::array by copying its data." alt="" coords="5,528,140,569"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="220,451,185,484,141,517,121,529,117,526,138,513,182,480,223,446"/>
+<area shape="rect" id="Node000011" href="$de/d35/classmaf_1_1math_1_1_vector.html#aa71376d41514904ec98f245a7f0cd734" title="Constructs from a std::vector by copying its data." alt="" coords="5,593,140,634"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="235,454,199,517,172,552,141,582,124,595,120,591,138,578,168,548,194,514,237,450"/>
+<area shape="rect" id="Node000012" href="$de/d35/classmaf_1_1math_1_1_vector.html#a791bd6bc5808495544d2d1ca64fd4d18" title="Constructs from a raw data pointer." alt="" coords="5,659,140,699"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="245,451,231,497,209,548,179,600,142,648,126,660,122,656,138,644,175,597,204,545,226,495,242,455"/>
+<area shape="rect" id="Node000013" href="$de/d35/classmaf_1_1math_1_1_vector.html#adce45df04dad23e8e7fb2aa5dde3b2cf" title="Constructs an uninitialized vector of a given size." alt="" coords="5,724,140,765"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="249,451,239,509,218,577,186,648,166,682,142,713,126,726,123,722,138,709,161,679,182,646,213,575,234,508,247,456"/>
+<area shape="rect" id="Node000014" href="$de/d35/classmaf_1_1math_1_1_vector.html#a716800c73059c5fdcfddc4abd057343c" title="Constructs from a std::vector by moving its data." alt="" coords="5,789,140,830"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="252,451,245,520,226,606,212,651,193,696,170,739,142,778,127,791,124,786,138,775,166,736,188,694,207,649,221,604,240,520,250,456"/>
+</map>

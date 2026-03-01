@@ -1,0 +1,21 @@
+<map id="maf::math::Vector::outer_product" name="maf::math::Vector::outer_product">
+<area shape="rect" id="Node000001" title="Outer product (Column Vector * Row Vector)." alt="" coords="5,152,140,193"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aa9212394167230bb799584278e8b9af2" title="Gets a mutable pointer to the underlying data." alt="" coords="188,45,345,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,150,135,115,186,81,203,75,199,79,189,86,138,120,97,154"/>
+<area shape="rect" id="Node000003" href="$de/d35/classmaf_1_1math_1_1_vector.html#a7c27148cb7d68df78343721cc56d67e0" title="Calculates the dot product (inner product) of two Vectors." alt="" coords="199,95,334,136"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="139,151,186,138,182,141,141,155"/>
+<area shape="rect" id="Node000007" href="$de/d35/classmaf_1_1math_1_1_vector.html#a486da0689bba119f338f50eb5e334a1a" title="Gets the number of elements in the vector." alt="" coords="394,153,552,179"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="140,169,379,165,377,170,140,174"/>
+<area shape="rect" id="Node000008" href="$de/d35/classmaf_1_1math_1_1_vector.html#aa96c8ef557852ec4425b3399e4c758c7" title="Default constructor." alt="" coords="406,203,540,244"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="140,179,391,211,389,215,140,184"/>
+<area shape="rect" id="Node000009" href="$de/d35/classmaf_1_1math_1_1_vector.html#a663a7e4b34644e198a855da680a40dc8" title="Gets the vector&#39;s orientation (ROW or COLUMN)." alt="" coords="199,260,334,301"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="107,191,189,240,211,253,206,253,186,244,106,196"/>
+<area shape="rect" id="Node000004" href="$de/d35/classmaf_1_1math_1_1_vector.html#a8f02b32c5f55c5f27708afcd50e9918b" title="Gets a const pointer to the underlying data. store." alt="" coords="393,5,552,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="323,92,343,81,367,60,377,50,392,40,405,36,401,39,394,44,380,54,371,64,347,86,325,97"/>
+<area shape="rect" id="Node000005" href="$d0/d9a/namespacemaf_1_1math_1_1acc.html#a0f65ed83214add340b9128c3bc0882d9" title=" " alt="" coords="402,55,544,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="333,97,402,83,397,85,335,102"/>
+<area shape="rect" id="Node000006" href="$d0/d9a/namespacemaf_1_1math_1_1acc.html#ac0f84d113312134278b0aeebe3ca3581" title=" " alt="" coords="402,104,544,130"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="333,113,388,116,383,117,334,119"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="334,129,405,148,400,149,334,135"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="299,134,394,189,406,196,400,196,392,194,298,139"/>
+</map>

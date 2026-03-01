@@ -1,0 +1,214 @@
+\doxysection{maf::\+math::\+Golden\+Section\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmaf_1_1math_1_1_golden_section}{}\label{classmaf_1_1math_1_1_golden_section}\index{maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}}
+
+
+Class for finding the minimum of a unimodal function using the Golden Section Search method.  
+
+
+
+
+{\ttfamily \+\#include $<$Golden\+Section.\+hpp$>$}
+
+
+
+Inheritance diagram for maf::\+math::\+Golden\+Section\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{dd/de6/classmaf_1_1math_1_1_golden_section__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for maf::\+math::\+Golden\+Section\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{da/d1d/classmaf_1_1math_1_1_golden_section__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_ae0903378d124f8726461ccd9971f2188}{Golden\+Section}} ()=delete
+\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_a9ab68d5a6a8a5a1f738acef12a0d405a}{Golden\+Section}} (const std::\+function$<$ T(T)$>$ \&function, T lower\+\_\+bound, T upper\+\_\+bound)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{classmaf_1_1math_1_1_golden_section}{Golden\+Section} class. \end{DoxyCompactList}\item 
+T \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_ae66c8c6ae6891af99c4b08913a4707ea}{get\+\_\+lower\+\_\+bound}} () const
+\begin{DoxyCompactList}\small\item\em Get the lower bound of the interval. \end{DoxyCompactList}\item 
+T \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_a238e56b0f65b3f17d570ef1e001c7a84}{get\+\_\+upper\+\_\+bound}} () const
+\begin{DoxyCompactList}\small\item\em Get the upper bound of the interval. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_a1821e7f912bab8d72a38d46cbbe35431}{set\+\_\+lower\+\_\+bound}} (T lower\+\_\+bound)
+\begin{DoxyCompactList}\small\item\em Set the lower bound of the interval. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_aee1ea6463a7e35e48577e5e0a33ba6ab}{set\+\_\+upper\+\_\+bound}} (T upper\+\_\+bound)
+\begin{DoxyCompactList}\small\item\em Set the upper bound of the interval. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{Optimizer\+Result}}$<$ T $>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_ac29234bd33ea96107b972e232c686a69}{solve}} (T tolerance=static\+\_\+cast$<$ T $>$(1e-\/7), \doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}} max\+\_\+iterations=100) override
+\begin{DoxyCompactList}\small\item\em Find the minimum on set interval using the Golden Section Search method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer$<$ T $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a329df7dd6df98b63308ea00eb754aee6}{\texorpdfstring{$\sim$}{\string~}\+Optimizer}} ()=default
+\item 
+const std::\+function$<$ T(T)$>$ \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a3c73d3374da043a465816b809205c9b0}{get\+\_\+function}} () const
+\begin{DoxyCompactList}\small\item\em Get the function being optimized/\+solved. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_ad51593bad51b6d9f41392c374b1e5c6f}{set\+\_\+function}} (const std::\+function$<$ T(T)$>$ \&function)
+\begin{DoxyCompactList}\small\item\em Set the function to optimize/\+solve. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer$<$ T $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}} ()=default
+\begin{DoxyCompactList}\small\item\em Protected default constructor -\/ only derived classes can construct. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_acc1a6ba07534c566c9798419c938406b}{Optimizer}} (const std::\+function$<$ T(T)$>$ \&function)
+\begin{DoxyCompactList}\small\item\em Protected constructor with function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer$<$ T $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+std::\+function$<$ T(T)$>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\+\_\+function}}
+\begin{DoxyCompactList}\small\item\em The function to optimize/\+solve. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$std::\+floating\+\_\+point T$>$\newline
+class maf::\+math::\+\+Golden\+Section$<$ T $>$}
+Class for finding the minimum of a unimodal function using the Golden Section Search method. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The floating-\/point type to use (e.\+g., float, double). \\
+\hline
+\end{DoxyTemplParams}
+
+
+\label{doc-constructors}
+\Hypertarget{classmaf_1_1math_1_1_golden_section_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmaf_1_1math_1_1_golden_section_ae0903378d124f8726461ccd9971f2188}\index{maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}!GoldenSection@{GoldenSection}}
+\index{GoldenSection@{GoldenSection}!maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{GoldenSection()}{GoldenSection()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_golden_section_ae0903378d124f8726461ccd9971f2188} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section}{maf::\+math::\+\+Golden\+Section}}$<$ T $>$::\+\+Golden\+Section (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classmaf_1_1math_1_1_golden_section_a9ab68d5a6a8a5a1f738acef12a0d405a}\index{maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}!GoldenSection@{GoldenSection}}
+\index{GoldenSection@{GoldenSection}!maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{GoldenSection()}{GoldenSection()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_golden_section_a9ab68d5a6a8a5a1f738acef12a0d405a} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section}{maf::\+math::\+\+Golden\+Section}}$<$ T $>$::\+\+Golden\+Section (\begin{DoxyParamCaption}\item[{const std::\+function$<$ T(T)$>$ \&}]{function}{, }\item[{T}]{lower\+\_\+bound}{, }\item[{T}]{upper\+\_\+bound}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for \doxylink{classmaf_1_1math_1_1_golden_section}{Golden\+Section} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em function} & The function for which to find the minimum. \\
+\hline
+{\em lower\+\_\+bound} & The lower bound of the interval. \\
+\hline
+{\em upper\+\_\+bound} & The upper bound of the interval. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/dbf/classmaf_1_1math_1_1_golden_section_a9ab68d5a6a8a5a1f738acef12a0d405a_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classmaf_1_1math_1_1_golden_section_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmaf_1_1math_1_1_golden_section_ae66c8c6ae6891af99c4b08913a4707ea}\index{maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}!get\_lower\_bound@{get\_lower\_bound}}
+\index{get\_lower\_bound@{get\_lower\_bound}!maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_lower\_bound()}{get\_lower\_bound()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_golden_section_ae66c8c6ae6891af99c4b08913a4707ea} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+T \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section}{maf::\+math::\+\+Golden\+Section}}$<$ T $>$::\+get\+\_\+lower\+\_\+bound (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Get the lower bound of the interval. 
+
+\begin{DoxyReturn}{Returns}
+The lower bound. 
+\end{DoxyReturn}
+\Hypertarget{classmaf_1_1math_1_1_golden_section_a238e56b0f65b3f17d570ef1e001c7a84}\index{maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}!get\_upper\_bound@{get\_upper\_bound}}
+\index{get\_upper\_bound@{get\_upper\_bound}!maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_upper\_bound()}{get\_upper\_bound()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_golden_section_a238e56b0f65b3f17d570ef1e001c7a84} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+T \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section}{maf::\+math::\+\+Golden\+Section}}$<$ T $>$::\+get\+\_\+upper\+\_\+bound (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Get the upper bound of the interval. 
+
+\begin{DoxyReturn}{Returns}
+The upper bound. 
+\end{DoxyReturn}
+\Hypertarget{classmaf_1_1math_1_1_golden_section_a1821e7f912bab8d72a38d46cbbe35431}\index{maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}!set\_lower\_bound@{set\_lower\_bound}}
+\index{set\_lower\_bound@{set\_lower\_bound}!maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_lower\_bound()}{set\_lower\_bound()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_golden_section_a1821e7f912bab8d72a38d46cbbe35431} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section}{maf::\+math::\+\+Golden\+Section}}$<$ T $>$::\+set\+\_\+lower\+\_\+bound (\begin{DoxyParamCaption}\item[{T}]{lower\+\_\+bound}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the lower bound of the interval. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lower\+\_\+bound} & The lower bound to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmaf_1_1math_1_1_golden_section_aee1ea6463a7e35e48577e5e0a33ba6ab}\index{maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}!set\_upper\_bound@{set\_upper\_bound}}
+\index{set\_upper\_bound@{set\_upper\_bound}!maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_upper\_bound()}{set\_upper\_bound()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_golden_section_aee1ea6463a7e35e48577e5e0a33ba6ab} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section}{maf::\+math::\+\+Golden\+Section}}$<$ T $>$::\+set\+\_\+upper\+\_\+bound (\begin{DoxyParamCaption}\item[{T}]{upper\+\_\+bound}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the upper bound of the interval. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em upper\+\_\+bound} & The upper bound to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmaf_1_1math_1_1_golden_section_ac29234bd33ea96107b972e232c686a69}\index{maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}!solve@{solve}}
+\index{solve@{solve}!maf::math::GoldenSection$<$ T $>$@{maf::math::GoldenSection$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_golden_section_ac29234bd33ea96107b972e232c686a69} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+\doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{Optimizer\+Result}}$<$ T $>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section}{maf::\+math::\+\+Golden\+Section}}$<$ T $>$::\+solve (\begin{DoxyParamCaption}\item[{T}]{tolerance}{ = {\ttfamily static\+\_\+cast$<$T$>$(1e-\/7)}, }\item[{\doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}}}]{max\+\_\+iterations}{ = {\ttfamily 100}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Find the minimum on set interval using the Golden Section Search method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tolerance} & The tolerance for convergence. \\
+\hline
+{\em max\+\_\+iterations} & The maximum number of iterations to perform. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An \doxylink{structmaf_1_1math_1_1_optimizer_result}{Optimizer\+Result} containing the solution, error, and optionally an error message. 
+\end{DoxyReturn}
+
+
+Implements \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a007c3a463607c4ce090ba43f2cd15472}{maf::\+math::\+\+Optimizer$<$ T $>$}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+include/\+\+Maf\+Lib/\+math/\+optimization/\+\doxymbox{\hyperlink{_golden_section_8hpp}{Golden\+Section.\+hpp}}\end{DoxyCompactItemize}

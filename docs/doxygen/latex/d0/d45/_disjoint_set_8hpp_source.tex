@@ -1,0 +1,108 @@
+\doxysection{Disjoint\+Set.\+hpp}
+\hypertarget{_disjoint_set_8hpp_source}{}\label{_disjoint_set_8hpp_source}\index{include/MafLib/structs/DisjointSet.hpp@{include/MafLib/structs/DisjointSet.hpp}}
+\doxymbox{\hyperlink{_disjoint_set_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf}{maf}}\ \{}
+\DoxyCodeLine{00033\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classmaf_1_1_disjoint_set}{DisjointSet}}\ \{}
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00035\ \ \ \ \ std::vector<T>\ \_objects;}
+\DoxyCodeLine{00036\ \ \ \ \ std::vector<size\_t>\ \_links;\ \textcolor{comment}{//\ \_links[i]\ =\ parent\ of\ element\ i}}
+\DoxyCodeLine{00037\ \ \ \ \ std::vector<size\_t>\ \_sizes;\ \textcolor{comment}{//\ \_sizes[i]\ =\ size\ of\ set\ represented\ by\ i}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \_validate\_handle(\textcolor{keywordtype}{size\_t}\ handle)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (handle\ >=\ \_links.size())\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Invalid\ handle\ provided\ to\ DisjointSets."{}});}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_ab4ed86e30e1e52168532ec22fef32f5b}{add\_set}}(\textcolor{keyword}{const}\ T\ \&x)\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ new\_id\ =\ \_objects.size();}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \_objects.push\_back(x);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \_links.push\_back(new\_id);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \_sizes.push\_back(1);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ new\_id;}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_a5694edb1c1503df39a79b77f0370f727}{add\_set}}(T\ \&\&x)\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ new\_id\ =\ \_objects.size();}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \_objects.push\_back(std::move(x));}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \_links.push\_back(new\_id);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \_sizes.push\_back(1);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ new\_id;}
+\DoxyCodeLine{00077\ \ \ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00090\ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_a8ba4ca7bf154318426dbafbbe294c6ba}{find}}(\textcolor{keywordtype}{size\_t}\ a)\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \_validate\_handle(a);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1.\ Find\ the\ root}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ root\ =\ a;}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (root\ !=\ \_links[root])\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ root\ =\ \_links[root];}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 2.\ Path\ compression}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (a\ !=\ root)\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ next\ =\ \_links[a];}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \_links[a]\ =\ root;}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ a\ =\ next;}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ root;}
+\DoxyCodeLine{00107\ \ \ \ \ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_ae8731c4fd9d0b6f8bed4f0b035306b9f}{unite}}(\textcolor{keywordtype}{size\_t}\ a,\ \textcolor{keywordtype}{size\_t}\ b)\ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ repr\_a\ =\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_a8ba4ca7bf154318426dbafbbe294c6ba}{find}}(a);}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ repr\_b\ =\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_a8ba4ca7bf154318426dbafbbe294c6ba}{find}}(b);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (repr\_a\ ==\ repr\_b)\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_sizes[repr\_a]\ <\ \_sizes[repr\_b])\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \_sizes[repr\_b]\ +=\ \_sizes[repr\_a];}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \_links[repr\_a]\ =\ repr\_b;}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \_sizes[repr\_a]\ +=\ \_sizes[repr\_b];}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \_links[repr\_b]\ =\ repr\_a;}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00144\ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_acb80ae42f825cae6c0f7e9f71eedf689}{united}}(\textcolor{keywordtype}{size\_t}\ a,\ \textcolor{keywordtype}{size\_t}\ b)\ \{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_a8ba4ca7bf154318426dbafbbe294c6ba}{find}}(a)\ ==\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_a8ba4ca7bf154318426dbafbbe294c6ba}{find}}(b);\ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00152\ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_ab00d6b60b33f011bf1097f7dbb5ed27b}{count\_sets}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ res\ =\ 0;}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \_links.size();\ ++i)\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_links[i]\ ==\ i)\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++res;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00160\ \ \ \ \ \}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00168\ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_a91da1bee9be42396620df397876b0354}{set\_size}}(\textcolor{keywordtype}{size\_t}\ x)\ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ repr\_x\ =\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_a8ba4ca7bf154318426dbafbbe294c6ba}{find}}(x);}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_sizes.at(repr\_x);}
+\DoxyCodeLine{00171\ \ \ \ \ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00179\ \ \ \ \ [[nodiscard]]\ T\ \&\doxymbox{\hyperlink{classmaf_1_1_disjoint_set_ab53433226000f309b61a554731df3f08}{get}}(\textcolor{keywordtype}{size\_t}\ handle)\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \_validate\_handle(handle);}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_objects.at(handle);}
+\DoxyCodeLine{00182\ \ \ \ \ \}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00190\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ T\ \&\doxymbox{\hyperlink{classmaf_1_1_disjoint_set_a29dc5cc12f53da7cd23add20b9e95e59}{get}}(\textcolor{keywordtype}{size\_t}\ handle)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \_validate\_handle(handle);}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_objects.at(handle);}
+\DoxyCodeLine{00193\ \ \ \ \ \}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00203\ \ \ \ \ [[nodiscard]]\ T\ \&\doxymbox{\hyperlink{classmaf_1_1_disjoint_set_a8193429818a02ccf0ace57e5c7a2faa2}{get\_representative}}(\textcolor{keywordtype}{size\_t}\ handle)\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ repr\_handle\ =\ \doxymbox{\hyperlink{classmaf_1_1_disjoint_set_a8ba4ca7bf154318426dbafbbe294c6ba}{find}}(handle);}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_objects[repr\_handle];}
+\DoxyCodeLine{00206\ \ \ \ \ \}}
+\DoxyCodeLine{00207\ \};}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \}\ \textcolor{comment}{//\ namespace\ maf}}
+
+\end{DoxyCode}

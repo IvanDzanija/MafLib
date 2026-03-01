@@ -1,0 +1,5 @@
+<map id="maf::DisjointSet::unite" name="maf::DisjointSet::unite">
+<area shape="rect" id="Node000001" title="Merges the two sets containing elements a and b." alt="" coords="5,5,157,31"/>
+<area shape="rect" id="Node000002" href="$db/da1/classmaf_1_1_disjoint_set.html#a8ba4ca7bf154318426dbafbbe294c6ba" title="Finds the representative handle of the set containing a." alt="" coords="205,5,349,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,16,192,18,187,18,157,21"/>
+</map>

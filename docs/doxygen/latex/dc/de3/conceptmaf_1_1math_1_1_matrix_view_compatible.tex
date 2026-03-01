@@ -1,0 +1,22 @@
+\doxysection{maf::\+math::\+Matrix\+View\+Compatible Concept Reference}
+\hypertarget{conceptmaf_1_1math_1_1_matrix_view_compatible}{}\label{conceptmaf_1_1math_1_1_matrix_view_compatible}\index{maf::math::MatrixViewCompatible@{maf::math::MatrixViewCompatible}}
+
+
+Clean concept compatible with Matrix\+View. Matrix\+View\+Compatible is either a Matrix\+View or a Matrix that can be made into a view.  
+
+
+
+
+{\ttfamily \+\#include $<$Lin\+Alg.\+hpp$>$}
+
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptmaf_1_1math_1_1_matrix_view_compatible}{MatrixViewCompatible}}\ =\ \doxymbox{\hyperlink{conceptmaf_1_1math_1_1_matrix_view_type}{MatrixViewType<T>}}\ ||\ \doxymbox{\hyperlink{conceptmaf_1_1math_1_1_matrix_type}{MatrixType<T>}}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Detailed Description}
+Clean concept compatible with Matrix\+View. Matrix\+View\+Compatible is either a Matrix\+View or a Matrix that can be made into a view. 

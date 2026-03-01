@@ -1,0 +1,17 @@
+<map id="maf::math::Matrix::is_diagonal" name="maf::math::Matrix::is_diagonal">
+<area shape="rect" id="Node000001" title="Checks if the matrix is diagonal." alt="" coords="5,71,138,111"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a48ce2d00357e89ece95524bd003b63c6" title="Checks if the matrix is lower triangular." alt="" coords="186,71,318,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,88,173,90,168,92,138,94"/>
+<area shape="rect" id="Node000005" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a774d7c4510a8977e5b19f5f332d5789c" title="Checks if the matrix is square (rows == cols)." alt="" coords="372,112,504,153"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="137,109,186,120,274,129,359,134,354,134,273,135,185,126,136,115"/>
+<area shape="rect" id="Node000006" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#af79337899f9b0f2613175daf53f18ea9" title="Checks if the matrix is upper triangular." alt="" coords="186,5,318,46"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="128,68,182,50,177,53,131,73"/>
+<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a3506acc05e298718fb6d5587d6594055" title="Gets a mutable reference to the element at (row, col)." alt="" coords="366,62,509,88"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="318,83,353,82,348,83,319,88"/>
+<area shape="rect" id="Node000004" href="$d0/d8d/namespacemaf_1_1util.html#ae4cf9e3bb378a55e4cb78fd699dfd4ff" title="Check if two numeric values of potentially different types are close to each other within a given eps..." alt="" coords="376,13,500,38"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="308,68,365,47,380,45,385,43,367,52,310,73"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="318,103,359,114,354,114,318,108"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="318,41,374,57,369,58,318,46"/>
+<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="318,23,362,25,357,26,319,28"/>
+<area shape="poly" id="edge9_Node000006_Node000005" title=" " alt="" coords="298,44,320,57,344,78,368,98,375,105,370,104,364,102,340,82,316,61,297,49"/>
+</map>

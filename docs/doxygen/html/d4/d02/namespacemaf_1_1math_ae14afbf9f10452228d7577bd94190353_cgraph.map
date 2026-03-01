@@ -1,0 +1,59 @@
+<map id="maf::math::QR_decompostion" name="maf::math::QR_decompostion">
+<area shape="rect" id="Node000001" title="Computes the QR decomposition of a matrix A using Householder reflections." alt="" coords="5,489,202,514"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a98d6cc10d243169d78f53d07406ace8b" title="Gets the number of columns." alt="" coords="264,5,396,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,488,111,416,132,304,151,241,176,178,208,117,248,63,261,53,258,57,252,66,212,120,181,180,156,243,138,306,116,417,108,489"/>
+<area shape="rect" id="Node000003" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a71134f227c2c22e4ecf24b33ed3c0396" title="Fills the entire matrix with a single value." alt="" coords="670,73,816,98"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="105,488,118,435,145,356,164,313,188,270,215,229,248,193,293,158,343,130,396,110,452,95,507,85,560,79,657,78,652,81,561,85,508,90,453,100,398,115,345,135,296,162,251,197,220,233,192,273,169,316,150,358,123,436,110,489"/>
+<area shape="rect" id="Node000004" href="$d2/d2c/namespacemaf_1_1math_1_1kernels.html#ad71b365885ef9cac18d73bee09e86908" title="General matrix&#45;vector multiplication (GEMV)." alt="" coords="265,481,396,522"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="201,499,252,500,247,503,203,504"/>
+<area shape="rect" id="Node000015" href="$d2/d2c/namespacemaf_1_1math_1_1kernels.html#a16e5396f4e2c040a00a2c151ba5cbce1" title="General rank&#45;1 update (GER)." alt="" coords="252,358,408,384"/>
+<area shape="poly" id="edge18_Node000001_Node000015" title=" " alt="" coords="126,486,295,389,293,394,130,490"/>
+<area shape="rect" id="Node000016" href="$d4/d02/namespacemaf_1_1math.html#a4d61c9a4c0434a2e01652894564f7ebb" title="Creates a new identity matrix of a given size." alt="" coords="265,207,396,247"/>
+<area shape="poly" id="edge25_Node000001_Node000016" title=" " alt="" coords="113,487,302,257,302,262,118,490"/>
+<area shape="rect" id="Node000020" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aa1fa0768048faff36f5dfc56911a8ce4" title="Gets the number of rows." alt="" coords="264,547,396,587"/>
+<area shape="poly" id="edge30_Node000001_Node000020" title=" " alt="" coords="150,512,251,542,247,545,151,518"/>
+<area shape="rect" id="Node000021" href="$de/d35/classmaf_1_1math_1_1_vector.html#a486da0689bba119f338f50eb5e334a1a" title="Gets the number of elements in the vector." alt="" coords="460,826,618,852"/>
+<area shape="poly" id="edge31_Node000001_Node000021" title=" " alt="" coords="114,512,169,577,207,615,251,647,274,659,295,664,334,668,372,674,392,683,413,698,425,713,432,728,438,756,443,785,449,798,461,812,467,819,462,817,457,816,445,801,438,786,432,757,427,729,421,716,409,702,389,688,371,679,333,673,294,670,272,664,248,652,204,619,165,581,114,518"/>
+<area shape="rect" id="Node000022" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a4543983313872f9ca5b96ba2bbd54bcc" title="Creates a view (sub&#45;matrix) into this matrix." alt="" coords="251,713,410,738"/>
+<area shape="poly" id="edge32_Node000001_Node000022" title=" " alt="" coords="111,512,133,548,164,596,204,647,251,692,272,706,267,706,248,696,200,650,159,599,129,551,111,517"/>
+<area shape="rect" id="Node000023" href="$de/d35/classmaf_1_1math_1_1_vector.html#ab4a0ac259c4b813b12689a85214f0592" title="Creates a view (sub&#45;Vector) into this Vector." alt="" coords="250,612,411,637"/>
+<area shape="poly" id="edge33_Node000001_Node000023" title=" " alt="" coords="121,512,178,553,251,597,268,605,263,606,248,601,175,558,122,518"/>
+<area shape="rect" id="Node000005" href="$db/d6f/classmaf_1_1math_1_1_matrix_view.html#a36d6c7ab732b0a81e0097881d0220808" title="Gets the number of columns." alt="" coords="666,651,820,691"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="396,520,413,533,428,555,434,578,434,621,433,642,436,661,444,680,461,697,486,711,514,720,543,724,573,723,632,712,682,698,687,697,633,718,573,728,542,729,512,725,484,716,457,701,439,683,430,663,428,642,429,621,429,578,423,558,409,537,396,525"/>
+<area shape="rect" id="Node000006" href="$db/d6f/classmaf_1_1math_1_1_matrix_view.html#a9abab954d3502b4acfd36d0075291717" title="Returns a pointer to the underlying data (mutable)." alt="" coords="462,481,615,522"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="395,499,449,501,444,503,396,504"/>
+<area shape="rect" id="Node000007" href="$de/d35/classmaf_1_1math_1_1_vector.html#a8f02b32c5f55c5f27708afcd50e9918b" title="Gets a const pointer to the underlying data. store." alt="" coords="459,661,618,686"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="395,520,413,533,425,548,432,563,437,592,442,620,449,633,461,646,467,653,462,652,457,650,445,636,437,621,432,593,427,565,420,551,409,537,395,525"/>
+<area shape="rect" id="Node000008" href="$db/d29/classmaf_1_1math_1_1_vector_view.html#a111d37b27369beb875a8b8848f76f32d" title="Returns a pointer to the underlying data (mutable)." alt="" coords="461,285,616,326"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="345,480,457,337,468,332,464,336,461,341,349,483"/>
+<area shape="rect" id="Node000009" href="$db/d29/classmaf_1_1math_1_1_vector_view.html#aa21ab8fb8d009b0306ba00366f816005" title="Gets the increment (stride) of the VectorView." alt="" coords="461,351,616,391"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="353,479,400,441,458,402,472,397,468,400,460,407,403,445,357,483"/>
+<area shape="rect" id="Node000010" href="$db/d6f/classmaf_1_1math_1_1_matrix_view.html#ab9e28031f4124585beb591c39dd0c6fd" title="Gets the stride of parent Matrix." alt="" coords="462,416,615,457"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="394,479,459,461,455,463,397,484"/>
+<area shape="rect" id="Node000011" href="$d4/dec/namespacemaf_1_1math_1_1kernels_1_1detail.html#a36da8768b872427251fc5191c54a6cde" title=" " alt="" coords="460,761,617,802"/>
+<area shape="poly" id="edge10_Node000004_Node000011" title=" " alt="" coords="396,519,413,533,431,561,439,587,440,613,438,638,437,664,438,689,445,715,461,741,470,752,465,751,457,745,440,717,433,690,431,664,433,638,435,613,433,588,426,563,409,537,396,525"/>
+<area shape="rect" id="Node000012" href="$db/d6f/classmaf_1_1math_1_1_matrix_view.html#a941d23fedfe623554aa311fcb3dbedb4" title="Gets the number of rows." alt="" coords="666,568,820,609"/>
+<area shape="poly" id="edge14_Node000004_Node000012" title=" " alt="" coords="395,516,460,531,653,571,649,573,458,536,396,521"/>
+<area shape="rect" id="Node000014" href="$d4/dec/namespacemaf_1_1math_1_1kernels_1_1detail.html#a654bce50e886af201dfe65bde4034576" title=" " alt="" coords="470,596,607,637"/>
+<area shape="poly" id="edge15_Node000004_Node000014" title=" " alt="" coords="388,520,413,533,437,554,461,576,479,588,474,588,457,580,433,558,409,537,388,525"/>
+<area shape="poly" id="edge11_Node000011_Node000005" title=" " alt="" coords="583,758,617,741,692,700,697,699,620,745,585,763"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="559,758,616,697,639,666,664,637,691,619,696,616,668,641,643,670,620,701,562,763"/>
+<area shape="rect" id="Node000013" href="$db/d6f/classmaf_1_1math_1_1_matrix_view.html#ace0019d93cd6ddcc3074176ab81be986" title="Gets a std::span of a single row." alt="" coords="666,761,820,802"/>
+<area shape="poly" id="edge13_Node000011_Node000013" title=" " alt="" coords="618,779,653,782,648,782,618,784"/>
+<area shape="poly" id="edge16_Node000014_Node000005" title=" " alt="" coords="607,632,654,646,648,647,607,637"/>
+<area shape="poly" id="edge17_Node000014_Node000012" title=" " alt="" coords="606,604,653,600,648,602,608,610"/>
+<area shape="poly" id="edge19_Node000015_Node000005" title=" " alt="" coords="341,356,389,311,422,288,458,271,504,255,543,245,562,245,581,248,600,257,620,272,639,291,653,311,662,331,666,352,666,394,658,436,648,480,643,525,648,571,656,595,669,619,688,642,683,641,664,622,651,597,643,572,638,525,643,479,653,435,661,393,661,353,657,333,648,314,635,295,617,276,598,262,580,253,562,250,544,250,505,260,460,276,424,293,392,316,345,359"/>
+<area shape="poly" id="edge20_Node000015_Node000006" title=" " alt="" coords="346,382,397,422,460,466,472,474,467,475,458,471,393,426,347,387"/>
+<area shape="poly" id="edge21_Node000015_Node000008" title=" " alt="" coords="372,355,459,330,455,333,375,360"/>
+<area shape="poly" id="edge22_Node000015_Node000009" title=" " alt="" coords="408,369,448,370,443,372,410,373"/>
+<area shape="poly" id="edge23_Node000015_Node000010" title=" " alt="" coords="373,382,459,410,454,412,374,387"/>
+<area shape="poly" id="edge24_Node000015_Node000012" title=" " alt="" coords="336,356,354,327,380,291,415,255,458,227,502,209,541,201,579,206,620,227,656,260,684,300,706,344,722,390,739,480,744,553,739,551,734,481,716,392,701,346,680,303,652,264,617,232,577,211,541,206,504,214,460,232,419,259,384,294,358,330,341,359"/>
+<area shape="rect" id="Node000017" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a12a8c0a0c3d48be5283f473f9b86c7e4" title="Converts this matrix into an identity matrix." alt="" coords="472,120,605,161"/>
+<area shape="poly" id="edge26_Node000016_Node000017" title=" " alt="" coords="380,204,475,165,472,169,383,208"/>
+<area shape="poly" id="edge28_Node000017_Node000003" title=" " alt="" coords="604,120,680,101,676,104,607,125"/>
+<area shape="rect" id="Node000018" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a3506acc05e298718fb6d5587d6594055" title="Gets a mutable reference to the element at (row, col)." alt="" coords="671,126,815,152"/>
+<area shape="poly" id="edge27_Node000017_Node000018" title=" " alt="" coords="604,137,658,138,653,141,607,142"/>
+<area shape="rect" id="Node000019" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a774d7c4510a8977e5b19f5f332d5789c" title="Checks if the matrix is square (rows == cols)." alt="" coords="677,176,809,217"/>
+<area shape="poly" id="edge29_Node000017_Node000019" title=" " alt="" coords="605,156,664,173,659,175,606,161"/>
+<area shape="poly" id="edge34_Node000023_Node000021" title=" " alt="" coords="384,635,413,654,428,675,435,696,437,736,439,774,447,793,461,812,466,818,461,817,457,815,442,795,434,775,432,736,430,697,423,678,409,658,384,640"/>
+</map>

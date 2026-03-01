@@ -1,6 +1,5 @@
 #ifndef QR_HPP
 #define QR_HPP
-#include <stdexcept>
 
 #pragma once
 #include "MafLib/main/GlobalHeader.hpp"
@@ -9,9 +8,30 @@
 #include "Vector.hpp"
 #include "VectorView.hpp"
 
-#pragma once
-
+/**
+ * @file QR.hpp
+ * @brief High-performance QR decomposition using Householder reflections.
+ *
+ * This header defines the `QR_decomposition` function, which computes the QR
+ * decomposition of a given matrix A using Householder reflections. The
+ * implementation is designed for performance and numerical stability, and it
+ * supports both single and double precision floating point types. The function
+ * allows users to choose between returning full or thin versions of the Q and R
+ * matrices based on their needs.
+ *
+ * More information:
+ * https://en.wikipedia.org/wiki/QR_decomposition
+ */
 namespace maf::math {
+/**
+ * @brief Struct to hold the results of QR decomposition.
+ * @tparam T The floating point type of the matrix elements (e.g., float, double).
+ * @details This struct contains the orthogonal matrix Q and the upper triangular
+ * matrix R resulting from the QR decomposition. The types of Q and R are both
+ * Matrix<T>, where T is a floating point type. The user can choose to return
+ * either the full or thin versions of Q and R based on their needs when calling
+ * the QR_decomposition function.
+ */
 template <std::floating_point T>
 struct QRResult {
   Matrix<T> Q;

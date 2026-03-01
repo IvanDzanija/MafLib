@@ -1,0 +1,98 @@
+\doxysection{Cholesky.\+hpp}
+\hypertarget{_cholesky_8hpp_source}{}\label{_cholesky_8hpp_source}\index{include/MafLib/math/linalg/Cholesky.hpp@{include/MafLib/math/linalg/Cholesky.hpp}}
+\doxymbox{\hyperlink{_cholesky_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CHOLESKY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CHOLESKY\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_matrix_8hpp}{Matrix.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail}{detail}}\ \{}
+\DoxyCodeLine{00032\ \textcolor{keyword}{template}\ <std::\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}\ T>}
+\DoxyCodeLine{00033\ [[nodiscard]]\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<T>}}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail_a9823af698a94cb131e27fbd62f84a83e}{\_cholesky}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<T>}}\ \&matrix)\ \{}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordflow}{if}\ (!matrix.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a0f6daf36ebb2efd5970384565469323c}{is\_symmetric}}())\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Matrix\ must\ be\ symmetric\ to\ try\ Cholesky\ decomposition!"{}});}
+\DoxyCodeLine{00037\ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ matrix.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa1fa0768048faff36f5dfc56911a8ce4}{row\_count}}();}
+\DoxyCodeLine{00040\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<T>}}\ L(n,\ n);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ jj\ =\ 0;\ jj\ <\ n;\ jj\ +=\ BLOCK\_SIZE)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ j\_end\ =\ std::min(jj\ +\ BLOCK\_SIZE,\ n);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ jj;\ j\ <\ j\_end;\ ++j)\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ T\ sum\ =\ 0;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ L\_row\_j\ =\ L.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_afb33cbf4574399aa71beba18c85a2663}{row\_span}}(j);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ k\ =\ 0;\ k\ <\ j;\ ++k)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ sum\ +=\ L\_row\_j[k]\ *\ L\_row\_j[k];}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ T\ diag\_val\ =\ matrix.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(j,\ j)\ -\/\ sum;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (diag\_val\ <=\ 0)\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Matrix\ is\ not\ positive\ definite!"{}});}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ L\_row\_j[j]\ =\ std::sqrt(diag\_val);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ j\ +\ 1;\ i\ <\ j\_end;\ ++i)\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ T\ sum\_i\ =\ 0;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ L\_row\_i\ =\ L.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_afb33cbf4574399aa71beba18c85a2663}{row\_span}}(i);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ k\ =\ 0;\ k\ <\ j;\ ++k)\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ sum\_i\ +=\ L\_row\_i[k]\ *\ L\_row\_j[k];}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ L\_row\_i[j]\ =\ (matrix.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(i,\ j)\ -\/\ sum\_i)\ /\ L\_row\_j[j];}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for\ if\ (n\ >\ 1000)}}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ ii\ =\ j\_end;\ ii\ <\ n;\ ii\ +=\ BLOCK\_SIZE)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ i\_end\ =\ std::min(ii\ +\ BLOCK\_SIZE,\ n);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ ii;\ i\ <\ i\_end;\ ++i)\ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ L\_row\_i\ =\ L.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_afb33cbf4574399aa71beba18c85a2663}{row\_span}}(i);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ jj;\ j\ <\ j\_end;\ ++j)\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ T\ sum\ =\ 0;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ L\_row\_j\ =\ L.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_afb33cbf4574399aa71beba18c85a2663}{row\_span}}(j);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ k\ =\ 0;\ k\ <\ j;\ ++k)\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ L\_row\_i[k]\ *\ L\_row\_j[k];}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ L\_row\_i[j]\ =\ (matrix.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(i,\ j)\ -\/\ sum)\ /\ L\_row\_j[j];}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ \ \ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordflow}{return}\ L;}
+\DoxyCodeLine{00093\ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \}\ \ \textcolor{comment}{//\ namespace\ detail}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00132\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ ResultType\ =\ \textcolor{keywordtype}{void},\ Numeric\ T>}
+\DoxyCodeLine{00133\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{namespacemaf_1_1math_adacdd5d260e55a04182d86ed82d0e0b2}{cholesky}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<T>}}\ \&matrix)\ \{}
+\DoxyCodeLine{00134\ \ \ \textcolor{keyword}{using\ }TargetType\ =}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ std::conditional\_t<std::is\_same\_v<ResultType,\ void>,}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::conditional\_t<std::is\_floating\_point\_v<T>,\ T,\ \textcolor{keywordtype}{double}>,}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ResultType>;}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \textcolor{keyword}{static\_assert}(std::is\_floating\_point\_v<TargetType>,}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Cholesky\ result\ type\ must\ be\ floating\ point!"{}});}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<TargetType,\ T>)\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail_a9823af698a94cb131e27fbd62f84a83e}{detail::\_cholesky}}(matrix);}
+\DoxyCodeLine{00144\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keyword}{auto}\ converted\ =\ matrix.template\ cast<TargetType>();}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail_a9823af698a94cb131e27fbd62f84a83e}{detail::\_cholesky}}(converted);}
+\DoxyCodeLine{00147\ \ \ \}}
+\DoxyCodeLine{00148\ \}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

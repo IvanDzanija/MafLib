@@ -1,0 +1,60 @@
+\doxysection{include/\+\+Maf\+Lib/\+math/\+linalg/\+\+QR.hpp File Reference}
+\hypertarget{_q_r_8hpp}{}\label{_q_r_8hpp}\index{include/MafLib/math/linalg/QR.hpp@{include/MafLib/math/linalg/QR.hpp}}
+
+
+High-\/performance QR decomposition using Householder reflections.  
+
+
+{\ttfamily \+\#include "{}Maf\+Lib/\+main/\+\+Global\+Header.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}Matrix.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}Matrix\+View.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}Vector.\+hpp"{}}\newline
+{\ttfamily \+\#include "{}Vector\+View.\+hpp"{}}\newline
+Include dependency graph for QR.\+hpp:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d8/d68/_q_r_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d6/dc4/_q_r_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structmaf_1_1math_1_1_q_r_result}{maf::\+math::\+\+QRResult$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Struct to hold the results of QR decomposition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf}{maf}}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf_1_1math}{maf::\+math}}
+\item 
+namespace \doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail}{maf::\+math::\+detail}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\using \doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail_a7ea52b131af7ccc3b444f62b0db646ac}{maf::\+math::\+detail::\+float\+\_\+promote\+\_\+t}} = std::\+conditional\+\_\+t$<$std::\+is\+\_\+floating\+\_\+point\+\_\+v$<$T$>$, T, double$>$
+\item 
+{\footnotesize template$<$Numeric T$>$ }\\using \doxymbox{\hyperlink{namespacemaf_1_1math_a3ee3725e7ac4fbf68a11b1fee76d907c}{maf::\+math::\+\+QRResult\+Type}} = \doxymbox{\hyperlink{structmaf_1_1math_1_1_q_r_result}{QRResult}}$<$\doxymbox{\hyperlink{namespacemaf_1_1math_1_1detail_a7ea52b131af7ccc3b444f62b0db646ac}{detail::\+float\+\_\+promote\+\_\+t}}$<$T$>$$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$Numeric T$>$ }\\\doxymbox{\hyperlink{namespacemaf_1_1math_a3ee3725e7ac4fbf68a11b1fee76d907c}{QRResult\+Type}}$<$ T $>$ \doxymbox{\hyperlink{namespacemaf_1_1math_ae14afbf9f10452228d7577bd94190353}{maf::\+math::\+\+QR\+\_\+decompostion}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \&A, bool full\+\_\+Q=false, bool full\+\_\+R=false)
+\begin{DoxyCompactList}\small\item\em Computes the QR decomposition of a matrix A using Householder reflections. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+High-\/performance QR decomposition using Householder reflections. 
+
+This header defines the {\ttfamily QR\+\_\+decomposition} function, which computes the QR decomposition of a given matrix A using Householder reflections. The implementation is designed for performance and numerical stability, and it supports both single and double precision floating point types. The function allows users to choose between returning full or thin versions of the Q and R matrices based on their needs.
+
+More information:\+ \href{https://en.wikipedia.org/wiki/QR_decomposition}{\texttt{https:\+/\+/\+en.\+wikipedia.\+org/\+wiki/\+\+QR\+\_\+decomposition}} 

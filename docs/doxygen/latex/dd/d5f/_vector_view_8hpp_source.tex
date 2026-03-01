@@ -1,0 +1,83 @@
+\doxysection{Vector\+View.\+hpp}
+\hypertarget{_vector_view_8hpp_source}{}\label{_vector_view_8hpp_source}\index{include/MafLib/math/linalg/VectorView.hpp@{include/MafLib/math/linalg/VectorView.hpp}}
+\doxymbox{\hyperlink{_vector_view_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VECTOR\_VIEW\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VECTOR\_VIEW\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_global_header_8hpp}{MafLib/main/GlobalHeader.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{utility_2_math_8hpp}{MafLib/utility/Math.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{using\ namespace\ }maf::util;}
+\DoxyCodeLine{00019\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a185af5ff3b8b0b3116f7475a815f09eb}{VectorView}}\ \{}
+\DoxyCodeLine{00021\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c}{value\_type}}\ =\ std::remove\_const\_t<T>;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a185af5ff3b8b0b3116f7475a815f09eb}{VectorView}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00033\ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a647af898d37b31c1669680b160c2a3f9}{VectorView}}(T\ *\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a111d37b27369beb875a8b8848f76f32d}{data}},\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aba677fd2d14a9d5f93f9042ef91f3626}{size}},\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aa0553516cebaa8c584049e4ab814de8f}{orientation}},\ \textcolor{keywordtype}{size\_t}\ inc\ =\ 1)}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ :\ \_data(\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a111d37b27369beb875a8b8848f76f32d}{data}}),\ \_size(\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aba677fd2d14a9d5f93f9042ef91f3626}{size}}),\ \_orientation(\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aa0553516cebaa8c584049e4ab814de8f}{orientation}}),\ \_inc(inc)\ \{\}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00037\ \ \ [[nodiscard]]\ T\ *\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a111d37b27369beb875a8b8848f76f32d}{data}}()\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data;\ \}}
+\DoxyCodeLine{00039\ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c}{value\_type}}\ *\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_afc98f2e9e238a5875997b496e7828a89}{data}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_data;\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00042\ \ \ [[nodiscard]]\ T\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_ae7211eae2205cfbe6e14b78ca9619f69}{operator[]}}(\textcolor{keywordtype}{size\_t}\ ind)\ \textcolor{keyword}{noexcept}\ \{\ \textcolor{keywordflow}{return}\ \_data[ind\ *\ \_inc];\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c}{value\_type}}\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_affba57c0d5ba0305a029f5a3084e99c6}{operator[]}}(\textcolor{keywordtype}{size\_t}\ ind)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[ind\ *\ \_inc];}
+\DoxyCodeLine{00047\ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00052\ \ \ [[nodiscard]]\ T\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aff60a87e9477400b138e7016afa7ce9b}{at}}(\textcolor{keywordtype}{size\_t}\ ind)\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (ind\ >=\ \_size)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}VectorView\ index\ out\ of\ bounds"{}});}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[ind\ *\ \_inc];}
+\DoxyCodeLine{00057\ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00062\ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a63e2fdf153e4b457908c7d59895abf6c}{value\_type}}\ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_abe890ebc951098e5099e1d65388d8bb7}{at}}(\textcolor{keywordtype}{size\_t}\ ind)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{if}\ (ind\ >=\ \_size)\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}VectorView\ index\ out\ of\ bounds"{}});}
+\DoxyCodeLine{00065\ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[ind\ *\ \_inc];}
+\DoxyCodeLine{00067\ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00070\ \ \ [[nodiscard]]\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aba677fd2d14a9d5f93f9042ef91f3626}{size}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_size;\ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00073\ \ \ [[nodiscard]]\ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aa21ab8fb8d009b0306ba00366f816005}{get\_increment}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_inc;\ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00076\ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_aa0553516cebaa8c584049e4ab814de8f}{orientation}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \_orientation;\ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00082\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view_a09db5472fc99830215ae275730f31279}{print}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_floating\_point\_v<T>)\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ std::cout\ <<\ std::setprecision(FLOAT\_PRECISION);}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \_size;\ i\ +=\ \_inc)\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ std::cout\ <<\ \_data[i]\ <<\ std::endl;}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//\ \ \ \ if\ (\_orientation\ ==\ COLUMN)\ \{}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ for\ (const\ T\ \&val\ :\ \_data)\ \{}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ std::cout\ <<\ val\ <<\ std::endl;}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ for\ (const\ T\ \&val\ :\ \_data)\ \{}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ std::cout\ <<\ val\ <<\ '\ ';}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ std::cout\ <<\ std::endl;}}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \}}}
+\DoxyCodeLine{00099\ \ \ \ \ std::cout\ <<\ std::fixed;}
+\DoxyCodeLine{00100\ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00103\ \ \ T\ *\_data;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Starting\ point}}
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordtype}{size\_t}\ \_size;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Logical\ length}}
+\DoxyCodeLine{00105\ \ \ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}\ \_orientation;\ \ \textcolor{comment}{//\ Orientation\ of\ the\ view\ (ROW\ or\ COLUMN)}}
+\DoxyCodeLine{00106\ \ \ \textcolor{keywordtype}{size\_t}\ \_inc;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Distance\ between\ elements\ (1\ =\ contiguous)}}
+\DoxyCodeLine{00107\ \};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_view_operators_8hpp}{VectorViewOperators.hpp}}"{}}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

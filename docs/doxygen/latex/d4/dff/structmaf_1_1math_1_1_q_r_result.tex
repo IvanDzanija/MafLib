@@ -1,0 +1,54 @@
+\doxysection{maf::\+math::\+QRResult\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structmaf_1_1math_1_1_q_r_result}{}\label{structmaf_1_1math_1_1_q_r_result}\index{maf::math::QRResult$<$ T $>$@{maf::math::QRResult$<$ T $>$}}
+
+
+Struct to hold the results of QR decomposition.  
+
+
+
+
+{\ttfamily \+\#include $<$QR.\+hpp$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \doxymbox{\hyperlink{structmaf_1_1math_1_1_q_r_result_ad48c2f6396586a5318cdde8369754c5a}{Q}}
+\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ T $>$ \doxymbox{\hyperlink{structmaf_1_1math_1_1_q_r_result_ad9e012e488744e4d9ce9403c17c07d9a}{R}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$std::\+floating\+\_\+point T$>$\newline
+struct maf::\+math::\+\+QRResult$<$ T $>$}
+Struct to hold the results of QR decomposition. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The floating point type of the matrix elements (e.\+g., float, double).\\
+\hline
+\end{DoxyTemplParams}
+This struct contains the orthogonal matrix Q and the upper triangular matrix R resulting from the QR decomposition. The types of Q and R are both \doxylink{classmaf_1_1math_1_1_matrix}{Matrix$<$\+T$>$}, where T is a floating point type. The user can choose to return either the full or thin versions of Q and R based on their needs when calling the QR\+\_\+decomposition function. 
+
+\label{doc-variable-members}
+\Hypertarget{structmaf_1_1math_1_1_q_r_result_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structmaf_1_1math_1_1_q_r_result_ad48c2f6396586a5318cdde8369754c5a}\index{maf::math::QRResult$<$ T $>$@{maf::math::QRResult$<$ T $>$}!Q@{Q}}
+\index{Q@{Q}!maf::math::QRResult$<$ T $>$@{maf::math::QRResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Q}{Q}}
+{\footnotesize\ttfamily \label{structmaf_1_1math_1_1_q_r_result_ad48c2f6396586a5318cdde8369754c5a} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$T$>$ \doxymbox{\hyperlink{structmaf_1_1math_1_1_q_r_result}{maf::\+math::\+\+QRResult}}$<$ T $>$::\+Q}
+
+\Hypertarget{structmaf_1_1math_1_1_q_r_result_ad9e012e488744e4d9ce9403c17c07d9a}\index{maf::math::QRResult$<$ T $>$@{maf::math::QRResult$<$ T $>$}!R@{R}}
+\index{R@{R}!maf::math::QRResult$<$ T $>$@{maf::math::QRResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{R}{R}}
+{\footnotesize\ttfamily \label{structmaf_1_1math_1_1_q_r_result_ad9e012e488744e4d9ce9403c17c07d9a} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$T$>$ \doxymbox{\hyperlink{structmaf_1_1math_1_1_q_r_result}{maf::\+math::\+\+QRResult}}$<$ T $>$::\+R}
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+include/\+\+Maf\+Lib/\+math/\+linalg/\+\doxymbox{\hyperlink{_q_r_8hpp}{QR.\+hpp}}\end{DoxyCompactItemize}

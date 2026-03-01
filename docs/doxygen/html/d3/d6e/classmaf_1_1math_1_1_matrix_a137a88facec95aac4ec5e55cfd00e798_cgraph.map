@@ -1,0 +1,5 @@
+<map id="maf::math::Matrix::Matrix" name="maf::math::Matrix::Matrix">
+<area shape="rect" id="Node000001" title="Constructs a matrix from a raw data pointer." alt="" coords="5,5,138,46"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aa9212394167230bb799584278e8b9af2" title="Gets a mutable pointer to the underlying data." alt="" coords="186,13,343,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,23,173,25,168,26,138,28"/>
+</map>

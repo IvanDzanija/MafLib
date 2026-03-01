@@ -1,0 +1,5 @@
+<map id="maf::math::mean" name="maf::math::mean">
+<area shape="rect" id="Node000001" title="Calculates the unbiased estimator of expected value aka mean." alt="" coords="205,5,325,31"/>
+<area shape="rect" id="Node000002" href="$d4/d02/namespacemaf_1_1math.html#a66ab6cca490d0bd2354b736a13658711" title="Calculates the unbiased estimator of sample covariance." alt="" coords="5,5,157,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,18,157,21,157,16,192,18"/>
+</map>

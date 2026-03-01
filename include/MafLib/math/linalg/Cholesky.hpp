@@ -3,6 +3,24 @@
 #pragma once
 #include "Matrix.hpp"
 
+/**
+ * @file Cholesky.hpp
+ * @brief High-performance Cholesky decomposition for symmetric positive definite
+ * matrices.
+ *
+ * This header defines the `cholesky` function, which computes the Cholesky
+ * decomposition of a given square, symmetric, positive definite matrix. The
+ * implementation uses a blocked algorithm for improved cache performance and is
+ * parallelized with OpenMP for multi-threading and SIMD vectorization.
+ *
+ * The function checks for symmetry and detects non-positive-definiteness during
+ * the computation. It supports both single and double precision floating point
+ * types, and allows for an optional template parameter to specify the result
+ * type.
+ *
+ * More information:
+ * https://en.wikipedia.org/wiki/Cholesky_decomposition
+ */
 namespace maf::math {
 namespace detail {
 /**

@@ -1,0 +1,22 @@
+\doxysection{maf::\+math::\+Vector\+View\+Compatible Concept Reference}
+\hypertarget{conceptmaf_1_1math_1_1_vector_view_compatible}{}\label{conceptmaf_1_1math_1_1_vector_view_compatible}\index{maf::math::VectorViewCompatible@{maf::math::VectorViewCompatible}}
+
+
+Clean concept compatible with Vector\+View. Matrix\+View\+Compatible is either a Vector\+View or a Vector that can be made into a view.  
+
+
+
+
+{\ttfamily \+\#include $<$Lin\+Alg.\+hpp$>$}
+
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptmaf_1_1math_1_1_vector_view_compatible}{VectorViewCompatible}}\ =\ \doxymbox{\hyperlink{conceptmaf_1_1math_1_1_vector_view_type}{VectorViewType<T>}}\ ||\ \doxymbox{\hyperlink{conceptmaf_1_1math_1_1_vector_type}{VectorType<T>}}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Detailed Description}
+Clean concept compatible with Vector\+View. Matrix\+View\+Compatible is either a Vector\+View or a Vector that can be made into a view. 

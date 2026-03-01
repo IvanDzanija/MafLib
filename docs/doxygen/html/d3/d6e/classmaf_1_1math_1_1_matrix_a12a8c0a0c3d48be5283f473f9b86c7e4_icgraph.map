@@ -1,0 +1,13 @@
+<map id="maf::math::Matrix::make_identity" name="maf::math::Matrix::make_identity">
+<area shape="rect" id="Node000001" title="Converts this matrix into an identity matrix." alt="" coords="762,31,894,71"/>
+<area shape="rect" id="Node000002" href="$d4/d02/namespacemaf_1_1math.html#a4d61c9a4c0434a2e01652894564f7ebb" title="Creates a new identity matrix of a given size." alt="" coords="583,31,714,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="743,51,714,54,714,48,749,51"/>
+<area shape="rect" id="Node000003" href="$d6/de6/namespacemaf_1_1math_1_1detail.html#a60463d7cb4da4798efddf0b3042c06c2" title="Internal implementation of PLU decomposition." alt="" coords="362,13,513,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="565,41,513,37,513,32,571,41"/>
+<area shape="rect" id="Node000006" href="$d4/d02/namespacemaf_1_1math.html#ae14afbf9f10452228d7577bd94190353" title="Computes the QR decomposition of a matrix A using Householder reflections." alt="" coords="339,62,535,88"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="571,60,536,66,536,61,565,60"/>
+<area shape="rect" id="Node000004" href="$d4/d02/namespacemaf_1_1math.html#a5605a040f9b62ca6a92b7e7f91c6ee0f" title="Performs a blocked PLU decomposition on a square matrix." alt="" coords="186,13,291,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="344,26,292,28,291,23,349,25"/>
+<area shape="rect" id="Node000005" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#ae26826bcc4a303b29538a17c0a39de2b" title="Checks if the matrix is singular (non&#45;invertible)." alt="" coords="5,5,138,46"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="167,26,139,28,138,23,173,25"/>
+</map>

@@ -1,0 +1,550 @@
+\doxysection{Vector\+Operators.\+hpp}
+\hypertarget{_vector_operators_8hpp_source}{}\label{_vector_operators_8hpp_source}\index{include/MafLib/math/linalg/VectorOperators.hpp@{include/MafLib/math/linalg/VectorOperators.hpp}}
+\doxymbox{\hyperlink{_vector_operators_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VECTOR\_OPERATORS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VECTOR\_OPERATORS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_conversions_8hpp}{MafLib/utility/Conversions.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_vector_8hpp}{Vector.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Equality\ operator}}
+\DoxyCodeLine{00010\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00011\ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ab956641750e967174430876f802852ba}{Vector<T>::operator==}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}\ \&other)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00012\ \ \ \textcolor{keywordflow}{if}\ (\_orientation\ !=\ other.\_orientation\ ||\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}()\ !=\ other.size())\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00014\ \ \ \}}
+\DoxyCodeLine{00015\ \ \ \textcolor{comment}{//\ maybe\ loop\ over\ data\ and\ actually\ compare\ so\ different\ types\ give\ actually\ the}}
+\DoxyCodeLine{00016\ \ \ \textcolor{comment}{//\ same\ result}}
+\DoxyCodeLine{00017\ \ \ \textcolor{keywordflow}{return}\ \_data\ ==\ other.\_data;}
+\DoxyCodeLine{00018\ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ Unary\ minus\ sign,\ creates\ a\ copy}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00022\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_af97d380418748bb3c50557ea86cb689f}{Vector<T>::operator-\/}}()\ const\ noexcept\ \{}
+\DoxyCodeLine{00023\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<T>}}\ result(*\textcolor{keyword}{this});}
+\DoxyCodeLine{00024\ \ \ result.\_invert\_sign();}
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00026\ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ Vector\ +\ Vector}}
+\DoxyCodeLine{00029\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00030\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00031\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a0829be3ec6913e833fbfd9764cde5324}{Vector<T>::operator+}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<U>}}\ \&other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordflow}{if}\ (\_orientation\ !=\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}()\ ||\ \_data.size()\ !=\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}())\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vectors\ must\ be\ same\ orientation\ and\ size!"{}});}
+\DoxyCodeLine{00036\ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}();}
+\DoxyCodeLine{00039\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<R>}}\ result(n,\ \_orientation);}
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ +\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(other[i]);}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ +\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(other[i]);}
+\DoxyCodeLine{00049\ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \}}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00052\ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ Vector\ +\ Scalar}}
+\DoxyCodeLine{00055\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00056\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00057\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a0829be3ec6913e833fbfd9764cde5324}{Vector<T>::operator+}}(\textcolor{keyword}{const}\ U\ \&scalar)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ R\ r\_scalar\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(scalar);}
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.size();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<R>}}\ result(n,\ \_orientation);}
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ +\ r\_scalar;}
+\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00069\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ +\ r\_scalar;}
+\DoxyCodeLine{00073\ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \}}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00076\ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{template}\ <Numeric\ T,\ Numeric\ U>}
+\DoxyCodeLine{00086\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{namespacemaf_1_1math_a7589e838f9f43f42cb637c59bd040536}{operator+}}(\textcolor{keyword}{const}\ U\ \&scalar,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<T>}}\ \&vec)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordflow}{return}\ vec\ +\ scalar;}
+\DoxyCodeLine{00088\ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ Vector\ +\ Vector}}
+\DoxyCodeLine{00091\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00092\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00093\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ac407d9fd6c17717e6fb6871dd4419e49}{Vector<T>::operator+=}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<U>}}\ \&other)\ \{}
+\DoxyCodeLine{00094\ \ \ \textcolor{keywordflow}{if}\ (\_orientation\ !=\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}()\ ||\ \_data.size()\ !=\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}())\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vectors\ must\ be\ same\ orientation\ and\ size!"{}});}
+\DoxyCodeLine{00096\ \ \ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}();}
+\DoxyCodeLine{00099\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \_data[i]\ +=\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(other[i]);}
+\DoxyCodeLine{00103\ \ \ \ \ \}}
+\DoxyCodeLine{00104\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \_data[i]\ +=\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(other[i]);}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00109\ \ \ \}}
+\DoxyCodeLine{00110\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00111\ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{comment}{//\ Vector\ +\ Scalar}}
+\DoxyCodeLine{00114\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00115\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00116\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ac407d9fd6c17717e6fb6871dd4419e49}{Vector<T>::operator+=}}(\textcolor{keyword}{const}\ U\ \&scalar)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00117\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ R\ r\_scalar\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(scalar);}
+\DoxyCodeLine{00120\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.size();}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \_data[i]\ +=\ r\_scalar;}
+\DoxyCodeLine{00126\ \ \ \ \ \}}
+\DoxyCodeLine{00127\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \_data[i]\ +=\ r\_scalar;}
+\DoxyCodeLine{00131\ \ \ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00134\ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{comment}{//\ Vector\ -\/\ Vector}}
+\DoxyCodeLine{00137\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00138\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00139\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_af97d380418748bb3c50557ea86cb689f}{Vector<T>::operator-\/}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<U>}}\ \&other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00140\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \textcolor{keywordflow}{if}\ (\_orientation\ !=\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}()\ ||\ \_data.size()\ !=\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}())\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vectors\ must\ be\ same\ orientation\ and\ size!"{}});}
+\DoxyCodeLine{00144\ \ \ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.size();}
+\DoxyCodeLine{00147\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<R>}}\ result(n,\ \_orientation);}
+\DoxyCodeLine{00148\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ -\/\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(other[i]);}
+\DoxyCodeLine{00152\ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ -\/\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(other[i]);}
+\DoxyCodeLine{00157\ \ \ \ \ \}}
+\DoxyCodeLine{00158\ \ \ \}}
+\DoxyCodeLine{00159\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00160\ \}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \textcolor{comment}{//\ Vector\ -\/\ Scalar}}
+\DoxyCodeLine{00163\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00164\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00165\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_af97d380418748bb3c50557ea86cb689f}{Vector<T>::operator-\/}}(\textcolor{keyword}{const}\ U\ \&scalar)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00166\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ R\ r\_scalar\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(scalar);}
+\DoxyCodeLine{00169\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.size();}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<R>}}\ result(n,\ \_orientation);}
+\DoxyCodeLine{00172\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ -\/\ r\_scalar;}
+\DoxyCodeLine{00176\ \ \ \ \ \}}
+\DoxyCodeLine{00177\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00178\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ -\/\ r\_scalar;}
+\DoxyCodeLine{00181\ \ \ \ \ \}}
+\DoxyCodeLine{00182\ \ \ \}}
+\DoxyCodeLine{00183\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00184\ \}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00193\ \textcolor{keyword}{template}\ <Numeric\ T,\ Numeric\ U>}
+\DoxyCodeLine{00194\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{namespacemaf_1_1math_aa539cd7e636fe2beafd205a3b51b0311}{operator-\/}}(\textcolor{keyword}{const}\ U\ \&scalar,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<T>}}\ \&vec)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00195\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ R\ r\_scalar\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(scalar);}
+\DoxyCodeLine{00198\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ vec.size();}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<R>}}\ result(n,\ vec.orientation());}
+\DoxyCodeLine{00201\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00202\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ result[i]\ =\ r\_scalar\ -\/\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(vec[i]);}
+\DoxyCodeLine{00205\ \ \ \ \ \}}
+\DoxyCodeLine{00206\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00207\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ result[i]\ =\ r\_scalar\ -\/\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(vec[i]);}
+\DoxyCodeLine{00210\ \ \ \ \ \}}
+\DoxyCodeLine{00211\ \ \ \}}
+\DoxyCodeLine{00212\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00213\ \}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \textcolor{comment}{//\ Vector\ -\/\ Vector}}
+\DoxyCodeLine{00216\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00217\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00218\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a9788849517cae340aa15007d1aa5c285}{Vector<T>::operator-\/=}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<U>}}\ \&other)\ \{}
+\DoxyCodeLine{00219\ \ \ \textcolor{keywordflow}{if}\ (\_orientation\ !=\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}()\ ||\ \_data.size()\ !=\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}}().size())\ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vectors\ must\ be\ same\ orientation\ and\ size!"{}});}
+\DoxyCodeLine{00221\ \ \ \}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}();}
+\DoxyCodeLine{00224\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00225\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \_data[i]\ -\/=\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(other[i]);}
+\DoxyCodeLine{00228\ \ \ \ \ \}}
+\DoxyCodeLine{00229\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00230\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \_data[i]\ -\/=\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(other[i]);}
+\DoxyCodeLine{00233\ \ \ \ \ \}}
+\DoxyCodeLine{00234\ \ \ \}}
+\DoxyCodeLine{00235\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00236\ \}}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \textcolor{comment}{//\ Vector\ -\/\ Scalar}}
+\DoxyCodeLine{00239\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00240\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00241\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a9788849517cae340aa15007d1aa5c285}{Vector<T>::operator-\/=}}(\textcolor{keyword}{const}\ U\ \&scalar)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00242\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \ \ R\ r\_scalar\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(scalar);}
+\DoxyCodeLine{00245\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.size();}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00248\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \_data[i]\ -\/=\ r\_scalar;}
+\DoxyCodeLine{00251\ \ \ \ \ \}}
+\DoxyCodeLine{00252\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00253\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \_data[i]\ -\/=\ r\_scalar;}
+\DoxyCodeLine{00256\ \ \ \ \ \}}
+\DoxyCodeLine{00257\ \ \ \}}
+\DoxyCodeLine{00258\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00259\ \}}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \textcolor{comment}{//\ Vector\ *\ Scalar}}
+\DoxyCodeLine{00262\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00263\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00264\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a6e1fbf66b0563b2308642feaa583be6f}{Vector<T>::operator*}}(\textcolor{keyword}{const}\ U\ \&scalar)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00265\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ R\ r\_scalar\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(scalar);}
+\DoxyCodeLine{00268\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.size();}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<R>}}\ result(n,\ \_orientation);}
+\DoxyCodeLine{00271\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00272\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ *\ r\_scalar;}
+\DoxyCodeLine{00275\ \ \ \ \ \}}
+\DoxyCodeLine{00276\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00277\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ *\ r\_scalar;}
+\DoxyCodeLine{00280\ \ \ \ \ \}}
+\DoxyCodeLine{00281\ \ \ \}}
+\DoxyCodeLine{00282\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00283\ \}}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00292\ \textcolor{keyword}{template}\ <Numeric\ T,\ Numeric\ U>}
+\DoxyCodeLine{00293\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{namespacemaf_1_1math_aa10366118175f185d9656b48350bbb87}{operator*}}(\textcolor{keyword}{const}\ U\ \&scalar,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<T>}}\ \&vec)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00294\ \ \ \textcolor{keywordflow}{return}\ vec\ *\ scalar;}
+\DoxyCodeLine{00295\ \}}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \textcolor{comment}{//\ Vector\ *\ Scalar}}
+\DoxyCodeLine{00298\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00299\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00300\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a015c3ef7c6ef11b29a8aef357b9c1d80}{Vector<T>::operator*=}}(\textcolor{keyword}{const}\ U\ \&scalar)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00301\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \ \ R\ r\_scalar\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(scalar);}
+\DoxyCodeLine{00304\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.size();}
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00306\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00307\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \_data[i]\ *=\ r\_scalar;}
+\DoxyCodeLine{00310\ \ \ \ \ \}}
+\DoxyCodeLine{00311\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00312\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00313\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \_data[i]\ *=\ r\_scalar;}
+\DoxyCodeLine{00315\ \ \ \ \ \}}
+\DoxyCodeLine{00316\ \ \ \}}
+\DoxyCodeLine{00317\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00318\ \}}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \textcolor{comment}{//\ Vector\ *\ Vector\ -\/>\ Scalar}}
+\DoxyCodeLine{00321\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00322\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00323\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a7c27148cb7d68df78343721cc56d67e0}{Vector<T>::dot\_product}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<U>}}\ \&other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00324\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.size();}
+\DoxyCodeLine{00325\ \ \ \textcolor{keywordflow}{if}\ (n\ !=\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}())\ \{}
+\DoxyCodeLine{00326\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vectors\ must\ be\ of\ same\ size!"{}});}
+\DoxyCodeLine{00327\ \ \ \}}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ \textcolor{preprocessor}{\#if\ defined(\_\_APPLE\_\_)\ \&\&\ defined(ACCELERATE\_AVAILABLE)}}
+\DoxyCodeLine{00330\ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ U>)\ \{}
+\DoxyCodeLine{00331\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ double>)\ \{}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a0f65ed83214add340b9128c3bc0882d9}{acc::ddot}}(\_data,\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}}());}
+\DoxyCodeLine{00333\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ float>)\ \{}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_ac0f84d113312134278b0aeebe3ca3581}{acc::sdot}}(\_data,\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}}());}
+\DoxyCodeLine{00335\ \ \ \ \ \}}
+\DoxyCodeLine{00336\ \ \ \}}
+\DoxyCodeLine{00337\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ \ \ R\ result(0);}
+\DoxyCodeLine{00342\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00343\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for\ reduction(+\ :\ result)}}
+\DoxyCodeLine{00344\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ result\ +=\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ *\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(other[i]);}
+\DoxyCodeLine{00346\ \ \ \ \ \}}
+\DoxyCodeLine{00347\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00348\ \textcolor{preprocessor}{\#pragma\ omp\ simd\ reduction(+\ :\ result)}}
+\DoxyCodeLine{00349\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ result\ +=\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ *\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(other[i]);}
+\DoxyCodeLine{00351\ \ \ \ \ \}}
+\DoxyCodeLine{00352\ \ \ \}}
+\DoxyCodeLine{00353\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00354\ \}}
+\DoxyCodeLine{00355\ }
+\DoxyCodeLine{00356\ \textcolor{comment}{//\ Vector\ *\ Vector\ -\/>\ Scalar}}
+\DoxyCodeLine{00357\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00358\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00359\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a6e1fbf66b0563b2308642feaa583be6f}{Vector<T>::operator*}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<U>}}\ \&other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00360\ \ \ \textcolor{keywordflow}{if}\ (\_orientation\ ==\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}()\ ||\ \_orientation\ ==\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}})\ \{}
+\DoxyCodeLine{00361\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Invalid\ multiplication:\ Vectors\ must\ be\ of\ different\ orientations\ (row\ x\ "{}}}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}column)\ for\ dot\ product.\ If\ you\ are\ certain\ that\ you\ want\ the\ dot\ "{}}}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}product,\ use\ the\ dot\_product()\ method\ which\ does\ not\ require\ specific\ "{}}}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}orientations."{}});}
+\DoxyCodeLine{00366\ \ \ \}}
+\DoxyCodeLine{00367\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a7c27148cb7d68df78343721cc56d67e0}{dot\_product}}(other);}
+\DoxyCodeLine{00368\ \}}
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00370\ \textcolor{comment}{//\ Vector\ *\ Vector\ -\/>\ Matrix}}
+\DoxyCodeLine{00371\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00372\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00373\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a5664c855ed6b5b75f47bce2bfd322ae0}{Vector<T>::outer\_product}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<U>}}\ \&other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00374\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.size();}
+\DoxyCodeLine{00377\ \ \ \textcolor{keywordtype}{size\_t}\ m\ =\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}();}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00379\ \ \ \textcolor{keywordflow}{if}\ (\_orientation\ ==\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}())\ \{}
+\DoxyCodeLine{00380\ \ \ \ \ \textcolor{comment}{//\ 1x1\ x\ 1x1\ vector\ multiplication}}
+\DoxyCodeLine{00381\ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ ==\ 1\ \&\&\ m\ ==\ 1)\ \{}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<R>}}(1,\ 1,\ \{\_data[0]\ *\ other[0]\});}
+\DoxyCodeLine{00383\ \ \ \ \ \}}
+\DoxyCodeLine{00384\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vector\ dimensions\ do\ not\ match!"{}});}
+\DoxyCodeLine{00385\ \ \ \}}
+\DoxyCodeLine{00386\ \ \ \textcolor{keywordflow}{switch}\ (\_orientation)\ \{}
+\DoxyCodeLine{00387\ \ \ \ \ \textcolor{keywordflow}{case}\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}}:\ \{}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<R>}}\ result(n,\ m);}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ *\ m\ >\ OMP\_QUADRATIC\_LIMIT)\ \{}
+\DoxyCodeLine{00390\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ m;\ ++j)\ \{}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ result.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}()[(i\ *\ m)\ +\ j]\ =}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ *\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(other[j]);}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00399\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ m;\ ++j)\ \{}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ result.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa9212394167230bb799584278e8b9af2}{data}}()[(i\ *\ m)\ +\ j]\ =}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ *\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(other[j]);}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00408\ \ \ \ \ \}}
+\DoxyCodeLine{00409\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ !=\ m)\ \{}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Vector\ dimensions\ do\ not\ match!"{}});}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00414\ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}This\ results\ in\ a\ 1x1\ matrix.\ Consider\ using\ vector\ dot\ "{}}}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}product."{}}}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{00417\ }
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<R>}}(1,\ 1,\ \{\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a7c27148cb7d68df78343721cc56d67e0}{dot\_product}}(other)\});}
+\DoxyCodeLine{00419\ \ \ \}}
+\DoxyCodeLine{00420\ \}}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00422\ \textcolor{comment}{//\ Vector\ *\ Matrix\ -\/>\ Vector}}
+\DoxyCodeLine{00423\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00424\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00425\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a6e1fbf66b0563b2308642feaa583be6f}{Vector<T>::operator*}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix<U>}}\ \&other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00426\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00428\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}();}
+\DoxyCodeLine{00429\ \ \ \textcolor{keywordtype}{size\_t}\ m\ =\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_aa1fa0768048faff36f5dfc56911a8ce4}{row\_count}}();}
+\DoxyCodeLine{00430\ \ \ \textcolor{keywordtype}{size\_t}\ r\ =\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a98d6cc10d243169d78f53d07406ace8b}{column\_count}}();}
+\DoxyCodeLine{00431\ }
+\DoxyCodeLine{00432\ \ \ \textcolor{keywordflow}{if}\ (n\ !=\ m)\ \{}
+\DoxyCodeLine{00433\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Dimensions\ do\ not\ match!"{}});}
+\DoxyCodeLine{00434\ \ \ \}}
+\DoxyCodeLine{00435\ \ \ \textcolor{keywordflow}{if}\ (\_orientation\ ==\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}})\ \{}
+\DoxyCodeLine{00436\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Invalid\ multiplication:\ column\ Vector\ *\ Matrix.\ "{}}}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Did\ you\ mean\ Matrix\ *\ Vector?"{}});}
+\DoxyCodeLine{00439\ \ \ \}}
+\DoxyCodeLine{00440\ }
+\DoxyCodeLine{00441\ \textcolor{preprocessor}{\#if\ defined(\_\_APPLE\_\_)\ \&\&\ defined(ACCELERATE\_AVAILABLE)}}
+\DoxyCodeLine{00442\ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<R,\ float>)\ \{}
+\DoxyCodeLine{00443\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<R>}}(r,}
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a94986b82d164e30556925b591bd1b6ad}{acc::sgevmm}}(m,\ r,\ util::convert\_if\_needed<R>(other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a332d0beee2d1a7e9df0a344ecbfb73de}{data\_vector}}()),}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ util::convert\_if\_needed<R>(\_data)),}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297a9940ad68617dac484ce18ec7b07beabc}{ROW}});}
+\DoxyCodeLine{00447\ }
+\DoxyCodeLine{00448\ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<R,\ double>)\ \{}
+\DoxyCodeLine{00449\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<R>}}(r,}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a4740d3eef4cdf9cf56ace30cd655be4d}{acc::dgevmm}}(m,\ r,\ util::convert\_if\_needed<R>(other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a332d0beee2d1a7e9df0a344ecbfb73de}{data\_vector}}()),}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ util::convert\_if\_needed<R>(\_data)),}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297a9940ad68617dac484ce18ec7b07beabc}{ROW}});}
+\DoxyCodeLine{00453\ \ \ \}}
+\DoxyCodeLine{00454\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00455\ }
+\DoxyCodeLine{00456\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<R>}}\ result(r,\ std::vector<R>(r),\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297a9940ad68617dac484ce18ec7b07beabc}{ROW}});}
+\DoxyCodeLine{00457\ \ \ \textcolor{keywordflow}{if}\ (n\ *\ m\ >=\ OMP\_QUADRATIC\_LIMIT)\ \{}
+\DoxyCodeLine{00458\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00459\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ r;\ ++i)\ \{}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ n;\ ++j)\ \{}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ result[i]\ +=\ \_data[j]\ *\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(j,\ i);}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00463\ \ \ \ \ \}}
+\DoxyCodeLine{00464\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00465\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ r;\ ++i)\ \{}
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ n;\ ++j)\ \{}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ result[i]\ +=\ \_data[j]\ *\ other.\doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_a3506acc05e298718fb6d5587d6594055}{at}}(j,\ i);}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00469\ \ \ \ \ \}}
+\DoxyCodeLine{00470\ \ \ \}}
+\DoxyCodeLine{00471\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00472\ \}}
+\DoxyCodeLine{00473\ }
+\DoxyCodeLine{00474\ \textcolor{comment}{//\ Vector\ /\ scalar}}
+\DoxyCodeLine{00475\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00476\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00477\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f4f0fcd27ee2344fd66efd1be569df2}{Vector<T>::operator/}}(\textcolor{keyword}{const}\ U\ \&scalar)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00478\ \ \ \textcolor{keyword}{using\ }R\ =}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ std::conditional\_t<std::is\_integral\_v<T>\ \&\&\ std::is\_integral\_v<U>,\ double,}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::common\_type\_t<T,\ U>>;\ \ \textcolor{comment}{//\ Forces\ double\ if\ both\ are\ ints}}
+\DoxyCodeLine{00481\ }
+\DoxyCodeLine{00482\ \ \ R\ r\_scalar\_inv\ =\ R(1)\ /\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(scalar);}
+\DoxyCodeLine{00483\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.size();}
+\DoxyCodeLine{00484\ }
+\DoxyCodeLine{00485\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector<R>}}\ result(n,\ \_orientation);}
+\DoxyCodeLine{00486\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00487\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00488\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ *\ r\_scalar\_inv;}
+\DoxyCodeLine{00490\ \ \ \ \ \}}
+\DoxyCodeLine{00491\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00492\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00493\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ result[i]\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(\_data[i])\ *\ r\_scalar\_inv;}
+\DoxyCodeLine{00495\ \ \ \ \ \}}
+\DoxyCodeLine{00496\ \ \ \}}
+\DoxyCodeLine{00497\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00498\ \}}
+\DoxyCodeLine{00499\ }
+\DoxyCodeLine{00507\ \textcolor{keyword}{template}\ <Numeric\ T,\ Numeric\ U>}
+\DoxyCodeLine{00508\ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{namespacemaf_1_1math_ac4720649ed3571d96a4dca03d8a998e6}{operator/}}(\textcolor{keyword}{const}\ U\ \&scalar,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<T>}}\ \&vec)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00509\ \ \ \textcolor{keyword}{using\ }R\ =}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ std::conditional\_t<std::is\_integral\_v<T>\ \&\&\ std::is\_integral\_v<U>,\ double,}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::common\_type\_t<T,\ U>>;\ \ \textcolor{comment}{//\ Forces\ double\ if\ both\ are\ ints}}
+\DoxyCodeLine{00512\ }
+\DoxyCodeLine{00513\ \ \ R\ r\_scalar\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(scalar);}
+\DoxyCodeLine{00514\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ vec.size();}
+\DoxyCodeLine{00515\ }
+\DoxyCodeLine{00516\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{Vector<R>}}\ result(n,\ vec.orientation());}
+\DoxyCodeLine{00517\ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00518\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00519\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ result[i]\ =\ r\_scalar\ /\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(vec[i]);}
+\DoxyCodeLine{00521\ \ \ \ \ \}}
+\DoxyCodeLine{00522\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00523\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00524\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ result[i]\ =\ r\_scalar\ /\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(vec[i]);}
+\DoxyCodeLine{00526\ \ \ \ \ \}}
+\DoxyCodeLine{00527\ \ \ \}}
+\DoxyCodeLine{00528\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00529\ \}}
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00531\ \textcolor{comment}{//\ Vector\ /=\ scalar}}
+\DoxyCodeLine{00532\ \textcolor{keyword}{template}\ <Numeric\ T>}
+\DoxyCodeLine{00533\ \textcolor{keyword}{template}\ <Numeric\ U>}
+\DoxyCodeLine{00534\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aef3a5e003a46c133ed55753464b78cff}{Vector<T>::operator/=}}(\textcolor{keyword}{const}\ U\ \&scalar)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00535\ \ \ \textcolor{keyword}{using\ }R\ =\ std::common\_type\_t<T,\ U>;}
+\DoxyCodeLine{00536\ }
+\DoxyCodeLine{00537\ \ \ \textcolor{keywordtype}{size\_t}\ n\ =\ \_data.size();}
+\DoxyCodeLine{00538\ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_floating\_point\_v<R>)\ \{}
+\DoxyCodeLine{00539\ \ \ \ \ R\ r\_scalar\_inv\ =\ R(1)\ /\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(scalar);}
+\DoxyCodeLine{00540\ }
+\DoxyCodeLine{00541\ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00542\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \_data[i]\ *=\ r\_scalar\_inv;}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00546\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00547\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \_data[i]\ *=\ r\_scalar\_inv;}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00551\ \ \ \ \ \}}
+\DoxyCodeLine{00552\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00553\ \ \ \ \ R\ r\_scalar\ =\ \textcolor{keyword}{static\_cast<}R\textcolor{keyword}{>}(scalar);}
+\DoxyCodeLine{00554\ }
+\DoxyCodeLine{00555\ \ \ \ \ \textcolor{keywordflow}{if}\ (n\ >\ OMP\_LINEAR\_LIMIT)\ \{}
+\DoxyCodeLine{00556\ \textcolor{preprocessor}{\#pragma\ omp\ parallel\ for}}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \_data[i]\ /=\ r\_scalar;}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00560\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00561\ \textcolor{preprocessor}{\#pragma\ omp\ simd}}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \_data[i]\ /=\ r\_scalar;}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00565\ \ \ \ \ \}}
+\DoxyCodeLine{00566\ \ \ \}}
+\DoxyCodeLine{00567\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00568\ \}}
+\DoxyCodeLine{00569\ }
+\DoxyCodeLine{00570\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00571\ }
+\DoxyCodeLine{00572\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$d9/d8d/classmaf_1_1math_1_1_optimizer.html" title="Class for optimization algorithms." alt="" coords="5,80,182,106"/>
+<area shape="rect" id="Node000001" href="$d9/d32/classmaf_1_1math_1_1_bisection.html" title="Class for finding roots of a function using the Bisection method." alt="" coords="251,5,426,31"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="139,71,229,40,273,30,268,33,230,45,142,76"/>
+<area shape="rect" id="Node000002" href="$df/dce/classmaf_1_1math_1_1_fixed_point.html" title="Class for finding fixed points of a function using the Fixed Point Iteration method." alt="" coords="247,55,430,80"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="197,80,249,76,244,78,198,85"/>
+<area shape="rect" id="Node000003" href="$d8/dbf/classmaf_1_1math_1_1_golden_section.html" title="Class for finding the minimum of a unimodal function using the Golden Section Search method." alt="" coords="236,104,441,130"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="197,100,238,106,233,107,198,106"/>
+<area shape="rect" id="Node000004" href="$d5/d67/classmaf_1_1math_1_1_newton_raphson.html" title="Class for finding roots of a function using the Newton&#45;Raphson method." alt="" coords="230,153,447,179"/>
+<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="142,109,230,140,273,153,268,153,229,145,142,114"/>
+</map>

@@ -1,0 +1,26 @@
+\doxysection{maf::\+math::\+Matrix\+View\+Type Concept Reference}
+\hypertarget{conceptmaf_1_1math_1_1_matrix_view_type}{}\label{conceptmaf_1_1math_1_1_matrix_view_type}\index{maf::math::MatrixViewType@{maf::math::MatrixViewType}}
+
+
+Clean Matrix\+View\+Type concept. Removes qualifiers and checks the value type of the Matrix\+View is Numeric concept.  
+
+
+
+
+{\ttfamily \+\#include $<$Lin\+Alg.\+hpp$>$}
+
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptmaf_1_1math_1_1_matrix_view_type}{MatrixViewType}}\ =}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{requires}\ \{\ \textcolor{keyword}{typename}\ std::remove\_cvref\_t<T>::value\_type;\ \}\ \&\&}
+\DoxyCodeLine{\ \ \ \ Numeric<typename\ std::remove\_cvref\_t<T>::value\_type>\ \&\&}
+\DoxyCodeLine{\ \ \ \ std::same\_as<std::remove\_cvref\_t<T>,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{MatrixView<typename\ std::remove\_cvref\_t<T>::value\_type}}>>}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Detailed Description}
+Clean Matrix\+View\+Type concept. Removes qualifiers and checks the value type of the Matrix\+View is Numeric concept. 

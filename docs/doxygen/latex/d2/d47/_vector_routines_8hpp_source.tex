@@ -1,0 +1,113 @@
+\doxysection{Vector\+Routines.\+hpp}
+\hypertarget{_vector_routines_8hpp_source}{}\label{_vector_routines_8hpp_source}\index{include/MafLib/math/linalg/AccelerateWrappers/VectorRoutines.hpp@{include/MafLib/math/linalg/AccelerateWrappers/VectorRoutines.hpp}}
+\doxymbox{\hyperlink{_vector_routines_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ACCELERATE\_VECTOR\_ROUTINES\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ACCELERATE\_VECTOR\_ROUTINES\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_accelerate_wrapper_8hpp}{AccelerateWrapper.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc}{maf::math::acc}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ BLAS\ LEVEL\ 1\ ROUTINES}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ R\ =\ Alpha\ *\ X\ +\ Y\ (double)}}
+\DoxyCodeLine{00013\ [[nodiscard]]\ \textcolor{keyword}{inline}\ std::vector<double>\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a57728e125327664b7118b6b646ff04d4}{daxpy}}(\textcolor{keyword}{const}\ std::vector<double>\ \&x,}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ \&y,}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ alpha\ =\ 1)\ \{}
+\DoxyCodeLine{00016\ \ \ std::vector<double>\ result(y);}
+\DoxyCodeLine{00017\ \ \ cblas\_daxpy(x.size(),\ alpha,\ x.data(),\ 1,\ result.data(),\ 1);}
+\DoxyCodeLine{00018\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00019\ \}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ Y\ =\ Alpha\ *\ X\ +\ Y\ (double)}}
+\DoxyCodeLine{00022\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_aef7de9e7deea56e65c8d6b76156bf12f}{inplace\_daxpy}}(\textcolor{keyword}{const}\ std::vector<double>\ \&x,\ std::vector<double>\ \&y,}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ alpha\ =\ 1)\ \{}
+\DoxyCodeLine{00024\ \ \ cblas\_daxpy(x.size(),\ alpha,\ x.data(),\ 1,\ y.data(),\ 1);}
+\DoxyCodeLine{00025\ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ R\ =\ Alpha\ *\ X\ +\ Y\ (float)}}
+\DoxyCodeLine{00028\ [[nodiscard]]\ \textcolor{keyword}{inline}\ std::vector<float>\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_ac4678109fd13b01a586a13cb95f8184b}{saxpy}}(\textcolor{keyword}{const}\ std::vector<float>\ \&x,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<float>\ \&y,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ alpha\ =\ 1)\ \{}
+\DoxyCodeLine{00031\ \ \ std::vector<float>\ result(y);}
+\DoxyCodeLine{00032\ \ \ cblas\_saxpy(x.size(),\ alpha,\ x.data(),\ 1,\ result.data(),\ 1);}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00034\ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ Y\ =\ Alpha\ *\ X\ +\ Y\ (float)}}
+\DoxyCodeLine{00037\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_afb2cad35eb6908493f2658b697f9001c}{inplace\_saxpy}}(\textcolor{keyword}{const}\ std::vector<float>\ \&x,\ std::vector<float>\ \&y,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ alpha\ =\ 1)\ \{}
+\DoxyCodeLine{00039\ \ \ cblas\_saxpy(x.size(),\ alpha,\ x.data(),\ 1,\ y.data(),\ 1);}
+\DoxyCodeLine{00040\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ R\ =\ X\ +\ Y\ (int32)}}
+\DoxyCodeLine{00043\ [[nodiscard]]\ \textcolor{keyword}{inline}\ std::vector<int>\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a4c433329ca2ac2169939b0766381e4b3}{vaddi}}(\textcolor{keyword}{const}\ std::vector<int>\ \&x,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<int>\ \&y)\ \{}
+\DoxyCodeLine{00045\ \ \ std::vector<int>\ result(y);}
+\DoxyCodeLine{00046\ \ \ vDSP\_vaddi(x.data(),\ 1,\ y.data(),\ 1,\ result.data(),\ 1,\ x.size());}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00048\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{comment}{//\ Y\ =\ X\ +\ Y\ (int32)}}
+\DoxyCodeLine{00051\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_abefc966df6ad8b9d2f2f54fccf682a58}{inplace\_vaddi}}(\textcolor{keyword}{const}\ std::vector<int>\ \&x,\ std::vector<int>\ \&y)\ \{}
+\DoxyCodeLine{00052\ \ \ vDSP\_vaddi(x.data(),\ 1,\ y.data(),\ 1,\ y.data(),\ 1,\ x.size());}
+\DoxyCodeLine{00053\ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ R\ =\ X\ +\ Alpha\ (float)}}
+\DoxyCodeLine{00056\ [[nodiscard]]\ \textcolor{keyword}{inline}\ std::vector<float>\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a875fb4edea20a12e049b84a36a38dab2}{vsadds}}(\textcolor{keyword}{const}\ std::vector<float>\ \&x,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ alpha\ =\ 1)\ \{}
+\DoxyCodeLine{00058\ \ \ std::vector<float>\ result(x.size());}
+\DoxyCodeLine{00059\ \ \ vDSP\_vsadd(x.data(),\ 1,\ \&alpha,\ result.data(),\ 1,\ x.size());}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00061\ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{comment}{//\ X\ =\ Alpha\ +\ X\ (float)}}
+\DoxyCodeLine{00064\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_ae3f5bfe9d4f7a57d90f644654d41a19b}{inplace\_vsadds}}(std::vector<float>\ \&x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ alpha\ =\ 1)\ \{}
+\DoxyCodeLine{00065\ \ \ vDSP\_vsadd(x.data(),\ 1,\ \&alpha,\ x.data(),\ 1,\ x.size());}
+\DoxyCodeLine{00066\ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{comment}{//\ R\ =\ X\ +\ Alpha\ (double)}}
+\DoxyCodeLine{00069\ [[nodiscard]]\ \textcolor{keyword}{inline}\ std::vector<double>\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a0dd95797c6ab03932290c1f169d18f5d}{vsaddd}}(\textcolor{keyword}{const}\ std::vector<double>\ \&x,}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ alpha\ =\ 1)\ \{}
+\DoxyCodeLine{00071\ \ \ std::vector<double>\ result(x.size());}
+\DoxyCodeLine{00072\ \ \ vDSP\_vsaddD(x.data(),\ 1,\ \&alpha,\ result.data(),\ 1,\ x.size());}
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00074\ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{comment}{//\ X\ =\ Alpha\ +\ X\ (double)}}
+\DoxyCodeLine{00077\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a11956a59db4393bf9a53f82b9c307cb3}{inplace\_vsaddd}}(std::vector<double>\ \&x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ alpha\ =\ 1)\ \{}
+\DoxyCodeLine{00078\ \ \ vDSP\_vsaddD(x.data(),\ 1,\ \&alpha,\ x.data(),\ 1,\ x.size());}
+\DoxyCodeLine{00079\ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{comment}{//\ R\ =\ X\ +\ Alpha\ (int32)}}
+\DoxyCodeLine{00082\ [[nodiscard]]\ \textcolor{keyword}{inline}\ std::vector<int32>\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_ad6023dbe05897d85870ac6f0f44a926d}{vsaddi}}(\textcolor{keyword}{const}\ std::vector<int32>\ \&x,}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}}\ alpha\ =\ 1)\ \{}
+\DoxyCodeLine{00084\ \ \ std::vector<int32>\ result(x.size());}
+\DoxyCodeLine{00085\ \ \ vDSP\_vsaddi(x.data(),\ 1,\ \&alpha,\ result.data(),\ 1,\ x.size());}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00087\ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{comment}{//\ X\ =\ Alpha\ +\ X\ (int32)}}
+\DoxyCodeLine{00090\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_aea68ededb5a1899d37a78231df668b3b}{inplace\_vsaddi}}(std::vector<int32>\ \&x,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}}\ alpha\ =\ 1)\ \{}
+\DoxyCodeLine{00091\ \ \ vDSP\_vsaddi(x.data(),\ 1,\ \&alpha,\ x.data(),\ 1,\ x.size());}
+\DoxyCodeLine{00092\ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{comment}{//\ Dot\ product\ (double)}}
+\DoxyCodeLine{00095\ [[nodiscard]]\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a0f65ed83214add340b9128c3bc0882d9}{ddot}}(\textcolor{keyword}{const}\ std::vector<double>\ \&x,}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ \&y)\ \{}
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordflow}{return}\ cblas\_ddot(x.size(),\ x.data(),\ 1,\ y.data(),\ 1);}
+\DoxyCodeLine{00098\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{comment}{//\ Dot\ product\ (float)}}
+\DoxyCodeLine{00101\ [[nodiscard]]\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_ac0f84d113312134278b0aeebe3ca3581}{sdot}}(\textcolor{keyword}{const}\ std::vector<float>\ \&x,}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<float>\ \&y)\ \{}
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordflow}{return}\ cblas\_sdot(x.size(),\ x.data(),\ 1,\ y.data(),\ 1);}
+\DoxyCodeLine{00104\ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math::acc}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

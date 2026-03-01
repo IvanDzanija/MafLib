@@ -1,0 +1,1502 @@
+\doxysection{maf::\+math::\+Vector\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmaf_1_1math_1_1_vector}{}\label{classmaf_1_1math_1_1_vector}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+
+
+A general-\/purpose mathematical vector class.  
+
+
+
+
+{\ttfamily \+\#include $<$Vector.\+hpp$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a7b8c419bb2ead188469aea139cf8edc6}{value\+\_\+type}} = T
+\begin{DoxyCompactList}\small\item\em The numeric type of the vector\textquotesingle{}s elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_adce45df04dad23e8e7fb2aa5dde3b2cf}{Vector}} (size\+\_\+t \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}, \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}=\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}})
+\begin{DoxyCompactList}\small\item\em Constructs an uninitialized vector of a given size. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a791bd6bc5808495544d2d1ca64fd4d18}{Vector}} (size\+\_\+t \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}, const U \texorpdfstring{$\ast$}{*}\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}}, \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}=\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}})
+\begin{DoxyCompactList}\small\item\em Constructs from a raw data pointer. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa71376d41514904ec98f245a7f0cd734}{Vector}} (size\+\_\+t \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}, const std::\+vector$<$ U $>$ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}}, \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}=\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}})
+\begin{DoxyCompactList}\small\item\em Constructs from a std::\+vector by copying its data. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a716800c73059c5fdcfddc4abd057343c}{Vector}} (size\+\_\+t \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}, std::\+vector$<$ T $>$ \&\&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}}, \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}=\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}})
+\begin{DoxyCompactList}\small\item\em Constructs from a std::\+vector by moving its data. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U, size\+\_\+t N$>$ }\\\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a20d90280ea731664d99eed92bfb5741c}{Vector}} (size\+\_\+t \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}}, const std::\+array$<$ U, N $>$ \&\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}}, \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}}=\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}})
+\begin{DoxyCompactList}\small\item\em Constructs from a std::\+array by copying its data. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aafcb79286a9e9a85ca763923c3f9d3a2}{Vector}} (const Vector$<$ U $>$ \&other)
+\begin{DoxyCompactList}\small\item\em Converting constructor. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a36d6a5a5315a1c2ae9bad35ca5aa448a}{begin}} () noexcept
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the beginning. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a4b7d99320a69fd965ce3210267d64c0e}{end}} () noexcept
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the end. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a7b7e8fda09c78bbd67569affd7020d65}{begin}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a const iterator to the beginning. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a67de8a29ae52bbb5c487ad55ec90366f}{end}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a const iterator to the end. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ad86b36b09c3a0b866d8508e013aa09fc}{cbegin}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a const iterator to the beginning. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_afa7ada2f328c3eff483b60d552bff19e}{cend}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a const iterator to the end. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a00b8fd60ab243cb2d89c724b3bbc91cd}{rbegin}} () noexcept
+\begin{DoxyCompactList}\small\item\em Returns a reverse iterator to the beginning. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8e539abf87cedeb0708b3bdcbee815bd}{rend}} () noexcept
+\begin{DoxyCompactList}\small\item\em Returns a reverse iterator to the end. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a528f46939b872577c016af6d44219562}{rbegin}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a const reverse iterator to the beginning. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ac558c55e469ae006b9c26362b1a8eb1a}{rend}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a const reverse iterator to the end. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ad8b6a7d8d3c11d9ada93dc01a7a6dead}{crbegin}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a const reverse iterator to the beginning. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a363f377d18c73b7b353b6d81fcb48e0c}{crend}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a const reverse iterator to the end. \end{DoxyCompactList}\item 
+const T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets a const pointer to the underlying data. store. \end{DoxyCompactList}\item 
+T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a3cca61baab5751e49a075e35ee5e8454}{data}} () noexcept
+\begin{DoxyCompactList}\small\item\em Gets a mutable pointer to the underlying data. \end{DoxyCompactList}\item 
+const std::\+vector$<$ T $>$ \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a6b4000caab61817d32f8de3fef04cb2a}{data\+\_\+vector}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets a const reference to the underlying std::\+vector data store. \end{DoxyCompactList}\item 
+std::\+vector$<$ T $>$ \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a732a9720069e7dd5b68baaa7430a10ec}{data\+\_\+vector}} () noexcept
+\begin{DoxyCompactList}\small\item\em Gets a mutable reference to the underlying std::\+vector data store. \end{DoxyCompactList}\item 
+size\+\_\+t \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets the number of elements in the vector. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets the vector\textquotesingle{}s orientation (ROW or COLUMN). \end{DoxyCompactList}\item 
+T \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ac8e1222d4ef75824b94980aaf6de600f}{at}} (size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Gets a mutable reference to the element at a specific index with bounds check. \end{DoxyCompactList}\item 
+const T \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_acc3db1eff1dee2710a1e3a837b75a1c2}{at}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets a const reference to the element at a specific index with bounds check. \end{DoxyCompactList}\item 
+T \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a6a49c85c7e94b1d06e2cd7a55bfef9e4}{operator\+[$\,$]\+}} (size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Accesses the element at a specific index with no bounds check. \end{DoxyCompactList}\item 
+const T \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a60ccbf803cb44df10138684693c50125}{operator\+[$\,$]\+}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Accesses the element at a specific index with no bounds check. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ T $>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ab4a0ac259c4b813b12689a85214f0592}{view}} (size\+\_\+t index, size\+\_\+t length, size\+\_\+t inc=1)
+\begin{DoxyCompactList}\small\item\em Creates a view (sub-\/\+Vector) into this \doxylink{classmaf_1_1math_1_1_vector}{Vector}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ const T $>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a854e8ab5e57f2a6e480ca196de8d4eaa}{view}} (size\+\_\+t index, size\+\_\+t length, size\+\_\+t inc=1) const
+\begin{DoxyCompactList}\small\item\em Creates a const view (sub-\/\+Vector) into this \doxylink{classmaf_1_1math_1_1_vector}{Vector}. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aad485062e875a345db7fd5c81f7390ef}{is\+\_\+null}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if the vector is a null vector. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a7112b999c9d59b392fba991a752af923}{fill}} (T value) noexcept
+\begin{DoxyCompactList}\small\item\em Fills the entire vector with a single value. \end{DoxyCompactList}\item 
+T \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a9ea665a8b70c85be70957d511865ff28}{norm}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Calculates the L2 norm (Euclidean length) of the vector. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a02e4aff220cd36bb92d84d08def1fdb2}{normalize}} ()
+\begin{DoxyCompactList}\small\item\em Normalizes the vector in-\/place (divides by its L2 norm). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a6257e58bd19631bdfb91b72c1da6d2c2}{transpose}} () noexcept
+\begin{DoxyCompactList}\small\item\em Transposes the vector in-\/place (flips orientation). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ T $>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f1900daefc1a467b50da3c889612c75}{transposed}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Creates and returns a new vector that is the transpose of this one. \end{DoxyCompactList}\item 
+constexpr bool \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ab956641750e967174430876f802852ba}{operator==}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}} \&other) const noexcept
+\begin{DoxyCompactList}\small\item\em Checks for exact element-\/wise equality. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_af97d380418748bb3c50557ea86cb689f}{operator-\/}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Unary minus. Returns a new \doxylink{classmaf_1_1math_1_1_vector}{Vector} with all elements negated. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a0829be3ec6913e833fbfd9764cde5324}{operator+}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em Element-\/wise vector addition (\doxylink{classmaf_1_1math_1_1_vector}{Vector} + \doxylink{classmaf_1_1math_1_1_vector}{Vector}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ab82ede35556d29c46527132e90a5573a}{operator+}} (const U \&scalar) const noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar addition (\doxylink{classmaf_1_1math_1_1_vector}{Vector} + scalar). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_ac407d9fd6c17717e6fb6871dd4419e49}{operator+=}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&other)
+\begin{DoxyCompactList}\small\item\em Element-\/wise vector addition assignment (\doxylink{classmaf_1_1math_1_1_vector}{Vector} + \doxylink{classmaf_1_1math_1_1_vector}{Vector}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a75b9b6b7c2c820ac39bc4c720538924d}{operator+=}} (const U \&scalar) noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar addition assignment (\doxylink{classmaf_1_1math_1_1_vector}{Vector} + scalar). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a1efd12a6bd6634efbc9750dd0558fc7c}{operator-\/}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em Element-\/wise vector subtraction (\doxylink{classmaf_1_1math_1_1_vector}{Vector} -\/ \doxylink{classmaf_1_1math_1_1_vector}{Vector}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a2433b6de5bd70d117b234289be80e97e}{operator-\/}} (const U \&scalar) const noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar subtraction (\doxylink{classmaf_1_1math_1_1_vector}{Vector} -\/ scalar). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a9788849517cae340aa15007d1aa5c285}{operator-\/=}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&other)
+\begin{DoxyCompactList}\small\item\em Element-\/wise vector subtraction assignment (\doxylink{classmaf_1_1math_1_1_vector}{Vector} -\/ \doxylink{classmaf_1_1math_1_1_vector}{Vector}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a6fc9e8a91009a3615dc0842f3cf6765a}{operator-\/=}} (const U \&scalar) noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar subtraction (\doxylink{classmaf_1_1math_1_1_vector}{Vector} -\/ scalar). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a6e1fbf66b0563b2308642feaa583be6f}{operator\texorpdfstring{$\ast$}{*}}} (const U \&scalar) const noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar multiplication (\doxylink{classmaf_1_1math_1_1_vector}{Vector} \texorpdfstring{$\ast$}{*} scalar). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a015c3ef7c6ef11b29a8aef357b9c1d80}{operator\texorpdfstring{$\ast$}{*}=}} (const U \&scalar) noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar multiplication assignment (\doxylink{classmaf_1_1math_1_1_vector}{Vector} \texorpdfstring{$\ast$}{*} scalar). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a7c27148cb7d68df78343721cc56d67e0}{dot\+\_\+product}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em Calculates the dot product (inner product) of two Vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a5664c855ed6b5b75f47bce2bfd322ae0}{outer\+\_\+product}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em Outer product (Column \doxylink{classmaf_1_1math_1_1_vector}{Vector} \texorpdfstring{$\ast$}{*} Row \doxylink{classmaf_1_1math_1_1_vector}{Vector}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a00b97a160b42a4eeb740eb693a3f8bd5}{operator\texorpdfstring{$\ast$}{*}}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em Dot product (Row \doxylink{classmaf_1_1math_1_1_vector}{Vector} \texorpdfstring{$\ast$}{*} Column \doxylink{classmaf_1_1math_1_1_vector}{Vector}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a3f7dfd09c96426650c80548b86804450}{operator\texorpdfstring{$\ast$}{*}}} (const \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ U $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em Matrix-\/\+Vector multiplication (Row \doxylink{classmaf_1_1math_1_1_vector}{Vector} \texorpdfstring{$\ast$}{*} \doxylink{classmaf_1_1math_1_1_matrix}{Matrix}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_a8f4f0fcd27ee2344fd66efd1be569df2}{operator/\+}} (const U \&scalar) const noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar division (\doxylink{classmaf_1_1math_1_1_vector}{Vector} /\+ scalar). \end{DoxyCompactList}\item 
+{\footnotesize template$<$Numeric U$>$ }\\auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aef3a5e003a46c133ed55753464b78cff}{operator/\+=}} (const U \&scalar) noexcept
+\begin{DoxyCompactList}\small\item\em Element-\/wise scalar division assignment (\doxylink{classmaf_1_1math_1_1_vector}{Vector} /\+ scalar). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_afe41f68eb599cda7645d60999069d2fd}{print}} () const
+\begin{DoxyCompactList}\small\item\em Prints the vector contents to std::\+cout. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$Numeric T$>$\newline
+class maf::\+math::\+\+Vector$<$ T $>$}
+A general-\/purpose mathematical vector class. 
+
+This class implements a mathematical vector, wrapping a std::\+vector for data storage. It supports both {\bfseries{ROW}} and {\bfseries{COLUMN}} orientations, which is crucial for correct algebraic operations with the \doxylink{classmaf_1_1math_1_1_matrix}{Matrix} class.
+
+It is templated to support various numeric types (T) and provides a range of constructors, element-\/wise operators, and common vector operations like norm, normalization, and dot product.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The numeric type of the vector elements (e.\+g., float, double, int).\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxySince}{Since}
+2025 
+\end{DoxySince}
+
+
+\label{doc-typedef-members}
+\Hypertarget{classmaf_1_1math_1_1_vector_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classmaf_1_1math_1_1_vector_a7b8c419bb2ead188469aea139cf8edc6}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a7b8c419bb2ead188469aea139cf8edc6} 
+template$<$Numeric T$>$ \\
+using \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+value\+\_\+type = T}
+
+
+
+The numeric type of the vector\textquotesingle{}s elements. 
+
+
+
+\label{doc-constructors}
+\Hypertarget{classmaf_1_1math_1_1_vector_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7} 
+template$<$Numeric T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+\+Vector (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor. 
+
+Creates an empty vector with default COLUMN orientation. Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{de/d35/classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_adce45df04dad23e8e7fb2aa5dde3b2cf}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_adce45df04dad23e8e7fb2aa5dde3b2cf} 
+template$<$Numeric T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+\+Vector (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size}{, }\item[{\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}}]{orientation}{ = {\ttfamily \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}}}}\end{DoxyParamCaption})}
+
+
+
+Constructs an uninitialized vector of a given size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \doxylink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}} & The number of elements in the vector. \\
+\hline
+{\em \doxylink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}} & The vector\textquotesingle{}s orientation (default:\+ COLUMN). \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if size is zero. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_adce45df04dad23e8e7fb2aa5dde3b2cf_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a791bd6bc5808495544d2d1ca64fd4d18}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a791bd6bc5808495544d2d1ca64fd4d18} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+\+Vector (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size}{, }\item[{const U \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}}]{orientation}{ = {\ttfamily \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}}}}\end{DoxyParamCaption})}
+
+
+
+Constructs from a raw data pointer. 
+
+Elements are COPIED from the data pointer. 
+\begin{DoxyParams}{Parameters}
+{\em \doxylink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}} & The number of elements in the vector. \\
+\hline
+{\em \doxylink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}} & Pointer to a contiguous memory. \\
+\hline
+{\em \doxylink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}} & The vector\textquotesingle{}s orientation (default:\+ COLUMN). \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if size is zero or data is nullptr. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_a791bd6bc5808495544d2d1ca64fd4d18_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_aa71376d41514904ec98f245a7f0cd734}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_aa71376d41514904ec98f245a7f0cd734} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+\+Vector (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size}{, }\item[{const std::\+vector$<$ U $>$ \&}]{data}{, }\item[{\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}}]{orientation}{ = {\ttfamily \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}}}}\end{DoxyParamCaption})}
+
+
+
+Constructs from a std::\+vector by copying its data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \doxylink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}} & The number of elements. Must match data.\+size(). \\
+\hline
+{\em \doxylink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}} & The std::\+vector to copy from. \\
+\hline
+{\em \doxylink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}} & The vector\textquotesingle{}s orientation (default:\+ COLUMN). \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if size is zero or data size mismatches. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_aa71376d41514904ec98f245a7f0cd734_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a716800c73059c5fdcfddc4abd057343c}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a716800c73059c5fdcfddc4abd057343c} 
+template$<$Numeric T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+\+Vector (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size}{, }\item[{std::\+vector$<$ T $>$ \&\&}]{data}{, }\item[{\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}}]{orientation}{ = {\ttfamily \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}}}}\end{DoxyParamCaption})}
+
+
+
+Constructs from a std::\+vector by moving its data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \doxylink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}} & The number of elements. Must match data.\+size(). \\
+\hline
+{\em \doxylink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}} & The std::\+vector to move from (r-\/value). \\
+\hline
+{\em \doxylink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}} & The vector\textquotesingle{}s orientation (default:\+ COLUMN). \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if size is zero or data size mismatches. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_a716800c73059c5fdcfddc4abd057343c_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a20d90280ea731664d99eed92bfb5741c}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a20d90280ea731664d99eed92bfb5741c} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U, size\+\_\+t N$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+\+Vector (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size}{, }\item[{const std::\+array$<$ U, N $>$ \&}]{data}{, }\item[{\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}}}]{orientation}{ = {\ttfamily \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}}}}\end{DoxyParamCaption})}
+
+
+
+Constructs from a std::\+array by copying its data. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & Type in the array (allows implicit conversion). \\
+\hline
+{\em N} & Size of the array. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em \doxylink{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}{size}} & The number of elements. Must match N. \\
+\hline
+{\em \doxylink{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}{data}} & The std::\+array to copy from. \\
+\hline
+{\em \doxylink{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}{orientation}} & The vector\textquotesingle{}s orientation (default:\+ COLUMN). \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if size is zero or array size mismatches. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_a20d90280ea731664d99eed92bfb5741c_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_aafcb79286a9e9a85ca763923c3f9d3a2}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!Vector@{Vector}}
+\index{Vector@{Vector}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector()}{Vector()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_aafcb79286a9e9a85ca763923c3f9d3a2} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+\+Vector (\begin{DoxyParamCaption}\item[{const Vector$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Converting constructor. 
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_aafcb79286a9e9a85ca763923c3f9d3a2_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classmaf_1_1math_1_1_vector_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmaf_1_1math_1_1_vector_ac8e1222d4ef75824b94980aaf6de600f}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!at@{at}}
+\index{at@{at}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_ac8e1222d4ef75824b94980aaf6de600f} 
+template$<$Numeric T$>$ \\
+T \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+at (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a mutable reference to the element at a specific index with bounds check. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+out\+\_\+of\+\_\+range} & if the index is invalid. \\
+\hline
+\end{DoxyExceptions}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{de/d35/classmaf_1_1math_1_1_vector_ac8e1222d4ef75824b94980aaf6de600f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_acc3db1eff1dee2710a1e3a837b75a1c2}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!at@{at}}
+\index{at@{at}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_acc3db1eff1dee2710a1e3a837b75a1c2} 
+template$<$Numeric T$>$ \\
+const T \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+at (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a const reference to the element at a specific index with bounds check. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+out\+\_\+of\+\_\+range} & if the index is invalid. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmaf_1_1math_1_1_vector_a7b7e8fda09c78bbd67569affd7020d65}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!begin@{begin}}
+\index{begin@{begin}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a7b7e8fda09c78bbd67569affd7020d65} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a const iterator to the beginning. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_a36d6a5a5315a1c2ae9bad35ca5aa448a}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!begin@{begin}}
+\index{begin@{begin}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a36d6a5a5315a1c2ae9bad35ca5aa448a} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns an iterator to the beginning. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{de/d35/classmaf_1_1math_1_1_vector_a36d6a5a5315a1c2ae9bad35ca5aa448a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_ad86b36b09c3a0b866d8508e013aa09fc}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!cbegin@{cbegin}}
+\index{cbegin@{cbegin}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{cbegin()}{cbegin()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_ad86b36b09c3a0b866d8508e013aa09fc} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+cbegin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a const iterator to the beginning. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_afa7ada2f328c3eff483b60d552bff19e}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!cend@{cend}}
+\index{cend@{cend}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{cend()}{cend()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_afa7ada2f328c3eff483b60d552bff19e} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+cend (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a const iterator to the end. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_ad8b6a7d8d3c11d9ada93dc01a7a6dead}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!crbegin@{crbegin}}
+\index{crbegin@{crbegin}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{crbegin()}{crbegin()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_ad8b6a7d8d3c11d9ada93dc01a7a6dead} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+crbegin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a const reverse iterator to the beginning. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_a363f377d18c73b7b353b6d81fcb48e0c}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!crend@{crend}}
+\index{crend@{crend}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{crend()}{crend()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a363f377d18c73b7b353b6d81fcb48e0c} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+crend (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a const reverse iterator to the end. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!data@{data}}
+\index{data@{data}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b} 
+template$<$Numeric T$>$ \\
+const T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a const pointer to the underlying data. store. 
+
+\begin{DoxyReturn}{Returns}
+const T\texorpdfstring{$\ast$}{*} 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{de/d35/classmaf_1_1math_1_1_vector_a8f02b32c5f55c5f27708afcd50e9918b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a3cca61baab5751e49a075e35ee5e8454}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!data@{data}}
+\index{data@{data}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a3cca61baab5751e49a075e35ee5e8454} 
+template$<$Numeric T$>$ \\
+T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a mutable pointer to the underlying data. 
+
+\begin{DoxyReturn}{Returns}
+T\texorpdfstring{$\ast$}{*} 
+\end{DoxyReturn}
+\Hypertarget{classmaf_1_1math_1_1_vector_a6b4000caab61817d32f8de3fef04cb2a}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!data\_vector@{data\_vector}}
+\index{data\_vector@{data\_vector}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{data\_vector()}{data\_vector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a6b4000caab61817d32f8de3fef04cb2a} 
+template$<$Numeric T$>$ \\
+const std::\+vector$<$ T $>$ \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+data\+\_\+vector (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a const reference to the underlying std::\+vector data store. 
+
+\begin{DoxyReturn}{Returns}
+const std::\+vector$<$\+T$>$\& 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{de/d35/classmaf_1_1math_1_1_vector_a6b4000caab61817d32f8de3fef04cb2a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a732a9720069e7dd5b68baaa7430a10ec}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!data\_vector@{data\_vector}}
+\index{data\_vector@{data\_vector}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{data\_vector()}{data\_vector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a732a9720069e7dd5b68baaa7430a10ec} 
+template$<$Numeric T$>$ \\
+std::\+vector$<$ T $>$ \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+data\+\_\+vector (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a mutable reference to the underlying std::\+vector data store. 
+
+\begin{DoxyReturn}{Returns}
+std::\+vector$<$\+T$>$\& 
+\end{DoxyReturn}
+\Hypertarget{classmaf_1_1math_1_1_vector_a7c27148cb7d68df78343721cc56d67e0}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!dot\_product@{dot\_product}}
+\index{dot\_product@{dot\_product}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{dot\_product()}{dot\_product()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a7c27148cb7d68df78343721cc56d67e0} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+dot\+\_\+product (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Calculates the dot product (inner product) of two Vectors. 
+
+\begin{DoxyAttention}{Attention}
+This method doesn\textquotesingle{}t check for correct \doxylink{classmaf_1_1math_1_1_vector}{Vector} orientations. 
+\end{DoxyAttention}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & Numeric type of the other \doxylink{classmaf_1_1math_1_1_vector}{Vector}. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classmaf_1_1math_1_1_vector}{Vector}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A scalar value of the common, promoted type. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if \doxylink{classmaf_1_1math_1_1_vector}{Vector} sizes do not match. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_a7c27148cb7d68df78343721cc56d67e0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{de/d35/classmaf_1_1math_1_1_vector_a7c27148cb7d68df78343721cc56d67e0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a67de8a29ae52bbb5c487ad55ec90366f}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!end@{end}}
+\index{end@{end}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a67de8a29ae52bbb5c487ad55ec90366f} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a const iterator to the end. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_a4b7d99320a69fd965ce3210267d64c0e}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!end@{end}}
+\index{end@{end}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a4b7d99320a69fd965ce3210267d64c0e} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns an iterator to the end. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{de/d35/classmaf_1_1math_1_1_vector_a4b7d99320a69fd965ce3210267d64c0e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a7112b999c9d59b392fba991a752af923}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!fill@{fill}}
+\index{fill@{fill}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{fill()}{fill()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a7112b999c9d59b392fba991a752af923} 
+template$<$Numeric T$>$ \\
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+fill (\begin{DoxyParamCaption}\item[{T}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Fills the entire vector with a single value. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_aad485062e875a345db7fd5c81f7390ef}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!is\_null@{is\_null}}
+\index{is\_null@{is\_null}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{is\_null()}{is\_null()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_aad485062e875a345db7fd5c81f7390ef} 
+template$<$Numeric T$>$ \\
+bool \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+is\+\_\+null (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Checks if the vector is a null vector. 
+
+\begin{DoxyReturn}{Returns}
+true if all elements are close to zero, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{de/d35/classmaf_1_1math_1_1_vector_aad485062e875a345db7fd5c81f7390ef_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a9ea665a8b70c85be70957d511865ff28}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!norm@{norm}}
+\index{norm@{norm}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{norm()}{norm()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a9ea665a8b70c85be70957d511865ff28} 
+template$<$Numeric T$>$ \\
+T \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+norm (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Calculates the L2 norm (Euclidean length) of the vector. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{de/d35/classmaf_1_1math_1_1_vector_a9ea665a8b70c85be70957d511865ff28_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a02e4aff220cd36bb92d84d08def1fdb2}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!normalize@{normalize}}
+\index{normalize@{normalize}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{normalize()}{normalize()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a02e4aff220cd36bb92d84d08def1fdb2} 
+template$<$Numeric T$>$ \\
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+normalize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Normalizes the vector in-\/place (divides by its L2 norm). 
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{de/d35/classmaf_1_1math_1_1_vector_a02e4aff220cd36bb92d84d08def1fdb2_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a3f7dfd09c96426650c80548b86804450}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a3f7dfd09c96426650c80548b86804450} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix}{Matrix}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Matrix-\/\+Vector multiplication (Row \doxylink{classmaf_1_1math_1_1_vector}{Vector} \texorpdfstring{$\ast$}{*} \doxylink{classmaf_1_1math_1_1_matrix}{Matrix}). 
+
+This must be a (1 x N) \texorpdfstring{$\ast$}{*} (N x M) multiplication. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & Numeric type of the matrix. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The matrix to multiply by (this vector must be a row). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new row \doxylink{classmaf_1_1math_1_1_vector}{Vector} of size (1 x M). 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if this is not a row vector or dimensions mismatch. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=342pt]{de/d35/classmaf_1_1math_1_1_vector_a3f7dfd09c96426650c80548b86804450_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a6e1fbf66b0563b2308642feaa583be6f}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a6e1fbf66b0563b2308642feaa583be6f} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar multiplication (\doxylink{classmaf_1_1math_1_1_vector}{Vector} \texorpdfstring{$\ast$}{*} scalar). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value to multiply by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classmaf_1_1math_1_1_vector}{Vector} of the common, promoted type. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{de/d35/classmaf_1_1math_1_1_vector_a6e1fbf66b0563b2308642feaa583be6f_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a00b97a160b42a4eeb740eb693a3f8bd5}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a00b97a160b42a4eeb740eb693a3f8bd5} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Dot product (Row \doxylink{classmaf_1_1math_1_1_vector}{Vector} \texorpdfstring{$\ast$}{*} Column \doxylink{classmaf_1_1math_1_1_vector}{Vector}). 
+
+\begin{DoxyAttention}{Attention}
+This must be a (1 x N) \texorpdfstring{$\ast$}{*} (N x 1) multiplication.
+\end{DoxyAttention}
+Checks for correct orientations then calls \doxylink{classmaf_1_1math_1_1_vector_a7c27148cb7d68df78343721cc56d67e0}{dot\+\_\+product()}. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & Numeric type of the other vector. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The row \doxylink{classmaf_1_1math_1_1_vector}{Vector} (this \doxylink{classmaf_1_1math_1_1_vector}{Vector} must be a column). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classmaf_1_1math_1_1_matrix}{Matrix} of size (this.\+size x other.\+size). 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if orientations are not ROW \texorpdfstring{$\ast$}{*} COLUMN. \\
+\hline
+{\em std::\+invalid\+\_\+argument} & if \doxylink{classmaf_1_1math_1_1_vector}{Vector} sizes do not match. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{de/d35/classmaf_1_1math_1_1_vector_a00b97a160b42a4eeb740eb693a3f8bd5_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a015c3ef7c6ef11b29a8aef357b9c1d80}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}}
+\index{operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}=()}{operator*=()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a015c3ef7c6ef11b29a8aef357b9c1d80} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator\texorpdfstring{$\ast$}{*}= (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar multiplication assignment (\doxylink{classmaf_1_1math_1_1_vector}{Vector} \texorpdfstring{$\ast$}{*} scalar). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value to multiply by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{Attention}
+This method doesn\textquotesingle{}t cast the \doxylink{classmaf_1_1math_1_1_vector}{Vector} if U is a broader type. 
+\end{DoxyAttention}
+\Hypertarget{classmaf_1_1math_1_1_vector_ab82ede35556d29c46527132e90a5573a}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_ab82ede35556d29c46527132e90a5573a} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator+ (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar addition (\doxylink{classmaf_1_1math_1_1_vector}{Vector} + scalar). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value to add to each element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classmaf_1_1math_1_1_vector}{Vector} of the common, promoted type. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{de/d35/classmaf_1_1math_1_1_vector_ab82ede35556d29c46527132e90a5573a_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a0829be3ec6913e833fbfd9764cde5324}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a0829be3ec6913e833fbfd9764cde5324} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator+ (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Element-\/wise vector addition (\doxylink{classmaf_1_1math_1_1_vector}{Vector} + \doxylink{classmaf_1_1math_1_1_vector}{Vector}). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & Numeric type of the other vector. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The vector to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classmaf_1_1math_1_1_vector}{Vector} of the common, promoted type. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if dimensions or orientations do not match. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_a0829be3ec6913e833fbfd9764cde5324_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a75b9b6b7c2c820ac39bc4c720538924d}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a75b9b6b7c2c820ac39bc4c720538924d} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator+= (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar addition assignment (\doxylink{classmaf_1_1math_1_1_vector}{Vector} + scalar). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value to add to each element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{Attention}
+This method doesn\textquotesingle{}t cast the vector if U is a broader type. 
+\end{DoxyAttention}
+\Hypertarget{classmaf_1_1math_1_1_vector_ac407d9fd6c17717e6fb6871dd4419e49}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_ac407d9fd6c17717e6fb6871dd4419e49} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator+= (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Element-\/wise vector addition assignment (\doxylink{classmaf_1_1math_1_1_vector}{Vector} + \doxylink{classmaf_1_1math_1_1_vector}{Vector}). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & Numeric type of the other vector. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The vector to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{Attention}
+This method doesn\textquotesingle{}t cast the vector if U is a broader type. 
+\end{DoxyAttention}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if dimensions or orientations do not match. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_ac407d9fd6c17717e6fb6871dd4419e49_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_af97d380418748bb3c50557ea86cb689f}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_af97d380418748bb3c50557ea86cb689f} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator-\/ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Unary minus. Returns a new \doxylink{classmaf_1_1math_1_1_vector}{Vector} with all elements negated. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily \doxylink{classmaf_1_1math_1_1_vector}{Vector}\texorpdfstring{$<$}{<}T\texorpdfstring{$>$}{>}} 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{de/d35/classmaf_1_1math_1_1_vector_af97d380418748bb3c50557ea86cb689f_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a2433b6de5bd70d117b234289be80e97e}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a2433b6de5bd70d117b234289be80e97e} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator-\/ (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar subtraction (\doxylink{classmaf_1_1math_1_1_vector}{Vector} -\/ scalar). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value to subtract from each element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classmaf_1_1math_1_1_vector}{Vector} of the common, promoted type. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{de/d35/classmaf_1_1math_1_1_vector_a2433b6de5bd70d117b234289be80e97e_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a1efd12a6bd6634efbc9750dd0558fc7c}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a1efd12a6bd6634efbc9750dd0558fc7c} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator-\/ (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Element-\/wise vector subtraction (\doxylink{classmaf_1_1math_1_1_vector}{Vector} -\/ \doxylink{classmaf_1_1math_1_1_vector}{Vector}). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & Numeric type of the other vector. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The vector to subtract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classmaf_1_1math_1_1_vector}{Vector} of the common, promoted type. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if dimensions or orientations do not match. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_a1efd12a6bd6634efbc9750dd0558fc7c_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a6fc9e8a91009a3615dc0842f3cf6765a}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a6fc9e8a91009a3615dc0842f3cf6765a} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator-\/= (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar subtraction (\doxylink{classmaf_1_1math_1_1_vector}{Vector} -\/ scalar). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value to subtract from each element. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{Attention}
+This method doesn\textquotesingle{}t cast the \doxylink{classmaf_1_1math_1_1_vector}{Vector} if U is a broader type. 
+\end{DoxyAttention}
+\Hypertarget{classmaf_1_1math_1_1_vector_a9788849517cae340aa15007d1aa5c285}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a9788849517cae340aa15007d1aa5c285} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator-\/= (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Element-\/wise vector subtraction assignment (\doxylink{classmaf_1_1math_1_1_vector}{Vector} -\/ \doxylink{classmaf_1_1math_1_1_vector}{Vector}). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & Numeric type of the other vector. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The vector to subtract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{Attention}
+This method doesn\textquotesingle{}t cast the vector if U is a broader type. 
+\end{DoxyAttention}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if dimensions or orientations do not match. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_a9788849517cae340aa15007d1aa5c285_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a8f4f0fcd27ee2344fd66efd1be569df2}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator/@{operator/}}
+\index{operator/@{operator/}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a8f4f0fcd27ee2344fd66efd1be569df2} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator/\+ (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar division (\doxylink{classmaf_1_1math_1_1_vector}{Vector} /\+ scalar). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value to divide by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classmaf_1_1math_1_1_vector}{Vector} of the common, promoted type (forced double if both are int). 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{de/d35/classmaf_1_1math_1_1_vector_a8f4f0fcd27ee2344fd66efd1be569df2_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_aef3a5e003a46c133ed55753464b78cff}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_aef3a5e003a46c133ed55753464b78cff} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator/\+= (\begin{DoxyParamCaption}\item[{const U \&}]{scalar}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Element-\/wise scalar division assignment (\doxylink{classmaf_1_1math_1_1_vector}{Vector} /\+ scalar). 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & An arithmetic scalar type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value to divide by. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{Attention}
+This method doesn\textquotesingle{}t cast the \doxylink{classmaf_1_1math_1_1_vector}{Vector} if U is a broader type. 
+\end{DoxyAttention}
+\Hypertarget{classmaf_1_1math_1_1_vector_ab956641750e967174430876f802852ba}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_ab956641750e967174430876f802852ba} 
+template$<$Numeric T$>$ \\
+bool \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator== (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ T $>$ \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Checks for exact element-\/wise equality. 
+
+For floating-\/point, use {\ttfamily \doxylink{namespacemaf_1_1math_a3d4733be1cd68ede07a9c2de6728b2d7}{loosely\+\_\+equal()}} 
+\begin{DoxyParams}{Parameters}
+{\em other} & The vector to compare against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if size, orientation, and all elements are identical. 
+\end{DoxyReturn}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_ab956641750e967174430876f802852ba_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a6a49c85c7e94b1d06e2cd7a55bfef9e4}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator\+[]\+@{operator[]}}
+\index{operator\+[]\+@{operator[]}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a6a49c85c7e94b1d06e2cd7a55bfef9e4} 
+template$<$Numeric T$>$ \\
+T \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accesses the element at a specific index with no bounds check. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+out\+\_\+of\+\_\+range} & if the index is invalid. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmaf_1_1math_1_1_vector_a60ccbf803cb44df10138684693c50125}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!operator\+[]\+@{operator[]}}
+\index{operator\+[]\+@{operator[]}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a60ccbf803cb44df10138684693c50125} 
+template$<$Numeric T$>$ \\
+const T \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accesses the element at a specific index with no bounds check. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+out\+\_\+of\+\_\+range} & if the index is invalid. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!orientation@{orientation}}
+\index{orientation@{orientation}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{orientation()}{orientation()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8} 
+template$<$Numeric T$>$ \\
+\doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}} \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+orientation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Gets the vector\textquotesingle{}s orientation (ROW or COLUMN). 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{de/d35/classmaf_1_1math_1_1_vector_a663a7e4b34644e198a855da680a40dc8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a5664c855ed6b5b75f47bce2bfd322ae0}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!outer\_product@{outer\_product}}
+\index{outer\_product@{outer\_product}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{outer\_product()}{outer\_product()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a5664c855ed6b5b75f47bce2bfd322ae0} 
+template$<$Numeric T$>$ \\
+template$<$Numeric U$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+outer\+\_\+product (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ U $>$ \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Outer product (Column \doxylink{classmaf_1_1math_1_1_vector}{Vector} \texorpdfstring{$\ast$}{*} Row \doxylink{classmaf_1_1math_1_1_vector}{Vector}). 
+
+This must be a (N x 1) \texorpdfstring{$\ast$}{*} (1 x M) multiplication. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em U} & Numeric type of the other vector. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The row \doxylink{classmaf_1_1math_1_1_vector}{Vector} (this \doxylink{classmaf_1_1math_1_1_vector}{Vector} must be a column). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classmaf_1_1math_1_1_matrix}{Matrix} of size (this.\+size x other.\+size). 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if orientations are not COLUMN \texorpdfstring{$\ast$}{*} ROW. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{de/d35/classmaf_1_1math_1_1_vector_a5664c855ed6b5b75f47bce2bfd322ae0_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_afe41f68eb599cda7645d60999069d2fd}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!print@{print}}
+\index{print@{print}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_afe41f68eb599cda7645d60999069d2fd} 
+template$<$Numeric T$>$ \\
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+print (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prints the vector contents to std::\+cout. 
+
+Sets floating point precision for readability. Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{de/d35/classmaf_1_1math_1_1_vector_afe41f68eb599cda7645d60999069d2fd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{de/d35/classmaf_1_1math_1_1_vector_afe41f68eb599cda7645d60999069d2fd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a528f46939b872577c016af6d44219562}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!rbegin@{rbegin}}
+\index{rbegin@{rbegin}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{rbegin()}{rbegin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a528f46939b872577c016af6d44219562} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+rbegin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a const reverse iterator to the beginning. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_a00b8fd60ab243cb2d89c724b3bbc91cd}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!rbegin@{rbegin}}
+\index{rbegin@{rbegin}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{rbegin()}{rbegin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a00b8fd60ab243cb2d89c724b3bbc91cd} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+rbegin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a reverse iterator to the beginning. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_ac558c55e469ae006b9c26362b1a8eb1a}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!rend@{rend}}
+\index{rend@{rend}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{rend()}{rend()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_ac558c55e469ae006b9c26362b1a8eb1a} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+rend (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a const reverse iterator to the end. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_a8e539abf87cedeb0708b3bdcbee815bd}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!rend@{rend}}
+\index{rend@{rend}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{rend()}{rend()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a8e539abf87cedeb0708b3bdcbee815bd} 
+template$<$Numeric T$>$ \\
+auto \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+rend (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a reverse iterator to the end. 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!size@{size}}
+\index{size@{size}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a} 
+template$<$Numeric T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Gets the number of elements in the vector. 
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{de/d35/classmaf_1_1math_1_1_vector_a486da0689bba119f338f50eb5e334a1a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a6257e58bd19631bdfb91b72c1da6d2c2}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a6257e58bd19631bdfb91b72c1da6d2c2} 
+template$<$Numeric T$>$ \\
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+transpose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Transposes the vector in-\/place (flips orientation). 
+
+\Hypertarget{classmaf_1_1math_1_1_vector_a8f1900daefc1a467b50da3c889612c75}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!transposed@{transposed}}
+\index{transposed@{transposed}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{transposed()}{transposed()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a8f1900daefc1a467b50da3c889612c75} 
+template$<$Numeric T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_aa96c8ef557852ec4425b3399e4c758c7}{Vector}}$<$ T $>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+transposed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Creates and returns a new vector that is the transpose of this one. 
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{de/d35/classmaf_1_1math_1_1_vector_a8f1900daefc1a467b50da3c889612c75_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_ab4a0ac259c4b813b12689a85214f0592}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!view@{view}}
+\index{view@{view}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{view()}{view()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_ab4a0ac259c4b813b12689a85214f0592} 
+template$<$Numeric T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ T $>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+view (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{, }\item[{size\+\_\+t}]{length}{, }\item[{size\+\_\+t}]{inc}{ = {\ttfamily 1}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Creates a view (sub-\/\+Vector) into this \doxylink{classmaf_1_1math_1_1_vector}{Vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em col} & Starting index of the view. \\
+\hline
+{\em length} & Length of the view. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View$<$\+T$>$} representing the specified sub-\/\+Vector. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if length is zero. \\
+\hline
+{\em std::\+out\+\_\+of\+\_\+range} & if the requested view exceeds \doxylink{classmaf_1_1math_1_1_vector}{Vector} dimensions. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{de/d35/classmaf_1_1math_1_1_vector_ab4a0ac259c4b813b12689a85214f0592_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{de/d35/classmaf_1_1math_1_1_vector_ab4a0ac259c4b813b12689a85214f0592_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmaf_1_1math_1_1_vector_a854e8ab5e57f2a6e480ca196de8d4eaa}\index{maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}!view@{view}}
+\index{view@{view}!maf::math::Vector$<$ T $>$@{maf::math::Vector$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{view()}{view()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_vector_a854e8ab5e57f2a6e480ca196de8d4eaa} 
+template$<$Numeric T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_vector_view}{Vector\+View}}$<$ const T $>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_vector}{maf::\+math::\+\+Vector}}$<$ T $>$::\+view (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{, }\item[{size\+\_\+t}]{length}{, }\item[{size\+\_\+t}]{inc}{ = {\ttfamily 1}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Creates a const view (sub-\/\+Vector) into this \doxylink{classmaf_1_1math_1_1_vector}{Vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em col} & Starting index of the view. \\
+\hline
+{\em length} & Length of the view. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classmaf_1_1math_1_1_vector_view}{Vector\+View$<$\+T$>$} representing the specified sub-\/\+Vector. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+invalid\+\_\+argument} & if length is zero. \\
+\hline
+{\em std::\+out\+\_\+of\+\_\+range} & if the requested view exceeds \doxylink{classmaf_1_1math_1_1_vector}{Vector} dimensions. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{de/d35/classmaf_1_1math_1_1_vector_a854e8ab5e57f2a6e480ca196de8d4eaa_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+include/\+\+Maf\+Lib/\+math/\+linalg/\+\doxymbox{\hyperlink{_lin_alg_8hpp}{Lin\+Alg.\+hpp}}\item 
+include/\+\+Maf\+Lib/\+math/\+linalg/\+\doxymbox{\hyperlink{_vector_8hpp}{Vector.\+hpp}}\item 
+include/\+\+Maf\+Lib/\+math/\+linalg/\+\doxymbox{\hyperlink{_vector_checkers_8hpp}{Vector\+Checkers.\+hpp}}\item 
+include/\+\+Maf\+Lib/\+math/\+linalg/\+\doxymbox{\hyperlink{_vector_constructors_8hpp}{Vector\+Constructors.\+hpp}}\item 
+include/\+\+Maf\+Lib/\+math/\+linalg/\+\doxymbox{\hyperlink{_vector_methods_8hpp}{Vector\+Methods.\+hpp}}\item 
+include/\+\+Maf\+Lib/\+math/\+linalg/\+\doxymbox{\hyperlink{_vector_operators_8hpp}{Vector\+Operators.\+hpp}}\end{DoxyCompactItemize}

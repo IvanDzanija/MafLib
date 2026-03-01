@@ -1,0 +1,60 @@
+\doxysection{Matrix\+View\+Operators.\+hpp}
+\hypertarget{_matrix_view_operators_8hpp_source}{}\label{_matrix_view_operators_8hpp_source}\index{include/MafLib/math/linalg/MatrixViewOperators.hpp@{include/MafLib/math/linalg/MatrixViewOperators.hpp}}
+\doxymbox{\hyperlink{_matrix_view_operators_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MATRIX\_VIEW\_OPERATORS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MATRIX\_VIEW\_OPERATORS\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_view_kernels_8hpp}{ViewKernels.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00007\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ @brief\ Matrix-\/Vector\ multiplication\ operator.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ This\ operator\ overload\ allows\ for\ the\ multiplication\ of\ a\ Matrix-\/like}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ object\ with\ a\ Vector-\/like\ object.\ It\ supports\ both\ MatrixView\ and}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Matrix\ types\ for\ the\ Matrix\ operand,\ and\ VectorView\ and\ Vector\ types}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ for\ the\ Vector\ operand.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ The\ multiplication\ is\ performed\ using\ the\ GEMV\ kernel,\ which\ handles}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ the\ actual\ computation\ efficiently,\ including\ any\ necessary\ type}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ conversions.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ @attention\ This\ operator\ uses\ fast\ BLAS\ implementation\ if\ both\ types}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ are\ floating\ point\ type\ and\ are\ the\ same,\ otherwise\ uses\ naive\ algorithm.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ It\ is\ usually\ worth\ casting\ a\ buffer\ for\ BLAS\ performance\ gains\ before\ hand.}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ @tparam\ T\ The\ type\ of\ the\ Matrix-\/like\ object\ (MatrixView\ or\ Matrix).}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ @tparam\ V\ The\ type\ of\ the\ Vector-\/like\ object\ (VectorView\ or\ Vector).}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ @param\ A\ The\ Matrix-\/like\ operand.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ @param\ x\ The\ Vector-\/like\ operand.}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ @return\ A\ new\ Vector\ resulting\ from\ the\ multiplication\ A\ *\ x.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ \textcolor{keyword}{template}\ <MatrixViewCompatible\ T,\ VectorViewCompatible\ V>}
+\DoxyCodeLine{00029\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{namespacemaf_1_1math_aa10366118175f185d9656b48350bbb87}{operator*}}(\textcolor{keyword}{const}\ T\ \&A,\ \textcolor{keyword}{const}\ V\ \&x)\ \{}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordflow}{if}\ (A.column\_count()\ !=\ x.size()\ ||\ x.orientation()\ !=\ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}})\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Inner\ dimensions\ do\ not\ match\ for\ Matrix-\/Vector\ multiplication!"{}});}
+\DoxyCodeLine{00033\ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{using\ }T\_type\ =\ \textcolor{keyword}{typename}\ T::value\_type;}
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{using\ }V\_type\ =\ \textcolor{keyword}{typename}\ V::value\_type;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_matrix_view}{MatrixView<T\_type>}}\ A\_view;}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ MatrixView<T\_type>>)\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ A\_view\ =\ A;}
+\DoxyCodeLine{00041\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ A\_view\ =\ A.view(0,\ 0,\ A.row\_count(),\ A.column\_count());}
+\DoxyCodeLine{00043\ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{comment}{//\ GEMV\ does\ the\ conversion\ of\ types\ internally(naively)}}
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<V,\ VectorView<V\_type>>)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908}{kernels::gemv}}(\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a2c01bf6305d59f47917ffbcfcbe71f0d}{kernels::OP::NoTrans}},\ A\_view,\ x);}
+\DoxyCodeLine{00048\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_ad71b365885ef9cac18d73bee09e86908}{kernels::gemv}}(\doxymbox{\hyperlink{namespacemaf_1_1math_1_1kernels_a9ac16c53ccb749011af572b9f42059b9a2c01bf6305d59f47917ffbcfcbe71f0d}{kernels::OP::NoTrans}},\ A\_view,\ x.view(0,\ x.size()));}
+\DoxyCodeLine{00050\ \ \ \}}
+\DoxyCodeLine{00051\ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

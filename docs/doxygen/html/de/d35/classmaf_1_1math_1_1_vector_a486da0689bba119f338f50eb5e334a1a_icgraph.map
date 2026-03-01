@@ -1,0 +1,52 @@
+<map id="maf::math::Vector::size" name="maf::math::Vector::size">
+<area shape="rect" id="Node000001" title="Gets the number of elements in the vector." alt="" coords="459,653,617,678"/>
+<area shape="rect" id="Node000002" href="$d4/d02/namespacemaf_1_1math.html#a2eb500c1b4cfbb3169604245422bd93e" title=" " alt="" coords="258,5,403,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="532,637,519,515,495,343,478,254,458,173,435,107,409,61,398,49,396,44,413,57,440,104,463,172,483,253,500,342,524,514,537,638"/>
+<area shape="rect" id="Node000003" href="$d4/d02/namespacemaf_1_1math.html#a66ab6cca490d0bd2354b736a13658711" title="Calculates the unbiased estimator of sample covariance." alt="" coords="28,248,179,273"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="531,637,516,543,490,418,474,355,455,299,433,255,409,226,376,208,338,199,299,198,260,203,186,225,132,249,128,245,184,220,259,198,299,193,339,194,378,203,413,222,438,252,460,297,479,353,496,416,521,542,536,638"/>
+<area shape="rect" id="Node000004" href="$de/d35/classmaf_1_1math_1_1_vector.html#a7c27148cb7d68df78343721cc56d67e0" title="Calculates the dot product (inner product) of two Vectors." alt="" coords="263,71,398,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="531,637,516,529,489,378,472,301,453,230,432,172,409,131,391,114,390,109,413,128,437,170,458,229,478,299,494,377,521,528,536,638"/>
+<area shape="rect" id="Node000006" href="$de/d35/classmaf_1_1math_1_1_vector.html#a5664c855ed6b5b75f47bce2bfd322ae0" title="Outer product (Column Vector * Row Vector)." alt="" coords="36,128,171,169"/>
+<area shape="poly" id="edge16_Node000001_Node000006" title=" " alt="" coords="531,637,516,537,491,403,474,335,455,274,433,225,409,193,383,174,354,160,324,150,292,143,228,138,172,140,169,136,228,133,292,138,325,144,356,155,386,170,413,189,438,222,460,272,479,334,496,401,522,536,536,638"/>
+<area shape="rect" id="Node000007" href="$d4/d02/namespacemaf_1_1math.html#af5b6a53c415e623671666331676152a1" title="Checks if two Vectors are element&#45;wise equal within a tolerance." alt="" coords="266,236,395,277"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="533,637,524,568,505,476,489,426,468,377,442,331,409,290,396,279,395,273,413,286,446,328,473,375,494,425,510,475,530,568,538,638"/>
+<area shape="rect" id="Node000008" href="$d4/d02/namespacemaf_1_1math.html#a3ecc6092e067ec17d8e9ed22a66f5deb" title="Calculates the unbiased estimator of expected value aka mean." alt="" coords="270,301,390,326"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="531,637,521,576,500,497,484,454,464,413,439,375,409,341,392,328,390,323,413,337,443,372,469,411,489,452,505,495,527,575,537,638"/>
+<area shape="rect" id="Node000009" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a0440e67c7abf25ef0f37d8d96e9e5cd4" title="Matrix&#45;Vector multiplication (Matrix * column_vector)." alt="" coords="264,351,396,391"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="528,637,513,589,490,527,455,463,434,433,409,406,395,395,394,389,413,402,438,430,460,460,494,525,518,587,533,638"/>
+<area shape="rect" id="Node000010" href="$de/d35/classmaf_1_1math_1_1_vector.html#a3f7dfd09c96426650c80548b86804450" title="Matrix&#45;Vector multiplication (Row Vector * Matrix)." alt="" coords="263,416,398,457"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="523,638,506,602,480,558,448,512,409,472,393,460,392,455,413,468,452,509,485,555,510,600,528,638"/>
+<area shape="rect" id="Node000011" href="$de/d35/classmaf_1_1math_1_1_vector.html#a0829be3ec6913e833fbfd9764cde5324" title="Element&#45;wise vector addition (Vector + Vector)." alt="" coords="263,481,398,522"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="515,641,470,590,441,562,410,537,390,525,389,520,412,533,445,558,474,586,521,640"/>
+<area shape="rect" id="Node000012" href="$de/d35/classmaf_1_1math_1_1_vector.html#ac407d9fd6c17717e6fb6871dd4419e49" title="Element&#45;wise vector addition assignment (Vector + Vector)." alt="" coords="263,547,398,587"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="497,646,410,603,384,590,382,585,412,598,502,644"/>
+<area shape="rect" id="Node000013" href="$de/d35/classmaf_1_1math_1_1_vector.html#a1efd12a6bd6634efbc9750dd0558fc7c" title="Element&#45;wise vector subtraction (Vector &#45; Vector)." alt="" coords="263,612,398,653"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="441,652,399,646,397,641,446,649"/>
+<area shape="rect" id="Node000014" href="$de/d35/classmaf_1_1math_1_1_vector.html#a9788849517cae340aa15007d1aa5c285" title="Element&#45;wise vector subtraction assignment (Vector &#45; Vector)." alt="" coords="263,677,398,718"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="442,682,399,690,396,685,446,679"/>
+<area shape="rect" id="Node000015" href="$de/d35/classmaf_1_1math_1_1_vector.html#ab956641750e967174430876f802852ba" title="Checks for exact element&#45;wise equality." alt="" coords="263,743,398,783"/>
+<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="497,688,412,732,385,744,381,740,410,727,500,684"/>
+<area shape="rect" id="Node000016" href="$d4/d02/namespacemaf_1_1math.html#ae14afbf9f10452228d7577bd94190353" title="Computes the QR decomposition of a matrix A using Householder reflections." alt="" coords="5,1028,202,1053"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="517,693,475,745,445,773,412,797,389,809,368,816,330,821,292,828,273,835,251,848,202,892,162,944,132,993,113,1028,108,1026,127,990,158,941,198,889,248,844,270,830,291,822,329,816,367,811,387,804,410,793,442,769,471,742,520,689"/>
+<area shape="rect" id="Node000017" href="$de/d35/classmaf_1_1math_1_1_vector.html#a8f1900daefc1a467b50da3c889612c75" title="Creates and returns a new vector that is the transpose of this one." alt="" coords="263,857,398,898"/>
+<area shape="poly" id="edge18_Node000001_Node000017" title=" " alt="" coords="524,690,480,765,449,805,413,841,386,859,382,855,409,837,445,802,476,762,521,695"/>
+<area shape="rect" id="Node000018" href="$de/d35/classmaf_1_1math_1_1_vector.html#a20d90280ea731664d99eed92bfb5741c" title="Constructs from a std::array by copying its data." alt="" coords="263,923,398,963"/>
+<area shape="poly" id="edge19_Node000001_Node000018" title=" " alt="" coords="531,691,517,740,492,798,458,858,437,886,413,912,395,924,392,920,409,908,433,883,453,855,487,796,512,738,528,696"/>
+<area shape="rect" id="Node000019" href="$de/d35/classmaf_1_1math_1_1_vector.html#aa71376d41514904ec98f245a7f0cd734" title="Constructs from a std::vector by copying its data." alt="" coords="263,988,398,1029"/>
+<area shape="poly" id="edge20_Node000001_Node000019" title=" " alt="" coords="534,691,523,752,501,827,465,906,441,944,413,977,397,990,393,985,409,973,437,940,460,904,496,825,518,751,532,696"/>
+<area shape="rect" id="Node000020" href="$de/d35/classmaf_1_1math_1_1_vector.html#a791bd6bc5808495544d2d1ca64fd4d18" title="Constructs from a raw data pointer." alt="" coords="263,1053,398,1094"/>
+<area shape="poly" id="edge21_Node000001_Node000020" title=" " alt="" coords="536,691,529,763,509,855,493,905,472,954,446,1000,413,1042,397,1055,394,1051,409,1038,441,997,467,951,488,903,504,854,524,762,534,696"/>
+<area shape="rect" id="Node000021" href="$de/d35/classmaf_1_1math_1_1_vector.html#adce45df04dad23e8e7fb2aa5dde3b2cf" title="Constructs an uninitialized vector of a given size." alt="" coords="263,1119,398,1159"/>
+<area shape="poly" id="edge22_Node000001_Node000021" title=" " alt="" coords="538,692,534,773,517,883,501,942,479,1001,450,1057,413,1107,398,1120,395,1116,409,1104,445,1054,474,999,496,941,512,882,529,773,536,696"/>
+<area shape="rect" id="Node000022" href="$de/d35/classmaf_1_1math_1_1_vector.html#a716800c73059c5fdcfddc4abd057343c" title="Constructs from a std::vector by moving its data." alt="" coords="263,1184,398,1225"/>
+<area shape="poly" id="edge23_Node000001_Node000022" title=" " alt="" coords="535,691,520,798,494,940,477,1013,458,1079,436,1134,413,1173,398,1186,395,1181,409,1169,432,1132,453,1078,472,1012,489,939,515,797,532,696"/>
+<area shape="rect" id="Node000023" href="$de/d35/classmaf_1_1math_1_1_vector.html#ab4a0ac259c4b813b12689a85214f0592" title="Creates a view (sub&#45;Vector) into this Vector." alt="" coords="250,1249,411,1274"/>
+<area shape="poly" id="edge24_Node000001_Node000023" title=" " alt="" coords="536,691,524,811,500,974,483,1057,463,1132,440,1195,413,1238,397,1251,394,1246,409,1235,435,1193,458,1131,478,1055,494,973,519,810,533,696"/>
+<area shape="rect" id="Node000024" href="$de/d35/classmaf_1_1math_1_1_vector.html#a854e8ab5e57f2a6e480ca196de8d4eaa" title="Creates a const view (sub&#45;Vector) into this Vector." alt="" coords="250,1298,411,1324"/>
+<area shape="poly" id="edge26_Node000001_Node000024" title=" " alt="" coords="536,692,526,821,503,999,486,1090,466,1173,442,1241,428,1268,413,1289,399,1300,397,1295,409,1285,423,1265,437,1239,461,1171,481,1088,498,998,521,820,534,696"/>
+<area shape="rect" id="Node000005" href="$de/d35/classmaf_1_1math_1_1_vector.html#a00b97a160b42a4eeb740eb693a3f8bd5" title="Dot product (Row Vector * Column Vector)." alt="" coords="36,63,171,103"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="246,90,173,88,170,83,250,86"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="247,114,173,133,169,129,250,110"/>
+<area shape="poly" id="edge8_Node000008_Node000003" title=" " alt="" coords="255,298,163,276,160,271,260,295"/>
+<area shape="poly" id="edge25_Node000023_Node000016" title=" " alt="" coords="256,1242,248,1238,198,1193,158,1140,127,1091,111,1056,111,1051,132,1088,162,1137,202,1189,251,1234,261,1242"/>
+</map>

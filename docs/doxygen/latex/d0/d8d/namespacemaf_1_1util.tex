@@ -1,0 +1,119 @@
+\doxysection{maf::\+util Namespace Reference}
+\hypertarget{namespacemaf_1_1util}{}\label{namespacemaf_1_1util}\index{maf::util@{maf::util}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classmaf_1_1util_1_1_mod_int}{Mod\+Int}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Concepts}
+\begin{DoxyCompactItemize}
+\item 
+concept \doxymbox{\hyperlink{conceptmaf_1_1util_1_1_numeric}{Numeric}}
+\begin{DoxyCompactList}\small\item\em Concept for numeric types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{Orientation}} :\+ uint8 \{ \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297a9940ad68617dac484ce18ec7b07beabc}{ROW}}
+, \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}{COLUMN}}
+ \}
+\begin{DoxyCompactList}\small\item\em Specifies if the vector behaves as a row or column vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{namespacemaf_1_1util_ab331fd08e50c92e3c379958f73f8ff21}{same\+\_\+sign}} (int a, int b)
+\item 
+bool \doxymbox{\hyperlink{namespacemaf_1_1util_a1fc89e6a016b62d850603a1d9ab579f1}{is\+\_\+power\+\_\+of\+\_\+two}} (int n)
+\item 
+unsigned int \doxymbox{\hyperlink{namespacemaf_1_1util_ae51d0d5b7dd64a53bd29db8ec4ab9811}{most\+\_\+significant\+\_\+bit}} (int n)
+\item 
+{\footnotesize template$<$typename T, typename U$>$ }\\bool \doxymbox{\hyperlink{namespacemaf_1_1util_ae4cf9e3bb378a55e4cb78fd699dfd4ff}{is\+\_\+close}} (T v1, U v2, double epsilon=EPSILON)
+\begin{DoxyCompactList}\small\item\em Check if two numeric values of potentially different types are close to each other within a given epsilon. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{namespacemaf_1_1util_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}\index{maf::util@{maf::util}!Orientation@{Orientation}}
+\index{Orientation@{Orientation}!maf::util@{maf::util}}
+\doxysubsubsection{\texorpdfstring{Orientation}{Orientation}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297} 
+enum \doxymbox{\hyperlink{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297}{maf::\+util::\+\+Orientation}} :\+ \doxymbox{\hyperlink{namespacemaf_a369c7c8a42bfa1b66b4aa59815849b1f}{uint8}}}
+
+
+
+Specifies if the vector behaves as a row or column vector. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ROW@{ROW}!maf::util@{maf::util}}
+\index{maf::util@{maf::util}!ROW@{ROW}}
+}\Hypertarget{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297a9940ad68617dac484ce18ec7b07beabc}\label{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297a9940ad68617dac484ce18ec7b07beabc} 
+ROW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COLUMN@{COLUMN}!maf::util@{maf::util}}
+\index{maf::util@{maf::util}!COLUMN@{COLUMN}}
+}\Hypertarget{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02}\label{namespacemaf_1_1util_a39d02d28701edb926edf1c9930554297aafe9f004ed3a9cc528054c668d639c02} 
+COLUMN&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{namespacemaf_1_1util_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacemaf_1_1util_ae4cf9e3bb378a55e4cb78fd699dfd4ff}\index{maf::util@{maf::util}!is\_close@{is\_close}}
+\index{is\_close@{is\_close}!maf::util@{maf::util}}
+\doxysubsubsection{\texorpdfstring{is\_close()}{is\_close()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1util_ae4cf9e3bb378a55e4cb78fd699dfd4ff} 
+template$<$typename T, typename U$>$ \\
+bool maf::\+util::\+is\+\_\+close (\begin{DoxyParamCaption}\item[{T}]{v1}{, }\item[{U}]{v2}{, }\item[{double}]{epsilon}{ = {\ttfamily EPSILON}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Check if two numeric values of potentially different types are close to each other within a given epsilon. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \doxylink{conceptmaf_1_1util_1_1_numeric}{Numeric} type of the first value. \\
+\hline
+{\em U} & \doxylink{conceptmaf_1_1util_1_1_numeric}{Numeric} type of the second value. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em v1} & First value. \\
+\hline
+{\em v2} & Second value. \\
+\hline
+{\em epsilon} & Tolerance for closeness check (default is EPSILON). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the values are close, false otherwise. 
+\end{DoxyReturn}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d8d/namespacemaf_1_1util_ae4cf9e3bb378a55e4cb78fd699dfd4ff_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemaf_1_1util_a1fc89e6a016b62d850603a1d9ab579f1}\index{maf::util@{maf::util}!is\_power\_of\_two@{is\_power\_of\_two}}
+\index{is\_power\_of\_two@{is\_power\_of\_two}!maf::util@{maf::util}}
+\doxysubsubsection{\texorpdfstring{is\_power\_of\_two()}{is\_power\_of\_two()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1util_a1fc89e6a016b62d850603a1d9ab579f1} 
+bool maf::\+util::\+is\+\_\+power\+\_\+of\+\_\+two (\begin{DoxyParamCaption}\item[{int}]{n}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{namespacemaf_1_1util_ae51d0d5b7dd64a53bd29db8ec4ab9811}\index{maf::util@{maf::util}!most\_significant\_bit@{most\_significant\_bit}}
+\index{most\_significant\_bit@{most\_significant\_bit}!maf::util@{maf::util}}
+\doxysubsubsection{\texorpdfstring{most\_significant\_bit()}{most\_significant\_bit()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1util_ae51d0d5b7dd64a53bd29db8ec4ab9811} 
+unsigned int maf::\+util::\+most\+\_\+significant\+\_\+bit (\begin{DoxyParamCaption}\item[{int}]{n}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{namespacemaf_1_1util_ab331fd08e50c92e3c379958f73f8ff21}\index{maf::util@{maf::util}!same\_sign@{same\_sign}}
+\index{same\_sign@{same\_sign}!maf::util@{maf::util}}
+\doxysubsubsection{\texorpdfstring{same\_sign()}{same\_sign()}}
+{\footnotesize\ttfamily \label{namespacemaf_1_1util_ab331fd08e50c92e3c379958f73f8ff21} 
+bool maf::\+util::\+same\+\_\+sign (\begin{DoxyParamCaption}\item[{int}]{a}{, }\item[{int}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+

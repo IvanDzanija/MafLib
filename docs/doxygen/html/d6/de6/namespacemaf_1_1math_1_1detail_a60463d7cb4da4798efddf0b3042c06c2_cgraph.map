@@ -1,0 +1,20 @@
+<map id="maf::math::detail::_plu" name="maf::math::detail::_plu">
+<area shape="rect" id="Node000001" title="Internal implementation of PLU decomposition." alt="" coords="5,119,157,144"/>
+<area shape="rect" id="Node000002" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a3506acc05e298718fb6d5587d6594055" title="Gets a mutable reference to the element at (row, col)." alt="" coords="566,5,710,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,116,139,76,170,56,204,40,248,26,294,16,387,5,475,3,553,8,548,10,475,8,387,11,295,22,249,31,206,45,173,60,142,81,97,120"/>
+<area shape="rect" id="Node000003" href="$d4/d02/namespacemaf_1_1math.html#a4d61c9a4c0434a2e01652894564f7ebb" title="Creates a new identity matrix of a given size." alt="" coords="206,54,336,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="125,116,193,96,189,100,127,120"/>
+<area shape="rect" id="Node000007" href="$d0/d8d/namespacemaf_1_1util.html#ae4cf9e3bb378a55e4cb78fd699dfd4ff" title="Check if two numeric values of potentially different types are close to each other within a given eps..." alt="" coords="209,119,333,144"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="156,129,196,130,191,133,158,134"/>
+<area shape="rect" id="Node000008" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#aa1fa0768048faff36f5dfc56911a8ce4" title="Gets the number of rows." alt="" coords="205,169,337,209"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="126,142,192,163,188,166,126,148"/>
+<area shape="rect" id="Node000009" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#afb33cbf4574399aa71beba18c85a2663" title="Gets a mutable std::span of a single row." alt="" coords="205,234,337,275"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="99,142,147,178,206,219,216,226,211,226,203,223,144,183,98,147"/>
+<area shape="rect" id="Node000004" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a12a8c0a0c3d48be5283f473f9b86c7e4" title="Converts this matrix into an identity matrix." alt="" coords="385,54,517,95"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="336,72,372,73,367,75,337,77"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="517,52,581,35,576,37,519,57"/>
+<area shape="rect" id="Node000005" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a71134f227c2c22e4ecf24b33ed3c0396" title="Fills the entire matrix with a single value." alt="" coords="565,59,711,84"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="517,71,553,72,547,73,518,76"/>
+<area shape="rect" id="Node000006" href="$d3/d6e/classmaf_1_1math_1_1_matrix.html#a774d7c4510a8977e5b19f5f332d5789c" title="Checks if the matrix is square (rows == cols)." alt="" coords="572,109,704,149"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="518,91,560,105,554,105,518,96"/>
+</map>

@@ -1,0 +1,171 @@
+\doxysection{maf::\+math::\+Fixed\+Point\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmaf_1_1math_1_1_fixed_point}{}\label{classmaf_1_1math_1_1_fixed_point}\index{maf::math::FixedPoint$<$ T $>$@{maf::math::FixedPoint$<$ T $>$}}
+
+
+Class for finding fixed points of a function using the Fixed Point Iteration method.  
+
+
+
+
+{\ttfamily \+\#include $<$Fixed\+Point.\+hpp$>$}
+
+
+
+Inheritance diagram for maf::\+math::\+Fixed\+Point\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{d3/dbb/classmaf_1_1math_1_1_fixed_point__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for maf::\+math::\+Fixed\+Point\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{d4/d97/classmaf_1_1math_1_1_fixed_point__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point_a3c326955ce45099f5146d396c7752d0f}{Fixed\+Point}} ()=delete
+\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point_a7191627b12d28d8cdf021aba7d35bbc8}{Fixed\+Point}} (const std::\+function$<$ T(T)$>$ \&function, T start)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{classmaf_1_1math_1_1_fixed_point}{Fixed\+Point} class. \end{DoxyCompactList}\item 
+T \doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point_a2b5897cdba095a6091a82b9f55e122bb}{get\+\_\+start}} () const
+\begin{DoxyCompactList}\small\item\em Get the initial guess for the fixed point. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point_abb08ffe657503fd26359c122f0ac9ed6}{set\+\_\+start}} (T start)
+\begin{DoxyCompactList}\small\item\em Set the initial guess for the fixed point. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{Optimizer\+Result}}$<$ T $>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point_aa7be58499fff62b9565639fc83a570f9}{solve}} (T tolerance=static\+\_\+cast$<$ T $>$(1e-\/7), \doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}} max\+\_\+iterations=1000) override
+\begin{DoxyCompactList}\small\item\em Find the fixed point using the Fixed Point Iteration method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer$<$ T $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a329df7dd6df98b63308ea00eb754aee6}{\texorpdfstring{$\sim$}{\string~}\+Optimizer}} ()=default
+\item 
+const std::\+function$<$ T(T)$>$ \& \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a3c73d3374da043a465816b809205c9b0}{get\+\_\+function}} () const
+\begin{DoxyCompactList}\small\item\em Get the function being optimized/\+solved. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_ad51593bad51b6d9f41392c374b1e5c6f}{set\+\_\+function}} (const std::\+function$<$ T(T)$>$ \&function)
+\begin{DoxyCompactList}\small\item\em Set the function to optimize/\+solve. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer$<$ T $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}} ()=default
+\begin{DoxyCompactList}\small\item\em Protected default constructor -\/ only derived classes can construct. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_acc1a6ba07534c566c9798419c938406b}{Optimizer}} (const std::\+function$<$ T(T)$>$ \&function)
+\begin{DoxyCompactList}\small\item\em Protected constructor with function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer}{maf::\+math::\+\+Optimizer$<$ T $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+std::\+function$<$ T(T)$>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\+\_\+function}}
+\begin{DoxyCompactList}\small\item\em The function to optimize/\+solve. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$std::\+floating\+\_\+point T$>$\newline
+class maf::\+math::\+\+Fixed\+Point$<$ T $>$}
+Class for finding fixed points of a function using the Fixed Point Iteration method. 
+
+\label{doc-constructors}
+\Hypertarget{classmaf_1_1math_1_1_fixed_point_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmaf_1_1math_1_1_fixed_point_a3c326955ce45099f5146d396c7752d0f}\index{maf::math::FixedPoint$<$ T $>$@{maf::math::FixedPoint$<$ T $>$}!FixedPoint@{FixedPoint}}
+\index{FixedPoint@{FixedPoint}!maf::math::FixedPoint$<$ T $>$@{maf::math::FixedPoint$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{FixedPoint()}{FixedPoint()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_fixed_point_a3c326955ce45099f5146d396c7752d0f} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point}{maf::\+math::\+\+Fixed\+Point}}$<$ T $>$::\+\+Fixed\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classmaf_1_1math_1_1_fixed_point_a7191627b12d28d8cdf021aba7d35bbc8}\index{maf::math::FixedPoint$<$ T $>$@{maf::math::FixedPoint$<$ T $>$}!FixedPoint@{FixedPoint}}
+\index{FixedPoint@{FixedPoint}!maf::math::FixedPoint$<$ T $>$@{maf::math::FixedPoint$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{FixedPoint()}{FixedPoint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_fixed_point_a7191627b12d28d8cdf021aba7d35bbc8} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+\doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point}{maf::\+math::\+\+Fixed\+Point}}$<$ T $>$::\+\+Fixed\+Point (\begin{DoxyParamCaption}\item[{const std::\+function$<$ T(T)$>$ \&}]{function}{, }\item[{T}]{start}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor for \doxylink{classmaf_1_1math_1_1_fixed_point}{Fixed\+Point} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em function} & The function for which to find the fixed point. \\
+\hline
+{\em start} & The initial guess for the fixed point. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{df/dce/classmaf_1_1math_1_1_fixed_point_a7191627b12d28d8cdf021aba7d35bbc8_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classmaf_1_1math_1_1_fixed_point_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmaf_1_1math_1_1_fixed_point_a2b5897cdba095a6091a82b9f55e122bb}\index{maf::math::FixedPoint$<$ T $>$@{maf::math::FixedPoint$<$ T $>$}!get\_start@{get\_start}}
+\index{get\_start@{get\_start}!maf::math::FixedPoint$<$ T $>$@{maf::math::FixedPoint$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_start()}{get\_start()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_fixed_point_a2b5897cdba095a6091a82b9f55e122bb} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+T \doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point}{maf::\+math::\+\+Fixed\+Point}}$<$ T $>$::\+get\+\_\+start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Get the initial guess for the fixed point. 
+
+\begin{DoxyReturn}{Returns}
+The initial guess. 
+\end{DoxyReturn}
+\Hypertarget{classmaf_1_1math_1_1_fixed_point_abb08ffe657503fd26359c122f0ac9ed6}\index{maf::math::FixedPoint$<$ T $>$@{maf::math::FixedPoint$<$ T $>$}!set\_start@{set\_start}}
+\index{set\_start@{set\_start}!maf::math::FixedPoint$<$ T $>$@{maf::math::FixedPoint$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_start()}{set\_start()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_fixed_point_abb08ffe657503fd26359c122f0ac9ed6} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+void \doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point}{maf::\+math::\+\+Fixed\+Point}}$<$ T $>$::\+set\+\_\+start (\begin{DoxyParamCaption}\item[{T}]{start}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the initial guess for the fixed point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & The initial guess to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmaf_1_1math_1_1_fixed_point_aa7be58499fff62b9565639fc83a570f9}\index{maf::math::FixedPoint$<$ T $>$@{maf::math::FixedPoint$<$ T $>$}!solve@{solve}}
+\index{solve@{solve}!maf::math::FixedPoint$<$ T $>$@{maf::math::FixedPoint$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily \label{classmaf_1_1math_1_1_fixed_point_aa7be58499fff62b9565639fc83a570f9} 
+template$<$std::\+floating\+\_\+point T$>$ \\
+\doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{Optimizer\+Result}}$<$ T $>$ \doxymbox{\hyperlink{classmaf_1_1math_1_1_fixed_point}{maf::\+math::\+\+Fixed\+Point}}$<$ T $>$::\+solve (\begin{DoxyParamCaption}\item[{T}]{tolerance}{ = {\ttfamily static\+\_\+cast$<$T$>$(1e-\/7)}, }\item[{\doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}}}]{max\+\_\+iterations}{ = {\ttfamily 1000}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Find the fixed point using the Fixed Point Iteration method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tolerance} & The tolerance for convergence. \\
+\hline
+{\em max\+\_\+iterations} & The maximum number of iterations to perform. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An \doxylink{structmaf_1_1math_1_1_optimizer_result}{Optimizer\+Result} containing the solution, error, and optionally an error message. 
+\end{DoxyReturn}
+
+
+Implements \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a007c3a463607c4ce090ba43f2cd15472}{maf::\+math::\+\+Optimizer$<$ T $>$}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+include/\+\+Maf\+Lib/\+math/\+optimization/\+\doxymbox{\hyperlink{_fixed_point_8hpp}{Fixed\+Point.\+hpp}}\end{DoxyCompactItemize}

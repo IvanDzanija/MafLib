@@ -1,0 +1,59 @@
+\doxysection{Vector\+Matrix\+Routines.\+hpp}
+\hypertarget{_vector_matrix_routines_8hpp_source}{}\label{_vector_matrix_routines_8hpp_source}\index{include/MafLib/math/linalg/AccelerateWrappers/VectorMatrixRoutines.hpp@{include/MafLib/math/linalg/AccelerateWrappers/VectorMatrixRoutines.hpp}}
+\doxymbox{\hyperlink{_vector_matrix_routines_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ACCELERATE\_VECTOR\_MATRIX\_ROUTINES\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ACCELERATE\_VECTOR\_MATRIX\_ROUTINES\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_accelerate_wrapper_8hpp}{AccelerateWrapper.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc}{maf::math::acc}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ BLAS\ LEVEL\ 2\ ROUTINES}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//=============================================================================}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ y\ =\ A\ *\ x\ (float)}}
+\DoxyCodeLine{00013\ [[nodiscard]]\ \textcolor{keyword}{inline}\ std::vector<float>\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a63b68222d1669958840b4e97fb5a3eb8}{sgemvm}}(\textcolor{keywordtype}{size\_t}\ rows,\ \textcolor{keywordtype}{size\_t}\ cols,}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<float>\ \&matrix,}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<float>\ \&vec)\ \{}
+\DoxyCodeLine{00016\ \ \ std::vector<float>\ result(rows,\ 0.0F);}
+\DoxyCodeLine{00017\ \ \ cblas\_sgemv(CblasRowMajor,\ CblasNoTrans,\ rows,\ cols,\ 1.0F,\ matrix.data(),\ cols,}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vec.data(),\ 1,\ 0.0F,\ result.data(),\ 1);}
+\DoxyCodeLine{00019\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00020\ \}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ y\ =\ A\ *\ x\ (double)}}
+\DoxyCodeLine{00023\ [[nodiscard]]\ \textcolor{keyword}{inline}\ std::vector<double>\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a4623bc3e02b40761807e97700753965b}{dgemvm}}(\textcolor{keywordtype}{size\_t}\ rows,\ \textcolor{keywordtype}{size\_t}\ cols,}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ \&matrix,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ \&vec)\ \{}
+\DoxyCodeLine{00026\ \ \ std::vector<double>\ result(rows,\ 0.0);}
+\DoxyCodeLine{00027\ \ \ cblas\_dgemv(CblasRowMajor,\ CblasNoTrans,\ rows,\ cols,\ 1.0F,\ matrix.data(),\ cols,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vec.data(),\ 1,\ 0.0,\ result.data(),\ 1);}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00030\ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ y\ =\ x\ *\ A\ (float)}}
+\DoxyCodeLine{00033\ [[nodiscard]]\ \textcolor{keyword}{inline}\ std::vector<float>\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a94986b82d164e30556925b591bd1b6ad}{sgevmm}}(\textcolor{keywordtype}{size\_t}\ rows,\ \textcolor{keywordtype}{size\_t}\ cols,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<float>\ \&matrix,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<float>\ \&vec)\ \{}
+\DoxyCodeLine{00036\ \ \ std::vector<float>\ result(cols,\ 0.0F);}
+\DoxyCodeLine{00037\ \ \ cblas\_sgemv(CblasRowMajor,\ CblasTrans,\ rows,\ cols,\ 1.0F,\ matrix.data(),\ cols,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vec.data(),\ 1,\ 0.0F,\ result.data(),\ 1);}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00040\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ y\ =\ x\ *\ A\ (double)}}
+\DoxyCodeLine{00043\ [[nodiscard]]\ \textcolor{keyword}{inline}\ std::vector<double>\ \doxymbox{\hyperlink{namespacemaf_1_1math_1_1acc_a4740d3eef4cdf9cf56ace30cd655be4d}{dgevmm}}(\textcolor{keywordtype}{size\_t}\ rows,\ \textcolor{keywordtype}{size\_t}\ cols,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ \&matrix,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\ \&vec)\ \{}
+\DoxyCodeLine{00046\ \ \ std::vector<double>\ result(cols,\ 0.0F);}
+\DoxyCodeLine{00047\ \ \ cblas\_dgemv(CblasRowMajor,\ CblasTrans,\ rows,\ cols,\ 1.0F,\ matrix.data(),\ cols,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vec.data(),\ 1,\ 0.0F,\ result.data(),\ 1);}
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00050\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math::acc}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

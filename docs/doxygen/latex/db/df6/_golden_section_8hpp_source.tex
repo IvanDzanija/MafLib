@@ -1,0 +1,85 @@
+\doxysection{Golden\+Section.\+hpp}
+\hypertarget{_golden_section_8hpp_source}{}\label{_golden_section_8hpp_source}\index{include/MafLib/math/optimization/GoldenSection.hpp@{include/MafLib/math/optimization/GoldenSection.hpp}}
+\doxymbox{\hyperlink{_golden_section_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GOLDEN\_SECTION\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GOLDEN\_SECTION\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_optimizer_8hpp}{Optimizer.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\doxymbox{\hyperlink{namespacemaf_1_1math}{maf::math}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{template}\ <std::\textcolor{keywordtype}{float}ing\_po\textcolor{keywordtype}{int}\ T>}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_ae0903378d124f8726461ccd9971f2188}{GoldenSection}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}}<T>\ \{}
+\DoxyCodeLine{00015\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_ae0903378d124f8726461ccd9971f2188}{GoldenSection}}()\ =\ \textcolor{keyword}{delete};\ \ \textcolor{comment}{//\ Make\ sure\ function\ is\ provided.}}
+\DoxyCodeLine{00023\ \ \ \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_a9ab68d5a6a8a5a1f738acef12a0d405a}{GoldenSection}}(\textcolor{keyword}{const}\ std::function<T(T)>\ \&function,\ T\ lower\_bound,\ T\ upper\_bound)}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_a8015fc5cf223a5b31755955eee008cd1}{Optimizer}}<T>(function),\ \_lower\_bound(lower\_bound),\ \_upper\_bound(upper\_bound)\ \{\}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \ \ [[nodiscard]]\ T\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_ae66c8c6ae6891af99c4b08913a4707ea}{get\_lower\_bound}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_lower\_bound;\ \}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ \ \ [[nodiscard]]\ T\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_a238e56b0f65b3f17d570ef1e001c7a84}{get\_upper\_bound}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_upper\_bound;\ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_a1821e7f912bab8d72a38d46cbbe35431}{set\_lower\_bound}}(T\ lower\_bound)\ \{\ \_lower\_bound\ =\ lower\_bound;\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_aee1ea6463a7e35e48577e5e0a33ba6ab}{set\_upper\_bound}}(T\ upper\_bound)\ \{\ \_upper\_bound\ =\ upper\_bound;\ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00055\ \ \ [[nodiscard]]\ \doxymbox{\hyperlink{structmaf_1_1math_1_1_optimizer_result}{OptimizerResult<T>}}\ \doxymbox{\hyperlink{classmaf_1_1math_1_1_golden_section_ac29234bd33ea96107b972e232c686a69}{solve}}(T\ tolerance\ =\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(1e-\/7),}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespacemaf_af052326c13f45efe97d686b69973eb15}{int32}}\ max\_iterations\ =\ 100)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00057\ \ \ \ \ T\ a\ =\ \_lower\_bound;}
+\DoxyCodeLine{00058\ \ \ \ \ T\ b\ =\ \_upper\_bound;}
+\DoxyCodeLine{00059\ \ \ \ \ T\ h\ =\ b\ -\/\ a;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ Initial\ check\ for\ trivial\ case}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{if}\ (h\ <=\ tolerance)\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ T\ solution\ =\ (a\ +\ b)\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(2);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{.solution\ =\ solution,}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .error\ =\ h\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(2),}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .error\_message\ =\ std::nullopt\};}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ T\ x1\ =\ b\ -\/\ ratio\ *\ h;}
+\DoxyCodeLine{00069\ \ \ \ \ T\ x2\ =\ a\ +\ ratio\ *\ h;}
+\DoxyCodeLine{00070\ \ \ \ \ T\ f1\ =\ this-\/>\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}(x1);}
+\DoxyCodeLine{00071\ \ \ \ \ T\ f2\ =\ this-\/>\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}(x2);}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{while}\ (h\ >\ tolerance\ \&\&\ max\_iterations-\/-\/\ >\ 0)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ h\ =\ ratio\ *\ h;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (f1\ <\ f2)\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ b\ =\ x2;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ x2\ =\ x1;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ f2\ =\ f1;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ x1\ =\ b\ -\/\ (ratio\ *\ h);}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ f1\ =\ this-\/>\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}(x1);}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ a\ =\ x1;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ x1\ =\ x2;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ f1\ =\ f2;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ x2\ =\ a\ +\ (ratio\ *\ h);}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ f2\ =\ this-\/>\doxymbox{\hyperlink{classmaf_1_1math_1_1_optimizer_aa7c0a76a29f60a9b7bd994b0b3a6405e}{\_function}}(x2);}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00087\ \ \ \ \ \}}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{//\ This\ should\ probably\ never\ happen\ since\ this\ method\ will\ find\ the\ local}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//\ minima\ at\ least.}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{if}\ (max\_iterations\ <=\ 0\ \&\&\ h\ >\ tolerance)\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ .solution\ =\ (a\ +\ b)\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(2),}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ .error\ =\ h\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(2),}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ .error\_message\ =\ \textcolor{stringliteral}{"{}Maximum\ number\ of\ iterations\ reached\ without\ convergence."{}}\};}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ \ \ \ \ T\ solution\ =\ (a\ +\ b)\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(2);}
+\DoxyCodeLine{00097\ \ \ \ \ T\ error\ =\ h\ /\ \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(2);}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordflow}{return}\ \{.solution\ =\ solution,\ .error\ =\ error,\ .error\_message\ =\ std::nullopt\};}
+\DoxyCodeLine{00099\ \ \ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00103\ \ \ T\ \_lower\_bound;}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00106\ \ \ T\ \_upper\_bound;}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \textcolor{comment}{//\ Internal\ constant}}
+\DoxyCodeLine{00109\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ T\ ratio\ =\ T(1)\ /\ std::numbers::phi\_v<T>;}
+\DoxyCodeLine{00110\ \};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \}\ \ \textcolor{comment}{//\ namespace\ maf::math}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
