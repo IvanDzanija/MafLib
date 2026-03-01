@@ -30,6 +30,23 @@ class ITest {
       ++_passed;
     }
   }
+
+  template <typename Ex, typename Fn>
+  void assert_throw(Fn &&fn, const std::string &msg, const char *file, int line) {
+    bool thrown = false;
+    try {
+      fn();
+    } catch (const Ex &) {
+      thrown = true;
+      std::cout << "[PASS] " << msg << std::endl;
+    } catch (...) {
+      // Wrong exception type (or non-std exception)
+      thrown = false;
+      std::cout << "[FAIL] " << file << ":" << line << " → Expected exception of type "
+                << typeid(Ex).name() << " but got a different exception." << std::endl;
+    }
+    assert_true(thrown, msg, file, line);
+  }
 };
 
 #define ASSERT_SAME_TYPE(expr, Type)                                       \
@@ -37,4 +54,7 @@ class ITest {
                 "Type mismatch: " #expr " is not of type " #Type)
 
 #define ASSERT_TRUE(cond) assert_true((cond), __func__, __FILE__, __LINE__)
+
+#define ASSERT_THROW(expr, ExType) \
+  assert_throw<ExType>([&]() { (void)(expr); }, __func__, __FILE__, __LINE__)
 }  // namespace maf::test

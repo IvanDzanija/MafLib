@@ -1000,16 +1000,399 @@ class MatrixTests : public ITest {
     math::Matrix<double> expected_R(
         3, 3, {-30.0, 15.0, -30.0, 0.0, 15.0, 15.0, 0.0, 0.0, 45.0});
     auto [Q, R] = math::QR_decompostion(A);
-    std::cout << "HERE" << std::endl;
-    Q.print();
-    R.print();
+    // std::cout << "HERE" << std::endl;
+    // Q.print();
+    // R.print();
 
     ASSERT_TRUE(loosely_equal(Q, expected_Q));
     ASSERT_TRUE(loosely_equal(R, expected_R));
     ASSERT_TRUE(loosely_equal(Q * R, A));
   }
 
-  void qr_time_test() {
+  void should_throw_on_empty_matrix() {
+    math::Matrix<double> A0;
+    ASSERT_THROW((void)math::QR_decompostion(A0), std::invalid_argument);
+  }
+
+  void should_return_thin_q_and_square_r_by_default_square_case() {
+    math::Matrix<double> A(5, 5);
+    for (size_t i = 0; i < 5; ++i) {
+      for (size_t j = 0; j < 5; ++j) {
+        A.at(i, j) = (i == j) ? 2.0 : (double)((int)i - (int)j);
+      }
+    }
+
+    auto [Q, R] = math::QR_decompostion(A);
+    ASSERT_TRUE(Q.row_count() == 5u);
+    ASSERT_TRUE(Q.column_count() == 5u);
+    ASSERT_TRUE(R.row_count() == 5u);
+    ASSERT_TRUE(R.column_count() == 5u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_return_thin_q_and_square_r_by_default_tall_case() {
+    math::Matrix<double> A(7, 3);
+    for (size_t i = 0; i < 7; ++i) {
+      for (size_t j = 0; j < 3; ++j) {
+        A.at(i, j) = ((double)(i + 1) * (double)(j + 2)) - (0.25 * (double)(i));
+      }
+    }
+    auto [Q, R] = math::QR_decompostion(A);
+    ASSERT_TRUE(Q.row_count() == 7u);
+    ASSERT_TRUE(Q.column_count() == 3u);
+    ASSERT_TRUE(R.row_count() == 3u);
+    ASSERT_TRUE(R.column_count() == 3u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_return_thin_q_and_square_r_by_default_wide_case() {
+    math::Matrix<double> A(3, 7);
+    for (size_t i = 0; i < 3; ++i) {
+      for (size_t j = 0; j < 7; ++j) {
+        A.at(i, j) = ((double)(i - 1) * 1.5) + ((double)j * 0.2);
+      }
+    }
+    auto [Q, R] = math::QR_decompostion(A);
+    ASSERT_TRUE(Q.row_count() == 3u);
+    ASSERT_TRUE(Q.column_count() == 3u);
+    ASSERT_TRUE(R.row_count() == 3u);
+    ASSERT_TRUE(R.column_count() == 7u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_square_fullq_false_fullr_false() {
+    math::Matrix<double> A(4, 4, {1, 2, 3, 4, 5, 6, 7, 8, 2, -1, 0, 3, 9, 1, -2, 5});
+    auto [Q, R] = math::QR_decompostion(A, false, false);
+    ASSERT_TRUE(Q.row_count() == 4u);
+    ASSERT_TRUE(Q.column_count() == 4u);
+    ASSERT_TRUE(R.row_count() == 4u);
+    ASSERT_TRUE(R.column_count() == 4u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_square_fullq_true_fullr_false() {
+    math::Matrix<double> A(4, 4, {1, 2, 3, 4, 5, 6, 7, 8, 2, -1, 0, 3, 9, 1, -2, 5});
+    auto [Q, R] = math::QR_decompostion(A, true, false);
+    ASSERT_TRUE(Q.row_count() == 4u);
+    ASSERT_TRUE(Q.column_count() == 4u);
+    ASSERT_TRUE(R.row_count() == 4u);
+    ASSERT_TRUE(R.column_count() == 4u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_square_fullq_false_fullr_true() {
+    math::Matrix<double> A(4, 4, {1, 2, 3, 4, 5, 6, 7, 8, 2, -1, 0, 3, 9, 1, -2, 5});
+    auto [Q, R] = math::QR_decompostion(A, false, true);
+    ASSERT_TRUE(Q.row_count() == 4u);
+    ASSERT_TRUE(Q.column_count() == 4u);
+    ASSERT_TRUE(R.row_count() == 4u);
+    ASSERT_TRUE(R.column_count() == 4u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_square_fullq_true_fullr_true() {
+    math::Matrix<double> A(4, 4, {1, 2, 3, 4, 5, 6, 7, 8, 2, -1, 0, 3, 9, 1, -2, 5});
+    auto [Q, R] = math::QR_decompostion(A, true, true);
+    ASSERT_TRUE(Q.row_count() == 4u);
+    ASSERT_TRUE(Q.column_count() == 4u);
+    ASSERT_TRUE(R.row_count() == 4u);
+    ASSERT_TRUE(R.column_count() == 4u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_tall_fullq_false_fullr_false() {
+    math::Matrix<double> A(6, 3,
+                           {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, -1, 2, -2, 2, 3, 1, 0});
+    auto [Q, R] = math::QR_decompostion(A, false, false);
+    ASSERT_TRUE(Q.row_count() == 6u);
+    ASSERT_TRUE(Q.column_count() == 3u);
+    ASSERT_TRUE(R.row_count() == 3u);
+    ASSERT_TRUE(R.column_count() == 3u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_tall_fullq_true_fullr_false() {
+    math::Matrix<double> A(6, 3,
+                           {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, -1, 2, -2, 2, 3, 1, 0});
+    auto [Q, R] = math::QR_decompostion(A, true, false);
+    ASSERT_TRUE(Q.row_count() == 6u);
+    ASSERT_TRUE(Q.column_count() == 6u);
+    ASSERT_TRUE(R.row_count() == 3u);
+    ASSERT_TRUE(R.column_count() == 3u);
+    // Matrix multiplication does not work here because of economy output
+    // ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_tall_fullq_false_fullr_true() {
+    math::Matrix<double> A(6, 3,
+                           {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, -1, 2, -2, 2, 3, 1, 0});
+    auto [Q, R] = math::QR_decompostion(A, false, true);
+    ASSERT_TRUE(Q.row_count() == 6u);
+    ASSERT_TRUE(Q.column_count() == 3u);
+    ASSERT_TRUE(R.row_count() == 6u);
+    ASSERT_TRUE(R.column_count() == 3u);
+    // Matrix multiplication does not work here because of economy output
+    // ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_tall_fullq_true_fullr_true() {
+    math::Matrix<double> A(6, 3,
+                           {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, -1, 2, -2, 2, 3, 1, 0});
+    auto [Q, R] = math::QR_decompostion(A, true, true);
+    ASSERT_TRUE(Q.row_count() == 6u);
+    ASSERT_TRUE(Q.column_count() == 6u);
+    ASSERT_TRUE(R.row_count() == 6u);
+    ASSERT_TRUE(R.column_count() == 3u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_wide_fullq_false_fullr_false() {
+    math::Matrix<double> A(3, 6,
+                           {1, 2, 3, 4, 5, 6, 0, -1, 2, -3, 4, -5, 2, 2, 1, 0, -1, -2});
+    auto [Q, R] = math::QR_decompostion(A, false, false);
+
+    ASSERT_TRUE(Q.row_count() == 3u);
+    ASSERT_TRUE(Q.column_count() == 3u);
+    ASSERT_TRUE(R.row_count() == 3u);
+    ASSERT_TRUE(R.column_count() == 6u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_wide_fullq_true_fullr_false() {
+    math::Matrix<double> A(3, 6,
+                           {1, 2, 3, 4, 5, 6, 0, -1, 2, -3, 4, -5, 2, 2, 1, 0, -1, -2});
+    auto [Q, R] = math::QR_decompostion(A, true, false);
+    ASSERT_TRUE(Q.row_count() == 3u);
+    ASSERT_TRUE(Q.column_count() == 3u);
+    ASSERT_TRUE(R.row_count() == 3u);
+    ASSERT_TRUE(R.column_count() == 6u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_wide_fullq_false_fullr_true() {
+    math::Matrix<double> A(3, 6,
+                           {1, 2, 3, 4, 5, 6, 0, -1, 2, -3, 4, -5, 2, 2, 1, 0, -1, -2});
+    auto [Q, R] = math::QR_decompostion(A, false, true);
+    ASSERT_TRUE(Q.row_count() == 3u);
+    ASSERT_TRUE(Q.column_count() == 3u);
+    ASSERT_TRUE(R.row_count() == 3u);
+    ASSERT_TRUE(R.column_count() == 6u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_wide_fullq_true_fullr_true() {
+    math::Matrix<double> A(3, 6,
+                           {1, 2, 3, 4, 5, 6, 0, -1, 2, -3, 4, -5, 2, 2, 1, 0, -1, -2});
+    auto [Q, R] = math::QR_decompostion(A, true, true);
+    ASSERT_TRUE(Q.row_count() == 3u);
+    ASSERT_TRUE(Q.column_count() == 3u);
+    ASSERT_TRUE(R.row_count() == 3u);
+    ASSERT_TRUE(R.column_count() == 6u);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_qr_promote_int_matrix_to_double_result_and_reconstruct() {
+    math::Matrix<int> A(4, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, -1, 2});
+    auto qr = math::QR_decompostion(A);
+
+    math::Matrix<double> Ad(4, 3);
+    for (size_t i = 0; i < 4; ++i) {
+      for (size_t j = 0; j < 3; ++j) {
+        Ad.at(i, j) = (double)A.at(i, j);
+      }
+    }
+    ASSERT_SAME_TYPE(qr.Q, math::Matrix<double>);
+    ASSERT_SAME_TYPE(qr.R, math::Matrix<double>);
+    ASSERT_TRUE(loosely_equal(qr.Q * qr.R, Ad));
+  }
+
+  void should_qr_work_with_float_input() {
+    math::Matrix<float> A(5, 2);
+    for (size_t i = 0; i < 5; ++i) {
+      for (size_t j = 0; j < 2; ++j) {
+        A.at(i, j) = ((float)((int)i - 2) * 0.75f) + ((float)j * 0.1f);
+      }
+    }
+
+    auto qr = math::QR_decompostion(A);
+
+    ASSERT_TRUE(loosely_equal(qr.Q * qr.R, A));
+  }
+
+  void should_decompose_1x1_matrix() {
+    math::Matrix<double> A(1, 1, {-7.25});
+    auto [Q, R] = math::QR_decompostion(A);
+
+    ASSERT_TRUE(Q.row_count() == 1u);
+    ASSERT_TRUE(Q.column_count() == 1u);
+    ASSERT_TRUE(R.row_count() == 1u);
+    ASSERT_TRUE(R.column_count() == 1u);
+
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_nx1_column_vector() {
+    math::Matrix<double> A(6, 1, {3, -1, 0, 5, 2, -4});
+    auto [Q, R] = math::QR_decompostion(A);
+
+    ASSERT_TRUE(Q.row_count() == 6u);
+    ASSERT_TRUE(Q.column_count() == 1u);
+    ASSERT_TRUE(R.row_count() == 1u);
+    ASSERT_TRUE(R.column_count() == 1u);
+
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_1xn_row_vector() {
+    math::Matrix<double> A(1, 6, {3, -1, 0, 5, 2, -4});
+    auto [Q, R] = math::QR_decompostion(A);
+
+    ASSERT_TRUE(Q.row_count() == 1u);
+    ASSERT_TRUE(Q.column_count() == 1u);
+    ASSERT_TRUE(R.row_count() == 1u);
+    ASSERT_TRUE(R.column_count() == 6u);
+
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_upper_triangular_matrix() {
+    math::Matrix<double> A(4, 4, {5, 2, -1, 3, 0, -4, 7, 1, 0, 0, 2, -6, 0, 0, 0, 9});
+    auto [Q, R] = math::QR_decompostion(A);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+
+    for (size_t i = 0; i < 4; ++i) {
+      for (size_t j = 0; j < i; ++j) {
+        ASSERT_TRUE(std::abs(R.at(i, j)) < 1e-10);
+      }
+    }
+  }
+
+  void should_decompose_matrix_with_first_column_already_canonical() {
+    math::Matrix<double> A(4, 3, {3, 1, 2, 0, -4, 5, 0, 6, -1, 0, 2, 7});
+    auto [Q, R] = math::QR_decompostion(A);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_zero_matrix() {
+    math::Matrix<double> A(5, 4);
+    for (size_t i = 0; i < 5; ++i) {
+      for (size_t j = 0; j < 4; ++j) {
+        A.at(i, j) = 0.0;
+      }
+    }
+
+    auto [Q, R] = math::QR_decompostion(A, true, true);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_rank_deficient_duplicate_columns() {
+    math::Matrix<double> A(4, 3, {1, 2, 4, 2, 3, 6, 3, 4, 8, 4, 5, 10});
+    auto [Q, R] = math::QR_decompostion(A);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_decompose_matrix_with_zero_column() {
+    math::Matrix<double> A(4, 3, {1, 0, 2, 3, 0, 4, 5, 0, 6, 7, 0, 8});
+    auto [Q, R] = math::QR_decompostion(A, true, true);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+  }
+
+  void should_produce_orthonormal_columns_thin_q_tall() {
+    math::Matrix<double> A(6, 3,
+                           {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, -1, 2, -2, 2, 3, 1, 0});
+    auto [Q, R] = math::QR_decompostion(A, false, false);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+
+    math::Matrix<double> QtQ(3, 3);
+    for (size_t i = 0; i < 3; ++i) {
+      for (size_t j = 0; j < 3; ++j) {
+        double s = 0.0;
+        for (size_t r = 0; r < 6; ++r) {
+          s += Q.at(r, i) * Q.at(r, j);
+        }
+        QtQ.at(i, j) = s;
+      }
+    }
+    auto I = math::identity_matrix<double>(3);
+    ASSERT_TRUE(loosely_equal(QtQ, I));
+  }
+
+  void should_produce_orthonormal_columns_full_q_square() {
+    math::Matrix<double> A(4, 4, {1, 2, 3, 4, 5, 6, 7, 8, 2, -1, 0, 3, 9, 1, -2, 5});
+    auto [Q, R] = math::QR_decompostion(A, false, true);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+
+    math::Matrix<double> QtQ(4, 4);
+    for (size_t i = 0; i < 4; ++i) {
+      for (size_t j = 0; j < 4; ++j) {
+        double s = 0.0;
+        for (size_t r = 0; r < 4; ++r) {
+          s += Q.at(r, i) * Q.at(r, j);
+        }
+        QtQ.at(i, j) = s;
+      }
+    }
+    auto I = math::identity_matrix<double>(4);
+    ASSERT_TRUE(loosely_equal(QtQ, I));
+  }
+
+  void should_return_upper_triangular_r_in_square_case() {
+    math::Matrix<double> A(5, 5);
+    for (size_t i = 0; i < 5; ++i) {
+      for (size_t j = 0; j < 5; ++j) {
+        A.at(i, j) = (double)((int)(i + 1) * (int)(j + 2)) - 0.5 * (double)j;
+      }
+    }
+
+    auto [Q, R] = math::QR_decompostion(A);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+
+    for (size_t i = 0; i < 5; ++i) {
+      for (size_t j = 0; j < i; ++j) {
+        ASSERT_TRUE(std::abs(R.at(i, j)) < 1e-10);
+      }
+    }
+  }
+
+  void should_return_upper_triangular_r_in_tall_case_default_r_is_nxn() {
+    math::Matrix<double> A(8, 3);
+    for (size_t i = 0; i < 8; ++i) {
+      for (size_t j = 0; j < 3; ++j) {
+        A.at(i, j) = (double)(i + 1) - (2.0 * (double)j) + (0.1 * (double)(i * j));
+      }
+    }
+
+    auto [Q, R] = math::QR_decompostion(A);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+
+    for (size_t i = 0; i < 3; ++i) {
+      for (size_t j = 0; j < i; ++j) {
+        ASSERT_TRUE(std::abs(R.at(i, j)) < 1e-10);
+      }
+    }
+  }
+
+  void should_return_upper_triangular_r_in_wide_case_default_r_is_nxn() {
+    math::Matrix<double> A(3, 8);
+    for (size_t i = 0; i < 3; ++i) {
+      for (size_t j = 0; j < 8; ++j) {
+        A.at(i, j) = ((double)(i + 2) * 0.3) + (((double)j - 3) * 0.7);
+      }
+    }
+    A.print();
+    std::cout << std::endl;
+
+    auto [Q, R] = math::QR_decompostion(A, true, true);
+    ASSERT_TRUE(loosely_equal(Q * R, A));
+
+    for (size_t i = 0; i < 3; ++i) {
+      for (size_t j = 0; j < i; ++j) {
+        ASSERT_TRUE(std::abs(R.at(i, j)) < 1e-10);
+      }
+    }
+  }
+
+  static void qr_time_test() {
     std::vector<size_t> sizes = {512, 1024, 2048};
 
     std::random_device rd;
@@ -1034,13 +1417,11 @@ class MatrixTests : public ITest {
       std::cout << "QR elapsed time (n=" << n << "): " << elapsed.count()
                 << " seconds.\n";
 
-      // Approximate flop count for full QR with explicit Q
       double flops = (8.0 / 3.0) * n * n * n;
 
       std::cout << "QR approx GFLOPS: " << (flops / elapsed.count()) / 1e9
                 << " GFLOPS\n";
 
-      // Prevent compiler from optimizing away computation
       volatile double sink = 0.0;
       sink += qr.R.at(0, 0);
       sink += qr.Q.at(0, 0);
@@ -1049,83 +1430,114 @@ class MatrixTests : public ITest {
 
  public:
   int run_all_tests() override {
-    // should_construct_empty_matrix_with_zero_rows_and_columns();
-    // should_construct_empty_matrix_of_given_size();
-    // should_throw_if_constructed_with_zero_dimensions();
-    // should_construct_from_raw_data();
-    // should_throw_if_raw_data_is_null();
-    // should_construct_from_std_vector();
-    // should_throw_if_vector_size_mismatch();
-    // should_construct_from_nested_vector();
-    // should_throw_if_nested_vector_dimensions_mismatch();
-    // should_construct_from_std_array();
-    // should_construct_from_initializer_list();
-    // should_throw_if_initializer_list_size_mismatch();
-    // should_return_true_for_square_matrix();
-    // should_return_true_for_symmetric_matrix();
-    // should_return_true_for_triangular_matrix();
-    // should_return_true_for_diagonal_matrix();
-    // should_return_true_for_positive_definite_matrix();
-    // should_return_true_for_non_square_matrix();
-    // should_return_false_for_non_singular_matrix();
-    // should_return_true_for_singular_matrix();
-    // should_return_false_for_non_singular_matrix();
-    // should_cast_int_matrix_to_float();
-    // should_cast_float_matrix_to_int();
-    // should_cast_int_matrix_to_double();
-    // should_preserve_matrix_properties_after_cast();
-    // should_cast_negative_values_correctly();
-    // should_cast_large_matrix_efficiently();
-    // should_allow_chaining_cast_with_operations();
-    // should_cast_after_matrix_operations();
-    // should_fill_matrix_with_value();
-    // should_make_identity_matrix();
-    // should_transpose_square_matrix_in_place();
-    // should_return_transposed_copy_for_non_square_matrix();
-    // should_check_equality_between_identical_matrices();
-    // should_not_be_equal_if_any_element_differs();
-    // should_correctly_perform_unary_minus();
-    // should_add_two_matrices_of_same_size();
-    // should_add_scalar_and_matrix();
-    // should_add_assign_matrix();
-    // should_add_assign_scalar();
-    // should_subtract_two_matrices_of_same_size();
-    // should_subtract_scalar_and_matrix();
-    // should_subtract_assign_matrix();
-    // should_subtract_assign_scalar();
-    // should_multiply_matrix_and_scalar();
-    // should_multiply_assign_scalar();
-    // should_divide_matrix_and_scalar();
-    // should_divide_assign_scalar();
-    // should_multiply_matrices();
-    // should_multiply_matrix_and_vector();
-    // matmul_time_test();
-    // should_throw_if_plu_called_on_non_square_matrix();
-    // should_throw_for_singular_matrix();
-    // should_correctly_perform_plu_decomposition_on_small_matrix();
-    // should_correctly_handle_identity_matrix_in_plu();
-    // should_correctly_decompose_upper_triangular_matrix();
-    // should_correctly_handle_negative_pivots_in_plu();
-    // plu_time_test();
-    // should_decompose_identity_matrix();
-    // should_decompose_known_small_matrix();
-    // should_correctly_decompose_for_known_example();
-    // should_decompose_diagonal_matrix();
-    // should_reconstruct_from_random_b_times_b_t();
-    // should_throw_if_non_symmetric();
-    // should_throw_if_not_positive_definite();
-    // should_auto_convert_int_matrix_to_double_in_cholesky();
-    // should_preserve_float_type_in_cholesky();
-    // should_preserve_double_type_in_cholesky();
-    // should_explicitly_convert_int_to_float_in_cholesky();
-    // should_explicitly_convert_float_to_double_in_cholesky();
-    // should_handle_int_identity_matrix_in_cholesky();
-    // should_handle_diagonal_int_matrix_in_cholesky();
-    // cholesky_time_test();
+    should_construct_empty_matrix_with_zero_rows_and_columns();
+    should_construct_empty_matrix_of_given_size();
+    should_throw_if_constructed_with_zero_dimensions();
+    should_construct_from_raw_data();
+    should_throw_if_raw_data_is_null();
+    should_construct_from_std_vector();
+    should_throw_if_vector_size_mismatch();
+    should_construct_from_nested_vector();
+    should_throw_if_nested_vector_dimensions_mismatch();
+    should_construct_from_std_array();
+    should_construct_from_initializer_list();
+    should_throw_if_initializer_list_size_mismatch();
+    should_return_true_for_square_matrix();
+    should_return_true_for_symmetric_matrix();
+    should_return_true_for_triangular_matrix();
+    should_return_true_for_diagonal_matrix();
+    should_return_true_for_positive_definite_matrix();
+    should_return_true_for_non_square_matrix();
+    should_return_false_for_non_singular_matrix();
+    should_return_true_for_singular_matrix();
+    should_return_false_for_non_singular_matrix();
+    should_cast_int_matrix_to_float();
+    should_cast_float_matrix_to_int();
+    should_cast_int_matrix_to_double();
+    should_preserve_matrix_properties_after_cast();
+    should_cast_negative_values_correctly();
+    should_cast_large_matrix_efficiently();
+    should_allow_chaining_cast_with_operations();
+    should_cast_after_matrix_operations();
+    should_fill_matrix_with_value();
+    should_make_identity_matrix();
+    should_transpose_square_matrix_in_place();
+    should_return_transposed_copy_for_non_square_matrix();
+    should_check_equality_between_identical_matrices();
+    should_not_be_equal_if_any_element_differs();
+    should_correctly_perform_unary_minus();
+    should_add_two_matrices_of_same_size();
+    should_add_scalar_and_matrix();
+    should_add_assign_matrix();
+    should_add_assign_scalar();
+    should_subtract_two_matrices_of_same_size();
+    should_subtract_scalar_and_matrix();
+    should_subtract_assign_matrix();
+    should_subtract_assign_scalar();
+    should_multiply_matrix_and_scalar();
+    should_multiply_assign_scalar();
+    should_divide_matrix_and_scalar();
+    should_divide_assign_scalar();
+    should_multiply_matrices();
+    should_multiply_matrix_and_vector();
+    matmul_time_test();
+    should_throw_if_plu_called_on_non_square_matrix();
+    should_throw_for_singular_matrix();
+    should_correctly_perform_plu_decomposition_on_small_matrix();
+    should_correctly_handle_identity_matrix_in_plu();
+    should_correctly_decompose_upper_triangular_matrix();
+    should_correctly_handle_negative_pivots_in_plu();
+    plu_time_test();
+    should_decompose_identity_matrix();
+    should_decompose_known_small_matrix();
+    should_correctly_decompose_for_known_example();
+    should_decompose_diagonal_matrix();
+    should_reconstruct_from_random_b_times_b_t();
+    should_throw_if_non_symmetric();
+    should_throw_if_not_positive_definite();
+    should_auto_convert_int_matrix_to_double_in_cholesky();
+    should_preserve_float_type_in_cholesky();
+    should_preserve_double_type_in_cholesky();
+    should_explicitly_convert_int_to_float_in_cholesky();
+    should_explicitly_convert_float_to_double_in_cholesky();
+    should_handle_int_identity_matrix_in_cholesky();
+    should_handle_diagonal_int_matrix_in_cholesky();
+    cholesky_time_test();
 
-    // should_decompose_identity_matrix_qr();
+    should_decompose_identity_matrix_qr();
     should_decompose_known_small_matrix_qr();
-    // qr_time_test();
+    should_throw_on_empty_matrix();
+    should_return_thin_q_and_square_r_by_default_square_case();
+    should_return_thin_q_and_square_r_by_default_tall_case();
+    should_return_thin_q_and_square_r_by_default_wide_case();
+    should_decompose_square_fullq_false_fullr_false();
+    should_decompose_square_fullq_true_fullr_false();
+    should_decompose_square_fullq_false_fullr_true();
+    should_decompose_square_fullq_true_fullr_true();
+    should_decompose_tall_fullq_false_fullr_false();
+    should_decompose_tall_fullq_true_fullr_false();
+    should_decompose_tall_fullq_false_fullr_true();
+    should_decompose_tall_fullq_true_fullr_true();
+    should_decompose_wide_fullq_false_fullr_false();
+    should_decompose_wide_fullq_true_fullr_false();
+    should_decompose_wide_fullq_false_fullr_true();
+    should_decompose_wide_fullq_true_fullr_true();
+    should_qr_promote_int_matrix_to_double_result_and_reconstruct();
+    should_qr_work_with_float_input();
+    should_decompose_1x1_matrix();
+    should_decompose_nx1_column_vector();
+    should_decompose_1xn_row_vector();
+    should_decompose_upper_triangular_matrix();
+    should_decompose_matrix_with_first_column_already_canonical();
+    should_decompose_zero_matrix();
+    should_decompose_rank_deficient_duplicate_columns();
+    should_decompose_matrix_with_zero_column();
+    should_produce_orthonormal_columns_thin_q_tall();
+    should_produce_orthonormal_columns_full_q_square();
+    should_return_upper_triangular_r_in_square_case();
+    should_return_upper_triangular_r_in_tall_case_default_r_is_nxn();
+    should_return_upper_triangular_r_in_wide_case_default_r_is_nxn();
+    qr_time_test();
 
     return 0;
   }

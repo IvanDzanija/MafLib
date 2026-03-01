@@ -70,6 +70,22 @@ static inline T householder_column(MatrixView<T> A_work, size_t j) {
   return T(2) / vTv;
 }
 
+/**
+ * @brief Loads the Householder reflector vector from A_work for column j.
+ * @param A_work The matrix containing the reflector. The reflector is stored in a
+ * compact form: the first element (the "beta" value) is stored in A_work(j,j), and the
+ * rest of the reflector vector (the "v" tail) is stored in A_work(j+1..m-1, j).
+ * @param j The index of the column for which to load the reflector (0-based).
+ * @return A Vector<T> containing the full Householder reflector vector v, where v[0]
+ * = 1.0 and v[1..len-1] are loaded from A_work(j+1..m-1, j).
+ * @details This function reconstructs the full Householder reflector vector v from its
+ * compact storage in A_work. The first element of v is set to 1.0, and the remaining
+ * elements are copied from the corresponding entries in A_work. The length of the
+ * returned vector is m - j, where m is the number of rows in A_work.
+ * @attention The input matrix A_work should have been modified by householder_column()
+ * to store the reflector. The caller should ensure that j is a valid column index and
+ * that A_work has enough space to store the reflector.
+ */
 template <std::floating_point T>
 static inline Vector<T> load_reflector(const Matrix<T> &A_work, size_t j) {
   const size_t m = A_work.row_count();
@@ -90,9 +106,27 @@ using float_promote_t = std::conditional_t<std::is_floating_point_v<T>, T, doubl
 template <Numeric T>
 using QRResultType = QRResult<detail::float_promote_t<T>>;
 
+/**
+ * @brief Computes the QR decomposition of a matrix A using Householder reflections.
+ * @param A The input matrix to decompose.
+ * @param full_Q If true, returns the full m x m orthogonal matrix Q. If false, returns
+ * the thin m x k matrix Q (where k = min(m, n)).
+ * @param full_R If true, returns the full m x n upper triangular matrix R. If false,
+ * returns the thin k x n matrix R (where k = min(m, n)).
+ * @return A QRResultType<T> containing the matrices Q and R of the decomposition.
+ * @details This function performs QR decomposition using Householder reflections. It
+ * iteratively computes Householder reflectors to zero out sub-diagonal elements of A,
+ * storing the reflectors in-place. After processing all columns, it extracts the upper
+ * triangular matrix R and constructs the orthogonal matrix Q from the stored
+ * reflectors. The user can choose to return either the full or thin versions of Q and R
+ * based on their needs.
+ * @throws std::invalid_argument if A is empty or if dimensions are incompatible for
+ * decomposition.
+ */
 template <Numeric T>
-[[nodiscard]] QRResultType<T> QR_decompostion(const Matrix<T> &A, bool full_R = false,
-                                              bool full_Q = false) {
+[[nodiscard]] QRResultType<T> QR_decompostion(const Matrix<T> &A, bool full_Q = false,
+                                              bool full_R = false) {
+  using DataType = detail::float_promote_t<T>;
   const size_t m = A.row_count();
   const size_t n = A.column_count();
   if (m == 0 || n == 0) {
@@ -102,8 +136,8 @@ template <Numeric T>
   // Smaller dimension determines number of reflectors
   const size_t k = std::min(m, n);
 
-  Matrix<T> A_work = A;
-  std::vector<T> tau(k, 0.0);
+  Matrix<DataType> A_work = A.template cast<DataType>();
+  std::vector<DataType> tau(k, 0.0);
 
   for (size_t j = 0; j < k; ++j) {
     auto Aw_view = A_work.view(0, 0, m, n);
@@ -113,40 +147,24 @@ template <Numeric T>
       continue;
     }
 
-    Vector<double> v = detail::load_reflector(A_work, j);
+    Vector<DataType> v = detail::load_reflector(A_work, j);
     auto v_view = v.view(0, v.size());
-
-    // DEBUG:
-    std::cout << "Householder reflector for column " << j << ":\n";
-    v.print();
-    std::cout << "tau: " << tau[j] << "\n";
-    std::cout << "A_work after forming reflector:\n";
-    A_work.print();
 
     if (j + 1 < n) {
       auto A_block = A_work.view(j, j + 1, m - j, n - (j + 1));
 
-      std::cout << "Next block :" << std::endl;
-      A_block.print();
-
       // w = A_block^T * v
-      Vector<T> w = kernels::gemv(kernels::OP::Trans, A_block, v_view);
-      std::cout << "w: " << std::endl;
-      w.print();
-
+      Vector<DataType> w = kernels::gemv(kernels::OP::Trans, A_block, v_view);
       auto w_view = w.view(0, w.size());
 
       // A_block = A_block - (v_view * w_view) * tau[j];
       kernels::ger(A_block, v_view, w_view, -tau[j]);
-
-      std::cout << "A_block after applying reflector:\n";
-      A_block.print();
-      std::cout << std::endl;
     }
   }
 
   // Get R
-  Matrix<T> R(full_R ? m : n, n);
+  Matrix<DataType> R(full_R ? m : k, n);
+  R.fill(0.0);
   for (size_t i = 0; i < R.row_count(); ++i) {
     for (size_t j = i; j < n; ++j) {
       R[i][j] = A_work[i][j];
@@ -154,7 +172,7 @@ template <Numeric T>
   }
 
   // Get Q
-  Matrix<T> Q_full = identity_matrix<T>(m);
+  auto Q_full = identity_matrix<DataType>(m);
 
   for (size_t t = 0; t < k; ++t) {
     const size_t j = (k - 1) - t;
@@ -162,19 +180,18 @@ template <Numeric T>
       continue;
     }
 
-    Vector<double> v = detail::load_reflector(A_work, j);
+    Vector<DataType> v = detail::load_reflector(A_work, j);
     auto v_view = v.view(0, v.size());
 
-    auto Qblock = Q_full.view(j, 0, m - j, m);
+    auto Qblock = Q_full.view(j, j, m - j, m - j);
 
-    Vector<T> w = kernels::gemv(kernels::OP::Trans, Qblock, v_view);
+    Vector<DataType> w = kernels::gemv(kernels::OP::Trans, Qblock, v_view);
 
-    auto w_view = w.view(0, w.size());
-    kernels::ger(Qblock, v_view, w_view, -tau[j]);
+    kernels::ger(Qblock, v_view, w.view(0, w.size()), -tau[j]);
   }
 
   // Thin or full Q
-  Matrix<T> Q = full_Q ? std::move(Q_full) : Matrix<double>(m, k);
+  Matrix<DataType> Q = full_Q ? std::move(Q_full) : Matrix<DataType>(m, k);
   if (!full_Q) {
     for (size_t i = 0; i < m; ++i) {
       for (size_t j = 0; j < k; ++j) {
