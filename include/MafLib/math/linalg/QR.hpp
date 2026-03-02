@@ -2,6 +2,7 @@
 #define QR_HPP
 
 #pragma once
+#include "AccelerateWrappers/AccelerateWrapper.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
 #include "Matrix.hpp"
 #include "MatrixView.hpp"
@@ -56,7 +57,7 @@ namespace detail {
  * is a valid column index.
  */
 template <std::floating_point T>
-static inline T householder_column(MatrixView<T> A_work, size_t j) {
+[[nodiscard]] static inline T householder_column(MatrixView<T> A_work, size_t j) {
   const size_t m = A_work.row_count();
   if (j >= m) {
     throw std::out_of_range("Householder column index out of range!");
@@ -107,7 +108,8 @@ static inline T householder_column(MatrixView<T> A_work, size_t j) {
  * that A_work has enough space to store the reflector.
  */
 template <std::floating_point T>
-static inline Vector<T> load_reflector(const Matrix<T> &A_work, size_t j) {
+[[nodiscard]] static inline Vector<T> load_reflector(const Matrix<T> &A_work,
+                                                     size_t j) {
   const size_t m = A_work.row_count();
   const size_t len = m - j;
   Vector<T> v_out(len, COLUMN);
@@ -158,6 +160,98 @@ template <Numeric T>
 
   Matrix<DataType> A_work = A.template cast<DataType>();
   std::vector<DataType> tau(k, 0.0);
+
+#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
+  Matrix<DataType> A_lap = A_work.transposed();  // Column-major order for LAPACK
+  auto *a = A_lap.data();
+
+  auto mm = (__LAPACK_int)m;
+  auto nn = (__LAPACK_int)n;
+  auto kk = (__LAPACK_int)k;
+  auto lda = (__LAPACK_int)m;
+
+  std::vector<DataType> tau_lap(k);
+
+  __LAPACK_int info = 0;
+  __LAPACK_int lwork = -1;
+  DataType wq = 0;
+  if constexpr (std::is_same_v<DataType, float>) {
+    sgeqrf_(&mm, &nn, (float *)a, &lda, (float *)tau_lap.data(), (float *)&wq, &lwork,
+            &info);
+  } else {
+    dgeqrf_(&mm, &nn, (double *)a, &lda, (double *)tau_lap.data(), (double *)&wq,
+            &lwork, &info);
+  }
+  lwork = (__LAPACK_int)std::max<double>(1.0, std::ceil((double)wq));
+  std::vector<DataType> work((size_t)lwork);
+
+  if constexpr (std::is_same_v<DataType, float>) {
+    sgeqrf_(&mm, &nn, (float *)a, &lda, (float *)tau_lap.data(), (float *)work.data(),
+            &lwork, &info);
+  } else {
+    dgeqrf_(&mm, &nn, (double *)a, &lda, (double *)tau_lap.data(),
+            (double *)work.data(), &lwork, &info);
+  }
+  if (info != 0) {
+    throw std::runtime_error("Accelerate/LAPACK geqrf failed");
+  }
+
+  // Get R
+  Matrix<DataType> R(full_R ? m : k, n);
+  R.fill(0.0);
+  for (size_t i = 0; i < R.row_count(); ++i) {
+    for (size_t j = i; j < n; ++j) {
+      R[i][j] = A_lap[j][i];
+    }
+  }
+
+  // Get Q
+  if (full_Q && m > n) {
+    Matrix<DataType> A_big(m, m);
+    A_big.fill(0.0);
+    for (size_t r = 0; r < n; ++r) {
+      for (size_t c = 0; c < m; ++c) {
+        A_big[r][c] = A_lap[r][c];
+      }
+    }
+    A_lap = std::move(A_big);
+    a = A_lap.data();
+    nn = (__LAPACK_int)m;
+  }
+  const size_t qcols_sz = full_Q ? m : k;
+  auto qcols = (__LAPACK_int)qcols_sz;
+  lwork = -1;
+  wq = 0;
+  if constexpr (std::is_same_v<DataType, float>) {
+    sorgqr_(&mm, &qcols, &kk, (float *)a, &lda, (const float *)tau_lap.data(),
+            (float *)&wq, &lwork, &info);
+  } else {
+    dorgqr_(&mm, &qcols, &kk, (double *)a, &lda, (const double *)tau_lap.data(),
+            (double *)&wq, &lwork, &info);
+  }
+  lwork = (__LAPACK_int)std::max<double>(1.0, std::ceil((double)wq));
+  work.assign((size_t)lwork, DataType(0));
+
+  if constexpr (std::is_same_v<DataType, float>) {
+    sorgqr_(&mm, &qcols, &kk, (float *)a, &lda, (const float *)tau_lap.data(),
+            (float *)work.data(), &lwork, &info);
+  } else {
+    dorgqr_(&mm, &qcols, &kk, (double *)a, &lda, (const double *)tau_lap.data(),
+            (double *)work.data(), &lwork, &info);
+  }
+  if (info != 0) {
+    throw std::runtime_error("Accelerate/LAPACK orgqr failed");
+  }
+
+  Matrix<DataType> Q(m, qcols_sz);
+  for (size_t i = 0; i < m; ++i) {
+    for (size_t j = 0; j < qcols_sz; ++j) {
+      Q[i][j] = A_lap[j][i];
+    }
+  }
+
+  return {std::move(Q), std::move(R)};
+#else
 
   for (size_t j = 0; j < k; ++j) {
     auto Aw_view = A_work.view(0, 0, m, n);
@@ -221,6 +315,7 @@ template <Numeric T>
   }
 
   return {std::move(Q), std::move(R)};
+#endif
 }
 
 }  // namespace maf::math

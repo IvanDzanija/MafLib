@@ -1,6 +1,7 @@
 #ifndef MATRIX_VIEW_OPERATORS_H
 #define MATRIX_VIEW_OPERATORS_H
 #pragma once
+#include "MafLib/utility/Math.hpp"
 #include "ViewKernels.hpp"
 
 namespace maf::math {

@@ -4,7 +4,7 @@
 #pragma once
 #if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
 #include <vecLib/cblas_new.h>
-#include <vecLib/clapack.h>
+#include <vecLib/lapack.h>
 #include <vecLib/vDSP.h>
 
 #include "MafLib/main/GlobalHeader.hpp"
