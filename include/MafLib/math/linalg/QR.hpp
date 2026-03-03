@@ -8,6 +8,7 @@
 #include "MatrixView.hpp"
 #include "Vector.hpp"
 #include "VectorView.hpp"
+#include "ViewKernels.hpp"
 
 /**
  * @file QR.hpp
