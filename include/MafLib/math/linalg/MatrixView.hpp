@@ -1,6 +1,5 @@
 #ifndef MATRIX_VIEW_H
 #define MATRIX_VIEW_H
-
 #pragma once
 #include "MafLib/utility/Math.hpp"
 
@@ -127,5 +126,4 @@ class MatrixView {
 };
 }  // namespace maf::math
 
-#include "MatrixViewOperators.hpp"
 #endif

@@ -108,5 +108,4 @@ class VectorView {
 
 }  // namespace maf::math
 
-#include "VectorViewOperators.hpp"
 #endif

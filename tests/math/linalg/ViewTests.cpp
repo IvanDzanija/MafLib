@@ -2,8 +2,10 @@
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/math/linalg/Matrix.hpp"
 #include "MafLib/math/linalg/MatrixView.hpp"
+#include "MafLib/math/linalg/MatrixViewOperators.hpp"
 #include "MafLib/math/linalg/Vector.hpp"
 #include "MafLib/math/linalg/VectorView.hpp"
+#include "MafLib/math/linalg/VectorViewOperators.hpp"
 #include "MafLib/utility/Math.hpp"
 
 namespace maf::test {
