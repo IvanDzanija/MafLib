@@ -3,7 +3,7 @@ CompileFlags:
     CompilationDatabase: build/clang-debug
     # Extra flags to inject
     Add:
-        - -std=c++20
+        - -std=c++23
         - -Wall
         - -Wextra
         - -Wpedantic
