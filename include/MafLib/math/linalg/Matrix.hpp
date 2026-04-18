@@ -419,9 +419,6 @@ class Matrix {
 
     result.fill(R(0));
 
-    // NOTE: Delete this after testing
-    _fallback_matrix_multiply(a_data, b_data, c_data, a_rows, a_cols, b_cols);
-
 #if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
     // Handle all floating-point combinations with proper conversion
     if constexpr (std::is_floating_point_v<R>) {
@@ -578,21 +575,6 @@ class Matrix {
       throw std::out_of_range("Index out of bounds.");
     }
     return (row * _cols) + col;
-  }
-
-  /** * @brief Internal-only accessor for high-performance kernels.
-   * No bounds checking. Use only when indices are guaranteed to be valid.
-   */
-  [[nodiscard]] constexpr T &_unchecked_at(size_t row, size_t col) noexcept {
-    return _data[(row * _cols) + col];
-  }
-
-  /** * @brief Internal-only accessor for high-performance kernels.
-   * No bounds checking. Use only when indices are guaranteed to be valid.
-   */
-  [[nodiscard]] constexpr const T &_unchecked_at(size_t row,
-                                                 size_t col) const noexcept {
-    return _data[(row * _cols) + col];
   }
 
   /**
