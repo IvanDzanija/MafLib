@@ -2,4 +2,3 @@
 BasedOnStyle: Google
 ColumnLimit: 88
 PointerAlignment: Right
-Standard: c++23
