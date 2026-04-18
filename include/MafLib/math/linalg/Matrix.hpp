@@ -157,6 +157,7 @@ class Matrix {
 
   /**
    * @brief Accesses the element at [row][col] with no bounds check.
+   * @return pointer to the start of the specified row.
    */
   [[nodiscard]] T *operator[](size_t ind) noexcept {
     // TODO: add tests
@@ -165,10 +166,30 @@ class Matrix {
 
   /**
    * @brief Accesses the element at [row][col] with no bounds check.
+   * @return const pointer to the start of the specified row.
    */
   [[nodiscard]] const T *operator[](size_t ind) const noexcept {
     // TODO: add tests
     return &_data[ind * _cols];
+  }
+
+  /**
+   * @brief Accesses the element at [row, col] with no bounds check.
+   * @return reference to the element at (row, col).
+   */
+
+  [[nodiscard]] T &operator[](size_t row, size_t col) noexcept {
+    // TODO: add tests
+    return &_data[(row * _cols) + col];
+  }
+
+  /**
+   * @brief Accesses the element at [row, col] with no bounds check.
+   * @return const reference to the element at (row, col).
+   */
+  [[nodiscard]] const T &operator[](size_t row, size_t col) const noexcept {
+    // TODO: add tests
+    return &_data[(row * _cols) + col];
   }
 
   /**
@@ -397,6 +418,9 @@ class Matrix {
     R *c_data = result.data();
 
     result.fill(R(0));
+
+    // NOTE: Delete this after testing
+    _fallback_matrix_multiply(a_data, b_data, c_data, a_rows, a_cols, b_cols);
 
 #if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
     // Handle all floating-point combinations with proper conversion

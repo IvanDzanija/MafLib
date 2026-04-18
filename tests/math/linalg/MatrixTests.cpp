@@ -646,7 +646,7 @@ class MatrixTests : public ITest {
   }
 
   void matmul_time_test() {
-    const size_t n = 1024;
+    const size_t n = 1024 * 2;
     math::Matrix<double> A(n, n);
     math::Matrix<double> B(n, n);
 
