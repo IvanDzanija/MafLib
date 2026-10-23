@@ -11,6 +11,8 @@
 #include "MatrixRoutines.hpp"
 #include "VectorMatrixRoutines.hpp"
 #include "VectorRoutines.hpp"
+#elifdef OPENBLAS_AVAILABLE
+#include <cblas.h>
 #endif
 
 #endif

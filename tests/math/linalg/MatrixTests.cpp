@@ -125,6 +125,37 @@ class MatrixTests : public ITest {
   }
 
   //=============================================================================
+  // MATRIX ELEMENT ACCESS TESTS
+  //=============================================================================
+  void should_access_row_with_operator() {
+    math::Matrix<int> m(2, 3, {1, 2, 3, 4, 5, 6});
+    ASSERT_TRUE(m[0][2] == 3);
+    ASSERT_TRUE(m[1][0] == 4);
+
+    m[1][0] = 10;
+    ASSERT_TRUE(m.at(1, 0) == 10);
+    ASSERT_TRUE(m[1][0] == 10);
+  }
+
+  void should_access_element_with_row_col_operator() {
+    math::Matrix<int> m(2, 3, {1, 2, 3, 4, 5, 6});
+    ASSERT_TRUE((m[0, 0] == 1));
+    ASSERT_TRUE((m[0, 2] == 3));
+    ASSERT_TRUE((m[1, 1] == 5));
+
+    m[1, 2] = 42;
+    ASSERT_TRUE(m.at(1, 2) == 42);
+    ASSERT_TRUE((m[1, 2] == 42));
+  }
+
+  void should_access_with_const_operator() {
+    const math::Matrix<int> m(2, 3, {1, 2, 3, 4, 5, 6});
+    ASSERT_TRUE(m[0][2] == 3);
+    ASSERT_TRUE((m[1, 1] == 5));
+    ASSERT_TRUE((m[1, 2] == 6));
+  }
+
+  //=============================================================================
   // MATRIX CHECKERS TESTS
   //=============================================================================
   void should_return_true_for_square_matrix() {
@@ -1602,6 +1633,9 @@ class MatrixTests : public ITest {
     should_construct_from_std_array();
     should_construct_from_initializer_list();
     should_throw_if_initializer_list_size_mismatch();
+    should_access_row_with_operator();
+    should_access_element_with_row_col_operator();
+    should_access_with_const_operator();
     should_return_true_for_square_matrix();
     should_return_true_for_symmetric_matrix();
     should_return_true_for_triangular_matrix();

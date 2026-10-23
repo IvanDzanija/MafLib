@@ -363,7 +363,7 @@ class Matrix {
       vDSP_mtransD(_data.data(), 1, result.data(), 1, _cols, _rows);
       return result;
     }
-#elif defined(__OPENBLAS_AVAILABLE)
+#elifdef OPENBLAS_AVAILABLE
     if constexpr (std::is_same_v<T, float>) {
       cblas_somatcopy(CblasRowMajor, CblasTrans, _rows, _cols, 1.0f, _data.data(),
                       _cols, result.data(), _rows);
@@ -373,7 +373,7 @@ class Matrix {
                       result.data(), _rows);
       return result;
     }
-  }
+
 #endif
     // Generic implementation
 #pragma omp parallel for collapse(2) schedule(static) default(none) shared(result)
@@ -605,8 +605,8 @@ class Matrix {
       _fallback_matrix_multiply(a_data, b_data, c_data, a_rows, a_cols, b_cols);
     }
 #else
-  // Default non-Apple implementation
-  _fallback_matrix_multiply(a_data, b_data, c_data, a_rows, a_cols, b_cols);
+    // Default non-Apple implementation
+    _fallback_matrix_multiply(a_data, b_data, c_data, a_rows, a_cols, b_cols);
 #endif
     return result;
   }
