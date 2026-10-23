@@ -1,9 +1,6 @@
 #include "ITest.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/math/linalg/Matrix.hpp"
-#include "MafLib/math/linalg/MatrixCheckers.hpp"
-#include "MafLib/math/linalg/QR.hpp"
-#include "MafLib/math/linalg/Vector.hpp"
 
 namespace maf::test {
 using namespace maf;
