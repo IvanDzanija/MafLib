@@ -45,17 +45,19 @@ auto gemv(OP trans, const MatrixView<T> &A, const VectorView<U> &x) {
                 std::is_same_v<U_value_type, float>) {
     // https://developer.apple.com/documentation/accelerate/cblas_sgemv(_:_:_:_:_:_:_:_:_:_:_:_:)?language=objc
     CBLAS_TRANSPOSE blas_trans = (trans == OP::NoTrans) ? CblasNoTrans : CblasTrans;
-    cblas_sgemv(CblasRowMajor, blas_trans, (int)A.row_count(), (int)A.column_count(),
-                1.0F, A.data(), (int)A.get_stride(), x.data(), (int)x.get_increment(),
-                0.0F, y.data(), 1);
+    cblas_sgemv(CblasRowMajor, blas_trans, static_cast<int>(A.row_count()),
+                static_cast<int>(A.column_count()), 1.0F, A.data(),
+                static_cast<int>(A.get_stride()), x.data(),
+                static_cast<int>(x.get_increment()), 0.0F, y.data(), 1);
     return y;
   } else if constexpr (std::is_same_v<T_value_type, double> &&
                        std::is_same_v<U_value_type, double>) {
     // https://developer.apple.com/documentation/accelerate/cblas_dgemv(_:_:_:_:_:_:_:_:_:_:_:_:)?language=objc
     CBLAS_TRANSPOSE blas_trans = (trans == OP::NoTrans) ? CblasNoTrans : CblasTrans;
-    cblas_dgemv(CblasRowMajor, blas_trans, (int)A.row_count(), (int)A.column_count(),
-                1.0, A.data(), (int)A.get_stride(), x.data(), (int)x.get_increment(),
-                0.0, y.data(), 1);
+    cblas_dgemv(CblasRowMajor, blas_trans, static_cast<int>(A.row_count()),
+                static_cast<int>(A.column_count()), 1.0, A.data(),
+                static_cast<int>(A.get_stride()), x.data(),
+                static_cast<int>(x.get_increment()), 0.0, y.data(), 1);
     return y;
   }
 #endif
@@ -92,15 +94,19 @@ void ger(MatrixView<T> &A, const VectorView<U> &x, const VectorView<U> &y,
 #if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
   if constexpr (std::is_same_v<T_value_type, float> &&
                 std::is_same_v<U_value_type, float>) {
-    cblas_sger(CblasRowMajor, (int)A.row_count(), (int)A.column_count(), alpha,
-               x.data(), (int)x.get_increment(), y.data(), (int)y.get_increment(),
-               A.data(), (int)A.get_stride());
+    cblas_sger(CblasRowMajor, static_cast<int>(A.row_count()),
+               static_cast<int>(A.column_count()), alpha, x.data(),
+               static_cast<int>(x.get_increment()), y.data(),
+               static_cast<int>(y.get_increment()), A.data(),
+               static_cast<int>(A.get_stride()));
     return;
   } else if constexpr (std::is_same_v<T_value_type, double> &&
                        std::is_same_v<U_value_type, double>) {
-    cblas_dger(CblasRowMajor, (int)A.row_count(), (int)A.column_count(), alpha,
-               x.data(), (int)x.get_increment(), y.data(), (int)y.get_increment(),
-               A.data(), (int)A.get_stride());
+    cblas_dger(CblasRowMajor, static_cast<int>(A.row_count()),
+               static_cast<int>(A.column_count()), alpha, x.data(),
+               static_cast<int>(x.get_increment()), y.data(),
+               static_cast<int>(y.get_increment()), A.data(),
+               static_cast<int>(A.get_stride()));
     return;
   }
 #endif
@@ -146,12 +152,14 @@ auto dot(const VectorView<T> &x, const VectorView<U> &y) {
 #if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
   if constexpr (std::is_same_v<T_value_type, float> &&
                 std::is_same_v<U_value_type, float>) {
-    return cblas_sdot((int)n, x.data(), (int)x.get_increment(), y.data(),
-                      (int)y.get_increment());
+    return cblas_sdot(static_cast<int>(n), x.data(),
+                      static_cast<int>(x.get_increment()), y.data(),
+                      static_cast<int>(y.get_increment()));
   } else if constexpr (std::is_same_v<T_value_type, double> &&
                        std::is_same_v<U_value_type, double>) {
-    return cblas_ddot((int)n, x.data(), (int)x.get_increment(), y.data(),
-                      (int)y.get_increment());
+    return cblas_ddot(static_cast<int>(n), x.data(),
+                      static_cast<int>(x.get_increment()), y.data(),
+                      static_cast<int>(y.get_increment()));
   }
 #endif
 
@@ -167,6 +175,7 @@ auto dot(const VectorView<T> &x, const VectorView<U> &y) {
       result += static_cast<R>(x[i]) * static_cast<R>(y[i]);
     }
   }
+  return result;
 }
 
 /** @brief Computes the outer product of two vectors.
