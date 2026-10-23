@@ -54,7 +54,7 @@ if(APPLE)
 endif()
 
 # 4. Standard Dependencies
-find_package(OpenMP)   # <-- no longer REQUIRED
+find_package(OpenMP)
 if(OpenMP_CXX_FOUND)
     message(STATUS "OpenMP found. Enabling parallelism.")
     target_link_libraries(${PROJECT_NAME}

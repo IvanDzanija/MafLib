@@ -401,8 +401,7 @@ class Matrix {
     if constexpr (is_spd) {
       // res = det(L)^2
       auto L = cholesky(*this);
-      using AccumType =
-          typename std::decay_t<decltype(L)>::value_type;  // Get the promoted type
+      using AccumType = std::decay_t<decltype(L)>::value_type;  // Get the promoted type
       AccumType det = 1;
 
       for (size_t i = 0; i < _rows; ++i) {
@@ -413,8 +412,7 @@ class Matrix {
       // res = det(U) * det(P), det(L) = 1
       auto plu_res = plu(*this);
       using AccumType =
-          typename std::decay_t<decltype(plu_res.U)>::value_type;  // Get the promoted
-                                                                   // type
+          std::decay_t<decltype(plu_res.U)>::value_type;  // Get the promoted type
       auto det = static_cast<AccumType>(plu_res.sign);
 
       for (size_t i = 0; i < _rows; ++i) {
