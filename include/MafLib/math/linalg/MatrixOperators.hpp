@@ -313,18 +313,21 @@ template <Numeric U>
         "Dimension mismatch in Matrix * Vector multiplication.");
   }
 
-#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
+#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
   if constexpr (std::is_same_v<R, float>) {
-    return Vector<R>(_rows,
-                     acc::sgemvm(_rows, _cols, util::convert_if_needed<R>(_data),
-                                 util::convert_if_needed<R>(other.data_vector())),
-                     COLUMN);
-
+    std::vector<float> a_converted, v_converted;
+    const float *a_ptr = util::to_pointer(a_converted, _data);
+    const float *v_ptr = util::to_pointer(v_converted, other.data_vector());
+    Vector<float> result(_rows, COLUMN);
+    blas::sgemvm(_rows, _cols, a_ptr, v_ptr, 1, result.data(), _cols);
+    return result;
   } else if constexpr (std::is_same_v<R, double>) {
-    return Vector<R>(_rows,
-                     acc::dgemvm(_rows, _cols, util::convert_if_needed<R>(_data),
-                                 util::convert_if_needed<R>(other.data_vector())),
-                     COLUMN);
+    std::vector<double> a_converted, v_converted;
+    const double *a_ptr = util::to_pointer(a_converted, _data);
+    const double *v_ptr = util::to_pointer(v_converted, other.data_vector());
+    Vector<double> result(_rows, COLUMN);
+    blas::dgemvm(_rows, _cols, a_ptr, v_ptr, 1, result.data(), _cols);
+    return result;
   }
 #endif
 

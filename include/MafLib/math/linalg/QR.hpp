@@ -121,9 +121,6 @@ template <std::floating_point T>
   return v_out;
 }
 
-template <typename T>
-using float_promote_t = std::conditional_t<std::is_floating_point_v<T>, T, double>;
-
 }  // namespace detail
 
 template <Numeric T>
@@ -149,110 +146,21 @@ using QRResultType = QRResult<detail::float_promote_t<T>>;
 template <Numeric T>
 [[nodiscard]] QRResultType<T> QR_decompostion(const Matrix<T> &A, bool full_Q = false,
                                               bool full_R = false) {
-  using DataType = detail::float_promote_t<T>;
   const size_t m = A.row_count();
   const size_t n = A.column_count();
   if (m == 0 || n == 0) {
     throw std::invalid_argument("Cannot perform QR decomposition on empty matrix!");
   }
 
+#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
+  return blas::qr_factorize(A, full_Q, full_R);
+#else
+  using DataType = detail::float_promote_t<T>;
   // Smaller dimension determines number of reflectors
   const size_t k = std::min(m, n);
 
   Matrix<DataType> A_work = A.template cast<DataType>();
   std::vector<DataType> tau(k, 0.0);
-
-#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
-  Matrix<DataType> A_lap = A_work.transposed();  // Column-major order for LAPACK
-  auto *a = A_lap.data();
-
-  auto mm = (__LAPACK_int)m;
-  auto nn = (__LAPACK_int)n;
-  auto kk = (__LAPACK_int)k;
-  auto lda = (__LAPACK_int)m;
-
-  std::vector<DataType> tau_lap(k);
-
-  __LAPACK_int info = 0;
-  __LAPACK_int lwork = -1;
-  DataType wq = 0;
-  if constexpr (std::is_same_v<DataType, float>) {
-    sgeqrf_(&mm, &nn, (float *)a, &lda, (float *)tau_lap.data(), (float *)&wq, &lwork,
-            &info);
-  } else {
-    dgeqrf_(&mm, &nn, (double *)a, &lda, (double *)tau_lap.data(), (double *)&wq,
-            &lwork, &info);
-  }
-  lwork = (__LAPACK_int)std::max<double>(1.0, std::ceil((double)wq));
-  std::vector<DataType> work((size_t)lwork);
-
-  if constexpr (std::is_same_v<DataType, float>) {
-    sgeqrf_(&mm, &nn, (float *)a, &lda, (float *)tau_lap.data(), (float *)work.data(),
-            &lwork, &info);
-  } else {
-    dgeqrf_(&mm, &nn, (double *)a, &lda, (double *)tau_lap.data(),
-            (double *)work.data(), &lwork, &info);
-  }
-  if (info != 0) {
-    throw std::runtime_error("Accelerate/LAPACK geqrf failed");
-  }
-
-  // Get R
-  Matrix<DataType> R(full_R ? m : k, n);
-  R.fill(0.0);
-  for (size_t i = 0; i < R.row_count(); ++i) {
-    for (size_t j = i; j < n; ++j) {
-      R[i][j] = A_lap[j][i];
-    }
-  }
-
-  // Get Q
-  if (full_Q && m > n) {
-    Matrix<DataType> A_big(m, m);
-    A_big.fill(0.0);
-    for (size_t r = 0; r < n; ++r) {
-      for (size_t c = 0; c < m; ++c) {
-        A_big[r][c] = A_lap[r][c];
-      }
-    }
-    A_lap = std::move(A_big);
-    a = A_lap.data();
-    nn = (__LAPACK_int)m;
-  }
-  const size_t qcols_sz = full_Q ? m : k;
-  auto qcols = (__LAPACK_int)qcols_sz;
-  lwork = -1;
-  wq = 0;
-  if constexpr (std::is_same_v<DataType, float>) {
-    sorgqr_(&mm, &qcols, &kk, (float *)a, &lda, (const float *)tau_lap.data(),
-            (float *)&wq, &lwork, &info);
-  } else {
-    dorgqr_(&mm, &qcols, &kk, (double *)a, &lda, (const double *)tau_lap.data(),
-            (double *)&wq, &lwork, &info);
-  }
-  lwork = (__LAPACK_int)std::max<double>(1.0, std::ceil((double)wq));
-  work.assign((size_t)lwork, DataType(0));
-
-  if constexpr (std::is_same_v<DataType, float>) {
-    sorgqr_(&mm, &qcols, &kk, (float *)a, &lda, (const float *)tau_lap.data(),
-            (float *)work.data(), &lwork, &info);
-  } else {
-    dorgqr_(&mm, &qcols, &kk, (double *)a, &lda, (const double *)tau_lap.data(),
-            (double *)work.data(), &lwork, &info);
-  }
-  if (info != 0) {
-    throw std::runtime_error("Accelerate/LAPACK orgqr failed");
-  }
-
-  Matrix<DataType> Q(m, qcols_sz);
-  for (size_t i = 0; i < m; ++i) {
-    for (size_t j = 0; j < qcols_sz; ++j) {
-      Q[i][j] = A_lap[j][i];
-    }
-  }
-
-  return {std::move(Q), std::move(R)};
-#else
 
   for (size_t j = 0; j < k; ++j) {
     auto Aw_view = A_work.view(0, 0, m, n);

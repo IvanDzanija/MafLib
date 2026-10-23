@@ -326,13 +326,11 @@ template <Numeric U>
     throw std::invalid_argument("Vectors must be of same size!");
   }
 
-#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
-  if constexpr (std::is_same_v<T, U>) {
-    if constexpr (std::is_same_v<T, double>) {
-      return acc::ddot(_data, other.data());
-    } else if constexpr (std::is_same_v<T, float>) {
-      return acc::sdot(_data, other.data());
-    }
+#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
+  if constexpr (std::is_same_v<T, double> && std::is_same_v<U, double>) {
+    return blas::ddot(_data.size(), _data.data(), 1, other.data(), 1);
+  } else if constexpr (std::is_same_v<T, float> && std::is_same_v<U, float>) {
+    return blas::sdot(_data.size(), _data.data(), 1, other.data(), 1);
   }
 #endif
 
@@ -438,18 +436,21 @@ template <Numeric U>
         "Did you mean Matrix * Vector?");
   }
 
-#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
+#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
   if constexpr (std::is_same_v<R, float>) {
-    return Vector<R>(r,
-                     acc::sgevmm(m, r, util::convert_if_needed<R>(other.data_vector()),
-                                 util::convert_if_needed<R>(_data)),
-                     ROW);
-
+    std::vector<float> m_converted, v_converted;
+    const float *m_ptr = util::to_pointer(m_converted, other.data_vector());
+    const float *v_ptr = util::to_pointer(v_converted, _data);
+    Vector<float> result(r, ROW);
+    blas::sgevmm(m, r, m_ptr, v_ptr, 1, result.data(), r);
+    return result;
   } else if constexpr (std::is_same_v<R, double>) {
-    return Vector<R>(r,
-                     acc::dgevmm(m, r, util::convert_if_needed<R>(other.data_vector()),
-                                 util::convert_if_needed<R>(_data)),
-                     ROW);
+    std::vector<double> m_converted, v_converted;
+    const double *m_ptr = util::to_pointer(m_converted, other.data_vector());
+    const double *v_ptr = util::to_pointer(v_converted, _data);
+    Vector<double> result(r, ROW);
+    blas::dgevmm(m, r, m_ptr, v_ptr, 1, result.data(), r);
+    return result;
   }
 #endif
 

@@ -433,23 +433,20 @@ class Matrix {
     Matrix<T> result(_cols, _rows);
 #if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
     if constexpr (std::is_same_v<T, float>) {
-      vDSP_mtrans(_data.data(), 1, result.data(), 1, _cols, _rows);
+      blas::smatcopy(_data.data(), result.data(), _rows, _cols);
       return result;
     } else if constexpr (std::is_same_v<T, double>) {
-      vDSP_mtransD(_data.data(), 1, result.data(), 1, _cols, _rows);
+      blas::dmatcopy(_data.data(), result.data(), _rows, _cols);
       return result;
     }
 #elifdef OPENBLAS_AVAILABLE
     if constexpr (std::is_same_v<T, float>) {
-      cblas_somatcopy(CblasRowMajor, CblasTrans, _rows, _cols, 1.0f, _data.data(),
-                      _cols, result.data(), _rows);
+      blas::smatcopy(_data.data(), result.data(), _rows, _cols);
       return result;
     } else if constexpr (std::is_same_v<T, double>) {
-      cblas_domatcopy(CblasRowMajor, CblasTrans, _rows, _cols, 1.0, _data.data(), _cols,
-                      result.data(), _rows);
+      blas::dmatcopy(_data.data(), result.data(), _rows, _cols);
       return result;
     }
-
 #endif
     // Generic implementation
 #pragma omp parallel for collapse(2) schedule(static) default(none) shared(result)
@@ -616,72 +613,23 @@ class Matrix {
 
     result.fill(R(0));
 
-#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
-    // Handle all floating-point combinations with proper conversion
-    if constexpr (std::is_floating_point_v<R>) {
-      if constexpr (std::is_same_v<R, float>) {
-        // Both matrices are float or can be safely converted to float
-        std::vector<float> a_converted, b_converted;
-        const float *a_ptr = a_data;
-        const float *b_ptr = b_data;
-
-        // Convert matrix A if needed
-        if constexpr (!std::is_same_v<T, float>) {
-          a_converted.resize(_data.size());
-          std::transform(_data.begin(), _data.end(), a_converted.begin(),
-                         [](T val) { return static_cast<float>(val); });
-          a_ptr = a_converted.data();
-        } else {
-          a_ptr = a_data;
-        }
-
-        // Convert matrix B if needed
-        if constexpr (!std::is_same_v<U, float>) {
-          b_converted.resize(other.data().size());
-          std::transform(other.data().begin(), other.data().end(), b_converted.begin(),
-                         [](U val) { return static_cast<float>(val); });
-          b_ptr = b_converted.data();
-        } else {
-          b_ptr = b_data;
-        }
-
-        cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, a_rows, b_cols, a_cols,
-                    1.0F, a_ptr, a_cols, b_ptr, b_cols, 0.0F, c_data, b_cols);
-      } else if constexpr (std::is_same_v<R, double>) {
-        // Both matrices are double or can be safely converted to double
-        std::vector<double> a_converted, b_converted;
-        const double *a_ptr;
-        const double *b_ptr;
-
-        // Convert matrix A if needed
-        if constexpr (!std::is_same_v<T, double>) {
-          a_converted.resize(_data.size());
-          std::transform(_data.begin(), _data.end(), a_converted.begin(),
-                         [](T val) { return static_cast<double>(val); });
-          a_ptr = a_converted.data();
-        } else {
-          a_ptr = a_data;
-        }
-
-        // Convert matrix B if needed
-        if constexpr (!std::is_same_v<U, double>) {
-          b_converted.resize(other.data().size());
-          std::transform(other.data().begin(), other.data().end(), b_converted.begin(),
-                         [](U val) { return static_cast<double>(val); });
-          b_ptr = b_converted.data();
-        } else {
-          b_ptr = b_data;
-        }
-
-        cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, a_rows, b_cols, a_cols,
-                    1.0, a_ptr, a_cols, b_ptr, b_cols, 0.0, c_data, b_cols);
-      }
+#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
+    // Handle floating-point types with the BLAS backend (proper conversion handled
+    // via util::to_pointer)
+    if constexpr (std::is_same_v<R, float>) {
+      std::vector<float> a_converted, b_converted;
+      blas::sgemm(a_rows, b_cols, a_cols, util::to_pointer(a_converted, _data),
+                  util::to_pointer(b_converted, other.data_vector()), c_data);
+    } else if constexpr (std::is_same_v<R, double>) {
+      std::vector<double> a_converted, b_converted;
+      blas::dgemm(a_rows, b_cols, a_cols, util::to_pointer(a_converted, _data),
+                  util::to_pointer(b_converted, other.data_vector()), c_data);
     } else {
       // Integer types - use fallback
       _fallback_matrix_multiply(a_data, b_data, c_data, a_rows, a_cols, b_cols);
     }
 #else
-    // Default non-Apple implementation
+    // Default non-BLAS implementation
     _fallback_matrix_multiply(a_data, b_data, c_data, a_rows, a_cols, b_cols);
 #endif
     return result;
@@ -853,6 +801,7 @@ template <Numeric T, Numeric U>
 
 }  // namespace maf::math
 
+#include "AccelerateWrappers/LapackRoutines.hpp"
 #include "Cholesky.hpp"
 #include "MatrixConstructors.hpp"
 #include "MatrixFactories.hpp"

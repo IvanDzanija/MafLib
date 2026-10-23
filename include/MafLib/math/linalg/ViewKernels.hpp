@@ -40,24 +40,28 @@ auto gemv(OP trans, const MatrixView<T> &A, const VectorView<U> &x) {
   size_t out_size = (trans == OP::NoTrans) ? A.row_count() : A.column_count();
   Vector<R> y(out_size, (trans == OP::NoTrans) ? COLUMN : ROW);
 
-#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
+#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
   if constexpr (std::is_same_v<T_value_type, float> &&
                 std::is_same_v<U_value_type, float>) {
     // https://developer.apple.com/documentation/accelerate/cblas_sgemv(_:_:_:_:_:_:_:_:_:_:_:_:)?language=objc
-    CBLAS_TRANSPOSE blas_trans = (trans == OP::NoTrans) ? CblasNoTrans : CblasTrans;
-    cblas_sgemv(CblasRowMajor, blas_trans, static_cast<int>(A.row_count()),
-                static_cast<int>(A.column_count()), 1.0F, A.data(),
-                static_cast<int>(A.get_stride()), x.data(),
-                static_cast<int>(x.get_increment()), 0.0F, y.data(), 1);
+    if (trans == OP::NoTrans) {
+      blas::sgemvm(A.row_count(), A.column_count(), A.data(), x.data(),
+                   x.get_increment(), y.data(), A.get_stride());
+    } else {
+      blas::sgevmm(A.row_count(), A.column_count(), A.data(), x.data(),
+                   x.get_increment(), y.data(), A.get_stride());
+    }
     return y;
   } else if constexpr (std::is_same_v<T_value_type, double> &&
                        std::is_same_v<U_value_type, double>) {
     // https://developer.apple.com/documentation/accelerate/cblas_dgemv(_:_:_:_:_:_:_:_:_:_:_:_:)?language=objc
-    CBLAS_TRANSPOSE blas_trans = (trans == OP::NoTrans) ? CblasNoTrans : CblasTrans;
-    cblas_dgemv(CblasRowMajor, blas_trans, static_cast<int>(A.row_count()),
-                static_cast<int>(A.column_count()), 1.0, A.data(),
-                static_cast<int>(A.get_stride()), x.data(),
-                static_cast<int>(x.get_increment()), 0.0, y.data(), 1);
+    if (trans == OP::NoTrans) {
+      blas::dgemvm(A.row_count(), A.column_count(), A.data(), x.data(),
+                   x.get_increment(), y.data(), A.get_stride());
+    } else {
+      blas::dgevmm(A.row_count(), A.column_count(), A.data(), x.data(),
+                   x.get_increment(), y.data(), A.get_stride());
+    }
     return y;
   }
 #endif
@@ -91,22 +95,17 @@ void ger(MatrixView<T> &A, const VectorView<U> &x, const VectorView<U> &y,
   using U_value_type = std::remove_cvref_t<U>;
   using R = std::common_type_t<T_value_type, U_value_type>;
 
-#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
+#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
   if constexpr (std::is_same_v<T_value_type, float> &&
                 std::is_same_v<U_value_type, float>) {
-    cblas_sger(CblasRowMajor, static_cast<int>(A.row_count()),
-               static_cast<int>(A.column_count()), alpha, x.data(),
-               static_cast<int>(x.get_increment()), y.data(),
-               static_cast<int>(y.get_increment()), A.data(),
-               static_cast<int>(A.get_stride()));
+    blas::sger(A.row_count(), A.column_count(), static_cast<float>(alpha), x.data(),
+               x.get_increment(), y.data(), y.get_increment(), A.data(),
+               A.get_stride());
     return;
   } else if constexpr (std::is_same_v<T_value_type, double> &&
                        std::is_same_v<U_value_type, double>) {
-    cblas_dger(CblasRowMajor, static_cast<int>(A.row_count()),
-               static_cast<int>(A.column_count()), alpha, x.data(),
-               static_cast<int>(x.get_increment()), y.data(),
-               static_cast<int>(y.get_increment()), A.data(),
-               static_cast<int>(A.get_stride()));
+    blas::dger(A.row_count(), A.column_count(), alpha, x.data(), x.get_increment(),
+               y.data(), y.get_increment(), A.data(), A.get_stride());
     return;
   }
 #endif
@@ -149,17 +148,13 @@ auto dot(const VectorView<T> &x, const VectorView<U> &y) {
     throw std::invalid_argument("Vectors must be of same size for dot product!");
   }
 
-#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
+#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
   if constexpr (std::is_same_v<T_value_type, float> &&
                 std::is_same_v<U_value_type, float>) {
-    return cblas_sdot(static_cast<int>(n), x.data(),
-                      static_cast<int>(x.get_increment()), y.data(),
-                      static_cast<int>(y.get_increment()));
+    return blas::sdot(n, x.data(), x.get_increment(), y.data(), y.get_increment());
   } else if constexpr (std::is_same_v<T_value_type, double> &&
                        std::is_same_v<U_value_type, double>) {
-    return cblas_ddot(static_cast<int>(n), x.data(),
-                      static_cast<int>(x.get_increment()), y.data(),
-                      static_cast<int>(y.get_increment()));
+    return blas::ddot(n, x.data(), x.get_increment(), y.data(), y.get_increment());
   }
 #endif
 
