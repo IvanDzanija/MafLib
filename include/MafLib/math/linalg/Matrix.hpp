@@ -165,17 +165,13 @@ class Matrix {
    * @brief Accesses the element at [row][col] with no bounds check.
    * @return pointer to the start of the specified row.
    */
-  [[nodiscard]] T *operator[](size_t ind) noexcept {
-    // TODO: add tests
-    return &_data[ind * _cols];
-  }
+  [[nodiscard]] T *operator[](size_t ind) noexcept { return &_data[ind * _cols]; }
 
   /**
    * @brief Accesses the element at [row][col] with no bounds check.
    * @return const pointer to the start of the specified row.
    */
   [[nodiscard]] const T *operator[](size_t ind) const noexcept {
-    // TODO: add tests
     return &_data[ind * _cols];
   }
 
@@ -184,7 +180,6 @@ class Matrix {
    * @return reference to the element at (row, col).
    */
   [[nodiscard]] T &operator[](size_t row, size_t col) noexcept {
-    // TODO: add tests
     return _data[(row * _cols) + col];
   }
 
@@ -193,7 +188,6 @@ class Matrix {
    * @return const reference to the element at (row, col).
    */
   [[nodiscard]] const T &operator[](size_t row, size_t col) const noexcept {
-    // TODO: add tests
     return _data[(row * _cols) + col];
   }
 
@@ -253,34 +247,116 @@ class Matrix {
   // ----------------------------------
 
   /** @brief Checks if the matrix is square (rows == cols). */
-  [[nodiscard]] constexpr bool is_square() const;
+  [[nodiscard]] constexpr bool is_square() const { return _rows == _cols; }
 
   /** @brief Checks if the matrix is symmetric (A == A^T). */
-  [[nodiscard]] constexpr bool is_symmetric() const;
+  [[nodiscard]] constexpr bool is_symmetric() const {
+    if (!is_square()) {
+      return false;
+    }
+    for (size_t i = 0; i < _rows; ++i) {
+      for (size_t j = i + 1; j < _cols; ++j) {
+        if (!is_close(at(i, j), at(j, i))) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
   /** @brief Checks if the matrix is upper triangular */
-  [[nodiscard]] constexpr bool is_upper_triangular() const;
+  [[nodiscard]] constexpr bool is_upper_triangular() const {
+    if (!is_square()) {
+      return false;
+    }
+
+    static constexpr T ZERO = static_cast<T>(0);
+    for (size_t i = 1; i < _rows; ++i) {
+      for (size_t j = 0; j < i; ++j) {
+        if (!is_close(at(i, j), ZERO)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
   /** @brief Checks if the matrix is lower triangular */
-  [[nodiscard]] constexpr bool is_lower_triangular() const;
+  [[nodiscard]] constexpr bool is_lower_triangular() const {
+    if (!is_square()) {
+      return false;
+    }
+
+    static constexpr T ZERO = static_cast<T>(0);
+
+    for (size_t i = 0; i < _rows - 1; ++i) {
+      for (size_t j = i + 1; j < _cols; ++j) {
+        if (!is_close(at(i, j), ZERO)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
   /** @brief Checks if the matrix is diagonal */
-  [[nodiscard]] constexpr bool is_diagonal() const;
+  [[nodiscard]] constexpr bool is_diagonal() const {
+    if (!is_square()) {
+      return false;
+    }
 
-  /**
-   * @brief Checks if the matrix is positive definite.
-   * @details For symmetric matrices, attempts Cholesky decomposition.
-   * TODO: Add Sylvester's criterion for non-symmetric.
-   * Defined in MatrixCheckers.hpp
-   */
-  [[nodiscard]] constexpr bool is_positive_definite() const;
+    // Upper triangular
+    static constexpr T ZERO = static_cast<T>(0);
+    for (size_t i = 1; i < _rows; ++i) {
+      for (size_t j = 0; j < i; ++j) {
+        if (!is_close(at(i, j), ZERO)) {
+          return false;
+        }
+      }
+    }
+
+    // Lower triangular
+    for (size_t i = 0; i < _rows - 1; ++i) {
+      for (size_t j = i + 1; j < _cols; ++j) {
+        if (!is_close(at(i, j), ZERO)) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
 
   /**
    * @brief Checks if the matrix is singular (non-invertible).
    * @details Equivalent to det(A) == 0.
    * @details Equivalent to rank(A) < max(dimensions(A)).
    */
-  [[nodiscard]] constexpr bool is_singular() const;
+  [[nodiscard]] constexpr bool is_singular() const {
+    if (!is_square()) {
+      return true;
+    }
+    try {
+      plu(*this);
+      return false;
+    } catch (const std::runtime_error &e) {
+      return true;
+    }
+  }
+
+  /**
+   * @brief Checks if the matrix is positive definite.
+   * @details For symmetric matrices, attempts Cholesky decomposition.
+   * TODO: Add Sylvester's criterion for non-symmetric.
+   */
+  [[nodiscard]] constexpr bool is_positive_definite() const {
+    try {
+      cholesky(*this);
+      return true;
+    } catch (std::exception e) {
+      return false;
+    }
+  }
 
 #pragma mark methods
   // ----------------------------------
@@ -411,8 +487,8 @@ class Matrix {
     } else {
       // res = det(U) * det(P), det(L) = 1
       auto plu_res = plu(*this);
-      using AccumType =
-          std::decay_t<decltype(plu_res.U)>::value_type;  // Get the promoted type
+      using AccumType = std::decay_t<decltype(plu_res.U)>::value_type;  // Get the
+                                                                        // promoted type
       auto det = static_cast<AccumType>(plu_res.sign);
 
       for (size_t i = 0; i < _rows; ++i) {
@@ -745,10 +821,39 @@ class Matrix {
   }
 };
 
+#pragma mark friend_functions
+// ----------------------------------
+// FRIEND FUNCTIONS
+// ----------------------------------
+
+/**
+ * @brief Checks if two matrices are element-wise equal within a tolerance.
+ * @tparam T Numeric type of the first matrix.
+ * @tparam U Numeric type of the second matrix.
+ * @param eps The absolute tolerance for equality.
+ * @return true if dimensions match and all elements are "close".
+ */
+template <Numeric T, Numeric U>
+[[nodiscard]] constexpr bool loosely_equal(const Matrix<T> &first,
+                                           const Matrix<U> &second, double eps = 1e-6) {
+  size_t n = first.row_count();
+  size_t m = first.column_count();
+  if (n != second.row_count() || m != second.column_count()) {
+    return false;
+  }
+  for (size_t i = 0; i < n; ++i) {
+    for (size_t j = 0; j < m; ++j) {
+      if (!is_close(first.at(i, j), second.at(i, j), eps)) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 }  // namespace maf::math
 
 #include "Cholesky.hpp"
-#include "MatrixCheckers.hpp"
 #include "MatrixConstructors.hpp"
 #include "MatrixFactories.hpp"
 #include "MatrixOperators.hpp"
