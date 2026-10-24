@@ -18,6 +18,10 @@
  * maf::math::blas namespace alias, which points to whichever backend is
  * available. When no backend is available nothing is declared and callers
  * fall back to the generic implementations.
+ *
+ * Call-site code should guard on the backend-agnostic BLAS_AVAILABLE macro
+ * (also defined by CMake whenever either backend is enabled); only this
+ * file and the routine headers need to distinguish the two backends.
  */
 
 #if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)

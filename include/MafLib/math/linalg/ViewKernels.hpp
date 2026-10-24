@@ -40,7 +40,7 @@ auto gemv(OP trans, const MatrixView<T> &A, const VectorView<U> &x) {
   size_t out_size = (trans == OP::NoTrans) ? A.row_count() : A.column_count();
   Vector<R> y(out_size, (trans == OP::NoTrans) ? COLUMN : ROW);
 
-#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
+#ifdef BLAS_AVAILABLE
   if constexpr (std::is_same_v<T_value_type, float> &&
                 std::is_same_v<U_value_type, float>) {
     // https://developer.apple.com/documentation/accelerate/cblas_sgemv(_:_:_:_:_:_:_:_:_:_:_:_:)?language=objc
@@ -95,7 +95,7 @@ void ger(MatrixView<T> &A, const VectorView<U> &x, const VectorView<U> &y,
   using U_value_type = std::remove_cvref_t<U>;
   using R = std::common_type_t<T_value_type, U_value_type>;
 
-#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
+#ifdef BLAS_AVAILABLE
   if constexpr (std::is_same_v<T_value_type, float> &&
                 std::is_same_v<U_value_type, float>) {
     blas::sger(A.row_count(), A.column_count(), static_cast<float>(alpha), x.data(),
@@ -148,7 +148,7 @@ auto dot(const VectorView<T> &x, const VectorView<U> &y) {
     throw std::invalid_argument("Vectors must be of same size for dot product!");
   }
 
-#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
+#ifdef BLAS_AVAILABLE
   if constexpr (std::is_same_v<T_value_type, float> &&
                 std::is_same_v<U_value_type, float>) {
     return blas::sdot(n, x.data(), x.get_increment(), y.data(), y.get_increment());

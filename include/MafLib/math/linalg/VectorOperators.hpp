@@ -326,7 +326,7 @@ template <Numeric U>
     throw std::invalid_argument("Vectors must be of same size!");
   }
 
-#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
+#ifdef BLAS_AVAILABLE
   if constexpr (std::is_same_v<T, double> && std::is_same_v<U, double>) {
     return blas::ddot(_data.size(), _data.data(), 1, other.data(), 1);
   } else if constexpr (std::is_same_v<T, float> && std::is_same_v<U, float>) {
@@ -436,7 +436,7 @@ template <Numeric U>
         "Did you mean Matrix * Vector?");
   }
 
-#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
+#ifdef BLAS_AVAILABLE
   if constexpr (std::is_same_v<R, float>) {
     std::vector<float> m_converted, v_converted;
     const float *m_ptr = util::to_pointer(m_converted, other.data_vector());

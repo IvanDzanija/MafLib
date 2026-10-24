@@ -47,6 +47,7 @@ if(APPLE)
                 ACCELERATE_AVAILABLE
                 ACCELERATE_NEW_LAPACK
                 ACCELERATE_LAPACK_ILP64
+                BLAS_AVAILABLE
         )
     else()
         message(STATUS "Accelerate framework NOT found. Building without it.")
@@ -79,6 +80,7 @@ if(UNIX AND NOT APPLE)
         target_compile_definitions(${PROJECT_NAME}
             INTERFACE
                 OPENBLAS_AVAILABLE
+                BLAS_AVAILABLE
         )
     else()
         message(STATUS "OpenBLAS NOT found. Building without it.")

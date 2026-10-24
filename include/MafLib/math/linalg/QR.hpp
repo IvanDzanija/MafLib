@@ -5,6 +5,8 @@
 #include "Matrix.hpp"
 #include "MatrixView.hpp"
 #include "Vector.hpp"
+#include "VectorView.hpp"
+#include "ViewKernels.hpp"
 
 /**
  * @file QR.hpp
@@ -148,7 +150,7 @@ template <Numeric T>
     throw std::invalid_argument("Cannot perform QR decomposition on empty matrix!");
   }
 
-#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
+#ifdef BLAS_AVAILABLE
   return blas::qr_factorize(A, full_Q, full_R);
 #else
   using DataType = detail::float_promote_t<T>;

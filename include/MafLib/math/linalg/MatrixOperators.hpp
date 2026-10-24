@@ -313,7 +313,7 @@ template <Numeric U>
         "Dimension mismatch in Matrix * Vector multiplication.");
   }
 
-#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
+#ifdef BLAS_AVAILABLE
   if constexpr (std::is_same_v<R, float>) {
     std::vector<float> a_converted, v_converted;
     const float *a_ptr = util::to_pointer(a_converted, _data);

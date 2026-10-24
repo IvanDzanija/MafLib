@@ -4,6 +4,7 @@
 #include "BlasWrappers/BlasWrapper.hpp"
 #include "LinAlg.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
+#include "MafLib/utility/Conversions.hpp"
 #include "MafLib/utility/Math.hpp"
 
 namespace maf::math {
@@ -403,7 +404,7 @@ class Matrix {
     if (!is_square()) {
       throw std::invalid_argument("Matrix must be square to transpose in-place.");
     }
-#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
+#ifdef BLAS_AVAILABLE
     if constexpr (std::is_same_v<T, float> || std::is_same_v<T, double>) {
       Matrix<T> temp = this->transposed();
       *this = std::move(temp);
@@ -431,15 +432,7 @@ class Matrix {
    */
   [[nodiscard]] Matrix<T> transposed() const {
     Matrix<T> result(_cols, _rows);
-#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
-    if constexpr (std::is_same_v<T, float>) {
-      blas::smatcopy(_data.data(), result.data(), _rows, _cols);
-      return result;
-    } else if constexpr (std::is_same_v<T, double>) {
-      blas::dmatcopy(_data.data(), result.data(), _rows, _cols);
-      return result;
-    }
-#elifdef OPENBLAS_AVAILABLE
+#ifdef BLAS_AVAILABLE
     if constexpr (std::is_same_v<T, float>) {
       blas::smatcopy(_data.data(), result.data(), _rows, _cols);
       return result;
@@ -613,15 +606,15 @@ class Matrix {
 
     result.fill(R(0));
 
-#if (defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)) || defined(OPENBLAS_AVAILABLE)
-    // Handle floating-point types with the BLAS backend (proper conversion handled
-    // via util::to_pointer)
+#ifdef BLAS_AVAILABLE
     if constexpr (std::is_same_v<R, float>) {
-      std::vector<float> a_converted, b_converted;
+      std::vector<float> a_converted;
+      std::vector<float> b_converted;
       blas::sgemm(a_rows, b_cols, a_cols, util::to_pointer(a_converted, _data),
                   util::to_pointer(b_converted, other.data_vector()), c_data);
     } else if constexpr (std::is_same_v<R, double>) {
-      std::vector<double> a_converted, b_converted;
+      std::vector<double> a_converted;
+      std::vector<double> b_converted;
       blas::dgemm(a_rows, b_cols, a_cols, util::to_pointer(a_converted, _data),
                   util::to_pointer(b_converted, other.data_vector()), c_data);
     } else {

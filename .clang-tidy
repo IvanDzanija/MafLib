@@ -1,6 +1,7 @@
 ---
 Checks: >
     *, -abseil-*, -altera-*, -android-*, -fuchsia-*, -google-*, -llvm-*,
+    -misc-header-include-cycle,
     -llvmlibc-*, -zircon-*, readability-*, modernize-*,
     -readability-else-after-return,
     -readability-static-accessed-through-instance,
