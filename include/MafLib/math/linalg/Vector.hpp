@@ -1,7 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 #pragma once
-#include "AccelerateWrappers/AccelerateWrapper.hpp"
+#include "BlasWrappers/BlasWrapper.hpp"
 #include "LinAlg.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/utility/Math.hpp"

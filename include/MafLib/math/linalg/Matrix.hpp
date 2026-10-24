@@ -1,7 +1,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 #pragma once
-#include "AccelerateWrappers/AccelerateWrapper.hpp"
+#include "BlasWrappers/BlasWrapper.hpp"
 #include "LinAlg.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/utility/Math.hpp"
@@ -801,7 +801,7 @@ template <Numeric T, Numeric U>
 
 }  // namespace maf::math
 
-#include "AccelerateWrappers/LapackRoutines.hpp"
+#include "BlasWrappers/LapackRoutines.hpp"
 #include "Cholesky.hpp"
 #include "MatrixConstructors.hpp"
 #include "MatrixFactories.hpp"

@@ -1,7 +1,7 @@
 #ifndef VIEW_KERNELS_H
 #define VIEW_KERNELS_H
 #pragma once
-#include "AccelerateWrappers/AccelerateWrapper.hpp"
+#include "BlasWrappers/BlasWrapper.hpp"
 #include "Matrix.hpp"
 #include "MatrixView.hpp"
 #include "Vector.hpp"

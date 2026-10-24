@@ -1,10 +1,10 @@
-#ifndef ACCELERATE_LAPACK_ROUTINES_H
-#define ACCELERATE_LAPACK_ROUTINES_H
+#ifndef BLAS_LAPACK_ROUTINES_H
+#define BLAS_LAPACK_ROUTINES_H
 
 #pragma once
-#include "../Matrix.hpp"
-#include "AccelerateWrapper.hpp"
+#include "BlasWrapper.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
+#include "MafLib/math/linalg/Matrix.hpp"
 
 /**
  * @file LapackRoutines.hpp

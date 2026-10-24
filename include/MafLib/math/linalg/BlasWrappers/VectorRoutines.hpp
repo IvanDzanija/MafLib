@@ -1,8 +1,8 @@
-#ifndef ACCELERATE_VECTOR_ROUTINES_H
-#define ACCELERATE_VECTOR_ROUTINES_H
+#ifndef BLAS_VECTOR_ROUTINES_H
+#define BLAS_VECTOR_ROUTINES_H
 
 #pragma once
-#include "AccelerateWrapper.hpp"
+#include "BlasWrapper.hpp"
 
 /**
  * @file VectorRoutines.hpp

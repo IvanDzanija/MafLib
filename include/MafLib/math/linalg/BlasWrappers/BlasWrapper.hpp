@@ -1,10 +1,10 @@
-#ifndef ACCELERATE_WRAPPER_H
-#define ACCELERATE_WRAPPER_H
+#ifndef BLAS_WRAPPER_H
+#define BLAS_WRAPPER_H
 
 #pragma once
 
 /**
- * @file AccelerateWrapper.hpp
+ * @file BlasWrapper.hpp
  * @brief Single entry point for the optimized BLAS/LAPACK backends.
  *
  * On Apple the Accelerate framework is used (vecLib). On Linux an optional
@@ -27,17 +27,13 @@
 
 #include "MafLib/main/GlobalHeader.hpp"
 
-namespace maf::math {
-namespace acc {}
-}  // namespace maf::math
+namespace maf::math::acc {}  // namespace maf::math::acc
 #elifdef OPENBLAS_AVAILABLE
 #include <cblas.h>
 
 #include "MafLib/main/GlobalHeader.hpp"
 
-namespace maf::math {
-namespace oblas {}
-}  // namespace maf::math
+namespace maf::math::oblas {}  // namespace maf::math::oblas
 #endif
 
 #if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)

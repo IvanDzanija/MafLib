@@ -5,7 +5,8 @@
 
 namespace maf::util {
 template <typename To, typename From>
-static std::vector<To> convert_if_needed(const std::vector<From> &src) {
+[[nodiscard]] static constexpr std::vector<To> convert_if_needed(
+    const std::vector<From> &src) {
   if constexpr (std::is_same_v<To, From>) {
     return src;
   } else {
@@ -34,8 +35,8 @@ static std::vector<To> convert_if_needed(const std::vector<From> &src) {
  *  @return A pointer to the elements, viewed as To.
  */
 template <typename To, typename From>
-[[nodiscard]] inline const To *to_pointer(std::vector<To> &buf,
-                                          const std::vector<From> &src) {
+[[nodiscard]] static constexpr const To *to_pointer(std::vector<To> &buf,
+                                                    const std::vector<From> &src) {
   if constexpr (std::is_same_v<To, From>) {
     return src.data();
   } else {

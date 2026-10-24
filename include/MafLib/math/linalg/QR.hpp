@@ -2,13 +2,9 @@
 #define QR_HPP
 
 #pragma once
-#include "AccelerateWrappers/AccelerateWrapper.hpp"
-#include "MafLib/main/GlobalHeader.hpp"
 #include "Matrix.hpp"
 #include "MatrixView.hpp"
 #include "Vector.hpp"
-#include "VectorView.hpp"
-#include "ViewKernels.hpp"
 
 /**
  * @file QR.hpp

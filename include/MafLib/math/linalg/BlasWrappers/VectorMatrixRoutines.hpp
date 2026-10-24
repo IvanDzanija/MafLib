@@ -1,8 +1,8 @@
-#ifndef ACCELERATE_VECTOR_MATRIX_ROUTINES_H
-#define ACCELERATE_VECTOR_MATRIX_ROUTINES_H
+#ifndef VECTOR_MATRIX_ROUTINES_H
+#define VECTOR_MATRIX_ROUTINES_H
 
 #pragma once
-#include "AccelerateWrapper.hpp"
+#include "BlasWrapper.hpp"
 
 /**
  * @file VectorMatrixRoutines.hpp

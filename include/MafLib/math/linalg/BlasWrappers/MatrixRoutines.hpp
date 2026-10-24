@@ -1,8 +1,8 @@
-#ifndef ACCELERATE_MATRIX_ROUTINES_H
-#define ACCELERATE_MATRIX_ROUTINES_H
+#ifndef BLAS_MATRIX_ROUTINES_H
+#define BLAS_MATRIX_ROUTINES_H
 
 #pragma once
-#include "AccelerateWrapper.hpp"
+#include "BlasWrapper.hpp"
 
 /**
  * @file MatrixRoutines.hpp
