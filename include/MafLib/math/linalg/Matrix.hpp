@@ -500,13 +500,22 @@ class Matrix {
    * @brief Checks for exact element-wise equality.
    * @details For floating-point, use `loosely_equal()`.
    */
-  [[nodiscard]] constexpr bool operator==(const Matrix &other) const noexcept;
+  [[nodiscard]] constexpr bool operator==(const Matrix &other) const noexcept {
+    if (_rows != other._rows || _cols != other._cols) {
+      return false;
+    }
+    return _data == other._data;
+  }
 
   /**
    * @brief Unary minus. Returns a new matrix with all elements negated.
    * @return `Matrix<T>`
    */
-  [[nodiscard]] auto operator-() const noexcept;
+  [[nodiscard]] auto operator-() const noexcept {
+    Matrix<T> result(*this);
+    result._invert_sign();
+    return result;
+  }
 
   /**
    * @brief Element-wise matrix addition.
@@ -515,7 +524,21 @@ class Matrix {
    * @throws std::invalid_argument if dimensions do not match.
    */
   template <Numeric U>
-  [[nodiscard]] auto operator+(const Matrix<U> &other) const;
+  [[nodiscard]] auto operator+(const Matrix<U> &other) const {
+    if (_rows != other.row_count() || _cols != other.column_count()) {
+      throw std::invalid_argument(
+          "Matrices have to be of same dimensions for addition!");
+    }
+    using R = std::common_type_t<T, U>;
+
+    Matrix<R> result(_rows, _cols);
+
+    omp_loop(_data.size(), [&](size_t i) {
+      result.data()[i] = static_cast<R>(_data[i]) + static_cast<R>(other.data()[i]);
+    });
+
+    return result;
+  }
 
   /**
    * @brief Element-wise scalar addition (Matrix + scalar).
@@ -523,7 +546,17 @@ class Matrix {
    * @return Matrix of the common, promoted type.
    */
   template <Numeric U>
-  [[nodiscard]] auto operator+(const U &scalar) const noexcept;
+  [[nodiscard]] auto operator+(const U &scalar) const noexcept {
+    using R = std::common_type_t<T, U>;
+
+    Matrix<R> result(_rows, _cols);
+    R r_scalar = static_cast<R>(scalar);
+
+    omp_loop(_data.size(),
+             [&](size_t i) { result.data()[i] = static_cast<R>(_data[i]) + r_scalar; });
+
+    return result;
+  }
 
   /**
    * @brief Element-wise matrix addition assignment.
@@ -532,7 +565,17 @@ class Matrix {
    * @throws std::invalid_argument if dimensions do not match.
    */
   template <Numeric U>
-  Matrix<T> &operator+=(const Matrix<U> &other);
+  Matrix<T> &operator+=(const Matrix<U> &other) {
+    if (_rows != other.row_count() || _cols != other.column_count()) {
+      throw std::invalid_argument(
+          "Matrices have to be of same dimensions for addition!");
+    }
+
+    omp_loop(_data.size(),
+             [&](size_t i) { _data[i] += static_cast<T>(other.data()[i]); });
+
+    return *this;
+  }
 
   /**
    * @brief Element-wise scalar addition assignment (Matrix + scalar).
@@ -541,7 +584,15 @@ class Matrix {
    * @return Matrix of the original matrix type.
    */
   template <Numeric U>
-  Matrix<T> &operator+=(const U &scalar) noexcept;
+  Matrix<T> &operator+=(const U &scalar) noexcept {
+    using R = std::common_type_t<T, U>;
+
+    R r_scalar = static_cast<R>(scalar);
+
+    omp_loop(_data.size(), [&](size_t i) { _data[i] += r_scalar; });
+
+    return *this;
+  }
 
   /**
    * @brief Element-wise matrix subtraction.
@@ -550,7 +601,20 @@ class Matrix {
    * @throws std::invalid_argument if dimensions do not match.
    */
   template <Numeric U>
-  [[nodiscard]] auto operator-(const Matrix<U> &other) const;
+  [[nodiscard]] auto operator-(const Matrix<U> &other) const {
+    if (_rows != other.row_count() || _cols != other.column_count()) {
+      throw std::invalid_argument(
+          "Matrices have to be of same dimensions for subtraction!");
+    }
+    using R = std::common_type_t<T, U>;
+
+    Matrix<R> result(_rows, _cols);
+
+    omp_loop(_data.size(), [&](size_t i) {
+      result.data()[i] = static_cast<R>(_data[i]) - static_cast<R>(other.data()[i]);
+    });
+    return result;
+  }
 
   /**
    * @brief Element-wise scalar subtraction (Matrix - scalar).
@@ -766,6 +830,14 @@ class Matrix {
 // ----------------------------------
 // FRIEND FUNCTIONS
 // ----------------------------------
+
+/**
+ * @brief Element-wise scalar addition (scalar + Matrix).
+ */
+template <Numeric T, Numeric U>
+[[nodiscard]] auto operator+(const U &scalar, const Matrix<T> &matrix) noexcept {
+  return matrix + scalar;
+}
 
 /**
  * @brief Checks if two matrices are element-wise equal within a tolerance.
