@@ -869,7 +869,6 @@ class Matrix {
       return result;
     }
 #endif
-
     Vector<R> result(_rows, std::vector<R>(_rows, R(0)), Orientation::COLUMN);
 
     omp_loop(_rows, _cols, [&](size_t i) {
