@@ -1,15 +1,15 @@
 #ifndef VECTOR_CHECKERS_H
 #define VECTOR_CHECKERS_H
 #pragma once
-#include "Vector.hpp"
+#include "MafLib/math/linalg/detail/Vector.hpp"
 
 /**
  * @file VectorCheckers.hpp
  * @brief Contains implementations for the checker methods of the Vector<T>
  * class.
  *
- * This file is intended to be included at the *end* of Vector.hpp and
- * should not be included directly anywhere else.
+ * It is pulled in by detail/linalg.hpp, the dependency-ordered hub
+ * header of this directory. Avoid including it directly.
  */
 namespace maf::math {
 // Checks if vector is null vector

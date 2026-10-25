@@ -1,11 +1,13 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 #pragma once
-#include "BlasWrappers/BlasWrapper.hpp"
-#include "LinAlg.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/BlasWrapper.hpp"
+#include "MafLib/math/linalg/detail/Core.hpp"
+#include "MafLib/math/linalg/detail/MatrixView.hpp"
 #include "MafLib/utility/Conversions.hpp"
 #include "MafLib/utility/Math.hpp"
+#include "Maflib/math/linalg//detail/Vector.hpp"
 
 namespace maf::math {
 
@@ -622,7 +624,17 @@ class Matrix {
    * @return Matrix of the common, promoted type.
    */
   template <Numeric U>
-  [[nodiscard]] auto operator-(const U &scalar) const noexcept;
+  [[nodiscard]] auto operator-(const U &scalar) const noexcept {
+    using R = std::common_type_t<T, U>;
+
+    Matrix<R> result(_rows, _cols);
+    R r_scalar = static_cast<R>(scalar);
+
+    omp_loop(_data.size(),
+             [&](size_t i) { result.data()[i] = static_cast<R>(_data[i]) - r_scalar; });
+
+    return result;
+  }
 
   /**
    * @brief Element-wise matrix subtraction assignment.
@@ -631,7 +643,17 @@ class Matrix {
    * @throws std::invalid_argument if dimensions do not match.
    */
   template <Numeric U>
-  Matrix<T> &operator-=(const Matrix<U> &other);
+  Matrix<T> &operator-=(const Matrix<U> &other) {
+    if (_rows != other.row_count() || _cols != other.column_count()) {
+      throw std::invalid_argument(
+          "Matrices have to be of same dimensions for addition!");
+    }
+
+    omp_loop(_data.size(),
+             [&](size_t i) { _data[i] -= static_cast<T>(other.data()[i]); });
+
+    return *this;
+  }
 
   /**
    * @brief Element-wise scalar subtraction assignment (Matrix - scalar).
@@ -640,7 +662,15 @@ class Matrix {
    * @return Matrix of the original matrix type.
    */
   template <Numeric U>
-  Matrix<T> &operator-=(const U &scalar) noexcept;
+  Matrix<T> &operator-=(const U &scalar) noexcept {
+    using R = std::common_type_t<T, U>;
+
+    R r_scalar = static_cast<R>(scalar);
+
+    omp_loop(_data.size(), [&](size_t i) { _data[i] -= r_scalar; });
+
+    return *this;
+  }
 
   /**
    * @brief Standard algebraic matrix multiplication (A * B).
@@ -698,7 +728,17 @@ class Matrix {
    * @return Matrix of the common, promoted type.
    */
   template <Numeric U>
-  [[nodiscard]] auto operator*(const U &scalar) const noexcept;
+  [[nodiscard]] auto operator*(const U &scalar) const noexcept {
+    using R = std::common_type_t<T, U>;
+
+    Matrix<R> result(_rows, _cols);
+    R r_scalar = static_cast<R>(scalar);
+
+    omp_loop(_data.size(),
+             [&](size_t i) { result.data()[i] = static_cast<R>(_data[i]) * r_scalar; });
+
+    return result;
+  }
 
   /**
    * @brief Element-wise scalar multiplication assignment (Matrix * scalar).
@@ -707,7 +747,14 @@ class Matrix {
    * @return Matrix of the original matrix type.
    */
   template <Numeric U>
-  Matrix<T> &operator*=(const U &scalar) noexcept;
+  Matrix<T> &operator*=(const U &scalar) noexcept {
+    using R = std::common_type_t<T, U>;
+
+    R r_scalar = static_cast<R>(scalar);
+
+    omp_loop(_data.size(), [&](size_t i) { _data[i] *= r_scalar; });
+    return *this;
+  }
 
   /**
    * @brief Matrix-Vector multiplication (Matrix * column_vector).
@@ -717,7 +764,61 @@ class Matrix {
    * dimensions do not match.
    */
   template <Numeric U>
-  [[nodiscard]] auto operator*(const Vector<U> &other) const;
+  [[nodiscard]] auto operator*(const Vector<U> &other) const {
+    using R = std::common_type_t<T, U>;
+
+    if (other.orientation() == Orientation::ROW) {
+      throw std::invalid_argument(
+          "Invalid multiplication: matrix * row vector.\n"
+          "Did you mean Vector * Matrix?");
+    }
+
+    if (other.size() != _cols) {
+      throw std::invalid_argument(
+          "Dimension mismatch in Matrix * Vector multiplication.");
+    }
+
+#ifdef BLAS_AVAILABLE
+    if constexpr (std::is_same_v<R, float>) {
+      std::vector<float> a_converted;
+      std::vector<float> v_converted;
+      const float *a_ptr = util::to_pointer(a_converted, _data);
+      const float *v_ptr = util::to_pointer(v_converted, other.data_vector());
+      Vector<float> result(_rows, COLUMN);
+      blas::sgemvm(_rows, _cols, a_ptr, v_ptr, 1, result.data(), _cols);
+      return result;
+    } else if constexpr (std::is_same_v<R, double>) {
+      std::vector<float> a_converted;
+      std::vector<float> v_converted;
+      const double *a_ptr = util::to_pointer(a_converted, _data);
+      const double *v_ptr = util::to_pointer(v_converted, other.data_vector());
+      Vector<double> result(_rows, COLUMN);
+      blas::dgemvm(_rows, _cols, a_ptr, v_ptr, 1, result.data(), _cols);
+      return result;
+    }
+#endif
+
+    Vector<R> result(_rows, std::vector<R>(_rows, R(0)), COLUMN);
+    if (_rows * _cols >= OMP_QUADRATIC_LIMIT) {
+#pragma omp parallel for
+      for (size_t i = 0; i < _rows; ++i) {
+        auto L_row_i = row_span(i);
+#pragma omp simd
+        for (size_t j = 0; j < _cols; ++j) {
+          result[i] += static_cast<R>(L_row_i[j]) * static_cast<R>(other[j]);
+        }
+      }
+    } else {
+      for (size_t i = 0; i < _rows; ++i) {
+        auto L_row_i = row_span(i);
+#pragma omp simd
+        for (size_t j = 0; j < _cols; ++j) {
+          result[i] += static_cast<R>(L_row_i[j]) * static_cast<R>(other[j]);
+        }
+      }
+    }
+    return result;
+  }
 
   /**
    * @brief Element-wise scalar division (Matrix / scalar).
@@ -725,7 +826,20 @@ class Matrix {
    * @return Matrix of the common, promoted type.
    */
   template <Numeric U>
-  [[nodiscard]] auto operator/(const U &scalar) const noexcept;
+  [[nodiscard]] auto operator/(const U &scalar) const noexcept {
+    using R =
+        std::conditional_t<std::is_integral_v<T> && std::is_integral_v<U>, double,
+                           std::common_type_t<T, U>>;  // Forces double if both are ints
+
+    Matrix<R> result(_rows, _cols);
+    R r_scalar_inv = R(1) / static_cast<R>(scalar);
+
+    omp_loop(_data.size(), [&](size_t i) {
+      result.data()[i] = static_cast<R>(_data[i]) * r_scalar_inv;
+    });
+
+    return result;
+  }
 
   /**
    * @brief Element-wise scalar division assignment (Matrix / scalar).
@@ -840,6 +954,40 @@ template <Numeric T, Numeric U>
 }
 
 /**
+ * @brief Element-wise scalar subtraction (scalar - Matrix).
+ * @tparam U An arithmetic scalar type.
+ * @return Matrix of the common, promoted type.
+ */
+template <Numeric T, Numeric U>
+[[nodiscard]] auto operator-(const U &scalar, const Matrix<T> &matrix) {
+  using R = std::common_type_t<T, U>;
+
+  Matrix<R> result(matrix.row_count(), matrix.column_count());
+  R r_scalar = static_cast<R>(scalar);
+
+  if (matrix.size() > OMP_LINEAR_LIMIT) {
+#pragma omp parallel for
+    for (size_t i = 0; i < matrix.size(); ++i) {
+      result.data()[i] = r_scalar - static_cast<R>(matrix.data()[i]);
+    }
+  } else {
+#pragma omp simd
+    for (size_t i = 0; i < matrix.size(); ++i) {
+      result.data()[i] = r_scalar - static_cast<R>(matrix.data()[i]);
+    }
+  }
+  return result;
+}
+
+/**
+ * @brief Element-wise scalar multiplication (scalar * Matrix).
+ */
+template <Numeric T, Numeric U>
+[[nodiscard]] auto operator*(const U &scalar, const Matrix<T> &matrix) noexcept {
+  return matrix * scalar;
+}
+
+/**
  * @brief Checks if two matrices are element-wise equal within a tolerance.
  * @tparam T Numeric type of the first matrix.
  * @tparam U Numeric type of the second matrix.
@@ -866,12 +1014,4 @@ template <Numeric T, Numeric U>
 
 }  // namespace maf::math
 
-#include "BlasWrappers/LapackRoutines.hpp"
-#include "Cholesky.hpp"
-#include "MatrixConstructors.hpp"
-#include "MatrixFactories.hpp"
-#include "MatrixOperators.hpp"
-#include "PLU.hpp"
-#include "QR.hpp"
-
-#endif
+#endif  // MATRIX_H

@@ -1,14 +1,14 @@
 #ifndef VECTOR_CONSTRUCTORS_H
 #define VECTOR_CONSTRUCTORS_H
 #pragma once
-#include "Vector.hpp"
+#include "MafLib/math/linalg/detail/Vector.hpp"
 
 /**
  * @file VectorConstructors.hpp
  * @brief Contains implementations for the constructors of the Vector<T> class.
  *
- * This file is intended to be included at the *end* of Vector.hpp and
- * should not be included directly anywhere else.
+ * It is pulled in by detail/linalg.hpp, the dependency-ordered hub
+ * header of this directory. Avoid including it directly.
  */
 namespace maf::math {
 // Constructs an uninitialized vector of size size.

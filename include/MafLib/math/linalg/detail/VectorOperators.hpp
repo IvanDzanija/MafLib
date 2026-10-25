@@ -2,7 +2,8 @@
 #define VECTOR_OPERATORS_H
 #pragma once
 #include "MafLib/utility/Conversions.hpp"
-#include "Vector.hpp"
+#include "MafLib/math/linalg/detail/Vector.hpp"
+#include "MafLib/math/linalg/detail/Matrix.hpp"
 
 namespace maf::math {
 

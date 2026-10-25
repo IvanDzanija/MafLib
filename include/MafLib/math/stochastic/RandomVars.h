@@ -1,8 +1,7 @@
 #ifndef RANDOMVARS_H
 #define RANDOMVARS_H
 #pragma once
-#include "MafLib/math/linalg/Matrix.hpp"
-#include "MafLib/math/linalg/Vector.hpp"
+#include "MafLib/math/linalg/LinAlg.hpp"
 
 namespace maf::math {
 
@@ -12,18 +11,18 @@ namespace maf::math {
 /// @return Vector of common promoted type.
 template <typename T, typename U>
 auto correlated_shocks(const Matrix<U> &L, const Vector<T> &Z) {
-    using R = std::common_type_t<T, U>;
+  using R = std::common_type_t<T, U>;
 
-    size_t n = Z.size();
-    Vector<R> Y(n, Vector<R>::COLUMN);
+  size_t n = Z.size();
+  Vector<R> Y(n, Vector<R>::COLUMN);
 
-    for (size_t i = 0; i < n; ++i) {
-        for (size_t k = 0; k <= i; ++k) {
-            Y.at(i) += L.at(i, k) * Z.at(k);
-        }
+  for (size_t i = 0; i < n; ++i) {
+    for (size_t k = 0; k <= i; ++k) {
+      Y.at(i) += L.at(i, k) * Z.at(k);
     }
-    return Y;
+  }
+  return Y;
 }
 
-} // namespace maf::math
+}  // namespace maf::math
 #endif

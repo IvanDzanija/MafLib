@@ -2,7 +2,7 @@
 #define BLAS_MATRIX_ROUTINES_H
 
 #pragma once
-#include "BlasWrapper.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/BlasWrapper.hpp"
 
 /**
  * @file MatrixRoutines.hpp

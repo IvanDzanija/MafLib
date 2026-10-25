@@ -1,14 +1,14 @@
 #ifndef MATRIX_CONSTRUCTORS_H
 #define MATRIX_CONSTRUCTORS_H
 #pragma once
-#include "Matrix.hpp"
+#include "MafLib/math/linalg/detail/Matrix.hpp"
 
 /**
  * @file MatrixConstructors.hpp
  * @brief Contains implementations for the constructors of the Matrix<T> class.
  *
- * This file is intended to be included at the *end* of Matrix.hpp and
- * should not be included directly anywhere else.
+ * It is pulled in by detail/linalg.hpp, the dependency-ordered hub
+ * header of this directory. Avoid including it directly.
  */
 namespace maf::math {
 // Constructs an uninitialized matrix of size rows x cols.

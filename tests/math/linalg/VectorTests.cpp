@@ -1,6 +1,6 @@
 #include "ITest.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
-#include "MafLib/math/linalg/Vector.hpp"
+#include "MafLib/math/linalg/LinAlg.hpp"
 
 namespace maf::test {
 

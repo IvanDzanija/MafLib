@@ -1,11 +1,11 @@
 #ifndef VIEW_KERNELS_H
 #define VIEW_KERNELS_H
 #pragma once
-#include "BlasWrappers/BlasWrapper.hpp"
-#include "Matrix.hpp"
-#include "MatrixView.hpp"
-#include "Vector.hpp"
-#include "VectorView.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/BlasWrapper.hpp"
+#include "MafLib/math/linalg/detail/Matrix.hpp"
+#include "MafLib/math/linalg/detail/MatrixView.hpp"
+#include "MafLib/math/linalg/detail/Vector.hpp"
+#include "MafLib/math/linalg/detail/VectorView.hpp"
 
 namespace maf::math::kernels {
 enum class OP : uint8 { NoTrans, Trans };

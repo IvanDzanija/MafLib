@@ -1,7 +1,7 @@
 #ifndef VECTOR_METHODS_H
 #define VECTOR_METHODS_H
 #pragma once
-#include "Vector.hpp"
+#include "MafLib/math/linalg/detail/Vector.hpp"
 
 namespace maf::math {
 // Inplace fill

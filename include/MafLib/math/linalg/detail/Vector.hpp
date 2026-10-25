@@ -1,8 +1,9 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 #pragma once
-#include "BlasWrappers/BlasWrapper.hpp"
-#include "LinAlg.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/BlasWrapper.hpp"
+#include "MafLib/math/linalg/detail/Core.hpp"
+#include "MafLib/math/linalg/detail/VectorView.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/utility/Math.hpp"
 
@@ -485,9 +486,4 @@ class Vector {
 
 }  // namespace maf::math
 
-#include "VectorCheckers.hpp"
-#include "VectorConstructors.hpp"
-#include "VectorMethods.hpp"
-#include "VectorOperators.hpp"
-
-#endif
+#endif  // VECTOR_H

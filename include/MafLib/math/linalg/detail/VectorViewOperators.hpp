@@ -2,7 +2,7 @@
 #define VECTOR_VIEW_OPERATORS_H
 #pragma once
 #include "MafLib/utility/Math.hpp"
-#include "ViewKernels.hpp"
+#include "MafLib/math/linalg/detail/ViewKernels.hpp"
 
 namespace maf::math {
 /*

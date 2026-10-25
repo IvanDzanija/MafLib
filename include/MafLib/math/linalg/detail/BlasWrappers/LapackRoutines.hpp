@@ -2,16 +2,16 @@
 #define BLAS_LAPACK_ROUTINES_H
 
 #pragma once
-#include "BlasWrapper.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/BlasWrapper.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
-#include "MafLib/math/linalg/Matrix.hpp"
+#include "MafLib/math/linalg/detail/Matrix.hpp"
 
 /**
  * @file LapackRoutines.hpp
  * @brief Object-level LAPACK routines built on top of the Matrix class.
  *
- * This header is included at the *bottom* of Matrix.hpp (before QR.hpp), so
- * the Matrix class is already complete here; including it anywhere earlier
+ * It is pulled in by detail/linalg.hpp after the Matrix and Vector class
+ * definitions, which it requires; it is never included earlier than them.
  * would create a circular dependency. QRResult is only forward declared and
  * is defined in QR.hpp.
  *

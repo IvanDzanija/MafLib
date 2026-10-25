@@ -1,7 +1,7 @@
 #ifndef CHOLESKY_H
 #define CHOLESKY_H
 #pragma once
-#include "Matrix.hpp"
+#include "MafLib/math/linalg/detail/Matrix.hpp"
 
 /**
  * @file Cholesky.hpp

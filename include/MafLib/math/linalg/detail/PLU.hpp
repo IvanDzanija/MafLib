@@ -1,7 +1,8 @@
 #ifndef PLU_H
 #define PLU_H
 #pragma once
-#include "Matrix.hpp"
+#include "MafLib/math/linalg/detail/Matrix.hpp"
+#include "MafLib/math/linalg/detail/MatrixFactories.hpp"
 
 /**
  * @file PLU.hpp

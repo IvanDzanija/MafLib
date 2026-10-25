@@ -41,17 +41,17 @@ namespace maf::math::oblas {}  // namespace maf::math::oblas
 #endif
 
 #if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
-#include "MatrixRoutines.hpp"
-#include "VectorMatrixRoutines.hpp"
-#include "VectorRoutines.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/MatrixRoutines.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/VectorMatrixRoutines.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/VectorRoutines.hpp"
 
 namespace maf::math {
 namespace blas = acc;
 }  // namespace maf::math
 #elifdef OPENBLAS_AVAILABLE
-#include "MatrixRoutines.hpp"
-#include "VectorMatrixRoutines.hpp"
-#include "VectorRoutines.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/MatrixRoutines.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/VectorMatrixRoutines.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/VectorRoutines.hpp"
 
 namespace maf::math {
 namespace blas = oblas;

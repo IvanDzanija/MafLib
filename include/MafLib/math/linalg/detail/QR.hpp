@@ -2,11 +2,13 @@
 #define QR_HPP
 
 #pragma once
-#include "Matrix.hpp"
-#include "MatrixView.hpp"
-#include "Vector.hpp"
-#include "VectorView.hpp"
-#include "ViewKernels.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/LapackRoutines.hpp"
+#include "MafLib/math/linalg/detail/Matrix.hpp"
+#include "MafLib/math/linalg/detail/MatrixFactories.hpp"
+#include "MafLib/math/linalg/detail/MatrixView.hpp"
+#include "MafLib/math/linalg/detail/Vector.hpp"
+#include "MafLib/math/linalg/detail/VectorView.hpp"
+#include "MafLib/math/linalg/detail/ViewKernels.hpp"
 
 /**
  * @file QR.hpp
