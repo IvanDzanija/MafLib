@@ -13,26 +13,26 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            # Linux setup (note: no libopenblas-dev; the MAFLIB_DISABLE_BLAS
-            # flag additionally guards against any BLAS sneaking in)
+            # Linux setup (note: no libopenblas-dev, so OpenBLAS is NOT
+            # detected and the portable non-BLAS code paths get tested)
             - name: Install dependencies (Linux)
               run: |
                   sudo apt-get update
                   sudo apt-get install -y clang ninja-build cmake libomp-dev
 
-            - name: Configure (clang-debug preset, BLAS disabled)
+            - name: Configure (clang-debug preset, no BLAS)
               env:
                   CC: clang
                   CXX: clang++
               run: |
-                  cmake --preset clang-debug -DMAFLIB_DISABLE_BLAS=ON | tee configure.log
-                  # Fail if any BLAS backend was picked up anyway
-                  if grep -Eq "OpenBLAS found|Accelerate framework found" configure.log; then
-                      echo "::error::BLAS backend was enabled; expected a non-BLAS build."
+                  cmake --preset clang-debug | tee configure.log
+                  # Verify the build really is BLAS-free
+                  if grep -q "OpenBLAS found" configure.log; then
+                      echo "::error::OpenBLAS was found; expected a non-BLAS build."
                       exit 1
                   fi
-                  grep -q "skipping BLAS detection" configure.log || {
-                      echo "::error::MAFLIB_DISABLE_BLAS message missing; option not applied."
+                  grep -q "OpenBLAS NOT found" configure.log || {
+                      echo "::error::'OpenBLAS NOT found' message missing; a BLAS backend may be active."
                       exit 1
                   }
 

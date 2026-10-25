@@ -977,8 +977,9 @@ class Matrix {
   template <typename A, typename B, typename C>
   void _gemm(const A *a_data, const B *b_data, C *c_data, size_t a_rows, size_t a_cols,
              size_t b_cols) const {
-    [[maybe_unused]] static constexpr size_t OMP_DIM = 10000;
-#pragma omp parallel for collapse(2) if (a_rows * b_cols > OMP_DIM) default(none)
+    static constexpr size_t OMP_DIM = 10000;
+#pragma omp parallel for collapse(2) if (a_rows * b_cols > OMP_DIM) default(none) \
+    shared(a_data, b_data, c_data, a_rows, a_cols, b_cols)
     for (size_t i = 0; i < a_rows; ++i) {
       for (size_t k = 0; k < a_cols; ++k) {
         for (size_t j = 0; j < b_cols; ++j) {

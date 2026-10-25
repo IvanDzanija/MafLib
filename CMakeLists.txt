@@ -15,13 +15,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_library(${PROJECT_NAME} INTERFACE)
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-# Option to skip BLAS detection and test the portable (non-BLAS) code paths.
-option(MAFLIB_DISABLE_BLAS "Build without BLAS/Accelerate/OpenBLAS backends" OFF)
-if(MAFLIB_DISABLE_BLAS)
-    message(STATUS "MAFLIB_DISABLE_BLAS=ON: skipping BLAS detection; using portable fallback kernels.")
-endif()
-
-if(NOT MAFLIB_DISABLE_BLAS AND APPLE)
+if(APPLE)
     # OpenMP via Homebrew
     find_program(HOMEBREW brew)
     if(HOMEBREW)
@@ -60,7 +54,7 @@ if(NOT MAFLIB_DISABLE_BLAS AND APPLE)
     endif()
 endif()
 
-if(NOT MAFLIB_DISABLE_BLAS AND UNIX AND NOT APPLE)
+if(UNIX AND NOT APPLE)
     # OpenBLAS (Linux)
     find_path(OPENBLAS_INCLUDE_DIR
         NAMES cblas.h

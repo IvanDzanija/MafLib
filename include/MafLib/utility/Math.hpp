@@ -112,7 +112,7 @@ inline void omp_loop(size_t n, size_t m, const F &fn) {
  * index and accumulate into `acc`.
  */
 template <typename R, std::invocable<size_t> F>
-inline void omp_loop_reduce(size_t n, [[maybe_unused]] R &acc, const F &fn) {
+inline void omp_loop_reduce(size_t n, R &acc, const F &fn) {
   if (n > OMP_LINEAR_LIMIT) {
 #pragma omp parallel for default(none) shared(fn, n) reduction(+ : acc)
     for (size_t i = 0; i < n; ++i) {
