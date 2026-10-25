@@ -4,9 +4,9 @@
 #include "MafLib/math/linalg/detail/BlasWrappers/BlasWrapper.hpp"
 #include "MafLib/math/linalg/detail/Core.hpp"
 #include "MafLib/math/linalg/detail/MatrixView.hpp"
+#include "MafLib/math/linalg/detail/Vector.hpp"
 #include "MafLib/utility/Conversions.hpp"
 #include "MafLib/utility/Math.hpp"
-#include "Maflib/math/linalg/detail/Vector.hpp"
 
 namespace maf::math {
 
@@ -977,11 +977,11 @@ class Matrix {
   template <typename A, typename B, typename C>
   void _gemm(const A *a_data, const B *b_data, C *c_data, size_t a_rows, size_t a_cols,
              size_t b_cols) const {
-#pragma omp parallel for collapse(2) if (a_rows * b_cols > 10000)
+    static constexpr size_t OMP_DIM = 10000;
+#pragma omp parallel for collapse(2) if (a_rows * b_cols > OMP_DIM)
     for (size_t ii = 0; ii < a_rows; ii += BLOCK_SIZE) {
       for (size_t jj = 0; jj < b_cols; jj += BLOCK_SIZE) {
         for (size_t kk = 0; kk < a_cols; kk += BLOCK_SIZE) {
-          // Process block (your existing blocked implementation)
           const size_t i_end = std::min(ii + BLOCK_SIZE, a_rows);
           const size_t j_end = std::min(jj + BLOCK_SIZE, b_cols);
           const size_t k_end = std::min(kk + BLOCK_SIZE, a_cols);

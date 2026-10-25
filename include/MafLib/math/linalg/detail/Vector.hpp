@@ -309,7 +309,7 @@ class Vector {
   [[nodiscard]] T norm() const noexcept {
     T sum = T(0);
 
-    omp_loop_reduce(sum, _data.size(), [&](size_t i) { sum += _data[i] * _data[i]; });
+    omp_loop_reduce(_data.size(), sum, [&](size_t i) { sum += _data[i] * _data[i]; });
 
     return std::sqrt(sum);
   }
@@ -592,7 +592,7 @@ class Vector {
 
     R result(0);
 
-    omp_loop_reduce(result, size(), [&](size_t i) {
+    omp_loop_reduce(size(), result, [&](size_t i) {
       result += static_cast<R>(_data[i]) * static_cast<R>(other[i]);
     });
 
