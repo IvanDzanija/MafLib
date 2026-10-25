@@ -22,8 +22,6 @@ class VectorView {
   /** @brief The numeric type of the vector elements. */
   using value_type = std::remove_const_t<T>;
 
-  /** @brief Default constructor creating an empty VectorView. */
-  explicit VectorView() = default;
   /** @brief Constructs a VectorView.
    * @param data Pointer to the starting element of the subvector.
    * @param size The logical number of elements in the subvector.

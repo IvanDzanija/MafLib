@@ -8,7 +8,7 @@
 #include "MafLib/math/linalg/detail/VectorView.hpp"
 
 namespace maf::math::kernels {
-enum class OP : uint8 { NoTrans, Trans };
+enum class OP : uint8 { NOTRANS, TRANS };
 
 namespace detail {
 template <Numeric T, Numeric U, Numeric R = std::common_type_t<T, U>>
@@ -37,14 +37,14 @@ auto gemv(OP trans, const MatrixView<T> &A, const VectorView<U> &x) {
   using U_value_type = std::remove_cvref_t<U>;
   using R = std::common_type_t<T_value_type, U_value_type>;
 
-  size_t out_size = (trans == OP::NoTrans) ? A.row_count() : A.column_count();
-  Vector<R> y(out_size, (trans == OP::NoTrans) ? COLUMN : ROW);
+  size_t out_size = (trans == OP::NOTRANS) ? A.row_count() : A.column_count();
+  Vector<R> y(out_size,
+              (trans == OP::NOTRANS) ? Orientation::COLUMN : Orientation::ROW);
 
 #ifdef BLAS_AVAILABLE
   if constexpr (std::is_same_v<T_value_type, float> &&
                 std::is_same_v<U_value_type, float>) {
-    // https://developer.apple.com/documentation/accelerate/cblas_sgemv(_:_:_:_:_:_:_:_:_:_:_:_:)?language=objc
-    if (trans == OP::NoTrans) {
+    if (trans == OP::NOTRANS) {
       blas::sgemvm(A.row_count(), A.column_count(), A.data(), x.data(),
                    x.get_increment(), y.data(), A.get_stride());
     } else {
@@ -54,8 +54,7 @@ auto gemv(OP trans, const MatrixView<T> &A, const VectorView<U> &x) {
     return y;
   } else if constexpr (std::is_same_v<T_value_type, double> &&
                        std::is_same_v<U_value_type, double>) {
-    // https://developer.apple.com/documentation/accelerate/cblas_dgemv(_:_:_:_:_:_:_:_:_:_:_:_:)?language=objc
-    if (trans == OP::NoTrans) {
+    if (trans == OP::NOTRANS) {
       blas::dgemvm(A.row_count(), A.column_count(), A.data(), x.data(),
                    x.get_increment(), y.data(), A.get_stride());
     } else {
@@ -66,7 +65,7 @@ auto gemv(OP trans, const MatrixView<T> &A, const VectorView<U> &x) {
   }
 #endif
 
-  if (trans == OP::NoTrans) {
+  if (trans == OP::NOTRANS) {
     detail::no_trans_gemv(A, x, y);
 
   } else {

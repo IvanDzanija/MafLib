@@ -658,12 +658,12 @@ class MatrixTests : public ITest {
 
   void should_multiply_matrix_and_vector() {
     math::Matrix<float> m(2, 3, {1.0, 0.5, -2.0, 4.0, 1.0, 3.0});
-    math::Vector<int> v(3, std::vector<int>{2, 4, 6}, math::COLUMN);
+    math::Vector<int> v(3, std::vector<int>{2, 4, 6}, math::Orientation::COLUMN);
 
     math::Vector<float> expected(
         2,
         std::vector<float>{1.0 * 2 + 0.5 * 4 + (-2.0) * 6, 4.0 * 2 + 1.0 * 4 + 3.0 * 6},
-        math::COLUMN);
+        math::Orientation::COLUMN);
 
     auto result = m * v;
     ASSERT_SAME_TYPE(result, math::Vector<float>);

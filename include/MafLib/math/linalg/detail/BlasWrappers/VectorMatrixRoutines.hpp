@@ -34,6 +34,7 @@ namespace maf::math::acc {
  */
 inline void sgemvm(size_t rows, size_t cols, const float *a, const float *x,
                    size_t incx, float *y, size_t lda) {
+  // https://developer.apple.com/documentation/accelerate/cblas_sgemv(_:_:_:_:_:_:_:_:_:_:_:_:)?language=objc
   cblas_sgemv(CblasRowMajor, CblasNoTrans, static_cast<int>(rows),
               static_cast<int>(cols), 1.0F, a, static_cast<int>(lda), x,
               static_cast<int>(incx), 0.0F, y, 1);
@@ -42,6 +43,7 @@ inline void sgemvm(size_t rows, size_t cols, const float *a, const float *x,
 /** @brief y = A * x (double). */
 inline void dgemvm(size_t rows, size_t cols, const double *a, const double *x,
                    size_t incx, double *y, size_t lda) {
+  // https://developer.apple.com/documentation/accelerate/cblas_dgemv(_:_:_:_:_:_:_:_:_:_:_:_:)?language=objc
   cblas_dgemv(CblasRowMajor, CblasNoTrans, static_cast<int>(rows),
               static_cast<int>(cols), 1.0, a, static_cast<int>(lda), x,
               static_cast<int>(incx), 0.0, y, 1);

@@ -1,8 +1,8 @@
 #ifndef VECTOR_VIEW_OPERATORS_H
 #define VECTOR_VIEW_OPERATORS_H
 #pragma once
-#include "MafLib/utility/Math.hpp"
 #include "MafLib/math/linalg/detail/ViewKernels.hpp"
+#include "MafLib/utility/Math.hpp"
 
 namespace maf::math {
 /*
@@ -27,26 +27,26 @@ namespace maf::math {
  * @return A new Vector resulting from the multiplication x * A.
  */
 template <VectorViewCompatible V, MatrixViewCompatible T>
-auto operator*(V &x, T &A) {
-  if (A.row_count() != x.size() || x.orientation() != ROW) {
+auto operator*(V &x, T &a) {
+  if (a.row_count() != x.size() || x.orientation() != Orientation::ROW) {
     throw std::invalid_argument(
         "Inner dimensions do not match for Vector-Matrix multiplication!");
   }
 
-  using T_type = typename T::value_type;
-  using V_type = typename V::value_type;
+  using T_type = T::value_type;
+  using V_type = V::value_type;
 
   if constexpr (std::is_same_v<V, VectorView<V_type>> &&
                 std::is_same_v<T, MatrixView<T_type>>) {
-    return kernels::gemv(kernels::OP::Trans, A, x);
+    return kernels::gemv(kernels::OP::TRANS, a, x);
   } else if constexpr (std::is_same_v<V, VectorView<V_type>>) {
-    return kernels::gemv(kernels::OP::Trans,
-                         A.view(0, 0, A.row_count(), A.column_count()), x);
+    return kernels::gemv(kernels::OP::TRANS,
+                         a.view(0, 0, a.row_count(), a.column_count()), x);
   } else if constexpr (std::is_same_v<T, MatrixView<T_type>>) {
-    return kernels::gemv(kernels::OP::Trans, A, x.view(0, x.size()));
+    return kernels::gemv(kernels::OP::TRANS, a, x.view(0, x.size()));
   } else {
-    return kernels::gemv(kernels::OP::Trans,
-                         A.view(0, 0, A.row_count(), A.column_count()),
+    return kernels::gemv(kernels::OP::TRANS,
+                         a.view(0, 0, a.row_count(), a.column_count()),
                          x.view(0, x.size()));
   }
 }
@@ -70,9 +70,9 @@ auto operator*(const V &x, const T &y) {
     throw std::invalid_argument("Dimensions do not match!");
   }
 
-  using T_type = typename T::value_type;
-  using V_type = typename V::value_type;
-  if (x.orientation() == y.orientation() || x.orientation() == COLUMN) {
+  using T_type = T::value_type;
+  using V_type = V::value_type;
+  if (x.orientation() == y.orientation() || x.orientation() == Orientation::COLUMN) {
     throw std::invalid_argument(
         "Invalid multiplication: Vectors must be of different orientations (row x "
         "column) for dot product. If you are certain that you want the dot "
@@ -103,8 +103,8 @@ auto operator*(const V &x, const T &y) {
  */
 template <VectorViewCompatible V, VectorViewCompatible T>
 auto outer_product(const V &x, const T &y) {
-  using T_type = typename T::value_type;
-  using V_type = typename V::value_type;
+  using T_type = T::value_type;
+  using V_type = V::value_type;
   using R = std::common_type_t<T_type, V_type>;
 
   size_t n = x.size();
@@ -119,7 +119,7 @@ auto outer_product(const V &x, const T &y) {
   }
 
   switch (x.orientation()) {
-    case COLUMN: {
+    case Orientation::COLUMN: {
       if (std::is_same_v<V, VectorView<V_type>> &&
           std::is_same_v<T, VectorView<T_type>>) {
         return kernels::outer(x, y);
@@ -140,8 +140,7 @@ auto outer_product(const V &x, const T &y) {
             "match!");
       }
       std::cout << "This results in a 1x1 matrix. Consider using vector dot "
-                   "product."
-                << std::endl;
+                   "product.\n";
       if (std::is_same_v<V, VectorView<V_type>> &&
           std::is_same_v<T, VectorView<T_type>>) {
         return Matrix<R>(1, 1, {kernels::dot(x, y)});

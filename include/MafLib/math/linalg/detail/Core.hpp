@@ -1,5 +1,5 @@
-#ifndef MAFLIB_MATH_LINALG_DETAIL_CORE_HPP
-#define MAFLIB_MATH_LINALG_DETAIL_CORE_HPP
+#ifndef LINALG_DETAIL_CORE_HPP
+#define LINALG_DETAIL_CORE_HPP
 #pragma once
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/utility/Math.hpp"
@@ -82,4 +82,4 @@ concept MatrixViewType =
 template <typename T>
 concept MatrixViewCompatible = MatrixViewType<T> || MatrixType<T>;
 }  // namespace maf::math
-#endif  // MAFLIB_MATH_LINALG_DETAIL_CORE_HPP
+#endif  // LINALG_DETAIL_CORE_HPP

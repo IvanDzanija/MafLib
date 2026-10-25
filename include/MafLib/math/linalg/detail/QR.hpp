@@ -4,7 +4,6 @@
 #pragma once
 #include "MafLib/math/linalg/detail/BlasWrappers/LapackRoutines.hpp"
 #include "MafLib/math/linalg/detail/Matrix.hpp"
-#include "MafLib/math/linalg/detail/MatrixFactories.hpp"
 #include "MafLib/math/linalg/detail/MatrixView.hpp"
 #include "MafLib/math/linalg/detail/Vector.hpp"
 #include "MafLib/math/linalg/detail/VectorView.hpp"
@@ -109,14 +108,14 @@ template <std::floating_point T>
  * that A_work has enough space to store the reflector.
  */
 template <std::floating_point T>
-[[nodiscard]] static inline Vector<T> load_reflector(const Matrix<T> &A_work,
+[[nodiscard]] static inline Vector<T> load_reflector(const Matrix<T> &a_work,
                                                      size_t j) {
-  const size_t m = A_work.row_count();
+  const size_t m = a_work.row_count();
   const size_t len = m - j;
-  Vector<T> v_out(len, COLUMN);
+  Vector<T> v_out(len, Orientation::COLUMN);
   v_out[0] = 1.0;
   for (size_t i = 1; i < len; ++i) {
-    v_out[i] = A_work[i + j][j];
+    v_out[i] = a_work[i + j][j];
   }
   return v_out;
 }
@@ -177,7 +176,7 @@ template <Numeric T>
       auto A_block = A_work.view(j, j + 1, m - j, n - (j + 1));
 
       // w = A_block^T * v
-      Vector<DataType> w = kernels::gemv(kernels::OP::Trans, A_block, v_view);
+      Vector<DataType> w = kernels::gemv(kernels::OP::TRANS, A_block, v_view);
       auto w_view = w.view(0, w.size());
 
       // A_block = A_block - (v_view * w_view) * tau[j];
@@ -208,7 +207,7 @@ template <Numeric T>
 
     auto Qblock = Q_full.view(j, j, m - j, m - j);
 
-    Vector<DataType> w = kernels::gemv(kernels::OP::Trans, Qblock, v_view);
+    Vector<DataType> w = kernels::gemv(kernels::OP::TRANS, Qblock, v_view);
 
     kernels::ger(Qblock, v_view, w.view(0, w.size()), -tau[j]);
   }

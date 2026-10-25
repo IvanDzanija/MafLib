@@ -17,7 +17,7 @@ concept Numeric = std::is_arithmetic_v<T>;
 // ENUMS
 //=============================================================================
 /** @brief Specifies if the vector behaves as a row or column vector. */
-enum Orientation : uint8 { ROW, COLUMN };
+enum class Orientation : uint8 { ROW, COLUMN };
 
 #pragma mark constants
 //=============================================================================
@@ -89,6 +89,32 @@ template <std::invocable<size_t> F>
 inline void omp_loop(size_t n, size_t m, const F &fn) {
   if (n * m >= OMP_QUADRATIC_LIMIT) {
 #pragma omp parallel for default(none) shared(fn, n, m)
+    for (size_t i = 0; i < n; ++i) {
+      fn(i);
+    }
+  } else {
+    for (size_t i = 0; i < n; ++i) {
+      fn(i);
+    }
+  }
+}
+
+/** @brief Parallel reduction loop helper that uses OpenMP for large iterations and
+ * falls back to a regular loop for smaller sizes.
+ *  @details The callable accumulates into `acc` with `operator+`; OpenMP reduces
+ * the per-thread partial results at the end of the parallel region.
+ *  @tparam R Type of the reduction accumulator (must support `operator+`).
+ *  @tparam F A callable type that takes a size_t index as an argument.
+ *  @param acc Reference to the reduction accumulator; it holds the final sum after
+ * the call.
+ *  @param n The number of iterations to perform.
+ *  @param fn The function to call for each iteration, which should accept a size_t
+ * index and accumulate into `acc`.
+ */
+template <typename R, std::invocable<size_t> F>
+inline void omp_loop_reduce(R &acc, size_t n, const F &fn) {
+  if (n > OMP_LINEAR_LIMIT) {
+#pragma omp parallel for default(none) shared(fn, n) reduction(+ : acc)
     for (size_t i = 0; i < n; ++i) {
       fn(i);
     }

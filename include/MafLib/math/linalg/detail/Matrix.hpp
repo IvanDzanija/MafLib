@@ -1,13 +1,12 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 #pragma once
-#include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/math/linalg/detail/BlasWrappers/BlasWrapper.hpp"
 #include "MafLib/math/linalg/detail/Core.hpp"
 #include "MafLib/math/linalg/detail/MatrixView.hpp"
 #include "MafLib/utility/Conversions.hpp"
 #include "MafLib/utility/Math.hpp"
-#include "Maflib/math/linalg//detail/Vector.hpp"
+#include "Maflib/math/linalg/detail/Vector.hpp"
 
 namespace maf::math {
 
@@ -54,7 +53,13 @@ class Matrix {
    * @param cols Number of columns.
    * @throws std::invalid_argument if dimensions are zero.
    */
-  Matrix(size_t rows, size_t cols);
+  Matrix(size_t rows, size_t cols) : _rows(rows), _cols(cols) {
+    if (rows == 0 || cols == 0) {
+      throw std::invalid_argument("Matrix dimensions must be greater than zero.");
+    }
+
+    _data.resize(rows * cols);
+  }
 
   /**
    * @brief Constructs a matrix from a raw data pointer.
@@ -65,7 +70,16 @@ class Matrix {
    * @throws std::invalid_argument if dimensions are zero or data is
    * nullptr.
    */
-  Matrix(size_t rows, size_t cols, T *data);
+  Matrix(size_t rows, size_t cols, T *data) : _rows(rows), _cols(cols) {
+    if (rows == 0 || cols == 0) {
+      throw std::invalid_argument("Matrix dimensions must be greater than zero!");
+    }
+    if (data == nullptr) {
+      throw std::invalid_argument("Data pointer cannot be null!");
+    }
+
+    _data.assign(data, data + (rows * cols));
+  }
 
   /**
    * @brief Constructs from a std::vector, filled by rows.
@@ -75,7 +89,18 @@ class Matrix {
    * @throws std::invalid_argument if dimensions are zero or data size
    * does not match.
    */
-  Matrix(size_t rows, size_t cols, const std::vector<T> &data);
+  Matrix(size_t rows, size_t cols, const std::vector<T> &data)
+      : _rows(rows), _cols(cols) {
+    if (rows == 0 || cols == 0) {
+      throw std::invalid_argument("Matrix dimensions must be greater than zero.");
+    }
+
+    if (data.size() != rows * cols) {
+      throw std::invalid_argument("Data size does not match matrix size.");
+    }
+
+    _data.assign(data.begin(), data.end());
+  }
 
   /**
    * @brief Constructs from a std::vector, filled by rows (move
@@ -86,7 +111,16 @@ class Matrix {
    * @throws std::invalid_argument if dimensions are zero or data size
    * does not match.
    */
-  Matrix(size_t rows, size_t cols, std::vector<T> &&data);
+  Matrix(size_t rows, size_t cols, std::vector<T> &&data) : _rows(rows), _cols(cols) {
+    if (rows == 0 || cols == 0) {
+      throw std::invalid_argument("Matrix dimensions must be greater than zero.");
+    }
+    if (data.size() != rows * cols) {
+      throw std::invalid_argument("Data size does not match matrix size.");
+    }
+
+    _data = std::move(data);
+  }
 
   /**
    * @brief Constructs from a nested std::vector (vector of vectors).
@@ -97,7 +131,23 @@ class Matrix {
    * @throws std::invalid_argument if dimensions are zero or data shape
    * does not match.
    */
-  Matrix(size_t rows, size_t cols, const std::vector<std::vector<T>> &data);
+  Matrix(size_t rows, size_t cols, const std::vector<std::vector<T>> &data)
+      : _rows(rows), _cols(cols) {
+    if (rows == 0 || cols == 0) {
+      throw std::invalid_argument("Matrix dimensions must be greater than zero.");
+    }
+
+    if (data.size() != rows || data.at(0).size() != cols) {
+      throw std::invalid_argument("Data size does not match matrix size.");
+    }
+
+    _data.resize(rows * cols);
+    for (size_t i = 0; i < rows; ++i) {
+      for (size_t j = 0; j < cols; ++j) {
+        _data.at(_get_index(i, j)) = static_cast<T>(data.at(i).at(j));
+      }
+    }
+  }
 
   /**
    * @brief Constructs from a std::array, filled by rows.
@@ -110,7 +160,17 @@ class Matrix {
    * does not match.
    */
   template <size_t N>
-  Matrix(size_t rows, size_t cols, const std::array<T, N> &data);
+  Matrix(size_t rows, size_t cols, const std::array<T, N> &data)
+      : _rows(rows), _cols(cols) {
+    if (rows == 0 || cols == 0) {
+      throw std::invalid_argument("Matrix dimensions must be greater than zero.");
+    }
+    if (N != rows * cols) {
+      throw std::invalid_argument("Data size does not match matrix size.");
+    }
+
+    _data.assign(data.begin(), data.end());
+  }
 
   /**
    * @brief Constructs from a std::initializer_list, filled by rows.
@@ -122,7 +182,17 @@ class Matrix {
    * does not match.
    */
   template <Numeric U>
-  Matrix(size_t rows, size_t cols, std::initializer_list<U> list);
+  Matrix(size_t rows, size_t cols, std::initializer_list<U> list)
+      : _rows(rows), _cols(cols) {
+    if (rows == 0 || cols == 0) {
+      throw std::invalid_argument("Matrix dimensions must be greater than zero.");
+    }
+    if (static_cast<size_t>(list.size()) != rows * cols) {
+      throw std::invalid_argument("Data size does not match matrix size.");
+    }
+
+    _data.assign(list.begin(), list.end());
+  }
 
 #pragma mark getters_setters
   // ----------------------------------
@@ -356,7 +426,7 @@ class Matrix {
     try {
       cholesky(*this);
       return true;
-    } catch (std::exception e) {
+    } catch (std::exception &e) {
       return false;
     }
   }
@@ -468,19 +538,20 @@ class Matrix {
 
     if constexpr (is_spd) {
       // res = det(L)^2
-      auto L = cholesky(*this);
-      using AccumType = std::decay_t<decltype(L)>::value_type;  // Get the promoted type
+      auto chol_res = cholesky(*this);
+      // Get the promoted type
+      using AccumType = std::decay_t<decltype(chol_res)>::value_type;
       AccumType det = 1;
 
       for (size_t i = 0; i < _rows; ++i) {
-        det *= L.at(i, i);
+        det *= chol_res.at(i, i);
       }
       return det * det;
     } else {
       // res = det(U) * det(P), det(L) = 1
       auto plu_res = plu(*this);
-      using AccumType = std::decay_t<decltype(plu_res.U)>::value_type;  // Get the
-                                                                        // promoted type
+      // Get the promoted type
+      using AccumType = std::decay_t<decltype(plu_res.U)>::value_type;
       auto det = static_cast<AccumType>(plu_res.sign);
 
       for (size_t i = 0; i < _rows; ++i) {
@@ -713,11 +784,11 @@ class Matrix {
                   util::to_pointer(b_converted, other.data_vector()), c_data);
     } else {
       // Integer types - use fallback
-      _fallback_matrix_multiply(a_data, b_data, c_data, a_rows, a_cols, b_cols);
+      _gemm(a_data, b_data, c_data, a_rows, a_cols, b_cols);
     }
 #else
     // Default non-BLAS implementation
-    _fallback_matrix_multiply(a_data, b_data, c_data, a_rows, a_cols, b_cols);
+    _gemm(a_data, b_data, c_data, a_rows, a_cols, b_cols);
 #endif
     return result;
   }
@@ -778,45 +849,36 @@ class Matrix {
           "Dimension mismatch in Matrix * Vector multiplication.");
     }
 
+    // Uses the BLAS gemv routines where available.
 #ifdef BLAS_AVAILABLE
     if constexpr (std::is_same_v<R, float>) {
       std::vector<float> a_converted;
       std::vector<float> v_converted;
       const float *a_ptr = util::to_pointer(a_converted, _data);
       const float *v_ptr = util::to_pointer(v_converted, other.data_vector());
-      Vector<float> result(_rows, COLUMN);
+      Vector<float> result(_rows, Orientation::COLUMN);
       blas::sgemvm(_rows, _cols, a_ptr, v_ptr, 1, result.data(), _cols);
       return result;
     } else if constexpr (std::is_same_v<R, double>) {
-      std::vector<float> a_converted;
-      std::vector<float> v_converted;
+      std::vector<double> a_converted;
+      std::vector<double> v_converted;
       const double *a_ptr = util::to_pointer(a_converted, _data);
       const double *v_ptr = util::to_pointer(v_converted, other.data_vector());
-      Vector<double> result(_rows, COLUMN);
+      Vector<double> result(_rows, Orientation::COLUMN);
       blas::dgemvm(_rows, _cols, a_ptr, v_ptr, 1, result.data(), _cols);
       return result;
     }
 #endif
 
-    Vector<R> result(_rows, std::vector<R>(_rows, R(0)), COLUMN);
-    if (_rows * _cols >= OMP_QUADRATIC_LIMIT) {
-#pragma omp parallel for
-      for (size_t i = 0; i < _rows; ++i) {
-        auto L_row_i = row_span(i);
-#pragma omp simd
-        for (size_t j = 0; j < _cols; ++j) {
-          result[i] += static_cast<R>(L_row_i[j]) * static_cast<R>(other[j]);
-        }
+    Vector<R> result(_rows, std::vector<R>(_rows, R(0)), Orientation::COLUMN);
+
+    omp_loop(_rows, _cols, [&](size_t i) {
+      auto row = row_span(i);
+      for (size_t j = 0; j < _cols; ++j) {
+        result[i] += static_cast<R>(row[j]) * static_cast<R>(other[j]);
       }
-    } else {
-      for (size_t i = 0; i < _rows; ++i) {
-        auto L_row_i = row_span(i);
-#pragma omp simd
-        for (size_t j = 0; j < _cols; ++j) {
-          result[i] += static_cast<R>(L_row_i[j]) * static_cast<R>(other[j]);
-        }
-      }
-    }
+    });
+
     return result;
   }
 
@@ -848,7 +910,18 @@ class Matrix {
    * @return Matrix of the original matrix type.
    */
   template <Numeric U>
-  Matrix<T> &operator/=(const U &scalar) noexcept;
+  Matrix<T> &operator/=(const U &scalar) noexcept {
+    using R = std::common_type_t<T, U>;
+
+    if constexpr (std::is_floating_point_v<R>) {
+      R r_scalar_inv = R(1) / static_cast<R>(scalar);
+      omp_loop(_data.size(), [&](size_t i) { _data[i] *= r_scalar_inv; });
+    } else {
+      R r_scalar = static_cast<R>(scalar);
+      omp_loop(_data.size(), [&](size_t i) { _data[i] /= r_scalar; });
+    }
+    return *this;
+  }
 
   // --- Debugging and printing ---
 
@@ -864,7 +937,7 @@ class Matrix {
       for (size_t j = 0; j < _cols; ++j) {
         std::cout << this->at(i, j) << ' ';
       }
-      std::cout << std::endl;
+      std::cout << "\n";
     }
   }
 
@@ -897,22 +970,13 @@ class Matrix {
    * @brief Internal helper to invert the sign of all elements in-place.
    */
   void _invert_sign() {
-    if (_data.size() > OMP_LINEAR_LIMIT) {
-#pragma omp parallel for
-      for (size_t i = 0; i < _data.size(); ++i) {
-        _data[i] = -_data[i];
-      }
-    } else {
-      for (size_t i = 0; i < _data.size(); ++i) {
-        _data[i] = -_data[i];
-      }
-    }
+    omp_loop(_data.size(), [&](size_t i) { _data[i] = -_data[i]; });
   }
 
   // Fallback matrix multiplication implementation
   template <typename A, typename B, typename C>
-  void _fallback_matrix_multiply(const A *a_data, const B *b_data, C *c_data,
-                                 size_t a_rows, size_t a_cols, size_t b_cols) const {
+  void _gemm(const A *a_data, const B *b_data, C *c_data, size_t a_rows, size_t a_cols,
+             size_t b_cols) const {
 #pragma omp parallel for collapse(2) if (a_rows * b_cols > 10000)
     for (size_t ii = 0; ii < a_rows; ii += BLOCK_SIZE) {
       for (size_t jj = 0; jj < b_cols; jj += BLOCK_SIZE) {
@@ -928,7 +992,6 @@ class Matrix {
               const size_t b_offset = k * b_cols;
               const size_t c_offset = i * b_cols;
 
-#pragma omp simd
               for (size_t j = jj; j < j_end; ++j) {
                 c_data[c_offset + j] += a_ik * static_cast<C>(b_data[b_offset + j]);
               }
@@ -940,9 +1003,9 @@ class Matrix {
   }
 };
 
-#pragma mark friend_functions
+#pragma mark friends
 // ----------------------------------
-// FRIEND FUNCTIONS
+// FRIEND OPERATORS
 // ----------------------------------
 
 /**
@@ -965,17 +1028,10 @@ template <Numeric T, Numeric U>
   Matrix<R> result(matrix.row_count(), matrix.column_count());
   R r_scalar = static_cast<R>(scalar);
 
-  if (matrix.size() > OMP_LINEAR_LIMIT) {
-#pragma omp parallel for
-    for (size_t i = 0; i < matrix.size(); ++i) {
-      result.data()[i] = r_scalar - static_cast<R>(matrix.data()[i]);
-    }
-  } else {
-#pragma omp simd
-    for (size_t i = 0; i < matrix.size(); ++i) {
-      result.data()[i] = r_scalar - static_cast<R>(matrix.data()[i]);
-    }
-  }
+  omp_loop(matrix.size(), [&](size_t i) {
+    result.data()[i] = r_scalar - static_cast<R>(matrix.data()[i]);
+  });
+
   return result;
 }
 
@@ -988,6 +1044,27 @@ template <Numeric T, Numeric U>
 }
 
 /**
+ * @brief Element-wise scalar division (scalar / Matrix).
+ * @tparam U An arithmetic scalar type.
+ * @return Matrix of the common, promoted type.
+ */
+template <Numeric T, Numeric U>
+[[nodiscard]] auto operator/(const U &scalar, const Matrix<T> &matrix) noexcept {
+  using R =
+      std::conditional_t<std::is_integral_v<T> && std::is_integral_v<U>, double,
+                         std::common_type_t<T, U>>;  // Forces double if both are ints
+
+  Matrix<R> result(matrix.row_count(), matrix.column_count());
+  R r_scalar = static_cast<R>(scalar);
+
+  omp_loop(matrix.size(), [&](size_t i) {
+    result.data()[i] = r_scalar / static_cast<R>(matrix.data()[i]);
+  });
+
+  return result;
+}
+
+/**
  * @brief Checks if two matrices are element-wise equal within a tolerance.
  * @tparam T Numeric type of the first matrix.
  * @tparam U Numeric type of the second matrix.
@@ -996,7 +1073,8 @@ template <Numeric T, Numeric U>
  */
 template <Numeric T, Numeric U>
 [[nodiscard]] constexpr bool loosely_equal(const Matrix<T> &first,
-                                           const Matrix<U> &second, double eps = 1e-6) {
+                                           const Matrix<U> &second,
+                                           double eps = EPSILON) {
   size_t n = first.row_count();
   size_t m = first.column_count();
   if (n != second.row_count() || m != second.column_count()) {
@@ -1010,6 +1088,52 @@ template <Numeric T, Numeric U>
     }
   }
   return true;
+}
+
+// ----------------------------------
+// FRIEND FACTORIES
+// ----------------------------------
+
+/**
+ * @brief Creates a new identity matrix of a given size.
+ * @tparam T The numeric type of the matrix.
+ * @param size The width and height of the square matrix.
+ * @return An identity Matrix<T> of size (size x size).
+ */
+template <Numeric T>
+[[nodiscard]] Matrix<T> inline identity_matrix(size_t size) {
+  Matrix<T> result(size, size);  // This is slower then specialized constructor
+  result.make_identity();
+  return result;
+}
+
+/**
+ * @brief Creates a new matrix filled with ones.
+ * @tparam U The numeric type of the matrix.
+ * @param rows Number of rows.
+ * @param cols Number of columns.
+ * @return A Matrix<U> of size (rows x cols) filled with U(1).
+ */
+template <Numeric U>
+[[nodiscard]] inline Matrix<U> ones(size_t rows, size_t cols) {
+  Matrix<U> result(rows, cols);
+  result.fill(U(1));
+  return result;
+}
+
+/**
+ * @brief Creates a new permutation matrix from a permutation vector.
+ * @tparam T The numeric type of the matrix.
+ * @param perm A vector where `perm[i] = j` means row `i` maps to
+ * column `j`.
+ * @return A sparse permutation Matrix<T>.
+ */
+template <Numeric T>
+[[nodiscard]] Matrix<T> inline permutation_matrix(const std::vector<uint32> &perm) {
+  size_t n = perm.size();
+  Matrix<T> result(n, n);  // Initializes to zero
+  omp_loop(n, [&](size_t i) { result[i][perm[i]] = static_cast<T>(1); });
+  return result;
 }
 
 }  // namespace maf::math
