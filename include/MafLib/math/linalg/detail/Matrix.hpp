@@ -977,26 +977,13 @@ class Matrix {
   template <typename A, typename B, typename C>
   void _gemm(const A *a_data, const B *b_data, C *c_data, size_t a_rows, size_t a_cols,
              size_t b_cols) const {
-    static constexpr size_t OMP_DIM = 10000;
-#pragma omp parallel for collapse(2) if (a_rows * b_cols > OMP_DIM)
-    for (size_t ii = 0; ii < a_rows; ii += BLOCK_SIZE) {
-      for (size_t jj = 0; jj < b_cols; jj += BLOCK_SIZE) {
-        for (size_t kk = 0; kk < a_cols; kk += BLOCK_SIZE) {
-          const size_t i_end = std::min(ii + BLOCK_SIZE, a_rows);
-          const size_t j_end = std::min(jj + BLOCK_SIZE, b_cols);
-          const size_t k_end = std::min(kk + BLOCK_SIZE, a_cols);
-
-          for (size_t i = ii; i < i_end; ++i) {
-            for (size_t k = kk; k < k_end; ++k) {
-              const C a_ik = static_cast<C>(a_data[(i * a_cols) + k]);
-              const size_t b_offset = k * b_cols;
-              const size_t c_offset = i * b_cols;
-
-              for (size_t j = jj; j < j_end; ++j) {
-                c_data[c_offset + j] += a_ik * static_cast<C>(b_data[b_offset + j]);
-              }
-            }
-          }
+    [[maybe_unused]] static constexpr size_t OMP_DIM = 10000;
+#pragma omp parallel for collapse(2) if (a_rows * b_cols > OMP_DIM) default(none)
+    for (size_t i = 0; i < a_rows; ++i) {
+      for (size_t k = 0; k < a_cols; ++k) {
+        for (size_t j = 0; j < b_cols; ++j) {
+          c_data[i * b_cols + j] += static_cast<C>(a_data[i * a_cols + k]) *
+                                    static_cast<C>(b_data[k * b_cols + j]);
         }
       }
     }

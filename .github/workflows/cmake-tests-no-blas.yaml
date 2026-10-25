@@ -1,0 +1,45 @@
+name: MafLib Tests (No BLAS)
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    build-and-test-no-blas:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            # Linux setup (note: no libopenblas-dev; the MAFLIB_DISABLE_BLAS
+            # flag additionally guards against any BLAS sneaking in)
+            - name: Install dependencies (Linux)
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y clang ninja-build cmake libomp-dev
+
+            - name: Configure (clang-debug preset, BLAS disabled)
+              env:
+                  CC: clang
+                  CXX: clang++
+              run: |
+                  cmake --preset clang-debug -DMAFLIB_DISABLE_BLAS=ON | tee configure.log
+                  # Fail if any BLAS backend was picked up anyway
+                  if grep -Eq "OpenBLAS found|Accelerate framework found" configure.log; then
+                      echo "::error::BLAS backend was enabled; expected a non-BLAS build."
+                      exit 1
+                  fi
+                  grep -q "skipping BLAS detection" configure.log || {
+                      echo "::error::MAFLIB_DISABLE_BLAS message missing; option not applied."
+                      exit 1
+                  }
+
+            # ⚙️ Build
+            - name: Build
+              run: cmake --build --preset clang-debug --parallel
+
+            # 🧪 Run tests
+            - name: Run tests
+              run: ctest --preset clang-debug --output-on-failure

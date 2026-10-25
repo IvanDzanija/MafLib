@@ -673,7 +673,9 @@ class ViewTests : public ITest {
   }
 
   static void gemv_time_test() {
+#ifdef MAFLIB_OPENMP_AVAILABLE
     std::cout << "OMP threads: " << omp_get_max_threads() << "\n";
+#endif
     constexpr size_t N = 4096;
     constexpr int WARMUP = 1;
     constexpr int ITERS = 3;
