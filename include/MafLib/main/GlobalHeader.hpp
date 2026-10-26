@@ -2,7 +2,10 @@
 #define GLOBALHEADER_HPP
 
 #pragma once
+
+#ifdef MAFLIB_OPENMP_AVAILABLE
 #include <omp.h>
+#endif
 
 #include <algorithm>
 #include <array>

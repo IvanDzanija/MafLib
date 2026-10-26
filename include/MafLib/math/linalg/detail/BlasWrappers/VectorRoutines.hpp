@@ -1,9 +1,19 @@
-#ifndef ACCELERATE_VECTOR_ROUTINES_H
-#define ACCELERATE_VECTOR_ROUTINES_H
+#ifndef BLAS_VECTOR_ROUTINES_H
+#define BLAS_VECTOR_ROUTINES_H
 
 #pragma once
-#include "AccelerateWrapper.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/BlasWrapper.hpp"
 
+/**
+ * @file VectorRoutines.hpp
+ * @brief BLAS level 1 vector routines.
+ *
+ * Identical counterparts are provided by maf::math::acc (Accelerate, Apple)
+ * and maf::math::oblas (OpenBLAS, Linux). The dot products are pointer-level;
+ * they own no containers and perform no type conversions.
+ */
+
+#if defined(__APPLE__) && defined(ACCELERATE_AVAILABLE)
 namespace maf::math::acc {
 //=============================================================================
 // BLAS LEVEL 1 ROUTINES
@@ -91,17 +101,51 @@ inline void inplace_vsaddi(std::vector<int32> &x, const int32 alpha = 1) {
   vDSP_vsaddi(x.data(), 1, &alpha, x.data(), 1, x.size());
 }
 
-// Dot product (double)
-[[nodiscard]] inline double ddot(const std::vector<double> &x,
-                                 const std::vector<double> &y) {
-  return cblas_ddot(x.size(), x.data(), 1, y.data(), 1);
+/** @brief Dot product of x and y (float).
+ *
+ *  @param x Pointer to the first vector.
+ *  @param incx Stride between elements of x.
+ *  @param y Pointer to the second vector.
+ *  @param incy Stride between elements of y.
+ */
+[[nodiscard]] inline float sdot(size_t n, const float *x, size_t incx, const float *y,
+                                size_t incy) {
+  return cblas_sdot(static_cast<int>(n), x, static_cast<int>(incx), y,
+                    static_cast<int>(incy));
 }
 
-// Dot product (float)
-[[nodiscard]] inline float sdot(const std::vector<float> &x,
-                                const std::vector<float> &y) {
-  return cblas_sdot(x.size(), x.data(), 1, y.data(), 1);
+/** @brief Dot product of x and y (double). */
+[[nodiscard]] inline double ddot(size_t n, const double *x, size_t incx,
+                                 const double *y, size_t incy) {
+  return cblas_ddot(static_cast<int>(n), x, static_cast<int>(incx), y,
+                    static_cast<int>(incy));
 }
 
 }  // namespace maf::math::acc
+#elifdef OPENBLAS_AVAILABLE
+namespace maf::math::oblas {
+
+/** @brief Dot product of x and y (float).
+ *
+ *  @param x Pointer to the first vector.
+ *  @param incx Stride between elements of x.
+ *  @param y Pointer to the second vector.
+ *  @param incy Stride between elements of y.
+ */
+[[nodiscard]] inline float sdot(size_t n, const float *x, size_t incx, const float *y,
+                                size_t incy) {
+  return cblas_sdot(static_cast<int>(n), x, static_cast<int>(incx), y,
+                    static_cast<int>(incy));
+}
+
+/** @brief Dot product of x and y (double). */
+[[nodiscard]] inline double ddot(size_t n, const double *x, size_t incx,
+                                 const double *y, size_t incy) {
+  return cblas_ddot(static_cast<int>(n), x, static_cast<int>(incx), y,
+                    static_cast<int>(incy));
+}
+
+}  // namespace maf::math::oblas
 #endif
+
+#endif  // ACCELERATE_VECTOR_ROUTINES_H

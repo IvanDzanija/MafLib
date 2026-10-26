@@ -1,9 +1,6 @@
 #include "ITest.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
-#include "MafLib/math/linalg/Matrix.hpp"
-#include "MafLib/math/linalg/MatrixCheckers.hpp"
-#include "MafLib/math/linalg/QR.hpp"
-#include "MafLib/math/linalg/Vector.hpp"
+#include "MafLib/math/linalg/LinAlg.hpp"
 
 namespace maf::test {
 using namespace maf;
@@ -122,6 +119,37 @@ class MatrixTests : public ITest {
       thrown = true;
     }
     ASSERT_TRUE(thrown);
+  }
+
+  //=============================================================================
+  // MATRIX ELEMENT ACCESS TESTS
+  //=============================================================================
+  void should_access_row_with_operator() {
+    math::Matrix<int> m(2, 3, {1, 2, 3, 4, 5, 6});
+    ASSERT_TRUE(m[0][2] == 3);
+    ASSERT_TRUE(m[1][0] == 4);
+
+    m[1][0] = 10;
+    ASSERT_TRUE(m.at(1, 0) == 10);
+    ASSERT_TRUE(m[1][0] == 10);
+  }
+
+  void should_access_element_with_row_col_operator() {
+    math::Matrix<int> m(2, 3, {1, 2, 3, 4, 5, 6});
+    ASSERT_TRUE((m[0, 0] == 1));
+    ASSERT_TRUE((m[0, 2] == 3));
+    ASSERT_TRUE((m[1, 1] == 5));
+
+    m[1, 2] = 42;
+    ASSERT_TRUE(m.at(1, 2) == 42);
+    ASSERT_TRUE((m[1, 2] == 42));
+  }
+
+  void should_access_with_const_operator() {
+    const math::Matrix<int> m(2, 3, {1, 2, 3, 4, 5, 6});
+    ASSERT_TRUE(m[0][2] == 3);
+    ASSERT_TRUE((m[1, 1] == 5));
+    ASSERT_TRUE((m[1, 2] == 6));
   }
 
   //=============================================================================
@@ -630,12 +658,12 @@ class MatrixTests : public ITest {
 
   void should_multiply_matrix_and_vector() {
     math::Matrix<float> m(2, 3, {1.0, 0.5, -2.0, 4.0, 1.0, 3.0});
-    math::Vector<int> v(3, std::vector<int>{2, 4, 6}, math::COLUMN);
+    math::Vector<int> v(3, std::vector<int>{2, 4, 6}, math::Orientation::COLUMN);
 
     math::Vector<float> expected(
         2,
         std::vector<float>{1.0 * 2 + 0.5 * 4 + (-2.0) * 6, 4.0 * 2 + 1.0 * 4 + 3.0 * 6},
-        math::COLUMN);
+        math::Orientation::COLUMN);
 
     auto result = m * v;
     ASSERT_SAME_TYPE(result, math::Vector<float>);
@@ -1145,7 +1173,7 @@ class MatrixTests : public ITest {
 
   void should_decompose_identity_matrix_qr() {
     math::Matrix<double> I = math::identity_matrix<double>(4);
-    auto [Q, R] = math::QR_decompostion(I);
+    auto [Q, R] = math::qr_decompostion(I);
     ASSERT_TRUE(loosely_equal(Q, I));
     ASSERT_TRUE(loosely_equal(R, I));
   }
@@ -1159,7 +1187,7 @@ class MatrixTests : public ITest {
          -2.0 / 3.0, -2.0 / 15.0, 11.0 / 15.0});
     math::Matrix<double> expected_R(
         3, 3, {-30.0, 15.0, -30.0, 0.0, 15.0, 15.0, 0.0, 0.0, 45.0});
-    auto [Q, R] = math::QR_decompostion(A);
+    auto [Q, R] = math::qr_decompostion(A);
     // std::cout << "HERE" << std::endl;
     // Q.print();
     // R.print();
@@ -1171,7 +1199,7 @@ class MatrixTests : public ITest {
 
   void should_throw_on_empty_matrix() {
     math::Matrix<double> A0;
-    ASSERT_THROW((void)math::QR_decompostion(A0), std::invalid_argument);
+    ASSERT_THROW((void)math::qr_decompostion(A0), std::invalid_argument);
   }
 
   void should_return_thin_q_and_square_r_by_default_square_case() {
@@ -1182,7 +1210,7 @@ class MatrixTests : public ITest {
       }
     }
 
-    auto [Q, R] = math::QR_decompostion(A);
+    auto [Q, R] = math::qr_decompostion(A);
     ASSERT_TRUE(Q.row_count() == 5u);
     ASSERT_TRUE(Q.column_count() == 5u);
     ASSERT_TRUE(R.row_count() == 5u);
@@ -1197,7 +1225,7 @@ class MatrixTests : public ITest {
         A.at(i, j) = ((double)(i + 1) * (double)(j + 2)) - (0.25 * (double)(i));
       }
     }
-    auto [Q, R] = math::QR_decompostion(A);
+    auto [Q, R] = math::qr_decompostion(A);
     ASSERT_TRUE(Q.row_count() == 7u);
     ASSERT_TRUE(Q.column_count() == 3u);
     ASSERT_TRUE(R.row_count() == 3u);
@@ -1212,7 +1240,7 @@ class MatrixTests : public ITest {
         A.at(i, j) = ((double)(i - 1) * 1.5) + ((double)j * 0.2);
       }
     }
-    auto [Q, R] = math::QR_decompostion(A);
+    auto [Q, R] = math::qr_decompostion(A);
     ASSERT_TRUE(Q.row_count() == 3u);
     ASSERT_TRUE(Q.column_count() == 3u);
     ASSERT_TRUE(R.row_count() == 3u);
@@ -1222,7 +1250,7 @@ class MatrixTests : public ITest {
 
   void should_decompose_square_fullq_false_fullr_false() {
     math::Matrix<double> A(4, 4, {1, 2, 3, 4, 5, 6, 7, 8, 2, -1, 0, 3, 9, 1, -2, 5});
-    auto [Q, R] = math::QR_decompostion(A, false, false);
+    auto [Q, R] = math::qr_decompostion(A, false, false);
     ASSERT_TRUE(Q.row_count() == 4u);
     ASSERT_TRUE(Q.column_count() == 4u);
     ASSERT_TRUE(R.row_count() == 4u);
@@ -1232,7 +1260,7 @@ class MatrixTests : public ITest {
 
   void should_decompose_square_fullq_true_fullr_false() {
     math::Matrix<double> A(4, 4, {1, 2, 3, 4, 5, 6, 7, 8, 2, -1, 0, 3, 9, 1, -2, 5});
-    auto [Q, R] = math::QR_decompostion(A, true, false);
+    auto [Q, R] = math::qr_decompostion(A, true, false);
     ASSERT_TRUE(Q.row_count() == 4u);
     ASSERT_TRUE(Q.column_count() == 4u);
     ASSERT_TRUE(R.row_count() == 4u);
@@ -1242,7 +1270,7 @@ class MatrixTests : public ITest {
 
   void should_decompose_square_fullq_false_fullr_true() {
     math::Matrix<double> A(4, 4, {1, 2, 3, 4, 5, 6, 7, 8, 2, -1, 0, 3, 9, 1, -2, 5});
-    auto [Q, R] = math::QR_decompostion(A, false, true);
+    auto [Q, R] = math::qr_decompostion(A, false, true);
     ASSERT_TRUE(Q.row_count() == 4u);
     ASSERT_TRUE(Q.column_count() == 4u);
     ASSERT_TRUE(R.row_count() == 4u);
@@ -1252,7 +1280,7 @@ class MatrixTests : public ITest {
 
   void should_decompose_square_fullq_true_fullr_true() {
     math::Matrix<double> A(4, 4, {1, 2, 3, 4, 5, 6, 7, 8, 2, -1, 0, 3, 9, 1, -2, 5});
-    auto [Q, R] = math::QR_decompostion(A, true, true);
+    auto [Q, R] = math::qr_decompostion(A, true, true);
     ASSERT_TRUE(Q.row_count() == 4u);
     ASSERT_TRUE(Q.column_count() == 4u);
     ASSERT_TRUE(R.row_count() == 4u);
@@ -1263,7 +1291,7 @@ class MatrixTests : public ITest {
   void should_decompose_tall_fullq_false_fullr_false() {
     math::Matrix<double> A(6, 3,
                            {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, -1, 2, -2, 2, 3, 1, 0});
-    auto [Q, R] = math::QR_decompostion(A, false, false);
+    auto [Q, R] = math::qr_decompostion(A, false, false);
     ASSERT_TRUE(Q.row_count() == 6u);
     ASSERT_TRUE(Q.column_count() == 3u);
     ASSERT_TRUE(R.row_count() == 3u);
@@ -1274,7 +1302,7 @@ class MatrixTests : public ITest {
   void should_decompose_tall_fullq_true_fullr_false() {
     math::Matrix<double> A(6, 3,
                            {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, -1, 2, -2, 2, 3, 1, 0});
-    auto [Q, R] = math::QR_decompostion(A, true, false);
+    auto [Q, R] = math::qr_decompostion(A, true, false);
     ASSERT_TRUE(Q.row_count() == 6u);
     ASSERT_TRUE(Q.column_count() == 6u);
     ASSERT_TRUE(R.row_count() == 3u);
@@ -1286,7 +1314,7 @@ class MatrixTests : public ITest {
   void should_decompose_tall_fullq_false_fullr_true() {
     math::Matrix<double> A(6, 3,
                            {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, -1, 2, -2, 2, 3, 1, 0});
-    auto [Q, R] = math::QR_decompostion(A, false, true);
+    auto [Q, R] = math::qr_decompostion(A, false, true);
     ASSERT_TRUE(Q.row_count() == 6u);
     ASSERT_TRUE(Q.column_count() == 3u);
     ASSERT_TRUE(R.row_count() == 6u);
@@ -1298,7 +1326,7 @@ class MatrixTests : public ITest {
   void should_decompose_tall_fullq_true_fullr_true() {
     math::Matrix<double> A(6, 3,
                            {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, -1, 2, -2, 2, 3, 1, 0});
-    auto [Q, R] = math::QR_decompostion(A, true, true);
+    auto [Q, R] = math::qr_decompostion(A, true, true);
     ASSERT_TRUE(Q.row_count() == 6u);
     ASSERT_TRUE(Q.column_count() == 6u);
     ASSERT_TRUE(R.row_count() == 6u);
@@ -1309,7 +1337,7 @@ class MatrixTests : public ITest {
   void should_decompose_wide_fullq_false_fullr_false() {
     math::Matrix<double> A(3, 6,
                            {1, 2, 3, 4, 5, 6, 0, -1, 2, -3, 4, -5, 2, 2, 1, 0, -1, -2});
-    auto [Q, R] = math::QR_decompostion(A, false, false);
+    auto [Q, R] = math::qr_decompostion(A, false, false);
 
     ASSERT_TRUE(Q.row_count() == 3u);
     ASSERT_TRUE(Q.column_count() == 3u);
@@ -1321,7 +1349,7 @@ class MatrixTests : public ITest {
   void should_decompose_wide_fullq_true_fullr_false() {
     math::Matrix<double> A(3, 6,
                            {1, 2, 3, 4, 5, 6, 0, -1, 2, -3, 4, -5, 2, 2, 1, 0, -1, -2});
-    auto [Q, R] = math::QR_decompostion(A, true, false);
+    auto [Q, R] = math::qr_decompostion(A, true, false);
     ASSERT_TRUE(Q.row_count() == 3u);
     ASSERT_TRUE(Q.column_count() == 3u);
     ASSERT_TRUE(R.row_count() == 3u);
@@ -1332,7 +1360,7 @@ class MatrixTests : public ITest {
   void should_decompose_wide_fullq_false_fullr_true() {
     math::Matrix<double> A(3, 6,
                            {1, 2, 3, 4, 5, 6, 0, -1, 2, -3, 4, -5, 2, 2, 1, 0, -1, -2});
-    auto [Q, R] = math::QR_decompostion(A, false, true);
+    auto [Q, R] = math::qr_decompostion(A, false, true);
     ASSERT_TRUE(Q.row_count() == 3u);
     ASSERT_TRUE(Q.column_count() == 3u);
     ASSERT_TRUE(R.row_count() == 3u);
@@ -1343,7 +1371,7 @@ class MatrixTests : public ITest {
   void should_decompose_wide_fullq_true_fullr_true() {
     math::Matrix<double> A(3, 6,
                            {1, 2, 3, 4, 5, 6, 0, -1, 2, -3, 4, -5, 2, 2, 1, 0, -1, -2});
-    auto [Q, R] = math::QR_decompostion(A, true, true);
+    auto [Q, R] = math::qr_decompostion(A, true, true);
     ASSERT_TRUE(Q.row_count() == 3u);
     ASSERT_TRUE(Q.column_count() == 3u);
     ASSERT_TRUE(R.row_count() == 3u);
@@ -1353,7 +1381,7 @@ class MatrixTests : public ITest {
 
   void should_qr_promote_int_matrix_to_double_result_and_reconstruct() {
     math::Matrix<int> A(4, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, -1, 2});
-    auto qr = math::QR_decompostion(A);
+    auto qr = math::qr_decompostion(A);
 
     math::Matrix<double> Ad(4, 3);
     for (size_t i = 0; i < 4; ++i) {
@@ -1374,14 +1402,14 @@ class MatrixTests : public ITest {
       }
     }
 
-    auto qr = math::QR_decompostion(A);
+    auto qr = math::qr_decompostion(A);
 
     ASSERT_TRUE(loosely_equal(qr.Q * qr.R, A));
   }
 
   void should_decompose_1x1_matrix() {
     math::Matrix<double> A(1, 1, {-7.25});
-    auto [Q, R] = math::QR_decompostion(A);
+    auto [Q, R] = math::qr_decompostion(A);
 
     ASSERT_TRUE(Q.row_count() == 1u);
     ASSERT_TRUE(Q.column_count() == 1u);
@@ -1393,7 +1421,7 @@ class MatrixTests : public ITest {
 
   void should_decompose_nx1_column_vector() {
     math::Matrix<double> A(6, 1, {3, -1, 0, 5, 2, -4});
-    auto [Q, R] = math::QR_decompostion(A);
+    auto [Q, R] = math::qr_decompostion(A);
 
     ASSERT_TRUE(Q.row_count() == 6u);
     ASSERT_TRUE(Q.column_count() == 1u);
@@ -1405,7 +1433,7 @@ class MatrixTests : public ITest {
 
   void should_decompose_1xn_row_vector() {
     math::Matrix<double> A(1, 6, {3, -1, 0, 5, 2, -4});
-    auto [Q, R] = math::QR_decompostion(A);
+    auto [Q, R] = math::qr_decompostion(A);
 
     ASSERT_TRUE(Q.row_count() == 1u);
     ASSERT_TRUE(Q.column_count() == 1u);
@@ -1417,7 +1445,7 @@ class MatrixTests : public ITest {
 
   void should_decompose_upper_triangular_matrix() {
     math::Matrix<double> A(4, 4, {5, 2, -1, 3, 0, -4, 7, 1, 0, 0, 2, -6, 0, 0, 0, 9});
-    auto [Q, R] = math::QR_decompostion(A);
+    auto [Q, R] = math::qr_decompostion(A);
     ASSERT_TRUE(loosely_equal(Q * R, A));
 
     for (size_t i = 0; i < 4; ++i) {
@@ -1429,7 +1457,7 @@ class MatrixTests : public ITest {
 
   void should_decompose_matrix_with_first_column_already_canonical() {
     math::Matrix<double> A(4, 3, {3, 1, 2, 0, -4, 5, 0, 6, -1, 0, 2, 7});
-    auto [Q, R] = math::QR_decompostion(A);
+    auto [Q, R] = math::qr_decompostion(A);
     ASSERT_TRUE(loosely_equal(Q * R, A));
   }
 
@@ -1441,26 +1469,26 @@ class MatrixTests : public ITest {
       }
     }
 
-    auto [Q, R] = math::QR_decompostion(A, true, true);
+    auto [Q, R] = math::qr_decompostion(A, true, true);
     ASSERT_TRUE(loosely_equal(Q * R, A));
   }
 
   void should_decompose_rank_deficient_duplicate_columns() {
     math::Matrix<double> A(4, 3, {1, 2, 4, 2, 3, 6, 3, 4, 8, 4, 5, 10});
-    auto [Q, R] = math::QR_decompostion(A);
+    auto [Q, R] = math::qr_decompostion(A);
     ASSERT_TRUE(loosely_equal(Q * R, A));
   }
 
   void should_decompose_matrix_with_zero_column() {
     math::Matrix<double> A(4, 3, {1, 0, 2, 3, 0, 4, 5, 0, 6, 7, 0, 8});
-    auto [Q, R] = math::QR_decompostion(A, true, true);
+    auto [Q, R] = math::qr_decompostion(A, true, true);
     ASSERT_TRUE(loosely_equal(Q * R, A));
   }
 
   void should_produce_orthonormal_columns_thin_q_tall() {
     math::Matrix<double> A(6, 3,
                            {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0, -1, 2, -2, 2, 3, 1, 0});
-    auto [Q, R] = math::QR_decompostion(A, false, false);
+    auto [Q, R] = math::qr_decompostion(A, false, false);
     ASSERT_TRUE(loosely_equal(Q * R, A));
 
     math::Matrix<double> QtQ(3, 3);
@@ -1479,7 +1507,7 @@ class MatrixTests : public ITest {
 
   void should_produce_orthonormal_columns_full_q_square() {
     math::Matrix<double> A(4, 4, {1, 2, 3, 4, 5, 6, 7, 8, 2, -1, 0, 3, 9, 1, -2, 5});
-    auto [Q, R] = math::QR_decompostion(A, false, true);
+    auto [Q, R] = math::qr_decompostion(A, false, true);
     ASSERT_TRUE(loosely_equal(Q * R, A));
 
     math::Matrix<double> QtQ(4, 4);
@@ -1504,7 +1532,7 @@ class MatrixTests : public ITest {
       }
     }
 
-    auto [Q, R] = math::QR_decompostion(A);
+    auto [Q, R] = math::qr_decompostion(A);
     ASSERT_TRUE(loosely_equal(Q * R, A));
 
     for (size_t i = 0; i < 5; ++i) {
@@ -1522,7 +1550,7 @@ class MatrixTests : public ITest {
       }
     }
 
-    auto [Q, R] = math::QR_decompostion(A);
+    auto [Q, R] = math::qr_decompostion(A);
     ASSERT_TRUE(loosely_equal(Q * R, A));
 
     for (size_t i = 0; i < 3; ++i) {
@@ -1542,7 +1570,7 @@ class MatrixTests : public ITest {
     A.print();
     std::cout << std::endl;
 
-    auto [Q, R] = math::QR_decompostion(A, true, true);
+    auto [Q, R] = math::qr_decompostion(A, true, true);
     ASSERT_TRUE(loosely_equal(Q * R, A));
 
     for (size_t i = 0; i < 3; ++i) {
@@ -1569,7 +1597,7 @@ class MatrixTests : public ITest {
       }
 
       auto start = std::chrono::high_resolution_clock::now();
-      auto qr = math::QR_decompostion(A);
+      auto qr = math::qr_decompostion(A);
       auto end = std::chrono::high_resolution_clock::now();
 
       std::chrono::duration<double> elapsed = end - start;
@@ -1602,6 +1630,9 @@ class MatrixTests : public ITest {
     should_construct_from_std_array();
     should_construct_from_initializer_list();
     should_throw_if_initializer_list_size_mismatch();
+    should_access_row_with_operator();
+    should_access_element_with_row_col_operator();
+    should_access_with_const_operator();
     should_return_true_for_square_matrix();
     should_return_true_for_symmetric_matrix();
     should_return_true_for_triangular_matrix();

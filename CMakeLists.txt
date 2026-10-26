@@ -47,9 +47,43 @@ if(APPLE)
                 ACCELERATE_AVAILABLE
                 ACCELERATE_NEW_LAPACK
                 ACCELERATE_LAPACK_ILP64
+                BLAS_AVAILABLE
         )
     else()
         message(STATUS "Accelerate framework NOT found. Building without it.")
+    endif()
+endif()
+
+if(UNIX AND NOT APPLE)
+    # OpenBLAS (Linux)
+    find_path(OPENBLAS_INCLUDE_DIR
+        NAMES cblas.h
+        PATH_SUFFIXES openblas
+    )
+    find_library(OPENBLAS_LIBRARY
+        NAMES openblas
+    )
+    if(OPENBLAS_LIBRARY)
+        message(STATUS "OpenBLAS found. Enabling optimizations.")
+        if(OPENBLAS_INCLUDE_DIR)
+            target_include_directories(${PROJECT_NAME}
+                INTERFACE
+                    ${OPENBLAS_INCLUDE_DIR}
+            )
+        else()
+            message(STATUS "OpenBLAS library found but cblas.h was not found; proceeding without an explicit include dir.")
+        endif()
+        target_link_libraries(${PROJECT_NAME}
+            INTERFACE
+                ${OPENBLAS_LIBRARY}
+        )
+        target_compile_definitions(${PROJECT_NAME}
+            INTERFACE
+                OPENBLAS_AVAILABLE
+                BLAS_AVAILABLE
+        )
+    else()
+        message(STATUS "OpenBLAS NOT found. Building without it.")
     endif()
 endif()
 

@@ -1,7 +1,7 @@
 #ifndef CHOLESKY_H
 #define CHOLESKY_H
 #pragma once
-#include "Matrix.hpp"
+#include "MafLib/math/linalg/detail/Matrix.hpp"
 
 /**
  * @file Cholesky.hpp
@@ -37,34 +37,32 @@ template <std::floating_point T>
   }
 
   size_t n = matrix.row_count();
-  Matrix<T> L(n, n);
+  Matrix<T> l(n, n);
 
   for (size_t jj = 0; jj < n; jj += BLOCK_SIZE) {
     const size_t j_end = std::min(jj + BLOCK_SIZE, n);
     for (size_t j = jj; j < j_end; ++j) {
       T sum = 0;
-      auto L_row_j = L.row_span(j);
+      auto l_row_j = l.row_span(j);
 
-#pragma omp simd
       for (size_t k = 0; k < j; ++k) {
-        sum += L_row_j[k] * L_row_j[k];
+        sum += l_row_j[k] * l_row_j[k];
       }
 
       T diag_val = matrix.at(j, j) - sum;
       if (diag_val <= 0) {
         throw std::invalid_argument("Matrix is not positive definite!");
       }
-      L_row_j[j] = std::sqrt(diag_val);
+      l_row_j[j] = std::sqrt(diag_val);
 
       for (size_t i = j + 1; i < j_end; ++i) {
         T sum_i = 0;
-        auto L_row_i = L.row_span(i);
+        auto l_row_i = l.row_span(i);
 
-#pragma omp simd
         for (size_t k = 0; k < j; ++k) {
-          sum_i += L_row_i[k] * L_row_j[k];
+          sum_i += l_row_i[k] * l_row_j[k];
         }
-        L_row_i[j] = (matrix.at(i, j) - sum_i) / L_row_j[j];
+        l_row_i[j] = (matrix.at(i, j) - sum_i) / l_row_j[j];
       }
     }
 
@@ -73,23 +71,22 @@ template <std::floating_point T>
       const size_t i_end = std::min(ii + BLOCK_SIZE, n);
 
       for (size_t i = ii; i < i_end; ++i) {
-        auto L_row_i = L.row_span(i);
+        auto l_row_i = l.row_span(i);
 
         for (size_t j = jj; j < j_end; ++j) {
           T sum = 0;
-          auto L_row_j = L.row_span(j);
+          auto l_row_j = l.row_span(j);
 
-#pragma omp simd
           for (size_t k = 0; k < j; ++k) {
-            sum += L_row_i[k] * L_row_j[k];
+            sum += l_row_i[k] * l_row_j[k];
           }
-          L_row_i[j] = (matrix.at(i, j) - sum) / L_row_j[j];
+          l_row_i[j] = (matrix.at(i, j) - sum) / l_row_j[j];
         }
       }
     }
   }
 
-  return L;
+  return l;
 }
 
 }  // namespace detail

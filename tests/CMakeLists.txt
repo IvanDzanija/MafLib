@@ -5,8 +5,6 @@ message(STATUS "Building tests for MafLib")
 
 # Add subfolders for categories
 add_subdirectory(math)
-# add_subdirectory(algos)
-add_subdirectory(structs)
 
 # Make the current directory visible for includes
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

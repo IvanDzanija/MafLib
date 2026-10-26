@@ -1,8 +1,6 @@
 #include "ITest.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/math/linalg/LinAlg.hpp"
-#include "MafLib/math/linalg/Matrix.hpp"
-#include "MafLib/math/linalg/Vector.hpp"
 
 namespace maf::test {
 
@@ -17,19 +15,19 @@ class VectorTests : public ITest {
   void should_construct_empty_vector_with_zero_size() {
     math::Vector<int> v;
     ASSERT_TRUE(v.size() == 0);
-    ASSERT_TRUE(v.orientation() == math::COLUMN);
+    ASSERT_TRUE(v.orientation() == math::Orientation::COLUMN);
   }
 
   void should_construct_vector_of_given_size() {
     math::Vector<int> v_col(5);
     ASSERT_SAME_TYPE(v_col, math::Vector<int>);
     ASSERT_TRUE(v_col.size() == 5);
-    ASSERT_TRUE(v_col.orientation() == math::COLUMN);
+    ASSERT_TRUE(v_col.orientation() == math::Orientation::COLUMN);
 
-    math::Vector<double> v_row(3, math::ROW);
+    math::Vector<double> v_row(3, math::Orientation::ROW);
     ASSERT_SAME_TYPE(v_row, math::Vector<double>);
     ASSERT_TRUE(v_row.size() == 3);
-    ASSERT_TRUE(v_row.orientation() == math::ROW);
+    ASSERT_TRUE(v_row.orientation() == math::Orientation::ROW);
   }
 
   void should_throw_if_constructed_with_zero_size() {
@@ -44,10 +42,10 @@ class VectorTests : public ITest {
 
   void should_construct_from_raw_data() {
     int data[3] = {10, 20, 30};
-    math::Vector<int> v(3, data, math::ROW);
+    math::Vector<int> v(3, data, math::Orientation::ROW);
     ASSERT_SAME_TYPE(v, math::Vector<int>);
     ASSERT_TRUE(v.size() == 3);
-    ASSERT_TRUE(v.orientation() == math::ROW);
+    ASSERT_TRUE(v.orientation() == math::Orientation::ROW);
     ASSERT_TRUE(v[0] == 10);
     ASSERT_TRUE(v[1] == 20);
     ASSERT_TRUE(v[2] == 30);
@@ -106,10 +104,10 @@ class VectorTests : public ITest {
 
   void should_construct_from_std_array() {
     std::array<float, 3> data = {1.1f, 2.2f, 3.3f};
-    math::Vector<float> v(3, data, math::ROW);
+    math::Vector<float> v(3, data, math::Orientation::ROW);
     ASSERT_SAME_TYPE(v, math::Vector<float>);
     ASSERT_TRUE(v.size() == 3);
-    ASSERT_TRUE(v.orientation() == math::ROW);
+    ASSERT_TRUE(v.orientation() == math::Orientation::ROW);
     ASSERT_TRUE(is_close(v[1], 2.2f));
   }
 
@@ -227,21 +225,21 @@ class VectorTests : public ITest {
   }
 
   void should_transpose_vector_in_place() {
-    math::Vector<int> v(3, math::COLUMN);
-    ASSERT_TRUE(v.orientation() == math::COLUMN);
+    math::Vector<int> v(3, math::Orientation::COLUMN);
+    ASSERT_TRUE(v.orientation() == math::Orientation::COLUMN);
     v.transpose();
-    ASSERT_TRUE(v.orientation() == math::ROW);
+    ASSERT_TRUE(v.orientation() == math::Orientation::ROW);
     v.transpose();
-    ASSERT_TRUE(v.orientation() == math::COLUMN);
+    ASSERT_TRUE(v.orientation() == math::Orientation::COLUMN);
   }
 
   void should_return_transposed_copy() {
-    math::Vector<int> v_col(3, math::COLUMN);
+    math::Vector<int> v_col(3, math::Orientation::COLUMN);
     auto v_row = v_col.transposed();
     ASSERT_SAME_TYPE(v_row, math::Vector<int>);
 
-    ASSERT_TRUE(v_col.orientation() == math::COLUMN);
-    ASSERT_TRUE(v_row.orientation() == math::ROW);
+    ASSERT_TRUE(v_col.orientation() == math::Orientation::COLUMN);
+    ASSERT_TRUE(v_row.orientation() == math::Orientation::ROW);
     ASSERT_TRUE(v_row.size() == 3);
   }
 
@@ -259,7 +257,7 @@ class VectorTests : public ITest {
     v3[0] = 1;
     v3[1] = 9;
     math::Vector<int> v4(3);
-    math::Vector<int> v5(2, math::ROW);
+    math::Vector<int> v5(2, math::Orientation::ROW);
     v5[0] = 1;
     v5[1] = 2;
     math::Vector<float> v6(2);
@@ -440,10 +438,10 @@ class VectorTests : public ITest {
   }
 
   void should_calculate_outer_product() {
-    math::Vector<int> v_col(2, math::COLUMN);
+    math::Vector<int> v_col(2, math::Orientation::COLUMN);
     v_col[0] = 1;
     v_col[1] = 2;
-    math::Vector<double> v_row(3, math::ROW);
+    math::Vector<double> v_row(3, math::Orientation::ROW);
     v_row[0] = 3;
     v_row[1] = 4;
     v_row[2] = 5;
@@ -465,7 +463,7 @@ class VectorTests : public ITest {
   //
   void should_multiply_row_vector_and_matrix() {
     // (1x2) * (2x2) -> (1x2)
-    math::Vector<int> v_row(2, math::ROW);
+    math::Vector<int> v_row(2, math::Orientation::ROW);
     v_row[0] = 1;
     v_row[1] = 2;
 
@@ -479,7 +477,7 @@ class VectorTests : public ITest {
     // res[0] = (1*10) + (2*30) = 70
     // res[1] = (1*20) + (2*40) = 100
     ASSERT_TRUE(res.size() == 2);
-    ASSERT_TRUE(res.orientation() == math::ROW);
+    ASSERT_TRUE(res.orientation() == math::Orientation::ROW);
     ASSERT_TRUE(res[0] == 70);
     ASSERT_TRUE(res[1] == 100);
 
