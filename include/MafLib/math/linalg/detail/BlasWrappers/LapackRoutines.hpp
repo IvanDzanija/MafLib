@@ -1,9 +1,9 @@
-#ifndef BLAS_LAPACK_ROUTINES_H
-#define BLAS_LAPACK_ROUTINES_H
+#ifndef MAF_BLAS_LAPACK_ROUTINES_H
+#define MAF_BLAS_LAPACK_ROUTINES_H
 
 #pragma once
-#include "MafLib/math/linalg/detail/BlasWrappers/BlasWrapper.hpp"
 #include "MafLib/main/GlobalHeader.hpp"
+#include "MafLib/math/linalg/detail/BlasWrappers/BlasWrapper.hpp"
 #include "MafLib/math/linalg/detail/Matrix.hpp"
 
 /**
@@ -45,12 +45,12 @@ namespace maf::math::acc {
  * @throws std::runtime_error if the LAPACK backend reports a failure.
  */
 template <Numeric T>
-[[nodiscard]] auto qr_factorize(const Matrix<T> &A, bool full_Q = false,
-                                bool full_R = false)
+[[nodiscard]] auto qr_factorize(const Matrix<T> &a_matrix, bool full_q = false,
+                                bool full_r = false)
     -> QRResult<detail::float_promote_t<T>> {
   using DataType = detail::float_promote_t<T>;
-  const size_t m = A.row_count();
-  const size_t n = A.column_count();
+  const size_t m = a_matrix.row_count();
+  const size_t n = a_matrix.column_count();
   if (m == 0 || n == 0) {
     throw std::invalid_argument("Cannot perform QR decomposition on empty matrix!");
   }
@@ -58,14 +58,14 @@ template <Numeric T>
   // Smaller dimension determines number of reflectors
   const size_t k = std::min(m, n);
 
-  Matrix<DataType> A_work = A.template cast<DataType>();
-  Matrix<DataType> A_lap = A_work.transposed();  // Column-major order for LAPACK
-  auto *a = A_lap.data();
+  Matrix<DataType> a_work = a_matrix.template cast<DataType>();
+  Matrix<DataType> a_lap = a_work.transposed();  // Column-major order for LAPACK
+  auto *a = a_lap.data();
 
-  auto mm = (__LAPACK_int)m;
-  auto nn = (__LAPACK_int)n;
-  auto kk = (__LAPACK_int)k;
-  auto lda = (__LAPACK_int)m;
+  auto mm = static_cast<__LAPACK_int>(m);
+  auto nn = static_cast<__LAPACK_int>(n);
+  auto kk = static_cast<__LAPACK_int>(k);
+  auto lda = static_cast<__LAPACK_int>(m);
 
   std::vector<DataType> tau_lap(k);
 
@@ -73,81 +73,74 @@ template <Numeric T>
   __LAPACK_int lwork = -1;
   DataType wq = 0;
   if constexpr (std::is_same_v<DataType, float>) {
-    sgeqrf_(&mm, &nn, (float *)a, &lda, (float *)tau_lap.data(), (float *)&wq, &lwork,
-            &info);
+    sgeqrf_(&mm, &nn, a, &lda, tau_lap.data(), &wq, &lwork, &info);
   } else {
-    dgeqrf_(&mm, &nn, (double *)a, &lda, (double *)tau_lap.data(), (double *)&wq,
-            &lwork, &info);
+    dgeqrf_(&mm, &nn, a, &lda, tau_lap.data(), &wq, &lwork, &info);
   }
-  lwork = (__LAPACK_int)std::max<double>(1.0, std::ceil((double)wq));
-  std::vector<DataType> work((size_t)lwork);
+  lwork = static_cast<__LAPACK_int>(
+      std::max<double>(1.0, std::ceil(static_cast<double>(wq))));
+  std::vector<DataType> work(static_cast<size_t>(lwork));
 
   if constexpr (std::is_same_v<DataType, float>) {
-    sgeqrf_(&mm, &nn, (float *)a, &lda, (float *)tau_lap.data(), (float *)work.data(),
-            &lwork, &info);
+    sgeqrf_(&mm, &nn, a, &lda, tau_lap.data(), work.data(), &lwork, &info);
   } else {
-    dgeqrf_(&mm, &nn, (double *)a, &lda, (double *)tau_lap.data(),
-            (double *)work.data(), &lwork, &info);
+    dgeqrf_(&mm, &nn, a, &lda, tau_lap.data(), work.data(), &lwork, &info);
   }
   if (info != 0) {
     throw std::runtime_error("Accelerate/LAPACK geqrf failed");
   }
 
   // Get R
-  Matrix<DataType> R(full_R ? m : k, n);
-  R.fill(0.0);
-  for (size_t i = 0; i < R.row_count(); ++i) {
+  Matrix<DataType> r(full_r ? m : k, n);
+  for (size_t i = 0; i < r.row_count(); ++i) {
     for (size_t j = i; j < n; ++j) {
-      R[i][j] = A_lap[j][i];
+      r[i, j] = a_lap[j, i];
     }
   }
 
   // Get Q
-  if (full_Q && m > n) {
-    Matrix<DataType> A_big(m, m);
-    A_big.fill(0.0);
+  if (full_q && m > n) {
+    Matrix<DataType> a_big(m, m);
+    a_big.fill(0.0);
     for (size_t r = 0; r < n; ++r) {
       for (size_t c = 0; c < m; ++c) {
-        A_big[r][c] = A_lap[r][c];
+        a_big[r, c] = a_lap[r, c];
       }
     }
-    A_lap = std::move(A_big);
-    a = A_lap.data();
-    nn = (__LAPACK_int)m;
+    a_lap = std::move(a_big);
+    a = a_lap.data();
+    nn = static_cast<__LAPACK_int>(m);
   }
-  const size_t qcols_sz = full_Q ? m : k;
-  auto qcols = (__LAPACK_int)qcols_sz;
+  const size_t qcols_sz = full_q ? m : k;
+  auto qcols = static_cast<__LAPACK_int>(qcols_sz);
   lwork = -1;
   wq = 0;
   if constexpr (std::is_same_v<DataType, float>) {
-    sorgqr_(&mm, &qcols, &kk, (float *)a, &lda, (float *)tau_lap.data(), (float *)&wq,
-            &lwork, &info);
+    sorgqr_(&mm, &qcols, &kk, a, &lda, tau_lap.data(), &wq, &lwork, &info);
   } else {
-    dorgqr_(&mm, &qcols, &kk, (double *)a, &lda, (double *)tau_lap.data(),
-            (double *)&wq, &lwork, &info);
+    dorgqr_(&mm, &qcols, &kk, a, &lda, tau_lap.data(), &wq, &lwork, &info);
   }
-  lwork = (__LAPACK_int)std::max<double>(1.0, std::ceil((double)wq));
-  work.assign((size_t)lwork, DataType(0));
+  lwork = static_cast<__LAPACK_int>(
+      std::max<double>(1.0, std::ceil(static_cast<double>(wq))));
+  work.assign(static_cast<size_t>(lwork), DataType(0));
 
   if constexpr (std::is_same_v<DataType, float>) {
-    sorgqr_(&mm, &qcols, &kk, (float *)a, &lda, (float *)tau_lap.data(),
-            (float *)work.data(), &lwork, &info);
+    sorgqr_(&mm, &qcols, &kk, a, &lda, tau_lap.data(), work.data(), &lwork, &info);
   } else {
-    dorgqr_(&mm, &qcols, &kk, (double *)a, &lda, (double *)tau_lap.data(),
-            (double *)work.data(), &lwork, &info);
+    dorgqr_(&mm, &qcols, &kk, a, &lda, tau_lap.data(), work.data(), &lwork, &info);
   }
   if (info != 0) {
     throw std::runtime_error("Accelerate/LAPACK orgqr failed");
   }
 
-  Matrix<DataType> Q(m, qcols_sz);
+  Matrix<DataType> q(m, qcols_sz);
   for (size_t i = 0; i < m; ++i) {
     for (size_t j = 0; j < qcols_sz; ++j) {
-      Q[i][j] = A_lap[j][i];
+      q[i, j] = a_lap[j, i];
     }
   }
 
-  return {std::move(Q), std::move(R)};
+  return {std::move(q), std::move(r)};
 }
 
 }  // namespace maf::math::acc
@@ -207,21 +200,17 @@ template <Numeric T>
   int lwork = -1;
   DataType wq = 0;
   if constexpr (std::is_same_v<DataType, float>) {
-    sgeqrf_(&mm, &nn, (float *)a, &lda, (float *)tau_lap.data(), (float *)&wq, &lwork,
-            &info);
+    sgeqrf_(&mm, &nn, a, &lda, tau_lap.data(), &wq, &lwork, &info);
   } else {
-    dgeqrf_(&mm, &nn, (double *)a, &lda, (double *)tau_lap.data(), (double *)&wq,
-            &lwork, &info);
+    dgeqrf_(&mm, &nn, a, &lda, tau_lap.data(), &wq, &lwork, &info);
   }
-  lwork = static_cast<int>(std::max<double>(1.0, std::ceil((double)wq)));
-  std::vector<DataType> work((size_t)lwork);
+  lwork = static_cast<int>(std::max<double>(1.0, std::ceil(static_cast<double>(wq))));
+  std::vector<DataType> work(static_cast<size_t>(lwork));
 
   if constexpr (std::is_same_v<DataType, float>) {
-    sgeqrf_(&mm, &nn, (float *)a, &lda, (float *)tau_lap.data(), (float *)work.data(),
-            &lwork, &info);
+    sgeqrf_(&mm, &nn, a, &lda, tau_lap.data(), work.data(), &lwork, &info);
   } else {
-    dgeqrf_(&mm, &nn, (double *)a, &lda, (double *)tau_lap.data(),
-            (double *)work.data(), &lwork, &info);
+    dgeqrf_(&mm, &nn, a, &lda, tau_lap.data(), work.data(), &lwork, &info);
   }
   if (info != 0) {
     throw std::runtime_error("OpenBLAS/LAPACK geqrf failed");
@@ -254,21 +243,17 @@ template <Numeric T>
   lwork = -1;
   wq = 0;
   if constexpr (std::is_same_v<DataType, float>) {
-    sorgqr_(&mm, &qcols, &kk, (float *)a, &lda, (float *)tau_lap.data(), (float *)&wq,
-            &lwork, &info);
+    sorgqr_(&mm, &qcols, &kk, a, &lda, tau_lap.data(), &wq, &lwork, &info);
   } else {
-    dorgqr_(&mm, &qcols, &kk, (double *)a, &lda, (double *)tau_lap.data(),
-            (double *)&wq, &lwork, &info);
+    dorgqr_(&mm, &qcols, &kk, a, &lda, tau_lap.data(), &wq, &lwork, &info);
   }
-  lwork = static_cast<int>(std::max<double>(1.0, std::ceil((double)wq)));
-  work.assign((size_t)lwork, DataType(0));
+  lwork = static_cast<int>(std::max<double>(1.0, std::ceil(static_cast<double>(wq))));
+  work.assign(static_cast<size_t>(lwork), DataType(0));
 
   if constexpr (std::is_same_v<DataType, float>) {
-    sorgqr_(&mm, &qcols, &kk, (float *)a, &lda, (float *)tau_lap.data(),
-            (float *)work.data(), &lwork, &info);
+    sorgqr_(&mm, &qcols, &kk, a, &lda, tau_lap.data(), work.data(), &lwork, &info);
   } else {
-    dorgqr_(&mm, &qcols, &kk, (double *)a, &lda, (double *)tau_lap.data(),
-            (double *)work.data(), &lwork, &info);
+    dorgqr_(&mm, &qcols, &kk, a, &lda, tau_lap.data(), work.data(), &lwork, &info);
   }
   if (info != 0) {
     throw std::runtime_error("OpenBLAS/LAPACK orgqr failed");

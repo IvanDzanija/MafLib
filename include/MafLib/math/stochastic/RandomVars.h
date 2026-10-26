@@ -10,18 +10,18 @@ namespace maf::math {
 /// https://en.wikipedia.org/wiki/Cholesky_decomposition#Monte_Carlo_simulation
 /// @return Vector of common promoted type.
 template <typename T, typename U>
-auto correlated_shocks(const Matrix<U> &L, const Vector<T> &Z) {
+auto correlated_shocks(const Matrix<U> &l, const Vector<T> &z) {
   using R = std::common_type_t<T, U>;
 
-  size_t n = Z.size();
-  Vector<R> Y(n, Vector<R>::COLUMN);
+  size_t n = z.size();
+  Vector<R> y(n, Vector<R>::COLUMN);
 
   for (size_t i = 0; i < n; ++i) {
     for (size_t k = 0; k <= i; ++k) {
-      Y.at(i) += L.at(i, k) * Z.at(k);
+      y[i] += l[i, k] * z[k];
     }
   }
-  return Y;
+  return y;
 }
 
 }  // namespace maf::math

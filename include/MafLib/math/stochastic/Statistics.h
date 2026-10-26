@@ -20,7 +20,7 @@ template <typename T>
 double covariance(const Vector<T> &x, const Vector<T> &y) {
   size_t n = x.size();
   if (n != y.size()) {
-    throw std::invalid_argument("Dimension mismatch.");
+    throw std::invalid_argument("Dimension mismatch!");
   }
 
   double mean_x = mean(x);
@@ -29,7 +29,7 @@ double covariance(const Vector<T> &x, const Vector<T> &y) {
   for (size_t i = 0; i < n; ++i) {
     cov += (x.at(i) - mean_x) * (y.at(i) - mean_y);
   }
-  return cov / (n - 1);
+  return cov / static_cast<double>(n - 1);
 }
 
 /// Calculates the unbiased estimar of sample variance.
@@ -39,13 +39,15 @@ double covariance(const std::vector<T> &x, T mean_x, const std::vector<T> &y,
                   T mean_y) {
   size_t n = x.size();
   if (n != y.size()) {
-    throw std::invalid_argument("Dimension mismatch.");
+    throw std::invalid_argument("Dimension mismatch!");
   }
+
   double cov = 0.0;
   for (size_t i = 0; i < n; ++i) {
     cov += (x.at(i) - mean_x) * (y.at(i) - mean_y);
   }
-  return cov / (n - 1);
+
+  return cov / static_cast<double>(n - 1);
 }
 
 }  // namespace maf::math

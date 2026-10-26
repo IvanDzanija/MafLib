@@ -10,7 +10,6 @@
 #include "MafLib/math/linalg/detail/ViewKernels.hpp"
 
 /**
- * @file QR.hpp
  * @brief High-performance QR decomposition using Householder reflections.
  *
  * This header defines the `QR_decomposition` function, which computes the QR
@@ -57,8 +56,8 @@ namespace detail {
  * is a valid column index.
  */
 template <std::floating_point T>
-[[nodiscard]] static inline T householder_column(MatrixView<T> A_work, size_t j) {
-  const size_t m = A_work.row_count();
+[[nodiscard]] static inline T householder_column(MatrixView<T> a_work, size_t j) {
+  const size_t m = a_work.row_count();
   if (j >= m) {
     throw std::out_of_range("Householder column index out of range!");
   }
@@ -66,7 +65,7 @@ template <std::floating_point T>
   // sigma = x_tail^2
   T sigma = 0.0;
   for (size_t i = j + 1; i < m; ++i) {
-    sigma += A_work[i][j] * A_work[i][j];
+    sigma += a_work[i, j] * a_work[i, j];
   }
 
   // Simple case, already in canonical form
@@ -74,21 +73,21 @@ template <std::floating_point T>
     return 0.0;
   }
 
-  const T alpha = A_work.at(j, j);
+  const T alpha = a_work[j, j];
   const T normx = std::sqrt(alpha * alpha + sigma);
   const T beta = (alpha <= 0.0) ? normx : -normx;  // stability trick
   const T u0_inv = 1.0 / (alpha - beta);
   for (size_t i = j + 1; i < m; ++i) {
-    A_work[i][j] *= u0_inv;
+    a_work[i, j] *= u0_inv;
   }
 
-  A_work[j][j] = beta;
+  a_work[j, j] = beta;
 
-  T vTv = 1.0;
+  T vt_v = 1.0;
   for (size_t i = j + 1; i < m; ++i) {
-    vTv += A_work[i][j] * A_work[i][j];
+    vt_v += a_work[i, j] * a_work[i, j];
   }
-  return T(2) / vTv;
+  return T(2) / vt_v;
 }
 
 /**
@@ -115,7 +114,7 @@ template <std::floating_point T>
   Vector<T> v_out(len, Orientation::COLUMN);
   v_out[0] = 1.0;
   for (size_t i = 1; i < len; ++i) {
-    v_out[i] = a_work[i + j][j];
+    v_out[i] = a_work[i + j, j];
   }
   return v_out;
 }
@@ -137,93 +136,101 @@ using QRResultType = QRResult<detail::float_promote_t<T>>;
  * iteratively computes Householder reflectors to zero out sub-diagonal elements of A,
  * storing the reflectors in-place. After processing all columns, it extracts the upper
  * triangular matrix R and constructs the orthogonal matrix Q from the stored
- * reflectors. The user can choose to return either the full or thin versions of Q and R
- * based on their needs.
+ * reflectors. When a BLAS backend is available, float/double inputs are dispatched
+ * to it; any other floating-point type (e.g., long double) uses this portable
+ * implementation. The user can choose to return either the full or thin versions of Q
+ * and R based on their needs.
  * @throws std::invalid_argument if A is empty or if dimensions are incompatible for
  * decomposition.
  */
 template <Numeric T>
-[[nodiscard]] QRResultType<T> QR_decompostion(const Matrix<T> &A, bool full_Q = false,
-                                              bool full_R = false) {
-  const size_t m = A.row_count();
-  const size_t n = A.column_count();
+[[nodiscard]] QRResultType<T> qr_decompostion(const Matrix<T> &a, bool full_q = false,
+                                              bool full_r = false) {
+  const size_t m = a.row_count();
+  const size_t n = a.column_count();
   if (m == 0 || n == 0) {
     throw std::invalid_argument("Cannot perform QR decomposition on empty matrix!");
   }
 
 #ifdef BLAS_AVAILABLE
-  return blas::qr_factorize(A, full_Q, full_R);
-#else
-  using DataType = detail::float_promote_t<T>;
-  // Smaller dimension determines number of reflectors
-  const size_t k = std::min(m, n);
+  // The BLAS/LAPACK backends only expose float and double entry points.
+  // Any other promoted type (e.g. long double) falls through to the portable
+  // Householder implementation below.
+  if constexpr (std::is_same_v<detail::float_promote_t<T>, float> ||
+                std::is_same_v<detail::float_promote_t<T>, double>) {
+    return blas::qr_factorize(a, full_q, full_r);
+  } else
+#endif
+  {
+    using DataType = detail::float_promote_t<T>;
+    // Smaller dimension determines number of reflectors
+    const size_t k = std::min(m, n);
 
-  Matrix<DataType> A_work = A.template cast<DataType>();
-  std::vector<DataType> tau(k, 0.0);
+    Matrix<DataType> a_work = a.template cast<DataType>();
+    std::vector<DataType> tau(k, 0.0);
 
-  for (size_t j = 0; j < k; ++j) {
-    auto Aw_view = A_work.view(0, 0, m, n);
+    for (size_t j = 0; j < k; ++j) {
+      auto aw_view = a_work.view(0, 0, m, n);
 
-    tau[j] = detail::householder_column(Aw_view, j);
-    if (tau[j] == 0.0) {
-      continue;
-    }
+      tau[j] = detail::householder_column(aw_view, j);
+      if (tau[j] == 0.0) {
+        continue;
+      }
 
-    Vector<DataType> v = detail::load_reflector(A_work, j);
-    auto v_view = v.view(0, v.size());
+      Vector<DataType> v = detail::load_reflector(a_work, j);
+      auto v_view = v.view(0, v.size());
 
-    if (j + 1 < n) {
-      auto A_block = A_work.view(j, j + 1, m - j, n - (j + 1));
+      if (j + 1 < n) {
+        auto a_block = a_work.view(j, j + 1, m - j, n - (j + 1));
 
-      // w = A_block^T * v
-      Vector<DataType> w = kernels::gemv(kernels::OP::TRANS, A_block, v_view);
-      auto w_view = w.view(0, w.size());
+        // w = A_block^T * v
+        Vector<DataType> w = kernels::gemv(kernels::OP::TRANS, a_block, v_view);
+        auto w_view = w.view(0, w.size());
 
-      // A_block = A_block - (v_view * w_view) * tau[j];
-      kernels::ger(A_block, v_view, w_view, -tau[j]);
-    }
-  }
-
-  // Get R
-  Matrix<DataType> R(full_R ? m : k, n);
-  R.fill(0.0);
-  for (size_t i = 0; i < R.row_count(); ++i) {
-    for (size_t j = i; j < n; ++j) {
-      R[i][j] = A_work[i][j];
-    }
-  }
-
-  // Get Q
-  auto Q_full = identity_matrix<DataType>(m);
-
-  for (size_t t = 0; t < k; ++t) {
-    const size_t j = (k - 1) - t;
-    if (tau[j] == 0.0) {
-      continue;
-    }
-
-    Vector<DataType> v = detail::load_reflector(A_work, j);
-    auto v_view = v.view(0, v.size());
-
-    auto Qblock = Q_full.view(j, j, m - j, m - j);
-
-    Vector<DataType> w = kernels::gemv(kernels::OP::TRANS, Qblock, v_view);
-
-    kernels::ger(Qblock, v_view, w.view(0, w.size()), -tau[j]);
-  }
-
-  // Thin or full Q
-  Matrix<DataType> Q = full_Q ? std::move(Q_full) : Matrix<DataType>(m, k);
-  if (!full_Q) {
-    for (size_t i = 0; i < m; ++i) {
-      for (size_t j = 0; j < k; ++j) {
-        Q[i][j] = Q_full[i][j];
+        // A_block = A_block - (v_view * w_view) * tau[j];
+        kernels::ger(a_block, v_view, w_view, -tau[j]);
       }
     }
-  }
 
-  return {std::move(Q), std::move(R)};
-#endif
+    // Get R
+    Matrix<DataType> r(full_r ? m : k, n);
+    for (size_t i = 0; i < r.row_count(); ++i) {
+      for (size_t j = i; j < n; ++j) {
+        r[i, j] = a_work[i, j];
+      }
+    }
+
+    // Get Q
+    auto q_full = identity_matrix<DataType>(m);
+
+    for (size_t t = 0; t < k; ++t) {
+      const size_t j = (k - 1) - t;
+      if (tau[j] == 0.0) {
+        continue;
+      }
+
+      Vector<DataType> v = detail::load_reflector(a_work, j);
+      auto v_view = v.view(0, v.size());
+
+      auto q_block = q_full.view(j, j, m - j, m - j);
+
+      Vector<DataType> w = kernels::gemv(kernels::OP::TRANS, q_block, v_view);
+
+      kernels::ger(q_block, v_view, w.view(0, w.size()), -tau[j]);
+    }
+
+    // Thin or full Q
+    Matrix<DataType> q = full_q ? std::move(q_full) : Matrix<DataType>(m, k);
+    if (!full_q) {
+      for (size_t i = 0; i < m; ++i) {
+        for (size_t j = 0; j < k; ++j) {
+          q[i, j] = q_full[i, j];
+        }
+      }
+    }
+
+    return {std::move(q), std::move(r)};
+  }
 }
 
 }  // namespace maf::math

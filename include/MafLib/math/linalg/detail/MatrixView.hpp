@@ -51,6 +51,22 @@ class MatrixView {
   }
 
   /**
+   * @brief Accesses the element at [row, col] with no bounds check.
+   * @return reference to the element at (row, col).
+   */
+  [[nodiscard]] T &operator[](size_t row, size_t col) noexcept {
+    return _data[(row * _stride) + col];
+  }
+
+  /**
+   * @brief Accesses the element at [row, col] with no bounds check.
+   * @return const reference to the element at (row, col).
+   */
+  [[nodiscard]] const value_type &operator[](size_t row, size_t col) const noexcept {
+    return _data[(row * _stride) + col];
+  }
+
+  /**
    * @brief Gets a mutable reference to the element at (row, col).
    * @throws std::out_of_range if the index is invalid.
    */
