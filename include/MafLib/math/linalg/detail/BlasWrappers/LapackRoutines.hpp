@@ -277,8 +277,8 @@ void dorgqr_(int *m, int *n, int *k, double *a, int *lda, double *tau, double *w
              int *lwork, int *info);
 void sgetrf_(int *m, int *n, float *a, int *lda, int *ipiv, int *info);
 void dgetrf_(int *m, int *n, double *a, int *lda, int *ipiv, int *info);
-void spotrf_(char *uplo, int *n, float *a, int *lda, int *info);
-void dpotrf_(char *uplo, int *n, double *a, int *lda, int *info);
+void spotrf_(const char *uplo, int *n, float *a, int *lda, int *info);
+void dpotrf_(const char *uplo, int *n, double *a, int *lda, int *info);
 }
 
 namespace maf::math::oblas {
