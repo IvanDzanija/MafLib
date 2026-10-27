@@ -20,7 +20,7 @@ class NewtonRaphsonTests : public ITest {
     math::OptimizerResult<double> result = nr.solve(tolerance, max_iterations);
 
     constexpr double expected = std::numbers::sqrt2;
-    ASSERT_TRUE(util::is_close(expected, result.solution, tolerance));
+    assert_true(util::is_close(expected, result.solution, tolerance));
   }
 
   void should_handle_non_converging_newton_raphson() {
@@ -34,7 +34,7 @@ class NewtonRaphsonTests : public ITest {
     maf::math::NewtonRaphson<double> nr(func, derivative, initial_guess);
     math::OptimizerResult<double> result = nr.solve(tolerance, max_iterations);
 
-    ASSERT_TRUE(!result);
+    assert_true(!result);
   }
 
   // TODO: Add secant method tests when added
@@ -51,15 +51,16 @@ class NewtonRaphsonTests : public ITest {
     auto result = optimizers[0]->solve(tolerance, max_iterations);
 
     constexpr double expected = std::numbers::sqrt2;
-    ASSERT_TRUE(util::is_close(expected, result.solution, tolerance));
+    assert_true(util::is_close(expected, result.solution, tolerance));
   }
 
  public:
-  int run_all_tests() override {
-    should_perform_newton_raphson();
-    should_handle_non_converging_newton_raphson();
-    check_inheritance_and_methods();
-    return 0;
+  std::vector<TestTask> get_tests() override {
+    return {
+        [this] { should_perform_newton_raphson(); },
+        [this] { should_handle_non_converging_newton_raphson(); },
+        [this] { check_inheritance_and_methods(); },
+    };
   }
 };
 

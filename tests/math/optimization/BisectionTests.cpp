@@ -22,7 +22,7 @@ class BisectionTests : public ITest {
     math::OptimizerResult<double> result = bisection.solve(tolerance, max_iterations);
 
     constexpr double expected = std::numbers::sqrt2;
-    ASSERT_TRUE(util::is_close(expected, result.solution, tolerance));
+    assert_true(util::is_close(expected, result.solution, tolerance));
   }
 
   void should_handle_wrong_initial_interval() {
@@ -35,7 +35,7 @@ class BisectionTests : public ITest {
     maf::math::Bisection<double> bisection(func, lower_bound, upper_bound);
     math::OptimizerResult<double> result = bisection.solve(tolerance, max_iterations);
 
-    ASSERT_TRUE(result.error_message.has_value() &&
+    assert_true(result.error_message.has_value() &&
                 result.error_message.value() ==
                     "Function has the same sign at the interval endpoints.");
   }
@@ -50,7 +50,7 @@ class BisectionTests : public ITest {
     maf::math::Bisection<double> bisection(func, lower_bound, upper_bound);
     math::OptimizerResult<double> result = bisection.solve(tolerance, max_iterations);
 
-    ASSERT_TRUE(result.error_message.has_value() &&
+    assert_true(result.error_message.has_value() &&
                 result.error_message.value() ==
                     "Maximum iterations reached without convergence.");
   }
@@ -66,16 +66,19 @@ class BisectionTests : public ITest {
     auto result = optimizers[0]->solve(tolerance, max_iterations);
 
     constexpr double expected = std::numbers::sqrt2;
-    ASSERT_TRUE(util::is_close(expected, result.solution, tolerance));
+    assert_true(util::is_close(expected, result.solution, tolerance));
   }
 
  public:
-  int run_all_tests() override {
-    should_find_root_with_bisection();
-    should_handle_wrong_initial_interval();
-    should_handle_non_converging_bisection();
-    check_inheritance_and_methods();
-    return 0;
+  std::vector<TestTask> get_tests() override {
+    return {
+        [this] { should_find_root_with_bisection(); },
+        [this] { should_handle_wrong_initial_interval(); },
+        [this] { should_handle_non_converging_bisection(); },
+        // This method is deterministic and always finds the root through the
+        // shared Optimizer interface.
+        [this] { check_inheritance_and_methods(); },
+    };
   }
 };
 

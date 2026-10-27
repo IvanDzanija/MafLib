@@ -1,6 +1,7 @@
 #ifndef PLU_H
 #define PLU_H
 #pragma once
+#include "MafLib/math/linalg/detail/BlasWrappers/LapackRoutines.hpp"
 #include "MafLib/math/linalg/detail/Matrix.hpp"
 
 /**
@@ -115,7 +116,6 @@ template <std::floating_point T>
         T mult = _U.at(j, i) * inv_pivot;
         L.at(j, i) = mult;
 
-#pragma omp simd
         for (size_t k = i + 1; k < block_end; ++k) {
           _U.at(j, k) -= mult * _U.at(i, k);
         }
@@ -151,7 +151,6 @@ template <std::floating_point T>
           }
           auto pivot_row = _U.row_span(k).subspan(block_end);
 
-#pragma omp simd
           for (size_t j = 0; j < len; ++j) {
             target_row[j] -= mult * pivot_row[j];
           }
@@ -219,10 +218,18 @@ template <typename ResultType = void, Numeric T>
   static_assert(std::is_floating_point_v<TargetType>,
                 "PLU result type must be floating point!");
 
-  if constexpr (std::is_same_v<TargetType, T>) {
-    return detail::_plu(Matrix<TargetType>(matrix));
-  } else {
-    return detail::_plu(matrix.template cast<TargetType>());
+#ifdef BLAS_AVAILABLE
+  if constexpr (std::is_same_v<TargetType, float> ||
+                std::is_same_v<TargetType, double>) {
+    return blas::lu_factorize<TargetType>(matrix);
+  } else
+#endif
+  {
+    if constexpr (std::is_same_v<TargetType, T>) {
+      return detail::_plu(Matrix<TargetType>(matrix));
+    } else {
+      return detail::_plu(matrix.template cast<TargetType>());
+    }
   }
 }
 

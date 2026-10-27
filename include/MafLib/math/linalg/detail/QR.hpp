@@ -153,9 +153,6 @@ template <Numeric T>
   }
 
 #ifdef BLAS_AVAILABLE
-  // The BLAS/LAPACK backends only expose float and double entry points.
-  // Any other promoted type (e.g. long double) falls through to the portable
-  // Householder implementation below.
   if constexpr (std::is_same_v<detail::float_promote_t<T>, float> ||
                 std::is_same_v<detail::float_promote_t<T>, double>) {
     return blas::qr_factorize(a, full_q, full_r);

@@ -19,7 +19,7 @@ class FixedPointTests : public ITest {
     math::OptimizerResult<double> result = fp.solve(tolerance, max_iterations);
 
     constexpr double expected = 0.739085;
-    ASSERT_TRUE(std::abs(result.solution - expected) < tolerance);
+    assert_true(std::abs(result.solution - expected) < tolerance);
   }
 
   void should_handle_non_converging_fixed_point() {
@@ -30,7 +30,7 @@ class FixedPointTests : public ITest {
 
     maf::math::FixedPoint<double> fp(func, initial_guess);
     math::OptimizerResult<double> result = fp.solve(tolerance, max_iterations);
-    ASSERT_TRUE(!result);
+    assert_true(!result);
   }
 
   void check_inheritance_and_methods() {
@@ -43,15 +43,16 @@ class FixedPointTests : public ITest {
     auto result = optimizers[0]->solve(tolerance, max_iterations);
 
     constexpr double expected = 0.739085;
-    ASSERT_TRUE(util::is_close(expected, result.solution, tolerance));
+    assert_true(util::is_close(expected, result.solution, tolerance));
   }
 
  public:
-  int run_all_tests() override {
-    should_perform_fixed_point_iteration();
-    should_handle_non_converging_fixed_point();
-    check_inheritance_and_methods();
-    return 0;
+  std::vector<TestTask> get_tests() override {
+    return {
+        [this] { should_perform_fixed_point_iteration(); },
+        [this] { should_handle_non_converging_fixed_point(); },
+        [this] { check_inheritance_and_methods(); },
+    };
   }
 };
 

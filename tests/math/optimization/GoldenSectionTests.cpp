@@ -20,7 +20,7 @@ class GoldenSectionTests : public ITest {
     math::OptimizerResult<double> result = gs.solve(tolerance, max_iterations);
 
     constexpr double expected = 2.0;
-    ASSERT_TRUE(std::abs(result.solution - expected) < tolerance);
+    assert_true(std::abs(result.solution - expected) < tolerance);
   }
 
   void check_inheritance_and_methods() {
@@ -34,15 +34,16 @@ class GoldenSectionTests : public ITest {
     auto result = optimizers[0]->solve(tolerance, max_iterations);
 
     constexpr double expected = 2.0;
-    ASSERT_TRUE(util::is_close(expected, result.solution, tolerance));
+    assert_true(util::is_close(expected, result.solution, tolerance));
   }
 
  public:
-  int run_all_tests() override {
-    should_find_minimum_with_golden_section();
-    // This method is deterministic and always finds at least a local minimum.
-    check_inheritance_and_methods();
-    return 0;
+  std::vector<TestTask> get_tests() override {
+    return {
+        [this] { should_find_minimum_with_golden_section(); },
+        // This method is deterministic and always finds at least a local minimum.
+        [this] { check_inheritance_and_methods(); },
+    };
   }
 };
 

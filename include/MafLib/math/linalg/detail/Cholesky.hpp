@@ -1,6 +1,7 @@
 #ifndef CHOLESKY_H
 #define CHOLESKY_H
 #pragma once
+#include "MafLib/math/linalg/detail/BlasWrappers/LapackRoutines.hpp"
 #include "MafLib/math/linalg/detail/Matrix.hpp"
 
 /**
@@ -136,11 +137,19 @@ template <typename ResultType = void, Numeric T>
   static_assert(std::is_floating_point_v<TargetType>,
                 "Cholesky result type must be floating point!");
 
-  if constexpr (std::is_same_v<TargetType, T>) {
-    return detail::_cholesky(matrix);
-  } else {
-    auto converted = matrix.template cast<TargetType>();
-    return detail::_cholesky(converted);
+#ifdef BLAS_AVAILABLE
+  if constexpr (std::is_same_v<TargetType, float> ||
+                std::is_same_v<TargetType, double>) {
+    return blas::cholesky_factorize<TargetType>(matrix);
+  } else
+#endif
+  {
+    if constexpr (std::is_same_v<TargetType, T>) {
+      return detail::_cholesky(matrix);
+    } else {
+      auto converted = matrix.template cast<TargetType>();
+      return detail::_cholesky(converted);
+    }
   }
 }
 
