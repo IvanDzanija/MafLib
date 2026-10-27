@@ -116,7 +116,6 @@ template <std::floating_point T>
         T mult = _U.at(j, i) * inv_pivot;
         L.at(j, i) = mult;
 
-#pragma omp simd
         for (size_t k = i + 1; k < block_end; ++k) {
           _U.at(j, k) -= mult * _U.at(i, k);
         }
@@ -152,7 +151,6 @@ template <std::floating_point T>
           }
           auto pivot_row = _U.row_span(k).subspan(block_end);
 
-#pragma omp simd
           for (size_t j = 0; j < len; ++j) {
             target_row[j] -= mult * pivot_row[j];
           }
@@ -221,9 +219,6 @@ template <typename ResultType = void, Numeric T>
                 "PLU result type must be floating point!");
 
 #ifdef BLAS_AVAILABLE
-  // The BLAS/LAPACK backends only expose float and double entry points.
-  // Any other promoted type (e.g. long double) falls through to the portable
-  // blocked implementation below.
   if constexpr (std::is_same_v<TargetType, float> ||
                 std::is_same_v<TargetType, double>) {
     return blas::lu_factorize<TargetType>(matrix);

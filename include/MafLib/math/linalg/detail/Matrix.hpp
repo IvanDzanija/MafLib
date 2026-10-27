@@ -928,7 +928,7 @@ class Matrix {
    */
   void print() const {
     if constexpr (std::is_floating_point_v<T>) {
-      std::cout << std::fixed << std::setprecision(FLOAT_PRECISION);
+      std::cout << std::fixed << std::setprecision(32);
     }
     for (size_t i = 0; i < _rows; ++i) {
       for (size_t j = 0; j < _cols; ++j) {
@@ -1058,8 +1058,7 @@ template <Numeric T, Numeric U>
  */
 template <Numeric T, Numeric U>
 [[nodiscard]] constexpr bool loosely_equal(const Matrix<T> &first,
-                                           const Matrix<U> &second,
-                                           double eps = EPSILON) {
+                                           const Matrix<U> &second) {
   size_t n = first.row_count();
   size_t m = first.column_count();
   if (n != second.row_count() || m != second.column_count()) {
@@ -1067,7 +1066,7 @@ template <Numeric T, Numeric U>
   }
   for (size_t i = 0; i < n; ++i) {
     for (size_t j = 0; j < m; ++j) {
-      if (!is_close(first.at(i, j), second.at(i, j), eps)) {
+      if (!is_close(first.at(i, j), second.at(i, j))) {
         return false;
       }
     }

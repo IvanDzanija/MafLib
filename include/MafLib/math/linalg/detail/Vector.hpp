@@ -893,14 +893,13 @@ template <Numeric T, Numeric U>
  */
 template <Numeric T, Numeric U>
 [[nodiscard]] constexpr bool loosely_equal(const Vector<T> &first,
-                                           const Vector<U> &second,
-                                           double eps = EPSILON) {
+                                           const Vector<U> &second) {
   size_t n = first.size();
   if (first.size() != second.size()) {
     return false;
   }
   for (size_t i = 0; i < n; ++i) {
-    if (!is_close(first[i], second[i], eps)) {
+    if (!is_close(first[i], second[i])) {
       return false;
     }
   }

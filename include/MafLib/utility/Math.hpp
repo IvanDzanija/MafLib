@@ -33,8 +33,6 @@ inline static constexpr size_t OMP_CUBIC_LIMIT = 50UL * 50UL;
 inline static constexpr uint8 BLOCK_SIZE = 16;
 /** @brief Precision for floating point number string conversion. */
 inline static constexpr uint8 FLOAT_PRECISION = 5;
-/** @brief Epsilon value for floating point comparisons. */
-inline static constexpr double EPSILON = 1e-6;
 
 #pragma mark methods
 //=============================================================================
@@ -49,10 +47,28 @@ inline static constexpr double EPSILON = 1e-6;
  *  @param epsilon Tolerance for closeness check (default is EPSILON).
  *  @return True if the values are close, false otherwise.
  */
-template <typename T, typename U>
-[[nodiscard]] bool is_close(T v1, U v2, double epsilon = EPSILON) {
+template <Numeric T, Numeric U>
+[[nodiscard]] constexpr bool is_close(
+    T v1, U v2,
+    std::common_type_t<T, U> rel_tol =
+        std::numeric_limits<std::common_type_t<T, U>>::epsilon() * 32,
+    std::common_type_t<T, U> abs_tol = 1e-12) {
   using R = std::common_type_t<T, U>;
-  return std::abs(static_cast<R>(v1) - static_cast<R>(v2)) < epsilon;
+
+  const R a = static_cast<R>(v1);
+  const R b = static_cast<R>(v2);
+
+  if (a == b) {
+    return true;
+  }
+
+  if (!std::isfinite(a) || !std::isfinite(b)) {
+    return false;
+  }
+
+  const R diff = std::abs(a - b);
+
+  return diff <= std::max(abs_tol, rel_tol * std::max(std::abs(a), std::abs(b)));
 }
 
 /** @brief Parallel loop helper that uses OpenMP for large iterations and falls back to

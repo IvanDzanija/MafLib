@@ -178,8 +178,8 @@ class MatrixTests : public ITest {
   }
 
   void should_return_true_for_triangular_matrix() {
-    std::array<float, 9> data1 = {1.1, 1.2, 1.3, 0.0, 2.2, 2.3, 0.0, 1e-9, 3.3};
-    std::array<float, 9> data2 = {1.1, 0.0, 0.0, 1.5, 2.2, 0.0, 0.0, 1e-9, 3.3};
+    std::array<float, 9> data1 = {1.1, 1.2, 1.3, 0.0, 2.2, 2.3, 0.0, 0, 3.3};
+    std::array<float, 9> data2 = {1.1, 0.0, 0.0, 1.5, 2.2, 0.0, 0.0, 0, 3.3};
     std::array<float, 9> data3 = {1.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.3};
     math::Matrix<float> m1(3, 3, data1);
     math::Matrix<float> m2(3, 3, data2);
@@ -192,7 +192,7 @@ class MatrixTests : public ITest {
   }
 
   void should_return_true_for_diagonal_matrix() {
-    std::array<float, 9> data1 = {1.1, 0, 0, 0, 2.2, 0, 0.0, 1e-9, 3.3};
+    std::array<float, 9> data1 = {1.1, 0, 0, 0, 2.2, 0, 0.0, 0, 3.3};
     std::array<float, 9> data2 = {1.1, 0.0, 0.0, 1, 2.2, 0.0, 0.0, 0, 3.3};
     std::array<float, 9> data3 = {1.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.3};
     math::Matrix<float> m1(3, 3, data1);
@@ -1186,6 +1186,8 @@ class MatrixTests : public ITest {
   void should_decompose_square_fullq_false_fullr_false() {
     math::Matrix<double> A(4, 4, {1, 2, 3, 4, 5, 6, 7, 8, 2, -1, 0, 3, 9, 1, -2, 5});
     auto [Q, R] = math::qr_decompostion(A, false, false);
+    (Q * R).print();
+    A.print();
     assert_true(Q.row_count() == 4u);
     assert_true(Q.column_count() == 4u);
     assert_true(R.row_count() == 4u);

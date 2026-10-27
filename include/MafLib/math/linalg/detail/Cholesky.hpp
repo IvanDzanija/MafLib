@@ -138,9 +138,6 @@ template <typename ResultType = void, Numeric T>
                 "Cholesky result type must be floating point!");
 
 #ifdef BLAS_AVAILABLE
-  // The BLAS/LAPACK backends only expose float and double entry points.
-  // Any other promoted type (e.g. long double) falls through to the portable
-  // blocked implementation below.
   if constexpr (std::is_same_v<TargetType, float> ||
                 std::is_same_v<TargetType, double>) {
     return blas::cholesky_factorize<TargetType>(matrix);
