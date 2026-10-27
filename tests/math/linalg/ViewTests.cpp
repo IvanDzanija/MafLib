@@ -20,10 +20,10 @@ class ViewTests : public ITest {
 
     VectorView<int> vv(v.data(), 5, v.orientation());
 
-    ASSERT_TRUE(vv.size() == 5);
-    ASSERT_TRUE(vv.get_increment() == 1);
-    ASSERT_TRUE(vv.at(0) == 1);
-    ASSERT_TRUE(vv.at(4) == 5);
+    assert_true(vv.size() == 5);
+    assert_true(vv.get_increment() == 1);
+    assert_true(vv.at(0) == 1);
+    assert_true(vv.at(4) == 5);
   }
 
   void should_construct_strided_vector_view() {
@@ -32,11 +32,11 @@ class ViewTests : public ITest {
 
     VectorView<int> vv(v.data(), 3, v.orientation(), 2);  // [1 3 5]
 
-    ASSERT_TRUE(vv.size() == 3);
-    ASSERT_TRUE(vv.get_increment() == 2);
-    ASSERT_TRUE(vv.at(0) == 1);
-    ASSERT_TRUE(vv.at(1) == 3);
-    ASSERT_TRUE(vv.at(2) == 5);
+    assert_true(vv.size() == 3);
+    assert_true(vv.get_increment() == 2);
+    assert_true(vv.at(0) == 1);
+    assert_true(vv.at(1) == 3);
+    assert_true(vv.at(2) == 5);
   }
 
   void should_modify_original_data_through_vector_view() {
@@ -47,10 +47,10 @@ class ViewTests : public ITest {
     vv.at(0) = 10;
     vv.at(1) = 20;
 
-    ASSERT_TRUE(v.at(0) == 0);
-    ASSERT_TRUE(v.at(1) == 10);
-    ASSERT_TRUE(v.at(2) == 20);
-    ASSERT_TRUE(v.at(3) == 0);
+    assert_true(v.at(0) == 0);
+    assert_true(v.at(1) == 10);
+    assert_true(v.at(2) == 20);
+    assert_true(v.at(3) == 0);
   }
 
   void should_throw_on_vector_view_out_of_bounds() {
@@ -63,7 +63,7 @@ class ViewTests : public ITest {
     } catch (const std::out_of_range &) {
       thrown = true;
     }
-    ASSERT_TRUE(thrown);
+    assert_true(thrown);
   }
 
   //=============================================================================
@@ -81,13 +81,13 @@ class ViewTests : public ITest {
     // View middle 2x2 block starting at (1,1)
     MatrixView<int> mv(m.data() + (1 * m.column_count()) + 1, 2, 2, m.column_count());
 
-    ASSERT_TRUE(mv.row_count() == 2);
-    ASSERT_TRUE(mv.column_count() == 2);
+    assert_true(mv.row_count() == 2);
+    assert_true(mv.column_count() == 2);
 
-    ASSERT_TRUE(mv.at(0, 0) == m.at(1, 1));
-    ASSERT_TRUE(mv.at(0, 1) == m.at(1, 2));
-    ASSERT_TRUE(mv.at(1, 0) == m.at(2, 1));
-    ASSERT_TRUE(mv.at(1, 1) == m.at(2, 2));
+    assert_true(mv.at(0, 0) == m.at(1, 1));
+    assert_true(mv.at(0, 1) == m.at(1, 2));
+    assert_true(mv.at(1, 0) == m.at(2, 1));
+    assert_true(mv.at(1, 1) == m.at(2, 2));
   }
 
   void should_modify_original_matrix_through_view() {
@@ -98,9 +98,9 @@ class ViewTests : public ITest {
     mv.at(0, 0) = 5;
     mv.at(1, 1) = 9;
 
-    ASSERT_TRUE(m.at(0, 0) == 5);
-    ASSERT_TRUE(m.at(1, 1) == 9);
-    ASSERT_TRUE(m.at(2, 2) == 0);
+    assert_true(m.at(0, 0) == 5);
+    assert_true(m.at(1, 1) == 9);
+    assert_true(m.at(2, 2) == 0);
   }
 
   void should_throw_on_matrix_view_out_of_bounds() {
@@ -113,7 +113,7 @@ class ViewTests : public ITest {
     } catch (const std::out_of_range &) {
       thrown = true;
     }
-    ASSERT_TRUE(thrown);
+    assert_true(thrown);
   }
 
   //=============================================================================
@@ -142,15 +142,15 @@ class ViewTests : public ITest {
     auto res = mv * vv;
 
     ASSERT_SAME_TYPE(res, Vector<int>);
-    ASSERT_TRUE(res.size() == 3);
+    assert_true(res.size() == 3);
 
     // manual:
     // [1 2 3]   [1]   [14]
     // [4 5 6] * [2] = [32]
     // [7 8 9]   [3]   [50]
-    ASSERT_TRUE(res.at(0) == 14);
-    ASSERT_TRUE(res.at(1) == 32);
-    ASSERT_TRUE(res.at(2) == 50);
+    assert_true(res.at(0) == 14);
+    assert_true(res.at(1) == 32);
+    assert_true(res.at(2) == 50);
 
     // FLOAT/DOUBLE
     Matrix<float> mf(3, 3);
@@ -172,10 +172,10 @@ class ViewTests : public ITest {
 
     auto resf = mvf * vvf;
     ASSERT_SAME_TYPE(resf, Vector<float>);
-    ASSERT_TRUE(resf.size() == 3);
-    ASSERT_TRUE(is_close(resf.at(0), 14.0f));
-    ASSERT_TRUE(is_close(resf.at(1), 32.0f));
-    ASSERT_TRUE(is_close(resf.at(2), 50.0f));
+    assert_true(resf.size() == 3);
+    assert_true(is_close(resf.at(0), 14.0f));
+    assert_true(is_close(resf.at(1), 32.0f));
+    assert_true(is_close(resf.at(2), 50.0f));
   }
 
   void should_compute_matrix_view_times_vector_view_with_type_promotion() {
@@ -197,8 +197,8 @@ class ViewTests : public ITest {
     auto resf = mv * vv;
 
     ASSERT_SAME_TYPE(resf, Vector<float>);
-    ASSERT_TRUE(is_close(resf.at(0), 1 * 0.5f + 2 * 1.5f));
-    ASSERT_TRUE(is_close(resf.at(1), 3 * 0.5f + 4 * 1.5f));
+    assert_true(is_close(resf.at(0), 1 * 0.5f + 2 * 1.5f));
+    assert_true(is_close(resf.at(1), 3 * 0.5f + 4 * 1.5f));
 
     // Promote int matrix and double vector to double result
     Vector<double> vd(2);
@@ -210,8 +210,8 @@ class ViewTests : public ITest {
     auto resd = mv * vvd;
 
     ASSERT_SAME_TYPE(resd, Vector<double>);
-    ASSERT_TRUE(is_close(resd.at(0), 1 * 0.5f + 2 * 1.5f));
-    ASSERT_TRUE(is_close(resd.at(1), 3 * 0.5f + 4 * 1.5f));
+    assert_true(is_close(resd.at(0), 1 * 0.5f + 2 * 1.5f));
+    assert_true(is_close(resd.at(1), 3 * 0.5f + 4 * 1.5f));
 
     // Promote float matrix and int vector to float result
     Matrix<float> mf(2, 2);
@@ -231,8 +231,8 @@ class ViewTests : public ITest {
     auto resf2 = mvf * vvi;
 
     ASSERT_SAME_TYPE(resf2, Vector<float>);
-    ASSERT_TRUE(is_close(resf2.at(0), 1.0f * 1 + 2.0f * 2));
-    ASSERT_TRUE(is_close(resf2.at(1), 3.0f * 1 + 4.0f * 2));
+    assert_true(is_close(resf2.at(0), 1.0f * 1 + 2.0f * 2));
+    assert_true(is_close(resf2.at(1), 3.0f * 1 + 4.0f * 2));
 
     // Promote double matrix and float vector to double result
     Matrix<double> md(2, 2);
@@ -246,8 +246,8 @@ class ViewTests : public ITest {
     auto resd2 = mvd * vv;
 
     ASSERT_SAME_TYPE(resd2, Vector<double>);
-    ASSERT_TRUE(is_close(resd2.at(0), 1.0 * 0.5f + 2.0 * 1.5f));
-    ASSERT_TRUE(is_close(resd2.at(1), 3.0 * 0.5f + 4.0 * 1.5f));
+    assert_true(is_close(resd2.at(0), 1.0 * 0.5f + 2.0 * 1.5f));
+    assert_true(is_close(resd2.at(1), 3.0 * 0.5f + 4.0 * 1.5f));
   }
 
   void should_compute_vector_view_times_matrix_view() {
@@ -270,12 +270,12 @@ class ViewTests : public ITest {
     auto res = vv * mv;
 
     ASSERT_SAME_TYPE(res, Vector<int>);
-    ASSERT_TRUE(res.size() == 3);
+    assert_true(res.size() == 3);
 
     // [2 3] * M
-    ASSERT_TRUE(res.at(0) == 2 * 1 + 3 * 4);
-    ASSERT_TRUE(res.at(1) == 2 * 2 + 3 * 5);
-    ASSERT_TRUE(res.at(2) == 2 * 3 + 3 * 6);
+    assert_true(res.at(0) == 2 * 1 + 3 * 4);
+    assert_true(res.at(1) == 2 * 2 + 3 * 5);
+    assert_true(res.at(2) == 2 * 3 + 3 * 6);
 
     // FLOAT/DOUBLE
     Vector<float> vf(2, Orientation::ROW);
@@ -296,10 +296,10 @@ class ViewTests : public ITest {
 
     auto resf = vvf * mvf;
     ASSERT_SAME_TYPE(resf, Vector<float>);
-    ASSERT_TRUE(resf.size() == 3);
-    ASSERT_TRUE(is_close(resf.at(0), 2.0f * 1.0f + 3.0f * 4.0f));
-    ASSERT_TRUE(is_close(resf.at(1), 2.0f * 2.0f + 3.0f * 5.0f));
-    ASSERT_TRUE(is_close(resf.at(2), 2.0f * 3.0f + 3.0f * 6.0f));
+    assert_true(resf.size() == 3);
+    assert_true(is_close(resf.at(0), 2.0f * 1.0f + 3.0f * 4.0f));
+    assert_true(is_close(resf.at(1), 2.0f * 2.0f + 3.0f * 5.0f));
+    assert_true(is_close(resf.at(2), 2.0f * 3.0f + 3.0f * 6.0f));
   }
 
   void should_compute_matrix_vector_subviews_correctly() {
@@ -325,11 +325,11 @@ class ViewTests : public ITest {
     auto res = mv * v;
 
     ASSERT_SAME_TYPE(res, Vector<double>);
-    ASSERT_TRUE(res.size() == 2);
+    assert_true(res.size() == 2);
     // [6 7 8]   [1]   [6*1 + 7*2 + 8*2]
     // [10 11 12] [2] = [10*1 + 11*2 + 12*2]
-    ASSERT_TRUE(res.at(0) == 6 * 1 + 7 * 2 + 8 * 3);
-    ASSERT_TRUE(res.at(1) == 10 * 1 + 11 * 2 + 12 * 3);
+    assert_true(res.at(0) == 6 * 1 + 7 * 2 + 8 * 3);
+    assert_true(res.at(1) == 10 * 1 + 11 * 2 + 12 * 3);
 
     // BLAS path with floats
     Matrix<float> mf(4, 4);
@@ -352,9 +352,9 @@ class ViewTests : public ITest {
 
     auto resf = mvf * vf2;
     ASSERT_SAME_TYPE(resf, Vector<float>);
-    ASSERT_TRUE(resf.size() == 2);
-    ASSERT_TRUE(is_close(resf.at(0), 6 * 1 + 7 * 2 + 8 * 3));
-    ASSERT_TRUE(is_close(resf.at(1), 10 * 1 + 11 * 2 + 12 * 3));
+    assert_true(resf.size() == 2);
+    assert_true(is_close(resf.at(0), 6 * 1 + 7 * 2 + 8 * 3));
+    assert_true(is_close(resf.at(1), 10 * 1 + 11 * 2 + 12 * 3));
 
     // BLAS path with doubles
     Matrix<double> md(4, 4);
@@ -374,9 +374,9 @@ class ViewTests : public ITest {
 
     auto resd = mvd * vd2;
     ASSERT_SAME_TYPE(resd, Vector<double>);
-    ASSERT_TRUE(resd.size() == 2);
-    ASSERT_TRUE(is_close(resd.at(0), 6 * 1 + 7 * 2 + 8 * 3));
-    ASSERT_TRUE(is_close(resd.at(1), 10 * 1 + 11 * 2 + 12 * 3));
+    assert_true(resd.size() == 2);
+    assert_true(is_close(resd.at(0), 6 * 1 + 7 * 2 + 8 * 3));
+    assert_true(is_close(resd.at(1), 10 * 1 + 11 * 2 + 12 * 3));
   }
 
   void should_compute_vector_matrix_subviews_correctly() {
@@ -401,12 +401,12 @@ class ViewTests : public ITest {
     auto res2 = vf * mv;
 
     ASSERT_SAME_TYPE(res2, Vector<float>);
-    ASSERT_TRUE(res2.size() == 3);
+    assert_true(res2.size() == 3);
     // [1 2] * [ 6  7  8 ]
     //         [10 11 12]
-    ASSERT_TRUE(res2.at(0) == 1 * 6 + 2 * 10);
-    ASSERT_TRUE(res2.at(1) == 1 * 7 + 2 * 11);
-    ASSERT_TRUE(res2.at(2) == 1 * 8 + 2 * 12);
+    assert_true(res2.at(0) == 1 * 6 + 2 * 10);
+    assert_true(res2.at(1) == 1 * 7 + 2 * 11);
+    assert_true(res2.at(2) == 1 * 8 + 2 * 12);
 
     // BLAS path with doubles
     Vector<double> vd(2, Orientation::ROW);
@@ -425,10 +425,10 @@ class ViewTests : public ITest {
 
     auto resd2 = vd * mvd;
     ASSERT_SAME_TYPE(resd2, Vector<double>);
-    ASSERT_TRUE(resd2.size() == 3);
-    ASSERT_TRUE(is_close(resd2.at(0), 1 * 6 + 2 * 10));
-    ASSERT_TRUE(is_close(resd2.at(1), 1 * 7 + 2 * 11));
-    ASSERT_TRUE(is_close(resd2.at(2), 1 * 8 + 2 * 12));
+    assert_true(resd2.size() == 3);
+    assert_true(is_close(resd2.at(0), 1 * 6 + 2 * 10));
+    assert_true(is_close(resd2.at(1), 1 * 7 + 2 * 11));
+    assert_true(is_close(resd2.at(2), 1 * 8 + 2 * 12));
 
     // BLAS path with floats
     Matrix<float> mf(4, 4);
@@ -444,10 +444,10 @@ class ViewTests : public ITest {
     auto resf2 = vf * mvf;
 
     ASSERT_SAME_TYPE(resf2, Vector<float>);
-    ASSERT_TRUE(resf2.size() == 3);
-    ASSERT_TRUE(is_close(resf2.at(0), 1 * 6 + 2 * 10));
-    ASSERT_TRUE(is_close(resf2.at(1), 1 * 7 + 2 * 11));
-    ASSERT_TRUE(is_close(resf2.at(2), 1 * 8 + 2 * 12));
+    assert_true(resf2.size() == 3);
+    assert_true(is_close(resf2.at(0), 1 * 6 + 2 * 10));
+    assert_true(is_close(resf2.at(1), 1 * 7 + 2 * 11));
+    assert_true(is_close(resf2.at(2), 1 * 8 + 2 * 12));
   }
 
   void should_compute_strided_vector_times_weird_submatrix_with_type_promotion() {
@@ -480,10 +480,10 @@ class ViewTests : public ITest {
     auto res = vv * mv;
 
     ASSERT_SAME_TYPE(res, Vector<int>);
-    ASSERT_TRUE(res.size() == 3);
-    ASSERT_TRUE(res.at(0) == 1 * 14 + 2 * 20);
-    ASSERT_TRUE(res.at(1) == 1 * 15 + 2 * 21);
-    ASSERT_TRUE(res.at(2) == 1 * 16 + 2 * 22);
+    assert_true(res.size() == 3);
+    assert_true(res.at(0) == 1 * 14 + 2 * 20);
+    assert_true(res.at(1) == 1 * 15 + 2 * 21);
+    assert_true(res.at(2) == 1 * 16 + 2 * 22);
 
     Vector<float> backing_f(6, Orientation::ROW);
     backing_f.fill(999.0f);
@@ -495,10 +495,10 @@ class ViewTests : public ITest {
     auto resf = vvf * mv;
 
     ASSERT_SAME_TYPE(resf, Vector<float>);
-    ASSERT_TRUE(resf.size() == 3);
-    ASSERT_TRUE(is_close(resf.at(0), 1.0f * 14 + 2.0f * 20));
-    ASSERT_TRUE(is_close(resf.at(1), 1.0f * 15 + 2.0f * 21));
-    ASSERT_TRUE(is_close(resf.at(2), 1.0f * 16 + 2.0f * 22));
+    assert_true(resf.size() == 3);
+    assert_true(is_close(resf.at(0), 1.0f * 14 + 2.0f * 20));
+    assert_true(is_close(resf.at(1), 1.0f * 15 + 2.0f * 21));
+    assert_true(is_close(resf.at(2), 1.0f * 16 + 2.0f * 22));
   }
 
   void should_compute_strided_vector_times_weird_submatrix_blas_float_path() {
@@ -526,10 +526,10 @@ class ViewTests : public ITest {
     auto res = vv * mv;
 
     ASSERT_SAME_TYPE(res, Vector<float>);
-    ASSERT_TRUE(res.size() == 3);
-    ASSERT_TRUE(is_close(res.at(0), 1.0f * 14.0f + 2.0f * 20.0f));
-    ASSERT_TRUE(is_close(res.at(1), 1.0f * 15.0f + 2.0f * 21.0f));
-    ASSERT_TRUE(is_close(res.at(2), 1.0f * 16.0f + 2.0f * 22.0f));
+    assert_true(res.size() == 3);
+    assert_true(is_close(res.at(0), 1.0f * 14.0f + 2.0f * 20.0f));
+    assert_true(is_close(res.at(1), 1.0f * 15.0f + 2.0f * 21.0f));
+    assert_true(is_close(res.at(2), 1.0f * 16.0f + 2.0f * 22.0f));
   }
 
   void should_compute_strided_vector_times_weird_submatrix_blas_double_path() {
@@ -555,10 +555,10 @@ class ViewTests : public ITest {
     auto res = vv * mv;
 
     ASSERT_SAME_TYPE(res, Vector<double>);
-    ASSERT_TRUE(res.size() == 3);
-    ASSERT_TRUE(is_close(res.at(0), 1.0 * 14.0 + 2.0 * 20.0));
-    ASSERT_TRUE(is_close(res.at(1), 1.0 * 15.0 + 2.0 * 21.0));
-    ASSERT_TRUE(is_close(res.at(2), 1.0 * 16.0 + 2.0 * 22.0));
+    assert_true(res.size() == 3);
+    assert_true(is_close(res.at(0), 1.0 * 14.0 + 2.0 * 20.0));
+    assert_true(is_close(res.at(1), 1.0 * 15.0 + 2.0 * 21.0));
+    assert_true(is_close(res.at(2), 1.0 * 16.0 + 2.0 * 22.0));
   }
 
   void should_compute_weird_submatrix_times_strided_vector_with_type_promotion() {
@@ -592,9 +592,9 @@ class ViewTests : public ITest {
     auto res = mv * vv;
 
     ASSERT_SAME_TYPE(res, Vector<int>);
-    ASSERT_TRUE(res.size() == 2);
-    ASSERT_TRUE(res.at(0) == 14 * 1 + 15 * 2 + 16 * 3);
-    ASSERT_TRUE(res.at(1) == 20 * 1 + 21 * 2 + 22 * 3);
+    assert_true(res.size() == 2);
+    assert_true(res.at(0) == 14 * 1 + 15 * 2 + 16 * 3);
+    assert_true(res.at(1) == 20 * 1 + 21 * 2 + 22 * 3);
 
     Vector<float> backing_f(6, Orientation::COLUMN);
     backing_f.fill(999.0f);
@@ -607,9 +607,9 @@ class ViewTests : public ITest {
     auto resf = mv * vvf;
 
     ASSERT_SAME_TYPE(resf, Vector<float>);
-    ASSERT_TRUE(resf.size() == 2);
-    ASSERT_TRUE(is_close(resf.at(0), 14.0f * 1.0f + 15.0f * 2.0f + 16.0f * 3.0f));
-    ASSERT_TRUE(is_close(resf.at(1), 20.0f * 1.0f + 21.0f * 2.0f + 22.0f * 3.0f));
+    assert_true(resf.size() == 2);
+    assert_true(is_close(resf.at(0), 14.0f * 1.0f + 15.0f * 2.0f + 16.0f * 3.0f));
+    assert_true(is_close(resf.at(1), 20.0f * 1.0f + 21.0f * 2.0f + 22.0f * 3.0f));
   }
 
   void should_compute_weird_submatrix_times_strided_vector_blas_float_path() {
@@ -637,9 +637,9 @@ class ViewTests : public ITest {
     auto res = mv * vv;
 
     ASSERT_SAME_TYPE(res, Vector<float>);
-    ASSERT_TRUE(res.size() == 2);
-    ASSERT_TRUE(is_close(res.at(0), 14.0f * 1.0f + 15.0f * 2.0f + 16.0f * 3.0f));
-    ASSERT_TRUE(is_close(res.at(1), 20.0f * 1.0f + 21.0f * 2.0f + 22.0f * 3.0f));
+    assert_true(res.size() == 2);
+    assert_true(is_close(res.at(0), 14.0f * 1.0f + 15.0f * 2.0f + 16.0f * 3.0f));
+    assert_true(is_close(res.at(1), 20.0f * 1.0f + 21.0f * 2.0f + 22.0f * 3.0f));
   }
 
   void should_compute_weird_submatrix_times_strided_vector_blas_double_path() {
@@ -667,251 +667,47 @@ class ViewTests : public ITest {
     auto res = mv * vv;
 
     ASSERT_SAME_TYPE(res, Vector<double>);
-    ASSERT_TRUE(res.size() == 2);
-    ASSERT_TRUE(is_close(res.at(0), 14.0 * 1.0 + 15.0 * 2.0 + 16.0 * 3.0));
-    ASSERT_TRUE(is_close(res.at(1), 20.0 * 1.0 + 21.0 * 2.0 + 22.0 * 3.0));
-  }
-
-  static void gemv_time_test() {
-#ifdef MAFLIB_OPENMP_AVAILABLE
-    std::cout << "OMP threads: " << omp_get_max_threads() << "\n";
-#endif
-    constexpr size_t N = 4096;
-    constexpr int WARMUP = 1;
-    constexpr int ITERS = 3;
-
-    // Deterministic values (same "numbers" across all type combos)
-    auto mat_val = [](size_t i, size_t j) -> int {
-      // small repeating pattern in [-3..3]
-      return static_cast<int>((i * 1315423911u + j * 2654435761u) % 7) - 3;
-    };
-    auto vec_val = [](size_t i) -> int {
-      return static_cast<int>((i * 2246822519u) % 7) - 3;
-    };
-
-    auto time_ms = [](auto &&fn, int iters) -> double {
-      using clock = std::chrono::steady_clock;
-      const auto t0 = clock::now();
-      for (int k = 0; k < iters; ++k) fn();
-      const auto t1 = clock::now();
-      return std::chrono::duration<double, std::milli>(t1 - t0).count() /
-             static_cast<double>(iters);
-    };
-
-    auto consume3 = [](const auto &v, volatile double &sink) {
-      const size_t n = v.size();
-      if (n == 0) return;
-      sink += static_cast<double>(v.at(0));
-      sink += static_cast<double>(v.at(n / 2));
-      sink += static_cast<double>(v.at(n - 1));
-    };
-
-    std::cout << "\n=== PERF 4096: Matrix*Vector + Vector*Matrix (same values) ===\n";
-    std::cout << "N=" << N << ", warmup=" << WARMUP << ", iters=" << ITERS << "\n";
-
-    volatile double sink = 0.0;
-
-    // ---------------------------------------------------------------------------
-    // float-float
-    // ---------------------------------------------------------------------------
-    {
-      Matrix<float> m(N, N);
-      Vector<float> vc(N, Orientation::COLUMN);
-      Vector<float> vr(N, Orientation::ROW);
-
-      for (size_t i = 0; i < N; ++i) {
-        const float vv = static_cast<float>(vec_val(i));
-        vc.at(i) = vv;
-        vr.at(i) = vv;
-        for (size_t j = 0; j < N; ++j) m.at(i, j) = static_cast<float>(mat_val(i, j));
-      }
-
-      MatrixView<float> mv(m.data(), N, N, m.column_count());
-      VectorView<float> vvc(vc.data(), N, vc.orientation());
-      VectorView<float> vvr(vr.data(), N, vr.orientation());
-
-      for (int k = 0; k < WARMUP; ++k) {
-        auto r1 = mv * vvc;
-        auto r2 = vvr * mv;
-        consume3(r1, sink);
-        consume3(r2, sink);
-      }
-
-      const double ms_mv = time_ms(
-          [&]() {
-            auto r = mv * vvc;
-            consume3(r, sink);
-          },
-          ITERS);
-
-      const double ms_vm = time_ms(
-          [&]() {
-            auto r = vvr * mv;
-            consume3(r, sink);
-          },
-          ITERS);
-
-      std::cout << "float-float  | M*V: " << ms_mv << " ms/iter"
-                << " | V*M: " << ms_vm << " ms/iter\n";
-    }
-
-    // ---------------------------------------------------------------------------
-    // double-double
-    // ---------------------------------------------------------------------------
-    {
-      Matrix<double> m(N, N);
-      Vector<double> vc(N, Orientation::COLUMN);
-      Vector<double> vr(N, Orientation::ROW);
-
-      for (size_t i = 0; i < N; ++i) {
-        const double vv = static_cast<double>(vec_val(i));
-        vc.at(i) = vv;
-        vr.at(i) = vv;
-        for (size_t j = 0; j < N; ++j) m.at(i, j) = static_cast<double>(mat_val(i, j));
-      }
-
-      MatrixView<double> mv(m.data(), N, N, m.column_count());
-      VectorView<double> vvc(vc.data(), N, vc.orientation());
-      VectorView<double> vvr(vr.data(), N, vr.orientation());
-
-      for (int k = 0; k < WARMUP; ++k) {
-        auto r1 = mv * vvc;
-        auto r2 = vvr * mv;
-        consume3(r1, sink);
-        consume3(r2, sink);
-      }
-
-      const double ms_mv = time_ms(
-          [&]() {
-            auto r = mv * vvc;
-            consume3(r, sink);
-          },
-          ITERS);
-
-      const double ms_vm = time_ms(
-          [&]() {
-            auto r = vvr * mv;
-            consume3(r, sink);
-          },
-          ITERS);
-
-      std::cout << "double-double| M*V: " << ms_mv << " ms/iter"
-                << " | V*M: " << ms_vm << " ms/iter\n";
-    }
-
-    // ---------------------------------------------------------------------------
-    // int-int
-    // ---------------------------------------------------------------------------
-    {
-      Matrix<int> m(N, N);
-      Vector<int> vc(N, Orientation::COLUMN);
-      Vector<int> vr(N, Orientation::ROW);
-
-      for (size_t i = 0; i < N; ++i) {
-        const int vv = vec_val(i);
-        vc.at(i) = vv;
-        vr.at(i) = vv;
-        for (size_t j = 0; j < N; ++j) m.at(i, j) = mat_val(i, j);
-      }
-
-      MatrixView<int> mv(m.data(), N, N, m.column_count());
-      VectorView<int> vvc(vc.data(), N, vc.orientation());
-      VectorView<int> vvr(vr.data(), N, vr.orientation());
-
-      for (int k = 0; k < WARMUP; ++k) {
-        auto r1 = mv * vvc;
-        auto r2 = vvr * mv;
-        consume3(r1, sink);
-        consume3(r2, sink);
-      }
-
-      const double ms_mv = time_ms(
-          [&]() {
-            auto r = mv * vvc;
-            consume3(r, sink);
-          },
-          ITERS);
-
-      const double ms_vm = time_ms(
-          [&]() {
-            auto r = vvr * mv;
-            consume3(r, sink);
-          },
-          ITERS);
-
-      std::cout << "int-int      | M*V: " << ms_mv << " ms/iter"
-                << " | V*M: " << ms_vm << " ms/iter\n";
-    }
-
-    // ---------------------------------------------------------------------------
-    // int-double (promotion) — same base integer matrix/vector values, vector is double
-    // ---------------------------------------------------------------------------
-    {
-      Matrix<int> m(N, N);
-      Vector<double> vc(N, Orientation::COLUMN);
-      Vector<double> vr(N, Orientation::ROW);
-
-      for (size_t i = 0; i < N; ++i) {
-        const int vv_i = vec_val(i);
-        vc.at(i) = static_cast<double>(vv_i);
-        vr.at(i) = static_cast<double>(vv_i);
-        for (size_t j = 0; j < N; ++j) m.at(i, j) = mat_val(i, j);
-      }
-
-      MatrixView<int> mv(m.data(), N, N, m.column_count());
-      VectorView<double> vvc(vc.data(), N, vc.orientation());
-      VectorView<double> vvr(vr.data(), N, vr.orientation());
-
-      for (int k = 0; k < WARMUP; ++k) {
-        auto r1 = mv * vvc;  // => Vector<double>
-        auto r2 = vvr * mv;  // => Vector<double>
-        consume3(r1, sink);
-        consume3(r2, sink);
-      }
-
-      const double ms_mv = time_ms(
-          [&]() {
-            auto r = mv * vvc;
-            consume3(r, sink);
-          },
-          ITERS);
-
-      const double ms_vm = time_ms(
-          [&]() {
-            auto r = vvr * mv;
-            consume3(r, sink);
-          },
-          ITERS);
-
-      std::cout << "int-double   | M*V: " << ms_mv << " ms/iter"
-                << " | V*M: " << ms_vm << " ms/iter\n";
-    }
-
-    std::cout << "sink=" << sink << "\n";
+    assert_true(res.size() == 2);
+    assert_true(is_close(res.at(0), 14.0 * 1.0 + 15.0 * 2.0 + 16.0 * 3.0));
+    assert_true(is_close(res.at(1), 20.0 * 1.0 + 21.0 * 2.0 + 22.0 * 3.0));
   }
 
  public:
-  int run_all_tests() override {
-    should_construct_contiguous_vector_view();
-    should_construct_strided_vector_view();
-    should_modify_original_data_through_vector_view();
-    should_throw_on_vector_view_out_of_bounds();
-    should_construct_matrix_view_and_access_elements();
-    should_modify_original_matrix_through_view();
-    should_throw_on_matrix_view_out_of_bounds();
-    should_compute_matrix_view_times_vector_view();
-    should_compute_matrix_view_times_vector_view_with_type_promotion();
-    should_compute_vector_view_times_matrix_view();
-    should_compute_matrix_vector_subviews_correctly();
-    should_compute_vector_matrix_subviews_correctly();
-    should_compute_strided_vector_times_weird_submatrix_with_type_promotion();
-    should_compute_strided_vector_times_weird_submatrix_blas_float_path();
-    should_compute_strided_vector_times_weird_submatrix_blas_double_path();
-    should_compute_weird_submatrix_times_strided_vector_with_type_promotion();
-    should_compute_weird_submatrix_times_strided_vector_blas_float_path();
-    should_compute_weird_submatrix_times_strided_vector_blas_double_path();
-    gemv_time_test();
-    return 0;
+  std::vector<TestTask> get_tests() override {
+    return {
+        // Vector views
+        [this] { should_construct_contiguous_vector_view(); },
+        [this] { should_construct_strided_vector_view(); },
+        [this] { should_modify_original_data_through_vector_view(); },
+        [this] { should_throw_on_vector_view_out_of_bounds(); },
+        // Matrix views
+        [this] { should_construct_matrix_view_and_access_elements(); },
+        [this] { should_modify_original_matrix_through_view(); },
+        [this] { should_throw_on_matrix_view_out_of_bounds(); },
+        // Operators
+        [this] { should_compute_matrix_view_times_vector_view(); },
+        [this] { should_compute_matrix_view_times_vector_view_with_type_promotion(); },
+        [this] { should_compute_vector_view_times_matrix_view(); },
+        [this] { should_compute_matrix_vector_subviews_correctly(); },
+        [this] { should_compute_vector_matrix_subviews_correctly(); },
+        [this] {
+          should_compute_strided_vector_times_weird_submatrix_with_type_promotion();
+        },
+        [this] {
+          should_compute_strided_vector_times_weird_submatrix_blas_float_path();
+        },
+        [this] {
+          should_compute_strided_vector_times_weird_submatrix_blas_double_path();
+        },
+        [this] {
+          should_compute_weird_submatrix_times_strided_vector_with_type_promotion();
+        },
+        [this] {
+          should_compute_weird_submatrix_times_strided_vector_blas_float_path();
+        },
+        [this] {
+          should_compute_weird_submatrix_times_strided_vector_blas_double_path();
+        }};
   }
 };
 

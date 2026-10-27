@@ -21,6 +21,8 @@
 namespace maf::math {
 template <std::floating_point T>
 struct QRResult;  // Defined in QR.hpp
+template <std::floating_point T>
+struct PLUResult;  // Defined in PLU.hpp
 
 namespace detail {
 /** @brief Promotes an integral input type to double for LAPACK work. */
@@ -143,6 +145,124 @@ template <Numeric T>
   return {std::move(q), std::move(r)};
 }
 
+/**
+ * @brief Computes the PLU factorization of A using the LAPACK backend (getrf).
+ * @details Matches the conventions of plu():
+ *  - P[i] is the index of the original row of A that ends up in row i, so
+ *    (P * A) = L * U, i.e. row i of P*A is row P[i] of A.
+ *  - L is unit lower triangular, U is upper triangular.
+ * @param matrix The square input matrix.
+ * @return PLUResult containing P, L, U and the sign of the permutation.
+ * @throws std::invalid_argument if the matrix is not square.
+ * @throws std::runtime_error if the matrix is singular or the backend fails.
+ */
+template <typename DataType, Numeric T>
+[[nodiscard]] PLUResult<DataType> lu_factorize(const Matrix<T> &a_matrix) {
+  if (a_matrix.row_count() != a_matrix.column_count()) {
+    throw std::invalid_argument("Matrix must be square for PLU decomposition!");
+  }
+  const size_t n = a_matrix.row_count();
+  if (n == 0) {
+    throw std::invalid_argument("Matrix dimensions must be greater than zero.");
+  }
+
+  // Row-major -> column-major via a transposed copy (same trick as QR).
+  Matrix<DataType> a_lap = a_matrix.template cast<DataType>().transposed();
+  auto *a = a_lap.data();
+
+  auto nn = static_cast<__LAPACK_int>(n);
+  std::vector<__LAPACK_int> ipiv(n);
+  __LAPACK_int info = 0;
+  if constexpr (std::is_same_v<DataType, float>) {
+    sgetrf_(&nn, &nn, a, &nn, ipiv.data(), &info);
+  } else {
+    dgetrf_(&nn, &nn, a, &nn, ipiv.data(), &info);
+  }
+  if (info > 0) {
+    throw std::runtime_error("Matrix is singular; pivot is near zero.");
+  }
+  if (info < 0) {
+    throw std::runtime_error("Accelerate/LAPACK getrf failed");
+  }
+
+  // Reconstruct the permutation vector: apply the same swaps LAPACK performed.
+  std::vector<uint32> P(n);
+  std::iota(P.begin(), P.end(), 0);
+  int8 sign = 1;
+  for (size_t k = 0; k < n; ++k) {
+    const auto piv = static_cast<size_t>(ipiv[k]);
+    if (piv - 1 != k) {  // ipiv entries are 1-based
+      std::swap(P[k], P[piv - 1]);
+      sign *= -1;
+    }
+  }
+
+  // Extract L and U from the factored matrix (rows already in final order).
+  Matrix<DataType> combined = a_lap.transposed();  // Row-major again
+  Matrix<DataType> l = identity_matrix<DataType>(n);
+  Matrix<DataType> u(n, n);
+#pragma omp parallel for schedule(static) if (n > 256)
+  for (size_t i = 0; i < n; ++i) {
+    // L rows: the strict lower prefix is [0, i); unit diagonal stays 1.
+    std::copy_n(&combined.at(i, 0), i, &l.at(i, 0));
+    // U rows: the upper (and diagonal) part is [i, n).
+    std::copy_n(&combined.at(i, i), n - i, &u.at(i, i));
+  }
+
+  return {std::move(P), std::move(l), std::move(u), sign};
+}
+
+/**
+ * @brief Computes the Cholesky factorization A = L * L^T (potrf).
+ * @details Matches the conventions of cholesky(): returns the lower
+ *          triangular factor L as a row-major Matrix, upper half zeroed.
+ * @param matrix The symmetric positive definite input matrix.
+ * @return The lower triangular Matrix L.
+ * @throws std::invalid_argument if the matrix is not symmetric or not
+ *         positive definite.
+ * @throws std::runtime_error if the backend reports a failure.
+ */
+template <typename DataType, Numeric T>
+[[nodiscard]] Matrix<DataType> cholesky_factorize(const Matrix<T> &a_matrix) {
+  if (!a_matrix.is_symmetric()) {
+    throw std::invalid_argument(
+        "Matrix must be symmetric to try Cholesky decomposition!");
+  }
+  const size_t n = a_matrix.row_count();
+  if (n == 0) {
+    throw std::invalid_argument("Matrix dimensions must be greater than zero.");
+  }
+
+  Matrix<DataType> a_lap = a_matrix.template cast<DataType>().transposed();
+  auto *a = a_lap.data();
+
+  auto nn = static_cast<__LAPACK_int>(n);
+  const char uplo = 'L';
+  __LAPACK_int info = 0;
+  if constexpr (std::is_same_v<DataType, float>) {
+    spotrf_(&uplo, &nn, a, &nn, &info);
+  } else {
+    dpotrf_(&uplo, &nn, a, &nn, &info);
+  }
+  if (info > 0) {
+    throw std::invalid_argument("Matrix is not positive definite!");
+  }
+  if (info < 0) {
+    throw std::runtime_error("Accelerate/LAPACK potrf failed");
+  }
+
+  // Column-major lower factor -> row-major lower factor.
+  Matrix<DataType> l = a_lap.transposed();
+#pragma omp parallel for schedule(static) if (n > 256)
+  for (size_t i = 0; i < n; ++i) {
+    if (i + 1 >= n) {
+      continue;  // Last row has no upper half to zero
+    }
+    std::fill_n(&l.at(i, i + 1), n - i - 1, DataType(0));
+  }
+  return l;
+}
+
 }  // namespace maf::math::acc
 #elifdef OPENBLAS_AVAILABLE
 // OpenBLAS does not declare the (Fortran ABI) LAPACK routines through cblas.h.
@@ -155,6 +275,10 @@ void sorgqr_(int *m, int *n, int *k, float *a, int *lda, float *tau, float *work
              int *lwork, int *info);
 void dorgqr_(int *m, int *n, int *k, double *a, int *lda, double *tau, double *work,
              int *lwork, int *info);
+void sgetrf_(int *m, int *n, float *a, int *lda, int *ipiv, int *info);
+void dgetrf_(int *m, int *n, double *a, int *lda, int *ipiv, int *info);
+void spotrf_(char *uplo, int *n, float *a, int *lda, int *info);
+void dpotrf_(char *uplo, int *n, double *a, int *lda, int *info);
 }
 
 namespace maf::math::oblas {
@@ -267,6 +391,111 @@ template <Numeric T>
   }
 
   return {std::move(Q), std::move(R)};
+}
+
+/**
+ * @brief Computes the PLU factorization of A using the LAPACK backend (getrf).
+ * @details Same P/L/U conventions as acc::lu_factorize() and plu().
+ * @throws std::invalid_argument if the matrix is not square.
+ * @throws std::runtime_error if the matrix is singular or the backend fails.
+ */
+template <typename DataType, Numeric T>
+[[nodiscard]] PLUResult<DataType> lu_factorize(const Matrix<T> &A) {
+  if (A.row_count() != A.column_count()) {
+    throw std::invalid_argument("Matrix must be square for PLU decomposition!");
+  }
+  const size_t n = A.row_count();
+  if (n == 0) {
+    throw std::invalid_argument("Matrix dimensions must be greater than zero.");
+  }
+
+  Matrix<DataType> A_lap = A.template cast<DataType>().transposed();
+  auto *a = A_lap.data();
+
+  auto nn = static_cast<int>(n);
+  std::vector<int> ipiv(n);
+  int info = 0;
+  if constexpr (std::is_same_v<DataType, float>) {
+    sgetrf_(&nn, &nn, a, &nn, ipiv.data(), &info);
+  } else {
+    dgetrf_(&nn, &nn, a, &nn, ipiv.data(), &info);
+  }
+  if (info > 0) {
+    throw std::runtime_error("Matrix is singular; pivot is near zero.");
+  }
+  if (info < 0) {
+    throw std::runtime_error("OpenBLAS/LAPACK getrf failed");
+  }
+
+  std::vector<uint32> P(n);
+  std::iota(P.begin(), P.end(), 0);
+  int8 sign = 1;
+  for (size_t k = 0; k < n; ++k) {
+    const auto piv = static_cast<size_t>(ipiv[k]);
+    if (piv - 1 != k) {  // ipiv entries are 1-based
+      std::swap(P[k], P[piv - 1]);
+      sign *= -1;
+    }
+  }
+
+  Matrix<DataType> combined = A_lap.transposed();
+  Matrix<DataType> L = identity_matrix<DataType>(n);
+  Matrix<DataType> U(n, n);
+#pragma omp parallel for schedule(static) if (n > 256)
+  for (size_t i = 0; i < n; ++i) {
+    std::copy_n(&combined.at(i, 0), i, &L.at(i, 0));
+    std::copy_n(&combined.at(i, i), n - i, &U.at(i, i));
+  }
+
+  return {std::move(P), std::move(L), std::move(U), sign};
+}
+
+/**
+ * @brief Computes the Cholesky factorization A = L * L^T (potrf).
+ * @details Same conventions as maf::math::cholesky(): lower triangular L,
+ *          upper half zeroed.
+ * @throws std::invalid_argument if the matrix is not symmetric or not
+ *         positive definite.
+ * @throws std::runtime_error if the backend reports a failure.
+ */
+template <typename DataType, Numeric T>
+[[nodiscard]] Matrix<DataType> cholesky_factorize(const Matrix<T> &A) {
+  if (!A.is_symmetric()) {
+    throw std::invalid_argument(
+        "Matrix must be symmetric to try Cholesky decomposition!");
+  }
+  const size_t n = A.row_count();
+  if (n == 0) {
+    throw std::invalid_argument("Matrix dimensions must be greater than zero.");
+  }
+
+  Matrix<DataType> A_lap = A.template cast<DataType>().transposed();
+  auto *a = A_lap.data();
+
+  auto nn = static_cast<int>(n);
+  const char uplo = 'L';
+  int info = 0;
+  if constexpr (std::is_same_v<DataType, float>) {
+    spotrf_(&uplo, &nn, a, &nn, &info);
+  } else {
+    dpotrf_(&uplo, &nn, a, &nn, &info);
+  }
+  if (info > 0) {
+    throw std::invalid_argument("Matrix is not positive definite!");
+  }
+  if (info < 0) {
+    throw std::runtime_error("OpenBLAS/LAPACK potrf failed");
+  }
+
+  Matrix<DataType> L = A_lap.transposed();
+#pragma omp parallel for schedule(static) if (n > 256)
+  for (size_t i = 0; i < n; ++i) {
+    if (i + 1 >= n) {
+      continue;  // Last row has no upper half to zero
+    }
+    std::fill_n(&L.at(i, i + 1), n - i - 1, DataType(0));
+  }
+  return L;
 }
 
 }  // namespace maf::math::oblas

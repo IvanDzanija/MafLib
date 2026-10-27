@@ -141,3 +141,9 @@ if(BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
 endif()
+
+# Local performance measurements. Targets are EXCLUDE_FROM_ALL: they are never
+# built by a plain `cmake --build`, never picked up by ctest, and are meant to
+# be run explicitly from a Release build:
+#   cmake --build --preset clang-release --target LinAlgMeasure
+add_subdirectory(measure)

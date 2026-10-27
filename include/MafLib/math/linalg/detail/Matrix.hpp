@@ -769,8 +769,6 @@ class Matrix {
     const U *b_data = other.data();
     R *c_data = result.data();
 
-    result.fill(R(0));
-
 #ifdef BLAS_AVAILABLE
     if constexpr (std::is_same_v<R, float>) {
       std::vector<float> a_converted;
