@@ -34,7 +34,8 @@ constexpr auto get_working_lapack_matrix(const Matrix<T> &matrix)
     }
     else
     {
-        lap = Matrix(matrix).transpose();
+        lap = Matrix<DataType>(matrix);
+        lap.transpose();
     }
     return lap;
 }
@@ -241,14 +242,14 @@ template <typename DataType, Numeric T>
         }
     }
 
-    Matrix<DataType> combined = a_lap.transposed();
+    a_lap.transpose();
     Matrix<DataType> l = identity_matrix<DataType>(n);
     Matrix<DataType> u(n, n);
 #pragma omp parallel for schedule(static) if (n > 256)
     for (size_t i = 0; i < n; ++i)
     {
-        std::copy_n(&combined.at(i, 0), i, &l.at(i, 0));
-        std::copy_n(&combined.at(i, i), n - i, &u.at(i, i));
+        std::copy_n(&a_lap[i, 0], i, &l[i, 0]);
+        std::copy_n(&a_lap[i, i], n - i, &u[i, i]);
     }
 
     return {std::move(P), std::move(l), std::move(u), sign};

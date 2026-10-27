@@ -219,11 +219,80 @@ template <Numeric T> class Matrix
         _data.assign(list.begin(), list.end());
     }
 
+    /**
+     * @brief Copy + converting constructor
+     */
     template <Numeric U>
     Matrix(const Matrix<U> &other)
         : _rows(other.row_count()), _cols(other.column_count()),
           _data(other.data_vector().begin(), other.data_vector().end())
     {
+    }
+
+    /**
+     * @brief Copy + converting assignment
+     */
+    template <Numeric U> Matrix &operator=(const Matrix<U> &other)
+    {
+        if constexpr (std::is_same_v<T, U>)
+        {
+            if (this == &other)
+            {
+                return *this;
+            }
+        }
+
+        _data.assign(other.data_vector().begin(), other.data_vector().end());
+
+        _rows = other.row_count();
+        _cols = other.column_count();
+
+        return *this;
+    }
+    /**
+     * @brief Move + converting constructor
+     */
+    template <Numeric U>
+    Matrix(Matrix<U> &&other) : _rows(other.row_count()), _cols(other.column_count())
+    {
+        if constexpr (std::is_same_v<T, U>)
+        {
+            // Same types have private access
+            _data = std::move(other._data);
+        }
+        else
+        {
+            _data.assign(std::make_move_iterator(other._data.begin()),
+                         std::make_move_iterator(other._data.end()));
+        }
+    }
+
+    /**
+     * @brief Move + converting assignment
+     */
+    template <Numeric U> Matrix &operator=(Matrix<U> &&other)
+    {
+        if constexpr (std::is_same_v<T, U>)
+        {
+            if (this == &other)
+            {
+
+                return *this;
+            }
+
+            _rows = other._rows;
+            _cols = other._cols;
+            _data = std::move(other._data);
+        }
+        else
+        {
+            _rows = other.row_count();
+            _cols = other.column_count();
+
+            _data.assign(other.data_vector().begin(), other.data_vector().end());
+        }
+
+        return *this;
     }
 
 #pragma mark getters_setters
