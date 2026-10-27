@@ -39,6 +39,33 @@ namespace maf::math::acc
 {
 
 /**
+ * @brief Computes the Householder reflector for given column.
+ * @param A The input matrix.
+ * @return Numeric tau
+ */
+template <Numeric T>
+[[nodiscard]] auto householder_reflector(MatrixView<T> a_matrix, size_t j)
+{
+    const auto n = static_cast<__LAPACK_int>(a_matrix.row_count() - j);
+    const __LAPACK_int incx{1};
+
+    T *alpha = &a_matrix[j, j];
+    T *x = n > 1 ? &a_matrix[j + 1, j] : alpha;
+    T tau{};
+
+    if constexpr (std::is_same_v<T, float>)
+    {
+        slarfg_(&n, alpha, x, &incx, &tau);
+    }
+    else
+    {
+        dlarfg_(&n, alpha, x, &incx, &tau);
+    }
+
+    return tau;
+}
+
+/**
  * @brief Computes the QR factorization of A using the LAPACK backend.
  * @details Follows the thin/full conventions of QR_decompostion():
  *  - R is (m x n) if full_R else (k x n), with k = min(m, n).
@@ -47,7 +74,6 @@ namespace maf::math::acc
  * @param full_Q Whether to produce the full m x m orthogonal matrix Q.
  * @param full_R Whether to produce the full m x n upper triangular matrix R.
  * @return QRResult containing Q and R.
- * @throws std::invalid_argument if A is empty.
  * @throws std::runtime_error if the LAPACK backend reports a failure.
  */
 template <Numeric T>
@@ -59,10 +85,6 @@ template <Numeric T>
 
     const size_t m = a_matrix.row_count();
     const size_t n = a_matrix.column_count();
-    if (m == 0 || n == 0)
-    {
-        throw std::invalid_argument("Cannot perform QR decomposition on empty matrix!");
-    }
 
     // Smaller dimension determines number of reflectors
     const size_t k = std::min(m, n);
@@ -77,9 +99,9 @@ template <Numeric T>
 
     std::vector<DataType> tau_lap(k);
 
-    __LAPACK_int info = 0;
-    __LAPACK_int lwork = -1;
-    DataType wq = 0;
+    __LAPACK_int info{0};
+    __LAPACK_int lwork{-1};
+    DataType wq{0};
     if constexpr (std::is_same_v<DataType, float>)
     {
         sgeqrf_(&mm, &nn, a, &lda, tau_lap.data(), &wq, &lwork, &info);
@@ -182,21 +204,12 @@ template <Numeric T>
  *  - L is unit lower triangular, U is upper triangular.
  * @param matrix The square input matrix.
  * @return PLUResult containing P, L, U and the sign of the permutation.
- * @throws std::invalid_argument if the matrix is not square.
  * @throws std::runtime_error if the matrix is singular or the backend fails.
  */
 template <typename DataType, Numeric T>
 [[nodiscard]] PLUResult<DataType> lu_factorize(const Matrix<T> &a_matrix)
 {
-    if (a_matrix.row_count() != a_matrix.column_count())
-    {
-        throw std::invalid_argument("Matrix must be square for PLU decomposition!");
-    }
     const size_t n = a_matrix.row_count();
-    if (n == 0)
-    {
-        throw std::invalid_argument("Matrix dimensions must be greater than zero.");
-    }
 
     auto a_lap = detail::get_working_lapack_matrix<DataType>(a_matrix);
     auto *a = a_lap.data();
@@ -324,10 +337,39 @@ extern "C"
     void dgetrf_(int *m, int *n, double *a, int *lda, int *ipiv, int *info);
     void spotrf_(const char *uplo, int *n, float *a, int *lda, int *info);
     void dpotrf_(const char *uplo, int *n, double *a, int *lda, int *info);
+    void slarfg_(const int *, float *, float *, const int *, float *);
+    void dlarfg_(const int *, double *, double *, const int *, double *);
 }
 
 namespace maf::math::oblas
 {
+
+/**
+ * @brief Computes the Householder reflector for given column.
+ * @param A The input matrix.
+ * @return Numeric tau
+ */
+template <Numeric T>
+[[nodiscard]] auto householder_reflector(MatrixView<T> a_matrix, size_t j)
+{
+    const auto n = static_cast<int>(a_matrix.row_count() - j);
+    const int incx{1};
+
+    T *alpha = &a_matrix[j, j];
+    T *x = n > 1 ? &a_matrix[j + 1, j] : alpha;
+    T tau{};
+
+    if constexpr (std::is_same_v<T, float>)
+    {
+        slarfg_(&n, alpha, x, &incx, &tau);
+    }
+    else
+    {
+        dlarfg_(&n, alpha, x, &incx, &tau);
+    }
+
+    return tau;
+}
 
 /**
  * @brief Computes the QR factorization of A using the LAPACK backend.
