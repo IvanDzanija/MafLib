@@ -34,7 +34,7 @@ constexpr auto get_working_lapack_matrix(const Matrix<T> &matrix)
     }
     else
     {
-        lap = matrix.template cast<DataType>().transposed();
+        lap = Matrix(matrix).transpose();
     }
     return lap;
 }
@@ -364,8 +364,7 @@ template <Numeric T>
     // Smaller dimension determines number of reflectors
     const size_t k = std::min(m, n);
 
-    Matrix<DataType> A_work = A.template cast<DataType>();
-    Matrix<DataType> A_lap = A_work.transposed(); // Column-major order for LAPACK
+    auto A_lap = detail::get_working_lapack_matrix<DataType>(A);
     auto *a = A_lap.data();
 
     auto mm = static_cast<int>(m);
@@ -488,7 +487,7 @@ template <typename DataType, Numeric T>
         throw std::invalid_argument("Matrix dimensions must be greater than zero.");
     }
 
-    Matrix<DataType> A_lap = A.template cast<DataType>().transposed();
+    auto A_lap = detail::get_working_lapack_matrix<DataType>(A);
     auto *a = A_lap.data();
 
     auto nn = static_cast<int>(n);
@@ -559,7 +558,7 @@ template <typename DataType, Numeric T>
         throw std::invalid_argument("Matrix dimensions must be greater than zero.");
     }
 
-    Matrix<DataType> A_lap = A.template cast<DataType>().transposed();
+    auto A_lap = detail::get_working_lapack_matrix<DataType>(A);
     auto *a = A_lap.data();
 
     auto nn = static_cast<int>(n);

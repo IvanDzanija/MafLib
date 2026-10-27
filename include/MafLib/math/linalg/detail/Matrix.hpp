@@ -219,7 +219,10 @@ template <Numeric T> class Matrix
         _data.assign(list.begin(), list.end());
     }
 
-    template <Numeric U> Matrix(const Matrix &other)
+    template <Numeric U>
+    Matrix(const Matrix<U> &other)
+        : _rows(other.row_count()), _cols(other.column_count()),
+          _data(other.data_vector().begin(), other.data_vector().end())
     {
     }
 
@@ -262,6 +265,16 @@ template <Numeric T> class Matrix
      * @return const std::vector<T>&
      */
     [[nodiscard]] const std::vector<T> &data_vector() const noexcept
+    {
+        return _data;
+    }
+
+    /**
+     * @brief Gets a mutable copy to the underlying std::vector
+     * data store.
+     * @return std::vector<T>
+     */
+    [[nodiscard]] std::vector<T> data_vector_copy() noexcept
     {
         return _data;
     }
