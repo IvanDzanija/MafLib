@@ -928,7 +928,7 @@ class Matrix {
    */
   void print() const {
     if constexpr (std::is_floating_point_v<T>) {
-      std::cout << std::fixed << std::setprecision(32);
+      std::cout << std::fixed << std::setprecision(FLOAT_PRECISION);
     }
     for (size_t i = 0; i < _rows; ++i) {
       for (size_t j = 0; j < _cols; ++j) {
