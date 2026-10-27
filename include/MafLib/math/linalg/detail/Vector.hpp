@@ -735,9 +735,9 @@ class Vector {
    */
   template <Numeric U>
   [[nodiscard]] auto operator/(const U &scalar) const noexcept {
-    using R =
-        std::conditional_t<std::is_integral_v<T> && std::is_integral_v<U>, double,
-                           std::common_type_t<T, U>>;  // Forces double if both are ints
+    using R = std::conditional_t<std::is_integral_v<T> && std::is_integral_v<U>, double,
+                                 std::common_type_t<T, U>>;  // Forces double if both
+                                                             // are ints
 
     R r_scalar_inv = R(1) / static_cast<R>(scalar);
     const size_t n = size();
