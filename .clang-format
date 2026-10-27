@@ -1,4 +1,4 @@
 ---
-BasedOnStyle: Google
+BasedOnStyle: Microsoft
 ColumnLimit: 88
 PointerAlignment: Right
