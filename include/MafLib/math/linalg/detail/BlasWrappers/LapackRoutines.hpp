@@ -27,16 +27,8 @@ using float_promote_t = std::conditional_t<std::is_floating_point_v<T>, T, doubl
 template <typename DataType, typename T>
 constexpr auto get_working_lapack_matrix(const Matrix<T> &matrix)
 {
-    Matrix<DataType> lap;
-    if constexpr (std::is_same_v<T, DataType>)
-    {
-        lap = matrix.transposed();
-    }
-    else
-    {
-        lap = Matrix<DataType>(matrix);
-        lap.transpose();
-    }
+    Matrix<DataType> lap(matrix);
+    lap.transpose();
     return lap;
 }
 } // namespace detail

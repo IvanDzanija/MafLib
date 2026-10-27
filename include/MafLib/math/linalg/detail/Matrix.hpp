@@ -662,10 +662,6 @@ template <Numeric T> class Matrix
      */
     void transpose()
     {
-        if (!is_square())
-        {
-            throw std::invalid_argument("Matrix must be square to transpose in-place.");
-        }
 #ifdef BLAS_AVAILABLE
         if constexpr (std::is_same_v<T, float> || std::is_same_v<T, double>)
         {
@@ -690,6 +686,7 @@ template <Numeric T> class Matrix
                 }
             }
         }
+        std::swap(_rows, _cols);
     }
 
     /**
