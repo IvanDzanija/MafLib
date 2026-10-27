@@ -51,7 +51,7 @@ template <Numeric T, Numeric U>
 [[nodiscard]] constexpr bool is_close(
     T v1, U v2,
     std::common_type_t<T, U> rel_tol =
-        std::numeric_limits<std::common_type_t<T, U>>::epsilon() * 32,
+        std::numeric_limits<std::common_type_t<T, U>>::epsilon() * 64,
     std::common_type_t<T, U> abs_tol = 1e-12) {
   using R = std::common_type_t<T, U>;
 
