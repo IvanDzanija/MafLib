@@ -72,9 +72,8 @@ template <std::floating_point T>
         return blas::householder_reflector(a_work, j);
     }
     else
-    {
 #endif
-
+    {
         // sigma = x_tail^2
         T sigma = 0.0;
         for (size_t i = j + 1; i < m; ++i)

@@ -15,21 +15,18 @@
  * nothing.
  */
 
-namespace maf::math {
+namespace maf::math
+{
 using namespace maf::util;
 
 // Classes
-template <Numeric T>
-class Vector;
+template <Numeric T> class Vector;
 
-template <Numeric T>
-class Matrix;
+template <Numeric T> class Matrix;
 
-template <Numeric T>
-class VectorView;
+template <Numeric T> class VectorView;
 
-template <Numeric T>
-class MatrixView;
+template <Numeric T> class MatrixView;
 
 // Concepts
 /** @brief Clean Vector concept.
@@ -81,5 +78,5 @@ concept MatrixViewType =
  */
 template <typename T>
 concept MatrixViewCompatible = MatrixViewType<T> || MatrixType<T>;
-}  // namespace maf::math
-#endif  // LINALG_DETAIL_CORE_HPP
+} // namespace maf::math
+#endif // LINALG_DETAIL_CORE_HPP
