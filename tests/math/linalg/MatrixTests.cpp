@@ -673,8 +673,7 @@ class MatrixTests : public ITest {
     math::Matrix<float> A(N, N);
     math::Matrix<float> B(N, N);
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
+    std::mt19937 gen(42);  // Fixed seed: deterministic test
     std::uniform_real_distribution<> dis(-10.0, 10.0);
     for (size_t i = 0; i < N; ++i) {
       for (size_t j = 0; j < N; ++j) {
@@ -684,7 +683,10 @@ class MatrixTests : public ITest {
     }
     auto C = A * B;
 
-    math::Matrix<float> D(N, N);
+    // Reference accumulated in double: a float reference would drift with
+    // K=N terms per element and make the comparison backend- (and run-)
+    // dependent.
+    math::Matrix<double> D(N, N);
     for (size_t i = 0; i < N; ++i) {
       for (size_t j = 0; j < N; ++j) {
         for (size_t k = 0; k < N; ++k) {
@@ -692,7 +694,25 @@ class MatrixTests : public ITest {
         }
       }
     }
-    assert_true(math::loosely_equal(C, D));
+    // C is a float gemm result: float summation over 512 terms with
+    // cancellation allows ~1% relative / small absolute deviation.
+    size_t mismatches = 0;
+    double worst_rel = 0.0;
+    for (size_t i = 0; i < N; ++i) {
+      for (size_t j = 0; j < N; ++j) {
+        if (!is_close(C.at(i, j), D.at(i, j), 1e-2, 0.05)) {
+          ++mismatches;
+          double rel =
+              std::abs(C.at(i, j) - D.at(i, j)) / std::max(std::abs(D.at(i, j)), 1.0);
+          worst_rel = std::max(worst_rel, rel);
+        }
+      }
+    }
+    assert_true(mismatches == 0);
+    if (mismatches > 0) {
+      std::cerr << "matmul_large_matrix_test: " << mismatches
+                << " mismatches, worst relative error " << worst_rel << "\n";
+    }
   }
 
   //=============================================================================
