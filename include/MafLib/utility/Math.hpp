@@ -32,7 +32,7 @@ inline static constexpr size_t OMP_CUBIC_LIMIT = 50UL * 50UL;
 /** @brief Block size used in block algorithms. */
 inline static constexpr uint8 BLOCK_SIZE = 16;
 /** @brief Precision for floating point number string conversion. */
-inline static constexpr uint8 FLOAT_PRECISION = 5;
+inline static constexpr uint8 FLOAT_PRECISION = 10;
 
 #pragma mark methods
 //=============================================================================

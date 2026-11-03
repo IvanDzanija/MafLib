@@ -77,7 +77,7 @@ class Vector {
 
   /**
    * @brief Constructs from a std::vector by copying its data.
-   * @param size The number of elements. Must match data.size().
+   * @param size The number of elements. Must be less or equal to data.size().
    * @param data The std::vector to copy from.
    * @param orientation The vector's orientation (default: COLUMN).
    * @throws std::invalid_argument if size is zero or data size
@@ -91,7 +91,7 @@ class Vector {
       throw std::invalid_argument("Vector size must be greater than zero.");
     }
 
-    if (data.size() != size) {
+    if (data.size() < size) {
       throw std::invalid_argument("Data size does not match vector size.");
     }
 
@@ -113,7 +113,7 @@ class Vector {
       throw std::invalid_argument("Vector size must be greater than zero.");
     }
 
-    if (data.size() != size) {
+    if (data.size() < size) {
       throw std::invalid_argument("Data size does not match vector size.");
     }
 
@@ -137,7 +137,7 @@ class Vector {
     if (size == 0) {
       throw std::invalid_argument("Vector size must be greater than zero.");
     }
-    if (N != size) {
+    if (N < size) {
       throw std::invalid_argument("Data size does not match vector size.");
     }
 
@@ -150,7 +150,7 @@ class Vector {
   template <Numeric U>
   [[nodiscard]] Vector(const Vector<U> &other)
       : _orientation(other.orientation()),
-        _data(other.data(), other.data() + other.size()) {}
+        _data(other.data().begin(), other.data().end()) {}
 
   // --- Iterators ---
   /** @brief Returns an iterator to the beginning. */

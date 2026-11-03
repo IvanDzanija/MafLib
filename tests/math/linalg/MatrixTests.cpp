@@ -885,16 +885,16 @@ class MatrixTests : public ITest {
     assert_true(thrown);
   }
 
-  void should_auto_convert_int_matrix_to_double_in_cholesky() {
+  void should_auto_convert_int_matrix_to_float_in_cholesky() {
     math::Matrix<int> m_int(3, 3, {4, 12, -16, 12, 37, -43, -16, -43, 98});
 
     auto L = cholesky(m_int);
 
-    ASSERT_SAME_TYPE(L, math::Matrix<double>);
+    ASSERT_SAME_TYPE(L, math::Matrix<float>);
 
     auto LLt = L * L.transposed();
-    auto m_double = m_int.cast<double>();
-    assert_true(math::loosely_equal(LLt, m_double));
+    auto m_float = m_int.cast<float>();
+    assert_true(math::loosely_equal(LLt, m_float));
   }
 
   void should_preserve_float_type_in_cholesky() {
@@ -950,10 +950,10 @@ class MatrixTests : public ITest {
 
     auto L = cholesky(I_int);
 
-    ASSERT_SAME_TYPE(L, math::Matrix<double>);
+    ASSERT_SAME_TYPE(L, math::Matrix<float>);
 
-    auto I_double = math::identity_matrix<double>(4);
-    assert_true(math::loosely_equal(L, I_double));
+    auto I_float = math::identity_matrix<float>(4);
+    assert_true(math::loosely_equal(L, I_float));
   }
 
   void should_handle_diagonal_int_matrix_in_cholesky() {
@@ -1047,22 +1047,36 @@ class MatrixTests : public ITest {
     math::Matrix<int> m4(3, 3, {9, 0, 0, 0, 16, 0, 0, 0, 25});
     math::Matrix<int> I = math::identity_matrix<int>(3);
 
-    ASSERT_SAME_TYPE(m1.determinant(), double);
-    assert_true(m1.determinant() == -2.0);
-    assert_true(m2.determinant() == 2.0);
-    assert_true(m3.determinant() == -16.0);
-    assert_true(m4.determinant() == 3600.0);
+    ASSERT_SAME_TYPE(m1.determinant(), float);
+    assert_true(is_close(m1.determinant(), -2.0, 1e-5, 1e-4));
+    assert_true(is_close(m2.determinant(), 2.0, 1e-5, 1e-4));
+    assert_true(is_close(m3.determinant(), -16.0, 1e-5, 1e-4));
+    assert_true(is_close(m4.determinant(), 3600.0, 1e-5, 1e-2));
     assert_true(I.determinant() == 1.0);
   }
 
-  void should_promote_int_matrix_to_double_when_computing_determinant() {
+  void should_promote_int_matrix_to_float_when_computing_determinant() {
     math::Matrix<int> m1(3, 3, {2, 3, 1, 4, 7, 5, 6, 8, 9});
     math::Matrix<int> m2(3, 3, {-7, -4, -8, -5, 0, -4, -7, -8, 8});
     math::Matrix<int> m3(2, 2, {3, 1, 1, 1});
 
-    assert_true(is_close(m1.determinant(), 18));
-    assert_true(is_close(m2.determinant(), -368));
-    assert_true(is_close(m3.determinant(), 2));
+    // Float-precision factors: allow a generous float-scale error.
+    assert_true(is_close(m1.determinant(), 18, 1e-3, 1e-2));
+    assert_true(is_close(m2.determinant(), -368, 1e-3, 1e-2));
+    assert_true(is_close(m3.determinant(), 2, 1e-3, 1e-2));
+  }
+
+  void should_promote_int_matrix_to_double_when_requested() {
+    math::Matrix<int> m(3, 3, {2, 3, 1, 4, 7, 5, 6, 8, 9});
+
+    auto plu_res = plu<double>(m);
+    ASSERT_SAME_TYPE(plu_res.L, math::Matrix<double>);
+
+    auto L = cholesky<double>(
+        math::Matrix<int>(3, 3, {4, 12, -16, 12, 37, -43, -16, -43, 98}));
+    ASSERT_SAME_TYPE(L, math::Matrix<double>);
+    auto LLt = L * L.transposed();
+    assert_true(is_close(LLt.at(0, 0), 4.0, 1e-12, 1e-9));
   }
   void should_compute_determinant_of_spd_int_matrix() {
     math::Matrix<int> spd(3, 3, {4, 12, -16, 12, 37, -43, -16, -43, 98});
@@ -1336,9 +1350,24 @@ class MatrixTests : public ITest {
     assert_true(loosely_equal(Q * R, A));
   }
 
-  void should_qr_promote_int_matrix_to_double_result_and_reconstruct() {
+  void should_qr_promote_int_matrix_to_float_result_and_reconstruct() {
     math::Matrix<int> A(4, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, -1, 2});
     auto qr = math::qr_decompostion(A);
+
+    math::Matrix<float> Af(4, 3);
+    for (size_t i = 0; i < 4; ++i) {
+      for (size_t j = 0; j < 3; ++j) {
+        Af.at(i, j) = (float)A.at(i, j);
+      }
+    }
+    ASSERT_SAME_TYPE(qr.Q, math::Matrix<float>);
+    ASSERT_SAME_TYPE(qr.R, math::Matrix<float>);
+    assert_true(loosely_equal(qr.Q * qr.R, Af));
+  }
+
+  void should_qr_promote_int_matrix_to_double_when_requested() {
+    math::Matrix<int> A(4, 3, {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, -1, 2});
+    auto qr = math::qr_decompostion<double>(A);
 
     math::Matrix<double> Ad(4, 3);
     for (size_t i = 0; i < 4; ++i) {
@@ -1614,7 +1643,7 @@ class MatrixTests : public ITest {
         [this] { should_reconstruct_from_random_b_times_b_t(); },
         [this] { should_throw_if_non_symmetric(); },
         [this] { should_throw_if_not_positive_definite(); },
-        [this] { should_auto_convert_int_matrix_to_double_in_cholesky(); },
+        [this] { should_auto_convert_int_matrix_to_float_in_cholesky(); },
         [this] { should_preserve_float_type_in_cholesky(); },
         [this] { should_preserve_double_type_in_cholesky(); },
         [this] { should_explicitly_convert_int_to_float_in_cholesky(); },
@@ -1634,7 +1663,8 @@ class MatrixTests : public ITest {
         [this] { should_throw_for_singular_matrix_when_computing_determinant(); },
         [this] { should_throw_for_empty_matrix_when_computing_determinant(); },
         [this] { should_compute_determinant_of_int_matrix(); },
-        [this] { should_promote_int_matrix_to_double_when_computing_determinant(); },
+        [this] { should_promote_int_matrix_to_float_when_computing_determinant(); },
+        [this] { should_promote_int_matrix_to_double_when_requested(); },
         [this] { should_compute_determinant_of_spd_int_matrix(); },
         [this] { should_compute_determinant_of_float_matrix(); },
         [this] { should_equal_determinant_of_transpose(); },
@@ -1662,7 +1692,8 @@ class MatrixTests : public ITest {
         [this] { should_decompose_wide_fullq_true_fullr_false(); },
         [this] { should_decompose_wide_fullq_false_fullr_true(); },
         [this] { should_decompose_wide_fullq_true_fullr_true(); },
-        [this] { should_qr_promote_int_matrix_to_double_result_and_reconstruct(); },
+        [this] { should_qr_promote_int_matrix_to_float_result_and_reconstruct(); },
+        [this] { should_qr_promote_int_matrix_to_double_when_requested(); },
         [this] { should_qr_work_with_float_input(); },
         [this] { should_decompose_1x1_matrix(); },
         [this] { should_decompose_nx1_column_vector(); },

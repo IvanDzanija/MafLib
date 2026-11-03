@@ -2,8 +2,32 @@
 #define UTIL_CONVERSIONS_H
 #pragma once
 #include "MafLib/main/GlobalHeader.hpp"
+#include "Math.hpp"
 
 namespace maf::util {
+
+/** @brief Promotes an integral input type to the LAPACK-compatible float.
+ *
+ *  Floating types pass through untouched (this trait never demotes). Integral
+ *  types promote to the smallest floating type that can hold them: types no
+ *  wider than float (int, short, char, ...) promote to float, wider types
+ *  (long, long long, ...) promote to double.
+ */
+template <Numeric T>
+using float_promote_t =
+    std::conditional_t<std::is_floating_point_v<T>, T,
+                       std::conditional_t<(sizeof(T) <= sizeof(float)), float, double>>;
+
+/** @brief Promotes any integral input type to double for LAPACK work.
+ *
+ *  Floating types pass through untouched. Use this instead of
+ *  float_promote_t when the extra precision of double is wanted for
+ *  every integral input.
+ */
+template <Numeric T>
+using double_promote_t = std::conditional_t<std::is_floating_point_v<T>, T, double>;
+
+/** @brief Promotes an integral input type to float for LAPACK work. */
 template <typename To, typename From>
 [[nodiscard]] static constexpr std::vector<To> convert_if_needed(
     const std::vector<From> &src) {

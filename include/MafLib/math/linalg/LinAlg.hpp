@@ -14,6 +14,7 @@
 #include "MafLib/math/linalg/detail/BlasWrappers/LapackRoutines.hpp"
 #include "MafLib/math/linalg/detail/Cholesky.hpp"
 #include "MafLib/math/linalg/detail/Core.hpp"
+#include "MafLib/math/linalg/detail/Eigen.hpp"
 #include "MafLib/math/linalg/detail/Matrix.hpp"
 #include "MafLib/math/linalg/detail/MatrixViewOperators.hpp"
 #include "MafLib/math/linalg/detail/PLU.hpp"

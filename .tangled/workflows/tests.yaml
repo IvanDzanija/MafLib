@@ -1,0 +1,45 @@
+# MafLib Tests
+
+when:
+  - event: push
+    branch: main
+
+  - event: pull_request
+    branch: main
+
+engine: microvm
+image: nixos
+
+# Build dependencies
+dependencies:
+  - clang
+  - cmake
+  - ninja
+  - libomp
+  - openblas
+
+steps:
+  # Verify the environment
+  - name: Check Architecture
+    command: |
+      echo "OS: $(uname -s)"
+      echo "Architecture: $(uname -m)"
+      echo "Compiler: $(clang++ --version | head -n 1)"
+      echo "CMake: $(cmake --version | head -n 1)"
+
+  # Configure
+  - name: Configure (clang-debug preset)
+    command: |
+      export CC=clang
+      export CXX=clang++
+      cmake --preset clang-debug
+
+  # Build
+  - name: Build
+    command: |
+      cmake --build --preset clang-debug --parallel
+
+  # Test
+  - name: Run tests
+    command: |
+      ctest --preset clang-debug --output-on-failure

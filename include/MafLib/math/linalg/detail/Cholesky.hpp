@@ -32,11 +32,6 @@ namespace detail {
  */
 template <std::floating_point T>
 [[nodiscard]] Matrix<T> _cholesky(const Matrix<T> &matrix) {
-  if (!matrix.is_symmetric()) {
-    throw std::invalid_argument(
-        "Matrix must be symmetric to try Cholesky decomposition!");
-  }
-
   size_t n = matrix.row_count();
   Matrix<T> l(n, n);
 
@@ -115,7 +110,11 @@ template <std::floating_point T>
  * More information:
  * https://en.wikipedia.org/wiki/Cholesky_decomposition
  *
- * @tparam T The floating point type of the matrix elements (e.g., float,
+ * @tparam ResultType The floating-point type of L. Defaults to
+ * util::float_promote_t<T> (int and smaller promote to float, long and
+ * larger to double, floating types pass through). Pass float or double
+ * explicitly to pin the promotion target.
+ * @tparam T The numeric type of the matrix elements (e.g., int, float,
  * double).
  * @param matrix The const reference to the square, symmetric, positive
  * definite input matrix (A) to decompose.
@@ -129,10 +128,17 @@ template <std::floating_point T>
  */
 template <typename ResultType = void, Numeric T>
 [[nodiscard]] auto cholesky(const Matrix<T> &matrix) {
-  using TargetType =
-      std::conditional_t<std::is_same_v<ResultType, void>,
-                         std::conditional_t<std::is_floating_point_v<T>, T, double>,
-                         ResultType>;
+  if (!matrix.is_symmetric()) {
+    throw std::invalid_argument(
+        "Matrix must be symmetric to try Cholesky decomposition!");
+  }
+
+  if (matrix.row_count() == 0 || matrix.column_count() == 0) {
+    throw std::invalid_argument("Matrix dimensions must be greater than zero.");
+  }
+
+  using TargetType = std::conditional_t<std::is_same_v<ResultType, void>,
+                                        util::float_promote_t<T>, ResultType>;
 
   static_assert(std::is_floating_point_v<TargetType>,
                 "Cholesky result type must be floating point!");

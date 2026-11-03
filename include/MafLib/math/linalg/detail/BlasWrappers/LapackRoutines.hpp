@@ -1,6 +1,7 @@
 #ifndef MAF_BLAS_LAPACK_ROUTINES_H
 #define MAF_BLAS_LAPACK_ROUTINES_H
 
+#include <print>
 #pragma once
 #include "MafLib/main/GlobalHeader.hpp"
 #include "MafLib/math/linalg/detail/BlasWrappers/BlasWrapper.hpp"
@@ -18,14 +19,16 @@ template <std::floating_point T>
 struct QRResult;  // Defined in QR.hpp
 template <std::floating_point T>
 struct PLUResult;  // Defined in PLU.hpp
+// Defined in Eigen.hpp
+template <std::floating_point T>
+struct EigenPair;
+template <std::floating_point T>
+using EigenResult = std::vector<EigenPair<T>>;
 
 namespace detail {
-/** @brief Promotes an integral input type to double for LAPACK work. */
-template <typename T>
-using float_promote_t = std::conditional_t<std::is_floating_point_v<T>, T, double>;
-
+/** @brief Converts given matrix to matrix of correct type. */
 template <typename DataType, typename T>
-constexpr auto get_working_lapack_matrix(const Matrix<T> &matrix) {
+constexpr auto _get_working_lapack_matrix(const Matrix<T> &matrix) {
   Matrix<DataType> lap(matrix);
   lap.transpose();
   return lap;
@@ -70,19 +73,17 @@ template <Numeric T>
  * @return QRResult containing Q and R.
  * @throws std::runtime_error if the LAPACK backend reports a failure.
  */
-template <Numeric T>
-[[nodiscard]] auto qr_factorize(const Matrix<T> &a_matrix, bool full_q = false,
-                                bool full_r = false)
-    -> QRResult<detail::float_promote_t<T>> {
-  using DataType = detail::float_promote_t<T>;
-
+template <typename DataType, Numeric T>
+[[nodiscard]] QRResult<DataType> qr_factorize(const Matrix<T> &a_matrix,
+                                              bool full_q = false,
+                                              bool full_r = false) {
   const size_t m = a_matrix.row_count();
   const size_t n = a_matrix.column_count();
 
   // Smaller dimension determines number of reflectors
   const size_t k = std::min(m, n);
 
-  auto a_lap = detail::get_working_lapack_matrix<DataType>(a_matrix);
+  auto a_lap = detail::_get_working_lapack_matrix<DataType>(a_matrix);
   auto *a = a_lap.data();
 
   auto mm = static_cast<__LAPACK_int>(m);
@@ -100,8 +101,9 @@ template <Numeric T>
   } else {
     dgeqrf_(&mm, &nn, a, &lda, tau_lap.data(), &wq, &lwork, &info);
   }
-  lwork = static_cast<__LAPACK_int>(
-      std::max<double>(1.0, std::ceil(static_cast<double>(wq))));
+
+  static constexpr DataType ONE{1.0};
+  lwork = static_cast<__LAPACK_int>(std::max(ONE, std::ceil(wq)));
   std::vector<DataType> work(static_cast<size_t>(lwork));
 
   if constexpr (std::is_same_v<DataType, float>) {
@@ -124,7 +126,6 @@ template <Numeric T>
   // Get Q
   if (full_q && m > n) {
     Matrix<DataType> a_big(m, m);
-    a_big.fill(0.0);
     for (size_t r = 0; r < n; ++r) {
       for (size_t c = 0; c < m; ++c) {
         a_big[r, c] = a_lap[r, c];
@@ -182,7 +183,7 @@ template <typename DataType, Numeric T>
 [[nodiscard]] PLUResult<DataType> lu_factorize(const Matrix<T> &a_matrix) {
   const size_t n = a_matrix.row_count();
 
-  auto a_lap = detail::get_working_lapack_matrix<DataType>(a_matrix);
+  auto a_lap = detail::_get_working_lapack_matrix<DataType>(a_matrix);
   auto *a = a_lap.data();
 
   auto nn = static_cast<__LAPACK_int>(n);
@@ -201,7 +202,7 @@ template <typename DataType, Numeric T>
   }
 
   std::vector<uint32> P(n);
-  std::iota(P.begin(), P.end(), 0);
+  std::ranges::iota(P, 0);
   int8 sign = 1;
   for (size_t k = 0; k < n; ++k) {
     const auto piv = static_cast<size_t>(ipiv[k]);
@@ -235,16 +236,9 @@ template <typename DataType, Numeric T>
  */
 template <typename DataType, Numeric T>
 [[nodiscard]] Matrix<DataType> cholesky_factorize(const Matrix<T> &a_matrix) {
-  if (!a_matrix.is_symmetric()) {
-    throw std::invalid_argument(
-        "Matrix must be symmetric to try Cholesky decomposition!");
-  }
   const size_t n = a_matrix.row_count();
-  if (n == 0) {
-    throw std::invalid_argument("Matrix dimensions must be greater than zero.");
-  }
 
-  auto a_lap = detail::get_working_lapack_matrix<DataType>(a_matrix);
+  auto a_lap = detail::_get_working_lapack_matrix<DataType>(a_matrix);
   auto *a = a_lap.data();
 
   auto nn = static_cast<__LAPACK_int>(n);
@@ -271,6 +265,63 @@ template <typename DataType, Numeric T>
     std::fill_n(&l.at(i, i + 1), n - i - 1, DataType(0));
   }
   return l;
+}
+
+template <typename DataType, Numeric T>
+[[nodiscard]] auto eigen_decompose(const Matrix<T> &a_matrix) {
+  const size_t n = a_matrix.row_count();
+  auto a_lap = detail::_get_working_lapack_matrix<DataType>(a_matrix);
+  auto *a = a_lap.data();
+
+  const char jobvl = 'N';
+  const char jobvr = 'V';
+  auto nn = static_cast<__LAPACK_int>(n);
+  std::vector<DataType> wr(n);
+  std::vector<DataType> wi(n);
+  Matrix<DataType> e_vcs(n, n);
+  Matrix<DataType> vl_dummy(n, n);  // Accelerate dereferences VL even with jobvl='N'
+  __LAPACK_int info{0};
+  __LAPACK_int lwork{-1};
+  DataType wq{0};
+  if constexpr (std::is_same_v<DataType, float>) {
+    sgeev_(&jobvl, &jobvr, &nn, a, &nn, wr.data(), wi.data(), vl_dummy.data(), &nn,
+           e_vcs.data(), &nn, &wq, &lwork, &info);
+  } else {
+    dgeev_(&jobvl, &jobvr, &nn, a, &nn, wr.data(), wi.data(), vl_dummy.data(), &nn,
+           e_vcs.data(), &nn, &wq, &lwork, &info);
+  }
+
+  static constexpr DataType ONE{1.0};
+  lwork = static_cast<__LAPACK_int>(std::max(ONE, std::ceil(wq)));
+  std::vector<DataType> work(static_cast<size_t>(lwork));
+
+  if constexpr (std::is_same_v<DataType, float>) {
+    sgeev_(&jobvl, &jobvr, &nn, a, &nn, wr.data(), wi.data(), vl_dummy.data(), &nn,
+           e_vcs.data(), &nn, work.data(), &lwork, &info);
+  } else {
+    dgeev_(&jobvl, &jobvr, &nn, a, &nn, wr.data(), wi.data(), vl_dummy.data(), &nn,
+           e_vcs.data(), &nn, work.data(), &lwork, &info);
+  }
+
+  if (info != 0) {
+    throw std::runtime_error("Accelerate/LAPACK geev failed");
+  }
+
+  EigenResult<DataType> result(n);
+
+  for (size_t i = 0; i < n; ++i) {
+    std::span row_span = e_vcs.row_span(i);
+    DataType value = wr[i];
+    if (wi[i] != 0) {
+      std::cout << "Eigen value is complex\n";
+    }
+    Vector<DataType> eigenvector(row_span.size(), row_span.data());
+    std::println("Eigen value: {}", value);
+    std::println("Eigen vector: ");
+    eigenvector.print();
+    result[i] = {std::move(eigenvector), std::move(value)};
+  }
+  return result;
 }
 
 }  // namespace maf::math::acc
@@ -330,11 +381,9 @@ template <Numeric T>
  * @throws std::invalid_argument if A is empty.
  * @throws std::runtime_error if the LAPACK backend reports a failure.
  */
-template <Numeric T>
-[[nodiscard]] auto qr_factorize(const Matrix<T> &A, bool full_Q = false,
-                                bool full_R = false)
-    -> QRResult<detail::float_promote_t<T>> {
-  using DataType = detail::float_promote_t<T>;
+template <typename DataType, Numeric T>
+[[nodiscard]] QRResult<DataType> qr_factorize(const Matrix<T> &A, bool full_Q = false,
+                                              bool full_R = false) {
   const size_t m = A.row_count();
   const size_t n = A.column_count();
   if (m == 0 || n == 0) {
@@ -344,7 +393,7 @@ template <Numeric T>
   // Smaller dimension determines number of reflectors
   const size_t k = std::min(m, n);
 
-  auto A_lap = detail::get_working_lapack_matrix<DataType>(A);
+  auto A_lap = detail::_get_working_lapack_matrix<DataType>(A);
   auto *a = A_lap.data();
 
   auto mm = static_cast<int>(m);
@@ -443,7 +492,7 @@ template <typename DataType, Numeric T>
     throw std::invalid_argument("Matrix dimensions must be greater than zero.");
   }
 
-  auto A_lap = detail::get_working_lapack_matrix<DataType>(A);
+  auto A_lap = detail::_get_working_lapack_matrix<DataType>(A);
   auto *a = A_lap.data();
 
   auto nn = static_cast<int>(n);
@@ -503,7 +552,7 @@ template <typename DataType, Numeric T>
     throw std::invalid_argument("Matrix dimensions must be greater than zero.");
   }
 
-  auto A_lap = detail::get_working_lapack_matrix<DataType>(A);
+  auto A_lap = detail::_get_working_lapack_matrix<DataType>(A);
   auto *a = A_lap.data();
 
   auto nn = static_cast<int>(n);

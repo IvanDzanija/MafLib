@@ -327,6 +327,28 @@ void gemv_bench() {
   std::cout << "sink=" << sink << "\n";
 }
 
+//=============================================================================
+// EIGEN DECOMPOSITION (real eigenvalues only — complex not supported yet)
+//=============================================================================
+void eigen_bench(const std::vector<size_t> &sizes) {
+  for (size_t n : sizes) {
+    // X^T X + eps is symmetric positive definite => all eigenvalues real.
+    auto X = make_random_matrix<double>(n, 0.0, 1.0);
+    auto A = X.transposed() * X + 1e-6;
+
+    double ms = bench_ms(
+        [&] {
+          auto pairs = eigen_decomposition(A);
+          volatile double sink = pairs[0].eigen_value;
+          (void)sink;
+        },
+        1, 2);
+
+    double gflops = (10.0 * n * n * n) / (ms * 1e6);  // rough dgeev estimate
+    print_result("eigen", "n=" + std::to_string(n) + " sym", ms, gflops);
+  }
+}
+
 }  // namespace maf::measure
 
 int main() {
@@ -340,6 +362,7 @@ int main() {
   maf::measure::plu_bench();
   maf::measure::cholesky_bench();
   maf::measure::qr_bench({512, 1024, 2048});
+  maf::measure::eigen_bench({128, 256, 512});
   maf::measure::cast_bench();
   maf::measure::gemv_bench();
 
